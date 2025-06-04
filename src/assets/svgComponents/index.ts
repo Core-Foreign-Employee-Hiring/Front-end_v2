@@ -1,0 +1,6 @@
+export { default as AlarmIcon } from './AlarmIcon'
+export { default as CalenderIcon } from './CalenderIcon'
+export { default as ClockIcon } from './ClockIcon'
+export { default as GlobalIcon } from './GlobalIcon'
+export { default as LocationIcon } from './LocationIcon'
+export { default as SearchIcon } from './SearchIcon'
