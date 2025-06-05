@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 interface AuthStoreType {
-  role: 'Employer' | 'Employee' | undefined
-  setState: (params: {}) => void
+  role: 'Employer' | 'Employee'
+  setState: (params: { role?: 'Employer' | 'Employee' }) => void
 }
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
   role: 'Employee',
-  setState: (params: {}) => {
+  setState: (params: { role?: 'Employer' | 'Employee' }) => {
     set((state) => ({
       ...state,
       ...params,
