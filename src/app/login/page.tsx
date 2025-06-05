@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { UnCheckIcon } from '@/assets/svgComponents'
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 
