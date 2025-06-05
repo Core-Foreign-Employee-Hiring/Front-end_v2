@@ -1,17 +1,48 @@
+'use client'
+
 import Image from 'next/image'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { UnCheckIcon } from '@/assets/svgComponents'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/store/authStore'
 
 const LoginPage = () => {
+  const router = useRouter()
+  const role = useAuthStore((state) => state.role)
+  const setAuthState = useAuthStore((state) => state.setState)
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       <div className="flex w-[600px] flex-col items-center justify-center">
         <Image src={'/logo.svg'} width={266} height={68} alt="로고" />
         <h1 className="title-lg mt-[80px]">로그인</h1>
         <div className="bg-gray1 mt-3 flex gap-x-2 rounded-full p-1">
-          <button className="title-sm bg-main rounded-full px-[39px] py-[8px] text-white">고용인</button>
-          <button className="title-sm bg-gray1 text-gray5 rounded-full px-[39px] py-[8px]">피고용인</button>
+          <button
+            onClick={() => {
+              setAuthState({ role: 'Employer' })
+            }}
+            className={
+              role === 'Employer'
+                ? 'title-sm bg-main rounded-full px-[39px] py-[8px] text-white'
+                : 'title-sm bg-gray1 text-gray5 rounded-full px-[39px] py-[8px]'
+            }
+          >
+            고용인
+          </button>
+          <button
+            onClick={() => {
+              setAuthState({ role: 'Employee' })
+            }}
+            className={
+              role === 'Employee'
+                ? 'title-sm bg-main rounded-full px-[39px] py-[8px] text-white'
+                : 'title-sm bg-gray1 text-gray5 rounded-full px-[39px] py-[8px]'
+            }
+          >
+            피고용인
+          </button>
         </div>
         <div className="mt-[40px] flex w-full flex-col items-center justify-center gap-y-[32px]">
           <div className="w-full">
@@ -43,7 +74,14 @@ const LoginPage = () => {
 
           <div className="flex flex-col items-center justify-center gap-y-1">
             <p className="body-sm text-gray5">FORWORK에 가입하면 채용과 관련된 정보를 쉽게 찾아볼 수 있어요!</p>
-            <button className="button text-main border-main border-b">회원가입</button>
+            <button
+              onClick={() => {
+                router.push('/sign-up')
+              }}
+              className="button text-main border-main border-b"
+            >
+              회원가입
+            </button>
           </div>
         </div>
       </div>
