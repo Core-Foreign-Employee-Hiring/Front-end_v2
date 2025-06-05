@@ -1,8 +1,21 @@
-import { CalenderIcon, ClockIcon, LocationIcon } from '@/assets/svgComponents'
+'use client'
 
-const RecruitCard = () => {
+import { CalenderIcon, ClockIcon, LocationIcon } from '@/assets/svgComponents'
+import { useRouter } from 'next/navigation'
+
+interface RecruitCardProps {
+  recruitId: number
+}
+
+const RecruitCard = ({ recruitId }: RecruitCardProps) => {
+  const router = useRouter()
   return (
-    <div className="border-gray2 flex flex-col gap-y-[20px] rounded-[32px] border p-6">
+    <div
+      onClick={() => {
+        router.push(`/${recruitId}`)
+      }}
+      className="border-gray2 flex flex-col gap-y-[20px] rounded-[32px] border p-6"
+    >
       <section className="flex flex-col gap-y-[9px]">
         <div>이천/물류센터/단순피킹/초보자가능/일당/단순업무/동반가능/</div>
         <div>회사명</div>
