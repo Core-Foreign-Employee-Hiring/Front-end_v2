@@ -5,6 +5,7 @@ import { GrayCommentIcon, OptionIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
 import Button from '@/components/common/Button'
 import { useState } from 'react'
+import Footer from '@/components/common/Footer'
 
 export default function ReviewDetailPage() {
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false)
@@ -104,6 +105,7 @@ export default function ReviewDetailPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   )
 }

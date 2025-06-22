@@ -7,6 +7,7 @@ import { GraySearchIcon } from '@/assets/svgComponents'
 import Button from '@/components/common/Button'
 import { useState } from 'react'
 import CreateReviewPage from '@/components/review/CreateReviewPage'
+import Footer from '@/components/common/Footer'
 
 const ReviewPage = () => {
   const [isCreateReviewPageOpen, setIsCreateReviewPageOpen] = useState(false)
@@ -53,6 +54,7 @@ const ReviewPage = () => {
           </div>
         )}
       </main>
+      <Footer />
     </>
   )
 }

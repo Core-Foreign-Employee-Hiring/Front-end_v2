@@ -1,5 +1,6 @@
 import Header from '@/components/common/Header'
 import RecruitCard from '@/components/recruit/RecruitCard'
+import Footer from '@/components/common/Footer'
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           <RecruitCard recruitId={9} />
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
