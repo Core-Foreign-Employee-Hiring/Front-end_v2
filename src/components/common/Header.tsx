@@ -72,7 +72,7 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed w-full">
+    <header className="fixed z-[100] w-full">
       {renderHeaderType('default')}
       {renderHeaderType('navbar')}
     </header>

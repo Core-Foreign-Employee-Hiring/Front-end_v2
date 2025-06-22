@@ -18,11 +18,15 @@ interface ButtonProps {
   onClick: () => void
 }
 
-const Button = ({ children, type = 'active', size = 'lg', customClassName }: ButtonProps) => {
-  const base = 'flex items-center justify-center gap-x-1 rounded-[16px] button w-full'
+const Button = ({ children, type = 'active', size = 'lg', customClassName, onClick }: ButtonProps) => {
+  const base = 'flex items-center justify-center gap-x-1 rounded-[16px] button'
   const style = buttonType[type]
   const styleSize = buttonSize[size]
 
-  return <button className={`${base} ${style} ${styleSize} ${customClassName}`}>{children}</button>
+  return (
+    <button onClick={onClick} className={`${base} ${style} ${styleSize} ${customClassName}`}>
+      {children}
+    </button>
+  )
 }
 export default Button
