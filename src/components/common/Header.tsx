@@ -18,7 +18,15 @@ const Header = () => {
       case 'default':
         return (
           <div className="flex h-[100px] w-full items-center justify-between bg-white md:px-5 lg:px-[200px] xl:px-[200px] 2xl:px-[200px]">
-            <Image src={'/logo.svg'} width={216} height={55} alt="로고" />
+            <Image
+              onClick={() => {
+                router.push('/')
+              }}
+              src={'/logo.svg'}
+              width={216}
+              height={55}
+              alt="로고"
+            />
             <section className="border-gray4 flex h-fit w-[500px] gap-x-2 rounded-full border px-4 py-3">
               <SearchIcon width={24} height={24} />
               <input placeholder={'어떤 직무와 키워드를 찾으시나요?'} className="w-full" />
