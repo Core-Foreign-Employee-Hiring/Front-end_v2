@@ -1,10 +1,10 @@
 import ProcessBar from '@/components/common/ProcessBar'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
-import IdField from '@/app/sign-up/employee/IdField'
-import PWField from '@/app/sign-up/employee/PWField'
-import NameField from '@/app/sign-up/employee/NameField'
-import PhoneNumberField from '@/app/sign-up/employee/PhoneNumberField'
+import IdField from '@/components/sign-up/employee/IdField'
+import PWField from '@/components/sign-up/employee/PWField'
+import NameField from '@/components/sign-up/employee/NameField'
+import PhoneNumberField from '@/components/sign-up/employee/PhoneNumberField'
 
 const EmployeeSignUp = () => {
   return (

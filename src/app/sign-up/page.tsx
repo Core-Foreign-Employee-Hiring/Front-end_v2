@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import { useAuthStore } from '@/store/authStore'
-import EmployeeSignUp from '@/app/sign-up/EmployeeSignUp'
-import EmployerSignUp from '@/app/sign-up/EmployerSignUp'
+import EmployeeSignUp from '@/components/sign-up/EmployeeSignUp'
+import EmployerSignUp from '@/components/sign-up/EmployerSignUp'
 
 const SignUpPage = () => {
   const role = useAuthStore((state) => state.role)
