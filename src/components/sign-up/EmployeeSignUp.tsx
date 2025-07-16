@@ -1,24 +1,31 @@
+import { useEffect, useState } from 'react'
+
+import { useModalStore } from '@/store/modalStore'
 import ProcessBar from '@/components/common/ProcessBar'
-import Input from '@/components/common/Input'
-import Button from '@/components/common/Button'
-import IdField from '@/components/sign-up/employee/IdField'
-import PWField from '@/components/sign-up/employee/PWField'
-import NameField from '@/components/sign-up/employee/NameField'
-import PhoneNumberField from '@/components/sign-up/employee/PhoneNumberField'
+import SignUpRequiredForm from '@/components/sign-up/employee/SignUpRequiredForm'
+import SignUpAdditionalInfoForm from '@/components/sign-up/employee/SignUpAdditionalInfoForm'
+import SearchAddressModal from '@/components/common/SearchAddressModal'
+import { useAuthStore } from '@/store/authStore'
 
 const EmployeeSignUp = () => {
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1)
+  const setModalState = useModalStore((state) => state.setState)
+  const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
+  const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
+
+  useEffect(() => {
+    console.log('employeeSignUp', employeeSignUp)
+  }, [employeeSignUp])
+
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-y-[40px]">
+      {isSearchAddressModalOpen && <SearchAddressModal />}
       <div className="flex flex-col items-center justify-center gap-y-[20px]">
         <div className="title-lg">회원가입(피고용인)</div>
-        <ProcessBar totalStep={2} currentStep={1} step1Content={'필수 정보'} step2Content={'추가 정보'} />
+        <ProcessBar totalStep={2} currentStep={currentStep} step1Content={'필수 정보'} step2Content={'추가 정보'} />
       </div>
-      <div className="flex w-full flex-col gap-y-[32px]">
-        <IdField />
-        <PWField />
-        <NameField />
-        <PhoneNumberField />
-      </div>
+      {currentStep === 1 && <SignUpRequiredForm setCurrentStep={setCurrentStep} />}
+      {currentStep === 2 && <SignUpAdditionalInfoForm setCurrentStep={setCurrentStep} />}
     </div>
   )
 }

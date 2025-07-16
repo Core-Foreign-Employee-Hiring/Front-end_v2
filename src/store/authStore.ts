@@ -1,13 +1,46 @@
 import { create } from 'zustand'
+import { EmployeeSignUpType } from '@/types/auth'
+
+interface SetAuthStoreType {
+  role?: 'Employer' | 'Employee'
+  //피고용인
+  employeeSignUp?: EmployeeSignUpType | undefined
+  isEmployeeIdVerified?: boolean | undefined //id가 유효한지 확인하는 state
+  checkPassWord?: string | undefined // 비밀번호 확인
+  isEmployeePasswordValid?: boolean | undefined //pw가 8~15자, 대소문자+숫자+기호를 포함하는지
+  isEmployeePasswordMatch?: boolean | undefined //pw가 확인 비밀번호와 일치하는지
+  isEmployeePhoneVerified?: boolean | undefined // 휴대폰 번호 인증을 했는지
+  isEmployeeEmailVerified?: boolean | undefined // 이메일 인증을 했는지
+  allOptions?: boolean
+}
 
 interface AuthStoreType {
   role: 'Employer' | 'Employee'
-  setState: (params: { role?: 'Employer' | 'Employee' }) => void
+  //피고용인
+  employeeSignUp: EmployeeSignUpType | undefined
+  isEmployeeIdVerified: boolean | undefined //id가 유효한지 확인하는 state
+  checkPassWord: string | undefined // 비밀번호 확인
+  isEmployeePasswordValid: boolean | undefined //pw가 8~15자, 대소문자+숫자+기호를 포함하는지
+  isEmployeePasswordMatch: boolean | undefined //pw가 확인 비밀번호와 일치하는지
+  isEmployeePhoneVerified: boolean | undefined // 휴대폰 번호 인증을 했는지
+  isEmployeeEmailVerified: boolean | undefined // 이메일 인증을 했는지
+  allOptions: boolean
+  //고용인
+  setState: (params: SetAuthStoreType) => void
 }
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
   role: 'Employee',
-  setState: (params: { role?: 'Employer' | 'Employee' }) => {
+  //피고용인
+  employeeSignUp: undefined,
+  isEmployeeIdVerified: undefined,
+  isEmployeePasswordValid: undefined,
+  checkPassWord: undefined,
+  isEmployeePasswordMatch: undefined,
+  isEmployeePhoneVerified: undefined, // 휴대폰 번호 인증을 했는지
+  isEmployeeEmailVerified: undefined, // 이메일 인증을 했는지
+  allOptions: false,
+  setState: (params: SetAuthStoreType) => {
     set((state) => ({
       ...state,
       ...params,

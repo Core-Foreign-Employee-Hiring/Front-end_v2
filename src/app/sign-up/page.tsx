@@ -8,8 +8,8 @@ import EmployerSignUp from '@/components/sign-up/EmployerSignUp'
 const SignUpPage = () => {
   const role = useAuthStore((state) => state.role)
   return (
-    <main>
-      <div className="flex w-[600px] flex-col items-center justify-center gap-y-[80px] border">
+    <main className="my-[100px] flex flex-col items-center justify-center">
+      <div className="flex w-[600px] flex-col items-center justify-center gap-y-[80px]">
         <Image src={'/logo.svg'} width={266} height={68} alt="로고" />
         {role === 'Employee' ? <EmployeeSignUp /> : <EmployerSignUp />}
       </div>

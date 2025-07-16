@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react'
+
 const inputBoxStyles = {
   default: 'border-gray2 placeholder:text-gray4 text-black',
   error: 'border-error text-black',
@@ -5,17 +7,22 @@ const inputBoxStyles = {
 }
 
 interface InputProps {
+  value: string
+  setValue?: (e: ChangeEvent<HTMLInputElement>) => void
   inputBoxStyle: 'default' | 'error' | 'disabled'
   textCount?: number
   totalCount?: number
   rightIcon?: React.ReactNode
   leftIcon?: React.ReactNode
   placeholder?: string
-  type?: 'text' | 'password' | 'email' | 'tel'
+  type?: 'text' | 'password' | 'email' | 'tel' | 'date'
   customClassName?: string
+  onClick?: () => void
 }
 
 const Input = ({
+  value,
+  setValue,
   inputBoxStyle,
   textCount,
   totalCount,
@@ -24,6 +31,7 @@ const Input = ({
   placeholder,
   type = 'text',
   customClassName,
+  onClick,
 }: InputProps) => {
   const inputBoxBase = 'border flex gap-x-2 p-4 rounded-[16px] items-center bg-white'
   const inputFieldBase = 'body-md w-full outline-none bg-white'
@@ -35,6 +43,9 @@ const Input = ({
       {leftIcon ? leftIcon : null}
       <div className="flex w-full justify-between">
         <input
+          onClick={onClick}
+          value={value}
+          onChange={setValue ?? (() => {})}
           type={type}
           disabled={inputBoxStyle === 'disabled'}
           className={`${inputFieldBase} ${inputBoxStyle === 'disabled' ? 'cursor-not-allowed' : ''}`}

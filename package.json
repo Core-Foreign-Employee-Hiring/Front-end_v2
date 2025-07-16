@@ -11,10 +11,13 @@
     "svgr": "svgr --icon --typescript --no-prettier --out-dir src/assets/svgComponents public/common --ignore-existing"
   },
   "dependencies": {
+    "framer-motion": "^12.23.6",
     "js-cookie": "^3.0.5",
     "next": "15.3.3",
     "react": "^19.0.0",
+    "react-daum-postcode": "^3.2.0",
     "react-dom": "^19.0.0",
+    "react-intersection-observer": "^9.16.0",
     "typescript-eslint": "^8.33.1",
     "zustand": "^5.0.5"
   },
