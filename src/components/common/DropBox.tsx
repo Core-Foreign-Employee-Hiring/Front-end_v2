@@ -7,10 +7,18 @@ interface DropBoxProps {
   isDropBoxOpen: boolean
   setIsDropBoxOpen: () => void
   children: ReactNode
+  customClassName: string
 }
-export default function DropBox({ initValue, selectedValue, isDropBoxOpen, setIsDropBoxOpen, children }: DropBoxProps) {
+export default function DropBox({
+  initValue,
+  selectedValue,
+  isDropBoxOpen,
+  setIsDropBoxOpen,
+  children,
+  customClassName,
+}: DropBoxProps) {
   return (
-    <div className="relative">
+    <div className={`${customClassName} relative`}>
       <section
         onClick={setIsDropBoxOpen}
         className={`border-gray2 flex h-[52px] w-full items-center justify-between rounded-[16px] border px-4 py-3`}

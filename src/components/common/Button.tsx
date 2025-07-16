@@ -16,16 +16,28 @@ interface ButtonProps {
   customClassName?: string
   children: ReactNode
   onClick: () => void
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
 }
 
-const Button = ({ children, type = 'active', size = 'lg', customClassName, onClick }: ButtonProps) => {
+const Button = ({
+  children,
+  type = 'active',
+  size = 'lg',
+  customClassName,
+  onClick,
+  leftIcon,
+  rightIcon,
+}: ButtonProps) => {
   const base = 'flex items-center justify-center gap-x-1 rounded-[16px] button'
   const style = buttonType[type]
   const styleSize = buttonSize[size]
 
   return (
     <button onClick={onClick} className={`${base} ${style} ${styleSize} ${customClassName}`}>
+      {leftIcon}
       {children}
+      {rightIcon}
     </button>
   )
 }

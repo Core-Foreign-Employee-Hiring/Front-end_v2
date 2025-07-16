@@ -168,3 +168,11 @@ body {
   line-height: 120%; /* 14.4px */
   letter-spacing: -0.18px;
 }
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
+  --breakpoint-wide: 1440px;
+}
+

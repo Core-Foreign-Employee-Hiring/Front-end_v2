@@ -16,7 +16,7 @@ const ProcessBar = ({
   width = 'w-[300px]',
 }: ProcessBarProps) => {
   const getCircleClass = (step: 1 | 2 | 3) =>
-    `title-sm flex h-[32px] w-[32px] desktop:h-[40px] desktop:w-[40px] items-center justify-center rounded-full whitespace-nowrap text-white ${
+    `title-sm flex h-[40px] w-[40px] items-center justify-center rounded-full whitespace-nowrap text-white ${
       currentStep >= step ? 'bg-main' : 'bg-gray2'
     }`
 

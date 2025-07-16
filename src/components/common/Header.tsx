@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { AlarmIcon, GlobalIcon, SearchIcon } from '@/assets/svgComponents'
+import { AlarmIcon, GlobalIcon, MenuIcon, SearchIcon } from '@/assets/svgComponents'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
@@ -17,9 +17,20 @@ const Header = () => {
     switch (headerType) {
       case 'default':
         return (
-          <div className="border-gray2 flex h-[100px] w-full items-center justify-between border bg-white md:px-5 lg:px-[200px] xl:px-[200px] 2xl:px-[200px]">
-            <div className="flex gap-x-[55px]">
+          <div className="desktop:h-[100px] desktop:px-[200px] border-gray2 flex h-[80px] items-center justify-between border-b bg-white px-[32px]">
+            <div className="flex items-center gap-x-[55px]">
               <Image
+                className="desktop:hidden block"
+                onClick={() => {
+                  router.push('/')
+                }}
+                src={'/logo.svg'}
+                width={102}
+                height={32}
+                alt="로고"
+              />
+              <Image
+                className="desktop:block hidden"
                 onClick={() => {
                   router.push('/')
                 }}
@@ -28,7 +39,7 @@ const Header = () => {
                 height={48}
                 alt="로고"
               />
-              <div className="flex gap-x-[52px]">
+              <div className="desktop:block desktop:gap-x-[52px] flex hidden">
                 {navContents.map((nav) => {
                   return (
                     <button
@@ -45,12 +56,13 @@ const Header = () => {
               </div>
             </div>
 
-            <section className="flex items-center gap-x-5">
-              <div className="flex gap-x-3">
+            <section className="desktop:gap-x-5 flex items-center">
+              <div className="desktop:gap-x-3 flex gap-x-2">
                 <GlobalIcon width={32} height={32} />
                 <AlarmIcon width={32} height={32} />
+                <MenuIcon width={32} height={32} className="desktop:hidden block" />
               </div>
-              <div className="flex items-center gap-x-2">
+              <div className="desktop:block flex hidden w-full items-center gap-x-2 whitespace-nowrap">
                 <button
                   onClick={() => {
                     router.push('/login')
