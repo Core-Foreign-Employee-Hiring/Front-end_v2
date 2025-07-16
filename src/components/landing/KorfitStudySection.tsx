@@ -57,6 +57,7 @@ export default function KorfitStudySection() {
             >
               <div className="relative h-[322px] w-[412px]">
                 <Image
+                  priority
                   className="z-10 object-cover"
                   fill
                   src={'/landing/study-img-1.svg'}
@@ -76,6 +77,7 @@ export default function KorfitStudySection() {
             >
               <div className="relative h-[282px] w-[375px]">
                 <Image
+                  priority
                   className="object-cover"
                   fill
                   src={'/landing/study-img-2.svg'}
@@ -95,6 +97,7 @@ export default function KorfitStudySection() {
             >
               <div className="relative h-[255px] w-[509px]">
                 <Image
+                  priority
                   className="object-cover"
                   fill
                   src={'/landing/study-img-3.svg'}
@@ -144,7 +147,13 @@ export default function KorfitStudySection() {
 
         <div className="absolute top-190 left-40">
           <div className="relative h-[410px] w-[410px]">
-            <Image className="object-cover" fill src={'/landing/together-img.svg'} alt={'/landing/together-img.svg'} />
+            <Image
+              priority
+              className="object-cover"
+              fill
+              src={'/landing/together-img.svg'}
+              alt={'/landing/together-img.svg'}
+            />
           </div>
         </div>
       </div>

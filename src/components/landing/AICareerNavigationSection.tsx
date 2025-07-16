@@ -40,7 +40,13 @@ export default function AICareerNavigationSection() {
           visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
         }}
       >
-        <Image src={'/landing/recruitment-notice-img.svg'} alt={'/landing/line-image.svg'} width={616} height={387} />
+        <Image
+          src={'/landing/recruitment-notice-img.svg'}
+          alt={'/landing/line-image.svg'}
+          priority
+          width={616}
+          height={387}
+        />
       </motion.div>
       <Image className="" src={'/landing/bg-img2.svg'} alt={'/landing/bg-img2.svg'} width={1254} height={493} />
       <motion.div

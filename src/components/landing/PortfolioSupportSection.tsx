@@ -31,7 +31,7 @@ export default function PortfolioSupportSection() {
             visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
           }}
         >
-          <Image className="object-cover" src={'/landing/archive.svg'} alt={'/landing/archive.svg'} fill />
+          <Image priority className="object-cover" src={'/landing/archive.svg'} alt={'/landing/archive.svg'} fill />
         </motion.div>
 
         <motion.div
@@ -74,6 +74,7 @@ export default function PortfolioSupportSection() {
         <div className="relative top-100 right-40 z-20">
           <div className="absolute h-[512px] w-[512px] rounded-full bg-[#5551F5] opacity-6 blur-lg" />
           <Image
+            priority
             className="object-cover"
             src={'/landing/portfolio-bg-img.svg'}
             alt={'/landing/portfolio-bg-img.svg'}

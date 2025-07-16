@@ -70,7 +70,7 @@ export default function TenStepSystemIntroSection() {
             visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
           }}
         >
-          <Image src={'/landing/resume.svg'} alt={'/landing/resume.svg'} width={616} height={770} />
+          <Image src={'/landing/resume.svg'} alt={'/landing/resume.svg'} priority width={616} height={770} />
         </motion.div>
       </section>
       <motion.div
