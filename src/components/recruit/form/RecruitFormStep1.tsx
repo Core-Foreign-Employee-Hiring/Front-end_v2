@@ -1,5 +1,11 @@
 import ProcessBar from '@/components/common/ProcessBar'
 import RecruitTitleField from '@/app/recruit-form/components/RecruitTitleField'
+import CompanyNameField from '@/app/recruit-form/components/CompanyNameField'
+import CompanyAddressField from '@/app/recruit-form/components/CompanyAddressField'
+import CompanyEstablishedDateField from '@/app/recruit-form/components/CompanyEstablishedDateField'
+import RepresentativeNameField from '@/app/recruit-form/components/RepresentativeNameField'
+import BusinessTypeField from '@/app/recruit-form/components/BusinessTypeField'
+import CompanyTypeField from '@/app/recruit-form/components/CompanyTypeField'
 
 interface RecruitFormStep1Props {
   currentStep: 1 | 2 | 3
@@ -21,6 +27,15 @@ export default function RecruitFormStep1({ currentStep }: RecruitFormStep1Props)
       </section>
       <div className="mt-[40px] flex flex-col gap-y-[32px]">
         <RecruitTitleField />
+        <div className="flex flex-col gap-y-[12px]">
+          <h2 className="title-md">회사정보</h2>
+          <CompanyNameField />
+          <CompanyAddressField />
+          <CompanyEstablishedDateField />
+          <RepresentativeNameField />
+          <BusinessTypeField />
+          <CompanyTypeField />
+        </div>
       </div>
     </div>
   )

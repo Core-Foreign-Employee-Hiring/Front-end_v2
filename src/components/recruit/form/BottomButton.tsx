@@ -3,6 +3,7 @@
 import Button from '@/components/common/Button'
 import { Dispatch, SetStateAction } from 'react'
 import { useRouter } from 'next/navigation'
+import { useRecruitStore } from '@/store/recruitStore'
 
 interface BottomButtonProps {
   currentStep: 1 | 2 | 3
@@ -11,6 +12,28 @@ interface BottomButtonProps {
 
 export default function BottomButton({ currentStep, setCurrentStep }: BottomButtonProps) {
   const router = useRouter()
+  const recruitPostData = useRecruitStore((state) => state.recruitPostData)
+
+  // 필수 필드 리스트
+  const step1RequiredFields = [
+    'title',
+    'companyName',
+    // 'companyImageUrl',
+    'zipcode',
+    'address1',
+    'address2',
+    'companyType',
+    'representativeName',
+    'establishedDate',
+    'businessType',
+  ]
+
+  // 하나라도 undefined/null/빈 문자열이면 false
+  const isStep1AllFilled = step1RequiredFields.every((field) => {
+    const value = recruitPostData[field as keyof typeof recruitPostData]
+    return value !== undefined && value !== null && value !== ''
+  })
+
   const renderBottomButton = (currentStep: 1 | 2 | 3) => {
     switch (currentStep) {
       case 1:
@@ -23,8 +46,9 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
               onClick={() => {
                 setCurrentStep(2)
               }}
+              disabled={!isStep1AllFilled}
               customClassName={'w-full'}
-              type={'active'}
+              type={isStep1AllFilled ? 'active' : 'disabled'}
               size={'lg'}
             >
               다음

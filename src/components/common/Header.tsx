@@ -105,6 +105,6 @@ const Header = () => {
     }
   }
 
-  return <header className="fixed z-[100] w-full">{renderHeaderType('default')}</header>
+  return <header className="fixed z-[40] w-full">{renderHeaderType('default')}</header>
 }
 export default Header

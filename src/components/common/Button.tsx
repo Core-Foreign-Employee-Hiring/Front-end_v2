@@ -18,6 +18,7 @@ interface ButtonProps {
   onClick: () => void
   leftIcon?: ReactNode
   rightIcon?: ReactNode
+  disabled?: boolean
 }
 
 const Button = ({
@@ -28,13 +29,14 @@ const Button = ({
   onClick,
   leftIcon,
   rightIcon,
+  disabled,
 }: ButtonProps) => {
   const base = 'flex items-center justify-center gap-x-1 rounded-[16px] button'
   const style = buttonType[type]
   const styleSize = buttonSize[size]
 
   return (
-    <button onClick={onClick} className={`${base} ${style} ${styleSize} ${customClassName}`}>
+    <button disabled={disabled} onClick={onClick} className={`${base} ${style} ${styleSize} ${customClassName}`}>
       {leftIcon}
       {children}
       {rightIcon}

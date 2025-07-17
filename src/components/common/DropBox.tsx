@@ -7,7 +7,7 @@ interface DropBoxProps {
   isDropBoxOpen: boolean
   setIsDropBoxOpen: () => void
   children: ReactNode
-  customClassName: string
+  customClassName?: string
 }
 export default function DropBox({
   initValue,
@@ -33,8 +33,8 @@ export default function DropBox({
         )}
       </section>
       {isDropBoxOpen ? (
-        <section className="border-gray2 absolute top-12 z-10 flex max-h-[420px] w-full flex-col overflow-y-scroll rounded-[16px] border bg-white">
-          {children}
+        <section className="border-gray2 absolute top-12 z-10 flex max-h-[420px] w-full flex-col overflow-auto rounded-[16px] border bg-white">
+          <div className="flex flex-col">{children}</div>
         </section>
       ) : null}
     </div>

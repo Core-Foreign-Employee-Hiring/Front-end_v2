@@ -12,14 +12,39 @@ const EmployeeSignUp = () => {
   const setModalState = useModalStore((state) => state.setState)
   const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
+  const setEmployeeSignUpState = useAuthStore((state) => state.setState)
 
   useEffect(() => {
     console.log('employeeSignUp', employeeSignUp)
   }, [employeeSignUp])
 
+  const handleComplete = async (data: any) => {
+    let fullAddress = data.address
+    let extraAddress = ''
+
+    const { addressType, bname, buildingName, zonecode } = data
+    console.log('data', data)
+
+    if (addressType === 'R') {
+      if (bname !== '') {
+        extraAddress += bname
+      }
+      if (buildingName !== '') {
+        extraAddress += `${extraAddress !== '' && ', '}${buildingName}`
+      }
+      fullAddress += `${extraAddress !== '' ? ` ${extraAddress}` : ''}`
+    }
+    setEmployeeSignUpState({
+      ...employeeSignUp,
+      employeeSignUp: { ...employeeSignUp, zipcode: zonecode, address1: fullAddress },
+    })
+
+    setModalState({ isSearchAddressModalOpen: false })
+  }
+
   return (
     <div className="flex w-full flex-col items-center justify-center gap-y-[40px]">
-      {isSearchAddressModalOpen && <SearchAddressModal />}
+      {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       <div className="flex flex-col items-center justify-center gap-y-[20px]">
         <div className="title-lg">회원가입(피고용인)</div>
         <ProcessBar totalStep={2} currentStep={currentStep} step1Content={'필수 정보'} step2Content={'추가 정보'} />

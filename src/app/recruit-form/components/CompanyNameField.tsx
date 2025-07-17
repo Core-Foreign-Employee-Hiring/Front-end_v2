@@ -1,29 +1,27 @@
 import Input from '@/components/common/Input'
 import { useRecruitStore } from '@/store/recruitStore'
 
-export default function RecruitTitleField() {
+export default function CompanyNameField() {
   const setState = useRecruitStore((state) => state.setState)
   const recruitPostData = useRecruitStore((state) => state.recruitPostData)
-  const title = useRecruitStore((state) => state.recruitPostData.title)
-
+  const companyName = useRecruitStore((state) => state.recruitPostData.companyName)
   return (
-    <div className="flex flex-col gap-y-[12px]">
-      <p className="subtitle-lg">
-        공고제목 <span className="text-main">*</span>
+    <div className="flex flex-col gap-y-3">
+      <p className="subtitle-lg flex gap-x-1">
+        회사이름<span className="text-main">*</span>
       </p>
       <Input
-        value={title ?? ''}
+        value={companyName ?? ''}
         setValue={(e) =>
           setState({
             recruitPostData: {
               ...recruitPostData,
-              title: e.target.value,
+              companyName: e.target.value,
             },
           })
         }
         inputBoxStyle={'default'}
-        onClick={() => {}}
-        placeholder={'공고 제목을 입력해주세요.'}
+        placeholder={'회사이름을 입력해주세요.'}
       />
     </div>
   )
