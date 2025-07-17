@@ -33,8 +33,8 @@ const Input = ({
   customClassName,
   onClick,
 }: InputProps) => {
-  const inputBoxBase = 'border flex gap-x-2 p-4 rounded-[16px] items-center bg-white'
-  const inputFieldBase = 'body-md w-full outline-none bg-white'
+  const inputBoxBase = 'border flex gap-x-2 desktop:p-4 px-4 py-3 rounded-[16px] items-center bg-white'
+  const inputFieldBase = 'button desktop:body-md w-full outline-none bg-white'
 
   const inputBoxStyleClassName = inputBoxStyles[inputBoxStyle]
 
