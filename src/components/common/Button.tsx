@@ -37,11 +37,18 @@ const Button = ({
   const style = buttonStyleType[type]
   const styleSize = buttonSize[size]
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (buttonType === 'button') {
+      e.preventDefault() // form submit 방지
+    }
+    onClick()
+  }
+
   return (
     <button
       type={buttonType}
       disabled={disabled}
-      onClick={onClick}
+      onClick={handleClick}
       className={`${base} ${style} ${styleSize} ${customClassName}`}
     >
       {leftIcon}

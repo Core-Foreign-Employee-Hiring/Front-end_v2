@@ -31,6 +31,7 @@ export default function WorkTypeField() {
                   },
                 })
               }}
+              type="button"
               key={type.eng}
               className={`${workType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] items-center justify-center rounded-[12px] border px-2' : 'border-gray2 button text-gray5 flex h-[40px] items-center justify-center rounded-[12px] border px-2'}`}
             >

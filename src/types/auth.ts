@@ -18,3 +18,16 @@ export interface EmployeeSignUpType {
   adInfoAgreementEmail?: boolean
   over15?: boolean
 }
+
+export interface EmployeeLoginType {
+  userId?: string
+  password?: string
+}
+
+export interface ResponseLoginType {
+  name: string
+  userId: string
+  accessToken: string
+  refreshToken: string
+  role: 'EMPLOYER' | 'EMPLOYEE'
+}

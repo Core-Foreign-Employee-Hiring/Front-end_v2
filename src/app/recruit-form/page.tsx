@@ -25,10 +25,6 @@ export default function RecruitFormPage() {
   const companyLogoImgRef = useRef<HTMLInputElement | null>(null)
   const posterImgRef = useRef<HTMLInputElement | null>(null)
 
-  useEffect(() => {
-    console.log('recruitPostData', recruitPostData)
-  }, [recruitPostData])
-
   // 스텝 변경시 스크롤 상단 이동
   useEffect(() => {
     window.scrollTo({
@@ -127,7 +123,7 @@ export default function RecruitFormPage() {
       const data = await postRecruit(recruitPostData)
       console.log('공고 생성', data)
 
-      router.push('/')
+      // router.push('/')
     } catch (error) {
       console.error('제출 중 오류:', error)
       // 필요시 에러 처리 로직 추가

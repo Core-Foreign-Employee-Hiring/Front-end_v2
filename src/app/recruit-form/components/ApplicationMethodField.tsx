@@ -35,6 +35,7 @@ export default function ApplicationMethodField() {
               </div>
             ) : (
               <button
+                type="button"
                 onClick={() => {
                   setApplicationMethod('홈페이지 지원')
                   setState({
@@ -67,6 +68,7 @@ export default function ApplicationMethodField() {
               </div>
             ) : (
               <button
+                type="button"
                 onClick={() => {
                   setApplicationMethod('전화/문자 지원')
                   setState({
@@ -99,6 +101,7 @@ export default function ApplicationMethodField() {
               </div>
             ) : (
               <button
+                type="button"
                 onClick={() => {
                   setApplicationMethod('이메일 지원')
                   setState({

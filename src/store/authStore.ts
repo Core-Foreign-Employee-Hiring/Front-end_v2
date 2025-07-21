@@ -1,8 +1,9 @@
 import { create } from 'zustand'
-import { EmployeeSignUpType } from '@/types/auth'
+import { EmployeeLoginType, EmployeeSignUpType } from '@/types/auth'
 
 interface SetAuthStoreType {
   role?: 'Employer' | 'Employee'
+  loginData?: EmployeeLoginType | undefined
   //피고용인
   employeeSignUp?: EmployeeSignUpType | undefined
   isEmployeeIdVerified?: boolean | undefined //id가 유효한지 확인하는 state
@@ -16,6 +17,7 @@ interface SetAuthStoreType {
 
 interface AuthStoreType {
   role: 'Employer' | 'Employee'
+  loginData: EmployeeLoginType | undefined
   //피고용인
   employeeSignUp: EmployeeSignUpType | undefined
   isEmployeeIdVerified: boolean | undefined //id가 유효한지 확인하는 state
@@ -31,6 +33,7 @@ interface AuthStoreType {
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
   role: 'Employee',
+  loginData: undefined,
   //피고용인
   employeeSignUp: undefined,
   isEmployeeIdVerified: undefined,

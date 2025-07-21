@@ -10,6 +10,7 @@ import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { postMemberEmployeeRegister } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 interface SignUpAdditionalInfoFormProps {
   setCurrentStep: Dispatch<SetStateAction<1 | 2>>
@@ -50,6 +51,10 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
         onClick={async () => {
           setCurrentStep(2)
           const result = await postMemberEmployeeRegister(employeeSignUp)
+          if (result.data) {
+            Cookies.set('accessToken', result.data.accessToken)
+            Cookies.set('refreshToken', result.data.accessToken)
+          }
           console.log('회원가입 response', result)
           router.back()
         }}

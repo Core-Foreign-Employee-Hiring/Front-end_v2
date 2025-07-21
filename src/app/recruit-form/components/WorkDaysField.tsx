@@ -37,6 +37,7 @@ export default function WorkDaysField() {
         <div className="flex items-center gap-x-2">
           {workDaysType === 'list' ? (
             <button
+              type="button"
               onClick={() => {
                 setWorkDaysType(undefined)
               }}
@@ -46,6 +47,7 @@ export default function WorkDaysField() {
             </button>
           ) : (
             <button
+              type="button"
               onClick={() => {
                 setWorkDaysType('list')
               }}
@@ -59,6 +61,7 @@ export default function WorkDaysField() {
             {workDaysListContents.map((type) => {
               return (
                 <button
+                  type="button"
                   onClick={() => {
                     setState({
                       recruitPostData: {

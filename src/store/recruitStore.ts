@@ -15,7 +15,7 @@ interface RecruitStoreType {
 }
 
 export const useRecruitStore = create<RecruitStoreType>((set) => ({
-  recruitPostData: {},
+  recruitPostData: { recruitPublishStatus: 'PUBLISHED' },
   s3CompanyLogoUrl: null,
   s3PosterUrl: null,
   setState: (params: SetRecruitStoreType) => {

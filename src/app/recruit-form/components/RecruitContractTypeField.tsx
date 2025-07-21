@@ -27,6 +27,7 @@ export default function RecruitContractTypeField({}: RecruitContractTypeFieldPro
         {contractContents.map((type) => {
           return (
             <button
+              type="button"
               onClick={() => {
                 setState({
                   recruitPostData: {

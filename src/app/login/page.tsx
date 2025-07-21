@@ -6,11 +6,14 @@ import Button from '@/components/common/Button'
 import { UnCheckIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
+import { postMemberLogin } from '@/lib/auth'
+import Cookies from 'js-cookie'
 
 const LoginPage = () => {
   const router = useRouter()
   const role = useAuthStore((state) => state.role)
   const setAuthState = useAuthStore((state) => state.setState)
+  const loginData = useAuthStore((state) => state.loginData)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
@@ -47,11 +50,37 @@ const LoginPage = () => {
           <div className="w-full">
             <section className="flex w-full flex-col gap-y-2">
               <div className="subtitle-lg">아이디</div>
-              <Input inputBoxStyle={'default'} type={'email'} placeholder={'아이디를 입력해주세요.'} />
+              <Input
+                value={loginData?.userId ?? ''}
+                setValue={(e) => {
+                  setAuthState({
+                    loginData: {
+                      ...loginData,
+                      userId: e.target.value,
+                    },
+                  })
+                }}
+                inputBoxStyle={'default'}
+                type={'email'}
+                placeholder={'아이디를 입력해주세요.'}
+              />
             </section>
             <section className="mt-8 flex w-full flex-col gap-y-2">
               <div className="subtitle-lg">비밀번호</div>
-              <Input inputBoxStyle={'default'} type={'email'} placeholder={'아이디를 입력해주세요.'} />
+              <Input
+                value={loginData?.password ?? ''}
+                setValue={(e) => {
+                  setAuthState({
+                    loginData: {
+                      ...loginData,
+                      password: e.target.value,
+                    },
+                  })
+                }}
+                inputBoxStyle={'default'}
+                type={'email'}
+                placeholder={'아이디를 입력해주세요.'}
+              />
               <p className="badge-md text-error">아이디 또는 비밀번호가 맞지 않아요</p>
             </section>
             <section className="mt-5 flex w-full justify-between">
@@ -65,7 +94,20 @@ const LoginPage = () => {
                 <button className="text-gray5 button">비밀번호 찾기</button>
               </div>
             </section>
-            <Button onClick={() => {}} customClassName={'h-[52px] mt-[24px]'} type={'active'} size={'lg'}>
+            <Button
+              onClick={async () => {
+                if (loginData) {
+                  const result = await postMemberLogin(loginData)
+                  if (result.data) {
+                    Cookies.set('accessToken', result.data.accessToken)
+                    Cookies.set('refreshToken', result.data.accessToken)
+                  }
+                }
+              }}
+              customClassName={'h-[52px] mt-[24px]'}
+              type={'active'}
+              size={'lg'}
+            >
               로그인
             </Button>
           </div>

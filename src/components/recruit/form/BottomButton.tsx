@@ -17,10 +17,11 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
       case 1:
         return (
           <div className="fixed bottom-0 flex w-full gap-x-4 bg-white px-[26px] pt-[10px] pb-[32px]">
-            <Button onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
+            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
               임시저장
             </Button>
             <Button
+              buttonType={'button'}
               onClick={() => {
                 setCurrentStep(2)
               }}
@@ -36,6 +37,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
         return (
           <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
             <Button
+              buttonType={'button'}
               onClick={() => {
                 setCurrentStep(1)
               }}
@@ -45,10 +47,11 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
             >
               이전
             </Button>
-            <Button onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
+            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
               임시저장
             </Button>
             <Button
+              buttonType={'button'}
               onClick={() => {
                 setCurrentStep(3)
               }}
@@ -64,6 +67,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
         return (
           <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
             <Button
+              buttonType={'button'}
               onClick={() => {
                 setCurrentStep(2)
               }}
@@ -73,7 +77,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
             >
               이전
             </Button>
-            <Button onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
+            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
               임시저장
             </Button>
             <Button

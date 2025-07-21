@@ -1,14 +1,30 @@
 import { ApiResponse } from '@/types/common'
-import { EmployeeSignUpType } from '@/types/auth'
+import { EmployeeLoginType, EmployeeSignUpType, ResponseLoginType } from '@/types/auth'
 
 /**
  * 피고용인 회원가입
  */
-export const postMemberEmployeeRegister = async (data: EmployeeSignUpType): Promise<ApiResponse<void>> => {
+export const postMemberEmployeeRegister = async (data: EmployeeSignUpType): Promise<ApiResponse<ResponseLoginType>> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/employee-register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  return await response.json()
+}
+
+/**
+ * 피고용인 로그인
+ */
+export const postMemberLogin = async (data: EmployeeLoginType): Promise<ApiResponse<ResponseLoginType>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: '*/*',
     },
     body: JSON.stringify(data),
   })
