@@ -31,7 +31,7 @@ export default function RecruitContractTypeField({}: RecruitContractTypeFieldPro
                 setState({
                   recruitPostData: {
                     ...recruitPostData,
-                    contractType: type.eng,
+                    contractType: contractType === type.eng ? undefined : type.eng,
                   },
                 })
               }}

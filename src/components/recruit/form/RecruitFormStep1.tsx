@@ -6,12 +6,15 @@ import CompanyEstablishedDateField from '@/app/recruit-form/components/CompanyEs
 import RepresentativeNameField from '@/app/recruit-form/components/RepresentativeNameField'
 import BusinessTypeField from '@/app/recruit-form/components/BusinessTypeField'
 import CompanyTypeField from '@/app/recruit-form/components/CompanyTypeField'
+import CompanyLogoImageField from '@/app/recruit-form/components/CompanyLogoImageField'
+import { RefObject } from 'react'
 
 interface RecruitFormStep1Props {
   currentStep: 1 | 2 | 3
+  companyLogoImgRef: RefObject<HTMLInputElement | null>
 }
 
-export default function RecruitFormStep1({ currentStep }: RecruitFormStep1Props) {
+export default function RecruitFormStep1({ currentStep, companyLogoImgRef }: RecruitFormStep1Props) {
   return (
     <div className="px-[26px] pt-[32px]">
       <section className="flex flex-col gap-y-[20px]">
@@ -30,6 +33,7 @@ export default function RecruitFormStep1({ currentStep }: RecruitFormStep1Props)
         <div className="flex flex-col gap-y-[12px]">
           <h2 className="title-md">회사정보</h2>
           <CompanyNameField />
+          <CompanyLogoImageField companyLogoImgRef={companyLogoImgRef} />
           <CompanyAddressField />
           <CompanyEstablishedDateField />
           <RepresentativeNameField />

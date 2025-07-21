@@ -55,7 +55,7 @@ export default function WorkDaysField() {
           <p className="button text-gray5">목록에서 선택</p>
         </div>
         {workDaysType === 'list' && (
-          <div className="flex gap-x-2">
+          <div className="flex flex-col gap-y-2">
             {workDaysListContents.map((type) => {
               return (
                 <button
@@ -68,7 +68,7 @@ export default function WorkDaysField() {
                     })
                   }}
                   key={type.eng}
-                  className={`${workDayType === type.eng ? 'border-main button text-main bg-main-light flex h-[40px] items-center justify-center rounded-[12px] border px-4' : 'border-gray2 button text-gray5 flex h-[40px] items-center justify-center rounded-[12px] border px-4'}`}
+                  className={`${workDayType === type.eng ? 'border-main button text-main bg-main-light flex h-[40px] items-center rounded-[12px] border px-4' : 'border-gray2 button text-gray5 flex h-[40px] items-center rounded-[12px] border px-4'}`}
                 >
                   {type.kor}
                 </button>
@@ -100,7 +100,7 @@ export default function WorkDaysField() {
           <p className="button text-gray5">직접 선택</p>
         </div>
         {workDaysType === 'direct' && (
-          <div className="flex gap-x-2">
+          <div className="grid grid-cols-4 flex-col gap-2">
             {workDaysDirectContents.map((type) => {
               return (
                 <button
@@ -113,7 +113,7 @@ export default function WorkDaysField() {
                     })
                   }}
                   key={type.eng}
-                  className={`${workDayType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[60px] items-center justify-center rounded-[12px] border' : 'border-gray2 button text-gray5 flex h-[40px] w-[60px] items-center justify-center rounded-[12px] border'}`}
+                  className={`${workDayType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[78px] items-center justify-center rounded-[12px] border' : 'border-gray2 button text-gray5 flex h-[40px] w-[78px] items-center justify-center rounded-[12px] border'}`}
                 >
                   {type.kor}
                 </button>

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-const buttonType = {
+const buttonStyleType = {
   active: 'bg-main text-white',
   disabled: 'text-gray5 bg-gray2',
   outline: 'border border-gray2 text-gray5',
@@ -19,6 +19,7 @@ interface ButtonProps {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   disabled?: boolean
+  buttonType?: 'button' | 'submit'
 }
 
 const Button = ({
@@ -30,13 +31,19 @@ const Button = ({
   leftIcon,
   rightIcon,
   disabled,
+  buttonType = 'button',
 }: ButtonProps) => {
   const base = 'flex items-center justify-center gap-x-1 rounded-[16px] button'
-  const style = buttonType[type]
+  const style = buttonStyleType[type]
   const styleSize = buttonSize[size]
 
   return (
-    <button disabled={disabled} onClick={onClick} className={`${base} ${style} ${styleSize} ${customClassName}`}>
+    <button
+      type={buttonType}
+      disabled={disabled}
+      onClick={onClick}
+      className={`${base} ${style} ${styleSize} ${customClassName}`}
+    >
       {leftIcon}
       {children}
       {rightIcon}

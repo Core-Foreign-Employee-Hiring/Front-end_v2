@@ -12,7 +12,6 @@ export default function WorkTypeField() {
     { kor: '대면 근무', eng: 'ONSITE' },
     { kor: '혼합 근무 (대면 + 비대면)', eng: 'HYBRID' },
     { kor: '비대면 근무', eng: 'REMOTE' },
-    { kor: '기타', eng: 'ETC' },
   ]
 
   return (
@@ -28,12 +27,12 @@ export default function WorkTypeField() {
                 setState({
                   recruitPostData: {
                     ...recruitPostData,
-                    workType: type.eng,
+                    workType: workType === type.eng ? undefined : type.eng,
                   },
                 })
               }}
               key={type.eng}
-              className={`${workType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] items-center justify-center rounded-[12px] border px-4' : 'border-gray2 button text-gray5 flex h-[40px] items-center justify-center rounded-[12px] border px-4'}`}
+              className={`${workType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] items-center justify-center rounded-[12px] border px-2' : 'border-gray2 button text-gray5 flex h-[40px] items-center justify-center rounded-[12px] border px-2'}`}
             >
               {type.kor}
             </button>

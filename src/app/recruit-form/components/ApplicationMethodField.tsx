@@ -16,8 +16,8 @@ export default function ApplicationMethodField() {
         지원방법 <span className="text-main">*</span>
       </p>
       <section className="flex flex-col gap-y-3">
-        <div className="flex gap-x-5">
-          <div className="flex items-center gap-x-2">
+        <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-1">
             {applicationMethod === '홈페이지 지원' ? (
               <div
                 onClick={() => {

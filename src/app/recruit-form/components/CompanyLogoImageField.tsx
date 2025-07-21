@@ -1,7 +1,7 @@
 'use client'
 import { AshbnIcon, UploadIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
-import { RefObject, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { useRecruitStore } from '@/store/recruitStore'
 
 interface FileInfo {
@@ -9,16 +9,15 @@ interface FileInfo {
   size: number
 }
 
-interface DetailFieldProps {
-  posterImgRef: RefObject<HTMLInputElement | null>
+interface CompanyLogoImageFieldProps {
+  companyLogoImgRef: RefObject<HTMLInputElement | null>
 }
 
-export default function DetailField({ posterImgRef }: DetailFieldProps) {
-  //이미지
+export default function CompanyLogoImageField({ companyLogoImgRef }: CompanyLogoImageFieldProps) {
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null)
 
   const setState = useRecruitStore((state) => state.setState)
-  const uploadImage = useRecruitStore((state) => state.s3PosterUrl)
+  const uploadImage = useRecruitStore((state) => state.s3CompanyLogoUrl)
 
   /**
    * 파일 크기를 읽기 쉬운 형태로 변환
@@ -37,7 +36,7 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
    * 이미지 미리보기 설정
    */
   const handleImagePreview = async () => {
-    const files = posterImgRef.current?.files
+    const files = companyLogoImgRef.current?.files
     const reader = new FileReader()
 
     if (files && files[0]) {
@@ -51,7 +50,7 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
 
       reader.readAsDataURL(file)
       reader.onloadend = () => {
-        setState({ s3PosterUrl: reader.result })
+        setState({ s3CompanyLogoUrl: reader.result })
       }
     }
   }
@@ -59,11 +58,11 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
   return (
     <div className="flex flex-col gap-y-3">
       <p className="subtitle-lg flex gap-x-1">
-        상세 정보<span className="text-main">*</span>
+        회사 로고<span className="text-main">*</span>
       </p>
       <div className="flex items-center gap-x-3">
-        <p className="subtitle-md text-gray5">채용 포스터 업로드</p>
-        <div onClick={() => posterImgRef.current?.click()} className="relative">
+        <p className="subtitle-md text-gray5">이미지 업로드</p>
+        <div onClick={() => companyLogoImgRef.current?.click()} className="relative">
           <div className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3">
             <UploadIcon width={20} height={20} />
             <p className="button text-gray5">파일 업로드</p>
@@ -71,7 +70,7 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
           <input
             type="file"
             id={'input-file'}
-            ref={posterImgRef}
+            ref={companyLogoImgRef}
             name="input-file"
             onChange={handleImagePreview}
             className="hidden"
@@ -96,7 +95,7 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
           </div>
           <AshbnIcon
             onClick={() => {
-              setState({ s3PosterUrl: null })
+              setState({ s3CompanyLogoUrl: null })
               setFileInfo(null)
             }}
             width={16}

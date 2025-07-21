@@ -45,59 +45,64 @@ export default function SalaryField() {
       <p className="subtitle-lg">
         급여 <span className="text-main">*</span>
       </p>
-      <section className="flex gap-x-3">
-        <DropBox
-          selectedValue={convertContent(salaryType)}
-          setIsDropBoxOpen={() => setIsDropBoxOpen(!isDropBoxOpen)}
-          isDropBoxOpen={isDropBoxOpen}
-          customClassName={'w-[160px] whitespace-nowrap'}
-          initValue={'급여 종류 선택'}
-        >
-          {salaryContents.map((salaryType) => {
-            return (
-              <button
-                key={salaryType.eng}
-                onClick={() => {
-                  setState({ ...recruitPostData, recruitPostData: { ...recruitPostData, salaryType: salaryType.eng } })
-                  setIsDropBoxOpen(false)
-                }}
-                className="body-sm flex h-[60px] items-center px-4"
-              >
-                {salaryType.kor}
-              </button>
-            )
-          })}
-        </DropBox>
+      <div className="flex flex-col gap-y-[20px]">
+        <section className="flex flex-col gap-y-2">
+          <DropBox
+            selectedValue={convertContent(salaryType)}
+            setIsDropBoxOpen={() => setIsDropBoxOpen(!isDropBoxOpen)}
+            isDropBoxOpen={isDropBoxOpen}
+            customClassName={'w-full'}
+            initValue={'급여 종류 선택'}
+          >
+            {salaryContents.map((salaryType) => {
+              return (
+                <button
+                  key={salaryType.eng}
+                  onClick={() => {
+                    setState({
+                      ...recruitPostData,
+                      recruitPostData: { ...recruitPostData, salaryType: salaryType.eng },
+                    })
+                    setIsDropBoxOpen(false)
+                  }}
+                  className="body-sm flex h-[60px] items-center px-4"
+                >
+                  {salaryType.kor}
+                </button>
+              )
+            })}
+          </DropBox>
+          <div className="flex w-full items-center gap-x-3">
+            <Input
+              value={salary !== undefined ? String(salary) : ''}
+              setValue={(e) => {
+                setState({
+                  ...recruitPostData,
+                  recruitPostData: { ...recruitPostData, salary: parseInt(e.target.value) },
+                })
+              }}
+              placeholder={'급여 입력'}
+              inputBoxStyle={'default'}
+              customClassName={'w-full'}
+            />
+            <p className="subtitle-md text-gray4">원</p>
+          </div>
+        </section>
         <div className="flex w-full items-center gap-x-3">
+          <p className="subtitle-sm text-gray5 whitespace-nowrap">기타사항</p>
           <Input
-            value={salary !== undefined ? String(salary) : ''}
+            value={directInputSalaryType ?? ''}
             setValue={(e) => {
               setState({
                 ...recruitPostData,
-                recruitPostData: { ...recruitPostData, salary: parseInt(e.target.value) },
+                recruitPostData: { ...recruitPostData, directInputSalaryType: e.target.value },
               })
             }}
-            placeholder={'급여 입력'}
+            placeholder={'직접입력'}
             inputBoxStyle={'default'}
             customClassName={'w-full'}
           />
-          <p className="subtitle-md text-gray4">원</p>
         </div>
-      </section>
-      <div className="flex w-full items-center gap-x-3">
-        <p className="subtitle-sm text-gray5 whitespace-nowrap">기타사항</p>
-        <Input
-          value={directInputSalaryType ?? ''}
-          setValue={(e) => {
-            setState({
-              ...recruitPostData,
-              recruitPostData: { ...recruitPostData, directInputSalaryType: e.target.value },
-            })
-          }}
-          placeholder={'직접입력'}
-          inputBoxStyle={'default'}
-          customClassName={'w-full'}
-        ></Input>
       </div>
     </div>
   )
