@@ -1,3 +1,8 @@
+export interface UserDataType {
+  name: string
+  userId: string
+  role: 'EMPLOYER' | 'EMPLOYEE'
+}
 export interface ApiResponse<T> {
   message: string
   status: number

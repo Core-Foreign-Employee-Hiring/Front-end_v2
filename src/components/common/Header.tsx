@@ -1,16 +1,22 @@
 'use client'
 import Image from 'next/image'
-import { AlarmIcon, GlobalIcon, MenuIcon, SearchIcon } from '@/assets/svgComponents'
+import { AlarmIcon, GlobalIcon, MenuCancelIcon, MenuIcon } from '@/assets/svgComponents'
 import { usePathname, useRouter } from 'next/navigation'
+import { Dispatch, SetStateAction } from 'react'
 
-const Header = () => {
+interface HeaderProps {
+  isHomeMenuOpen: boolean
+  setIsHomeMenuOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
   const pathname = usePathname()
   const router = useRouter()
 
   const navContents = [
     { title: '홈', router: '/' },
-    { title: '채용후기', router: '/review' },
-    { title: '스터디 참여', router: '/study' },
+    { title: '합격 아카이브', router: '/review' },
+    { title: '스터디', router: '/study' },
   ]
 
   const renderHeaderType = (headerType: 'default' | 'navbar') => {
@@ -60,7 +66,25 @@ const Header = () => {
               <div className="desktop:gap-x-3 flex gap-x-2">
                 <GlobalIcon width={32} height={32} />
                 <AlarmIcon width={32} height={32} />
-                <MenuIcon width={32} height={32} className="desktop:hidden block" />
+                {isHomeMenuOpen ? (
+                  <MenuCancelIcon
+                    onClick={() => {
+                      setIsHomeMenuOpen(false)
+                    }}
+                    width={32}
+                    height={32}
+                    className="desktop:hidden block"
+                  />
+                ) : (
+                  <MenuIcon
+                    onClick={() => {
+                      setIsHomeMenuOpen(true)
+                    }}
+                    width={32}
+                    height={32}
+                    className="desktop:hidden block"
+                  />
+                )}
               </div>
               <div className="desktop:block flex hidden w-full items-center gap-x-2 whitespace-nowrap">
                 <button

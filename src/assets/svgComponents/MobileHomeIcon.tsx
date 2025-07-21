@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgMobileHomeIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" {...props}><path fill="#6F717C" d="M21.64 11.453c0-.582-.234-1.139-.649-1.546l-7.87-7.715a2.164 2.164 0 0 0-3.029 0l-7.87 7.715c-.414.407-.648.964-.649 1.546v8.81c0 1.194.97 2.163 2.165 2.163h15.738a2.164 2.164 0 0 0 2.164-2.164zm1.574 8.81A3.74 3.74 0 0 1 19.476 24H3.738A3.74 3.74 0 0 1 0 20.262v-8.81c0-1.003.404-1.965 1.121-2.668l7.87-7.715a3.74 3.74 0 0 1 5.233 0l7.869 7.715a3.74 3.74 0 0 1 1.12 2.669z" /><path fill="#6F717C" d="M14.265 16.328a1.18 1.18 0 0 0-1.181-1.18h-2.951a1.18 1.18 0 0 0-1.18 1.18v6.885H7.378v-6.885a2.754 2.754 0 0 1 2.754-2.754h2.95a2.754 2.754 0 0 1 2.755 2.754v6.885h-1.573z" /></svg>;
+export default SvgMobileHomeIcon;

@@ -1,4 +1,3 @@
-import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import TenStepSystemIntroSection from '@/components/landing/TenStepSystemIntroSection'
 import AICareerNavigationSection from '@/components/landing/AICareerNavigationSection'
@@ -8,8 +7,7 @@ import KorfitStudySection from '@/components/landing/KorfitStudySection'
 export default function LandingPage() {
   return (
     <main className="">
-      <Header />
-      <div className="flex flex-col items-center justify-center pt-[100px]">
+      <div className="flex flex-col items-center justify-center">
         <TenStepSystemIntroSection />
         <AICareerNavigationSection />
         <PortfolioSupportSection />

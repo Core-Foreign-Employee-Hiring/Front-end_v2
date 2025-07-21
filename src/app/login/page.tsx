@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { postMemberLogin } from '@/lib/auth'
 import Cookies from 'js-cookie'
+import { UserDataType } from '@/types/common'
 
 const LoginPage = () => {
   const router = useRouter()
@@ -101,6 +102,16 @@ const LoginPage = () => {
                   if (result.data) {
                     Cookies.set('accessToken', result.data.accessToken)
                     Cookies.set('refreshToken', result.data.accessToken)
+
+                    const userData: UserDataType = {
+                      name: result.data.name,
+                      userId: result.data.userId,
+                      role: result.data.role,
+                    }
+                    // localStorage 는 브라우저 환경에서만 접근 가능
+                    if (typeof window !== 'undefined') {
+                      localStorage.setItem('userData', JSON.stringify(userData))
+                    }
                   }
                 }
               }}

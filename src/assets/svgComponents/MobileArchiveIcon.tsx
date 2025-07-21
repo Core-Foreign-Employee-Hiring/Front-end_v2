@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgMobileArchiveIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 18" {...props}><path fill="#6F717C" d="M0 14.06V3.563A3.56 3.56 0 0 1 3.562 0h5.606c.734 0 1.434.307 1.931.847l2.77 3.008c.213.232.514.364.828.364h5.74A3.56 3.56 0 0 1 24 7.78v6.28a3.563 3.563 0 0 1-3.562 3.563H3.562A3.563 3.563 0 0 1 0 14.061m1.5 0c0 1.14.923 2.064 2.062 2.064h16.876c1.139 0 2.062-.924 2.062-2.063V7.78c0-1.139-.923-2.063-2.062-2.063h-5.74a2.63 2.63 0 0 1-1.932-.846l-2.77-3.009a1.13 1.13 0 0 0-.828-.363H3.562C2.423 1.5 1.5 2.423 1.5 3.562z" /><path fill="#6F717C" d="M21.563 4.5c0-1.14-.924-2.063-2.063-2.063h-8.437v-1.5H19.5A3.56 3.56 0 0 1 23.063 4.5v.937h-1.5z" /></svg>;
+export default SvgMobileArchiveIcon;
