@@ -20,7 +20,7 @@ import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 
 export default function Home() {
-  const [value, setValue] = useState('')
+  const [searchValue, setSearchValue] = useState('')
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [isJobCategoryFilterOpen, setIsJobCategoryFilterOpen] = useState(false)
   const [isContractTypeFilterOpen, setIsContractTypeFilterOpen] = useState(false)
@@ -37,8 +37,9 @@ export default function Home() {
     hasMore,
     error,
     loadingRef,
+    totalElements,
   } = useInfiniteScroll({
-    searchValue: value,
+    searchValue: searchValue,
     jobCategories: selectedJobCategoryFilterContentList,
     contractTypes: selectedContractTypeFilterContentList,
     size: 20,
@@ -75,16 +76,17 @@ export default function Home() {
           <div className="desktop:mt-[60px] mt-5 flex flex-col gap-y-6 px-5 md:px-5 lg:px-[200px] xl:px-[200px] 2xl:px-[200px]">
             <Input
               leftIcon={<GraySearchIcon width={24} height={24} />}
-              value={value}
+              value={searchValue}
+              setValue={(e) => setSearchValue(e.target.value)}
               inputBoxStyle={'default'}
               placeholder={'채용 공고를 검색해보세요.'}
             />
-            <div className="h-[232px] w-full bg-[#D9D9D9]"></div>
+            {searchValue ? null : <div className="h-[232px] w-full bg-[#D9D9D9]"></div>}
             <section>
               <div className="flex flex-col gap-y-3">
                 <div className="title-lg">공고 전체</div>
                 <p className="subtitle-lg text-main">
-                  34,231 <span className="text-black">건</span>
+                  {totalElements} <span className="text-black">건</span>
                 </p>
                 <section className="relative flex gap-x-2">
                   <section
@@ -95,9 +97,11 @@ export default function Home() {
                   >
                     <div className="flex items-center gap-x-1">
                       <p className="button text-gray5">직종</p>
-                      <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
-                        {selectedJobCategoryFilterContentList.length}
-                      </div>
+                      {selectedJobCategoryFilterContentList.length === 0 ? null : (
+                        <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
+                          {selectedJobCategoryFilterContentList.length}
+                        </div>
+                      )}
                     </div>
                     {isJobCategoryFilterOpen ? (
                       <DropboxArrowUpIcon width={24} height={24} />
@@ -167,9 +171,11 @@ export default function Home() {
                   >
                     <div className="flex items-center gap-x-1">
                       <p className="button text-gray5">계약형태</p>
-                      <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
-                        {selectedContractTypeFilterContentList.length}
-                      </div>
+                      {selectedContractTypeFilterContentList.length === 0 ? null : (
+                        <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
+                          {selectedContractTypeFilterContentList.length}
+                        </div>
+                      )}
                     </div>
                     {isContractTypeFilterOpen ? (
                       <DropboxArrowUpIcon width={24} height={24} />

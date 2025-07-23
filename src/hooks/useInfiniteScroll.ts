@@ -15,6 +15,7 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [totalElements, setTotalElements] = useState(0)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const loadingRef = useRef<HTMLDivElement | null>(null)
 
@@ -41,6 +42,7 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
           setData((prevData) => (isReset ? newData : [...prevData, ...newData]))
           setHasMore(pageNumber < response.data.totalPages - 1)
           setPage(pageNumber)
+          setTotalElements(response.data.totalPages)
         } else {
           setError(response.message || '데이터를 불러오는데 실패했습니다.')
         }
@@ -117,5 +119,6 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
     error,
     loadingRef,
     resetData,
+    totalElements,
   }
 }
