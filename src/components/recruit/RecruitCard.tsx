@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { RecruitResponseContentType } from '@/types/recruit'
+import { RecruitResponseContentType, SalaryEnumType } from '@/types/recruit'
 import { convertEnumToKorContractType, convertEnumToKorJobCategory, convertEnumToKorSalaryType } from '@/utils/recruit'
 
 interface RecruitCardProps {
@@ -20,6 +20,27 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
     // "2025-07-16" -> ["2025", "07", "16"]
     const [year, month, day] = dateString.split('-')
     return `${month}.${day}`
+  }
+
+  const formatNumberWithComma = (number: number | null) => {
+    if (number) return number.toLocaleString('ko-KR')
+  }
+
+  const styleBySalaryType = (salaryType: SalaryEnumType) => {
+    switch (salaryType) {
+      case 'ANNUAL':
+        return 'border-main-dark text-main-dark'
+      case 'HOURLY':
+        return 'border-sub3 text-sub3'
+      case 'MONTHLY':
+        return 'border-sub2 text-sub2'
+      case 'WEEKLY':
+        return 'border-sub5 text-sub5'
+      case 'DAILY':
+        return 'border-sub1 text-sub1'
+      case 'ETC':
+        return 'border-gray2 text-gray5'
+    }
   }
 
   return (
@@ -50,10 +71,12 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       </div>
 
       <div className="flex items-center gap-x-1">
-        <div className="border-sub3 badge-sm text-sub3 flex h-[22px] w-[37px] items-center justify-center rounded-[8px] border">
+        <div
+          className={`${styleBySalaryType(recruit.salaryType)} badge-sm flex h-[22px] w-[37px] items-center justify-center rounded-[8px] border`}
+        >
           {convertEnumToKorSalaryType(recruit.salaryType)}
         </div>
-        <p className="button">{recruit.salary}원</p>
+        <p className="button">{formatNumberWithComma(recruit.salary)}원</p>
       </div>
     </div>
   )
