@@ -2,7 +2,7 @@
 
 import Header from '@/components/common/Header'
 import BottomButton from '@/components/recruit/form/BottomButton'
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import RecruitFormStep1 from '@/components/recruit/form/RecruitFormStep1'
 import RecruitFormStep2 from '@/components/recruit/form/RecruitFormStep2'
 import RecruitFormStep3 from '@/components/recruit/form/RecruitFormStep3'
@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 import { ApiResponse } from '@/types/common'
 
 export default function RecruitFormPage() {
+  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
   const recruitPostData = useRecruitStore((state) => state.recruitPostData)
   const setState = useRecruitStore((state) => state.setState)
@@ -130,10 +131,15 @@ export default function RecruitFormPage() {
     }
   }
 
+  useEffect(() => {
+    console.log('recruitPostData', recruitPostData)
+  }, [recruitPostData])
+
   return (
     <form onSubmit={handleSubmit}>
+      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
+
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
-      <Header />
       <div className="h-[80px]" />
       {currentStep === 1 && <RecruitFormStep1 currentStep={currentStep} companyLogoImgRef={companyLogoImgRef} />}
       {currentStep === 2 && <RecruitFormStep2 currentStep={currentStep} />}
