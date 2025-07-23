@@ -2,7 +2,6 @@ import {
   MobileArchiveIcon,
   MobileHomeIcon,
   MobileStudyIcon,
-  PersonIcon,
   SelectedMobileArchiveIcon,
   SelectedMobileHomeIcon,
   SelectedMobileStudyIcon,
@@ -11,7 +10,7 @@ import Button from '@/components/common/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { UserDataType } from '@/types/common'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import Cookies, { set } from 'js-cookie'
+import Cookies from 'js-cookie'
 
 interface MenuProps {
   setIsHomeMenuOpen: Dispatch<SetStateAction<boolean>>

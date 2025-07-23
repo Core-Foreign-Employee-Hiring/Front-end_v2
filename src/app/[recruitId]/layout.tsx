@@ -1,75 +1,67 @@
-import React, { ReactNode } from "react";
-import type { Metadata } from "next";
+import React, { ReactNode } from 'react'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "KUSITMS | RECRUIT",
+  title: 'KORFIT | 외국인을 위한 한국 취업 플랫폼',
   description:
-    "큐시즘과 함께할 새로운 기수를 모집합니다. 모집 일정과 지원 방법을 확인해보세요.",
+    '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
   keywords: [
-    "KUSITMS",
-    "큐시즘",
-    "큐시즘 모집",
-    "대학생 연합 학회",
-    "IT 학회",
-    "IT 대학생 활동",
-    "리크루팅",
-    "기수 모집",
-    "지원 방법",
-    "학회 지원",
+    'KORFIT',
+    '외국인 취업',
+    '한국 취업',
+    '외국인 채용',
+    '취업 로드맵',
+    'AI 취업 코칭',
+    '10단계 역량 검증',
+    '외국인 구직',
+    '한국 일자리',
+    '글로벌 인재',
+    '취업 플랫폼',
+    '채용 정보',
+    '포트폴리오 지원',
+    '취업 역량 강화',
   ],
   openGraph: {
-    title: "KUSITMS | RECRUIT",
+    title: 'KORFIT | 외국인을 위한 한국 취업 플랫폼',
     description:
-      "큐시즘과 함께할 새로운 기수를 모집합니다. 모집 일정과 지원 방법을 확인해보세요.",
-    url: "https://www.kusitms.com/recruit",
-    siteName: "KUSITMS",
-
+      '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
+    url: 'https://forwork-xi.vercel.app',
+    siteName: 'KORFIT',
     images: [
       {
-        url: "https://kusitms-bucket.s3.ap-northeast-2.amazonaws.com/upload/fdc0f561-9f61-47d0-be9b-1274cfe4814emarkup_banner.png",
-
-        alt: "KUSITMS Recruit",
+        url: 'https://coreforwork.s3.ap-northeast-2.amazonaws.com/file/FowfcOVfTZCgKLuU/file_2025-07-22_00:23:20.png',
+        width: 1200,
+        height: 630,
+        alt: 'KORFIT - 외국인을 위한 한국 취업 플랫폼',
       },
     ],
-    type: "website",
+    type: 'website',
+    locale: 'ko_KR',
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "KUSITMS | RECRUIT",
-    description:
-      "큐시즘과 함께할 새로운 기수를 모집합니다. 모집 일정과 지원 방법을 확인해보세요.",
-    images: [
-      "https://kusitms-bucket.s3.ap-northeast-2.amazonaws.com/upload/fdc0f561-9f61-47d0-be9b-1274cfe4814emarkup_banner.png",
-    ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
-};
+  alternates: {
+    canonical: 'https://forwork-xi.vercel.app', // 실제 도메인으로 수정 필요
+  },
+}
 
 export default async function RecruitLayout({
-                                              children,
-                                            }: Readonly<{
-  children: ReactNode;
+  children,
+}: Readonly<{
+  children: ReactNode
 }>) {
   return (
-    <div className="flex flex-col desktop:gap-y-[100px] items-center">
-      <section className="items-center justify-center w-full max-w-6xl text-center">
-        <h1 className="mb-[40px] desktop:mt-[192px] mt-[60px]">
-          <span className="desktop:text-[72px] text-[48px] font-black leading-[130%]">KUSITMS</span>
-          <br/>
-          <span
-            className="desktop:text-[72px] text-[48px] font-extrabold text-transparent [-webkit-text-stroke:1px_white]">
-            Recruitment
-          </span>
-        </h1>
-        <div className="flex flex-col font-normal desktop:text-[20px] text-[16px] mt-[40px] leading-[150%]">
-          <div className="flex flex-col items-center justify-center desktop:flex-row destop:gap-x-1">
-            <p>큐시즘은 혼자서는 해낼 수 없는 일들을 </p>
-            <p> 함께 이루어내고 있어요.</p>
-          </div>
-          <p>멋진 아이디어를 실현하고, 놀라운 결과를 만들어내요.</p>
-          <p>우리와 함께할래요?</p>
-        </div>
-      </section>
-      <main className="w-full items-center justify-center">{children}</main>
+    <div className="">
+      <main className="">{children}</main>
     </div>
-  );
+  )
 }
