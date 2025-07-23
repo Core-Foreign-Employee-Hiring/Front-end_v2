@@ -7,9 +7,17 @@ import { useState } from 'react'
 import { DropboxArrowDownIcon, DropboxArrowUpIcon, GrayCancelIcon, GraySearchIcon } from '@/assets/svgComponents'
 import Menu from '@/components/common/Menu'
 import Filter from '@/components/recruit/Filter'
-import { contractTypeList, jobCategoryList } from '@/utils/recruit'
+import {
+  contractTypeList,
+  convertEnumToKorContractType,
+  convertEnumToKorJobCategory,
+  convertKorToEnumContractType,
+  convertKorToEnumJobCategory,
+  jobCategoryList,
+} from '@/utils/recruit'
 import { useRecruitStore } from '@/store/recruitStore'
-import { ContractEnumType, ContractKorType, JobCategoryEnumType, JobCategoryKorType } from '@/types/recruit'
+import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 
 export default function Home() {
   const [value, setValue] = useState('')
@@ -22,100 +30,19 @@ export default function Home() {
   //zustand
   const setState = useRecruitStore((state) => state.setState)
 
-  const convertKorToEnumJobCategory = (category: JobCategoryKorType): JobCategoryEnumType => {
-    switch (category) {
-      case '디자인':
-        return 'DESIGN'
-      case '영업/CS':
-        return 'SALES_CS'
-      case '생산/제조':
-        return 'PRODUCTION_MANUFACTURING'
-      case '서비스':
-        return 'SERVICE'
-      case 'IT':
-        return 'IT'
-      case '건설':
-        return 'CONSTRUCTION'
-      case '경영/사무':
-        return 'MANAGEMENT_OFFICE'
-      case '엔터테인먼트':
-        return 'ENTERTAINMENT'
-      case '마케팅/광고':
-        return 'MARKETING_ADVERTISING'
-      case '번역':
-        return 'TRANSLATION'
-      case '교육':
-        return 'EDUCATION'
-      case 'R&D':
-        return 'R_AND_D'
-      case '무역/물류':
-        return 'TRADE_LOGISTICS'
-      case '기타':
-        return 'ETC'
-    }
-  }
-
-  const convertEnumToKorJobCategory = (category: JobCategoryEnumType): JobCategoryKorType => {
-    switch (category) {
-      case 'DESIGN':
-        return '디자인'
-      case 'SALES_CS':
-        return '영업/CS'
-      case 'PRODUCTION_MANUFACTURING':
-        return '생산/제조'
-      case 'SERVICE':
-        return '서비스'
-      case 'IT':
-        return 'IT'
-      case 'CONSTRUCTION':
-        return '건설'
-      case 'MANAGEMENT_OFFICE':
-        return '경영/사무'
-      case 'ENTERTAINMENT':
-        return '엔터테인먼트'
-      case 'MARKETING_ADVERTISING':
-        return '마케팅/광고'
-      case 'TRANSLATION':
-        return '번역'
-      case 'EDUCATION':
-        return '교육'
-      case 'R_AND_D':
-        return 'R&D'
-      case 'TRADE_LOGISTICS':
-        return '무역/물류'
-      case 'ETC':
-        return '기타'
-    }
-  }
-
-  const convertKorToEnumContractType = (category: ContractKorType): ContractEnumType => {
-    switch (category) {
-      case '인턴':
-        return 'INTERN'
-      case '경력':
-        return 'EXPERIENCED'
-      case '계약직':
-        return 'CONTRACT'
-      case '신입':
-        return 'NEWCOMER'
-      case '정규직':
-        return 'REGULAR'
-    }
-  }
-  const convertEnumToKorContractType = (category: ContractEnumType): ContractKorType => {
-    switch (category) {
-      case 'INTERN':
-        return '인턴'
-      case 'EXPERIENCED':
-        return '경력'
-      case 'CONTRACT':
-        return '계약직'
-      case 'NEWCOMER':
-        return '신입'
-      case 'REGULAR':
-        return '정규직'
-    }
-  }
+  // 무한스크롤 훅 사용
+  const {
+    data: recruits,
+    loading,
+    hasMore,
+    error,
+    loadingRef,
+  } = useInfiniteScroll({
+    searchValue: value,
+    jobCategories: selectedJobCategoryFilterContentList,
+    contractTypes: selectedContractTypeFilterContentList,
+    size: 20,
+  })
 
   const handleJobCategoryToggle = (content: JobCategoryKorType) => {
     const isSelected = selectedJobCategoryFilterContentList.includes(convertKorToEnumJobCategory(content))
@@ -306,16 +233,39 @@ export default function Home() {
                 </section>
               </div>
 
+              {/* 에러 표시 */}
+              {error && <div className="text-error py-4 text-center">{error}</div>}
+
+              {/* 공고 리스트 */}
               <div className="desktop:grid-cols-4 desktop:gap-6 mt-[16px] grid grid-cols-2 gap-4">
-                <RecruitCard recruitId={1} />
-                <RecruitCard recruitId={2} />
-                <RecruitCard recruitId={3} />
-                <RecruitCard recruitId={4} />
-                <RecruitCard recruitId={5} />
-                <RecruitCard recruitId={6} />
-                <RecruitCard recruitId={7} />
-                <RecruitCard recruitId={8} />
+                {recruits.map((recruit) => (
+                  <RecruitCard key={recruit.recruitId} recruit={recruit} />
+                ))}
               </div>
+
+              {/* 로딩 인디케이터 */}
+              {loading && (
+                <div className="flex justify-center py-8">
+                  <div className="border-main h-8 w-8 animate-spin rounded-full border-b-2"></div>
+                </div>
+              )}
+
+              {/* 무한스크롤 트리거 엘리먼트 */}
+              {hasMore && (
+                <div ref={loadingRef} className="flex h-10 items-center justify-center">
+                  <span className="text-sm text-gray-400">더 많은 공고를 불러오는 중...</span>
+                </div>
+              )}
+
+              {/* 더 이상 데이터가 없을 때 */}
+              {!hasMore && recruits.length > 0 && (
+                <div className="py-8 text-center text-gray-500">모든 공고를 확인했습니다.</div>
+              )}
+
+              {/* 데이터가 없을 때 */}
+              {!loading && recruits.length === 0 && (
+                <div className="py-16 text-center text-gray-500">검색 결과가 없습니다.</div>
+              )}
             </section>
           </div>
           {/*<Footer />*/}

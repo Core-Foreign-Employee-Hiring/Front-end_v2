@@ -1,7 +1,7 @@
 import DropBox from '@/components/common/DropBox'
 import Input from '@/components/common/Input'
 import { useRecruitStore } from '@/store/recruitStore'
-import { SalaryType } from '@/types/recruit'
+import { SalaryEnumType } from '@/types/recruit'
 import { useState } from 'react'
 
 export default function SalaryField() {
@@ -12,7 +12,7 @@ export default function SalaryField() {
   const salaryType = useRecruitStore((state) => state.recruitPostData.salaryType)
   const directInputSalaryType = useRecruitStore((state) => state.recruitPostData.directInputSalaryType)
 
-  const salaryContents: { kor: string; eng: SalaryType }[] = [
+  const salaryContents: { kor: string; eng: SalaryEnumType }[] = [
     { kor: '연봉', eng: 'ANNUAL' },
     { kor: '월급', eng: 'MONTHLY' },
     { kor: '주급', eng: 'WEEKLY' },
@@ -21,7 +21,7 @@ export default function SalaryField() {
     { kor: '기타', eng: 'ETC' },
   ]
 
-  const convertContent = (salaryType: SalaryType | undefined) => {
+  const convertContent = (salaryType: SalaryEnumType | undefined) => {
     switch (salaryType) {
       case 'ANNUAL':
         return '연봉'

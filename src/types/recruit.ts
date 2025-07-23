@@ -1,3 +1,13 @@
+export interface RecruitResponseContentType {
+  recruitId: number
+  companyImageUrl: string
+  companyName: string
+  recruitEndDate: string
+  contractType: ContractEnumType
+  jobCategories: JobCategoryEnumType[]
+  salaryType: SalaryEnumType
+  salary: number
+}
 export interface RecruitInputDataType {
   title?: string
   companyName?: string
@@ -22,7 +32,7 @@ export interface RecruitInputDataType {
   workStartTime?: string
   workEndTime?: string
   directInputWorkTime?: string
-  salaryType?: SalaryType
+  salaryType?: SalaryEnumType
   salary?: number
   directInputSalaryType?: string
   posterImageUrl?: string
@@ -61,7 +71,9 @@ export type WorkDaysType =
   | 'SATURDAY'
   | 'SUNDAY'
   | 'ETC'
-export type SalaryType = 'ANNUAL' | 'MONTHLY' | 'WEEKLY' | 'DAILY' | 'HOURLY' | 'ETC'
+export type SalaryEnumType = 'ANNUAL' | 'MONTHLY' | 'WEEKLY' | 'DAILY' | 'HOURLY' | 'ETC'
+export type SalaryKorType = '연봉' | '월급' | '주급' | '일급' | '시급' | '기타'
+
 export type JobCategoryKorType =
   | '디자인'
   | '영업/CS'
