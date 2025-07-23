@@ -1,6 +1,6 @@
 import Input from '@/components/common/Input'
 import { useRecruitStore } from '@/store/recruitStore'
-import { ContractType } from '@/types/recruit'
+import { ContractKorType } from '@/types/recruit'
 
 interface RecruitContractTypeFieldProps {}
 
@@ -10,7 +10,7 @@ export default function RecruitContractTypeField({}: RecruitContractTypeFieldPro
   const contractType = useRecruitStore((state) => state.recruitPostData.contractType)
   const directInputContractType = useRecruitStore((state) => state.recruitPostData.directInputContractType)
 
-  const contractContents: { kor: string; eng: ContractType }[] = [
+  const contractContents: { kor: string; eng: ContractKorType }[] = [
     { kor: '정규직', eng: 'REGULAR' },
     { kor: '계약직', eng: 'CONTRACT' },
     { kor: '인턴', eng: 'INTERN' },

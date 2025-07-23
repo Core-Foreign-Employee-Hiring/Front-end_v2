@@ -12,23 +12,9 @@ export interface RecruitInputDataType {
   isAlwaysRecruiting?: true
   recruitStartDate?: string
   recruitEndDate?: string
-  contractType?: ContractType
+  contractType?: ContractKorType
   directInputContractType?: string
-  jobCategories?:
-    | 'DESIGN'
-    | 'PRODUCTION_MANUFACTURING'
-    | 'IT'
-    | 'MANAGEMENT_OFFICE'
-    | 'MARKETING_ADVERTISING'
-    | 'EDUCATION'
-    | 'TRADE_LOGISTICS'
-    | 'SALES_CS'
-    | 'SERVICE'
-    | 'CONSTRUCTION'
-    | 'ENTERTAINMENT'
-    | 'TRANSLATION'
-    | 'R_AND_D'
-    | 'ETC'[]
+  jobCategories?: JobCategoryEnumType[]
   workType?: WorkType
   directInputWorkType?: string
   workDayType?: WorkDaysType
@@ -59,7 +45,8 @@ export type CompanyType =
   | 'SOCIAL_ENTERPRISE'
   | 'COOPERATIVE'
 
-export type ContractType = 'INTERN' | 'REGULAR' | 'NEWCOMER' | 'EXPERIENCED' | 'CONTRACT'
+export type ContractEnumType = 'INTERN' | 'REGULAR' | 'NEWCOMER' | 'EXPERIENCED' | 'CONTRACT'
+export type ContractKorType = '인턴' | '정규직' | '신입' | '경력' | '계약직'
 export type WorkType = 'ONSITE' | 'HYBRID' | 'REMOTE' | 'ETC'
 export type WorkDaysType =
   | 'WEEKDAYS'
@@ -75,3 +62,33 @@ export type WorkDaysType =
   | 'SUNDAY'
   | 'ETC'
 export type SalaryType = 'ANNUAL' | 'MONTHLY' | 'WEEKLY' | 'DAILY' | 'HOURLY' | 'ETC'
+export type JobCategoryKorType =
+  | '디자인'
+  | '영업/CS'
+  | '생산/제조'
+  | '서비스'
+  | 'IT'
+  | '건설'
+  | '경영/사무'
+  | '엔터테인먼트'
+  | '마케팅/광고'
+  | '번역'
+  | '교육'
+  | 'R&D'
+  | '무역/물류'
+  | '기타'
+export type JobCategoryEnumType =
+  | 'DESIGN'
+  | 'PRODUCTION_MANUFACTURING'
+  | 'IT'
+  | 'MANAGEMENT_OFFICE'
+  | 'MARKETING_ADVERTISING'
+  | 'EDUCATION'
+  | 'TRADE_LOGISTICS'
+  | 'SALES_CS'
+  | 'SERVICE'
+  | 'CONSTRUCTION'
+  | 'ENTERTAINMENT'
+  | 'TRANSLATION'
+  | 'R_AND_D'
+  | 'ETC'

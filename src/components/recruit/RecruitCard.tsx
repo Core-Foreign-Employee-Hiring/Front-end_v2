@@ -18,12 +18,13 @@ const RecruitCard = ({ recruitId }: RecruitCardProps) => {
     >
       <div className="relative h-[133px] w-full">
         <Image src={'/pizza.png'} alt={'피자'} fill className="rounded-[12px] object-cover"></Image>
+        <div className="absolute z-10 h-[133px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
+        <p className="badge-sm absolute top-2 right-2 z-10 text-white">~3/31까지</p>
       </div>
 
       <div className="flex flex-col gap-y-1">
         <div className="flex items-center justify-between">
           <p className="subtitle-lg">직무</p>
-          <p className="badge-sm text-gray5">~3/31까지</p>
         </div>
 
         <p className="body-sm text-gray5">회사명</p>
