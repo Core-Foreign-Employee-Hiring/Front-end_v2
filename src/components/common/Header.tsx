@@ -15,7 +15,7 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
 
   const navContents = [
     { title: '홈', router: '/' },
-    { title: '합격 아카이브', router: '/review' },
+    { title: '합격 아카이브', router: '/archive' },
     { title: '스터디', router: '/study' },
   ]
 

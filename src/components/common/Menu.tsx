@@ -46,7 +46,7 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
     },
     {
       title: '합격 아카이브',
-      router: '/review',
+      router: '/archive',
       unSelectedIcon: <MobileArchiveIcon width={24} height={17} />,
       selectedIcon: <SelectedMobileArchiveIcon width={23} height={24} />,
     },
