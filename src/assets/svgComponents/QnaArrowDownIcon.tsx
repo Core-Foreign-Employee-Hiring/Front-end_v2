@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgQnaArrowDownIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 16 9" {...props}><path fill="#999BA5" d="M8.002 6.792 14.029.765a.78.78 0 0 1 .56-.232.75.75 0 0 1 .56.224.76.76 0 0 1 .228.56.76.76 0 0 1-.228.56L8.945 8.09a1.2 1.2 0 0 1-.444.293q-.239.09-.498.089-.26 0-.498-.089a1.2 1.2 0 0 1-.444-.293L.854 1.885a.78.78 0 0 1-.231-.564.75.75 0 0 1 .224-.564.76.76 0 0 1 .56-.228q.332 0 .56.228z" /></svg>;
+export default SvgQnaArrowDownIcon;
