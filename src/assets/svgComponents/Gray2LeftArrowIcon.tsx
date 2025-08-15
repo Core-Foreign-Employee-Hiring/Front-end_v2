@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgGray2LeftArrowIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 9 16" {...props}><path fill="#E9EBEF" d="m2.206 7.998 6.027-6.027a.78.78 0 0 0 .232-.56.75.75 0 0 0-.224-.56.76.76 0 0 0-.56-.228.76.76 0 0 0-.56.228L.908 7.056a1.2 1.2 0 0 0-.293.444q-.09.239-.089.498 0 .26.089.498.088.24.293.444l6.205 6.206a.78.78 0 0 0 .564.231.75.75 0 0 0 .564-.224.76.76 0 0 0 .228-.56.76.76 0 0 0-.228-.56z" /></svg>;
+export default SvgGray2LeftArrowIcon;

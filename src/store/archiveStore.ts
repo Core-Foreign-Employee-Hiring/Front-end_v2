@@ -1,12 +1,12 @@
 import { create } from 'zustand'
-import { PassArchiveType } from '@/types/archive'
+import { PassArchiveRegisterType } from '@/types/archive'
 
 interface SetArchiveStoreType {
-  archiveData: PassArchiveType
+  archiveData: PassArchiveRegisterType
 }
 
 interface ArchiveStoreType {
-  archiveData: PassArchiveType | undefined
+  archiveData: PassArchiveRegisterType | undefined
   setState: (params: SetArchiveStoreType) => void
 }
 
