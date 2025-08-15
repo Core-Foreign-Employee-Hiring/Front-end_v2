@@ -7,7 +7,7 @@ const inputBoxStyles = {
 }
 
 interface InputProps {
-  value: string
+  value: string | number
   setValue?: (e: ChangeEvent<HTMLInputElement>) => void
   inputBoxStyle: 'default' | 'error' | 'disabled'
   textCount?: number
@@ -15,7 +15,7 @@ interface InputProps {
   rightIcon?: React.ReactNode
   leftIcon?: React.ReactNode
   placeholder?: string
-  type?: 'text' | 'password' | 'email' | 'tel' | 'date'
+  type?: 'text' | 'password' | 'email' | 'tel' | 'date' | 'number'
   customClassName?: string
   onClick?: () => void
 }

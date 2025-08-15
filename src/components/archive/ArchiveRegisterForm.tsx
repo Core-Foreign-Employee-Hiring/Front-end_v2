@@ -1,3 +1,5 @@
+'use client'
+
 import Header from '@/components/common/Header'
 import TitleField from '@/components/archive/register/TitleField'
 import SummaryField from '@/components/archive/register/SummaryField'
@@ -7,11 +9,73 @@ import ImageUploadField from '@/components/archive/register/ImageUploadField'
 import ProductUploadField from '@/components/archive/register/ProductUploadField'
 import PriceField from '@/components/archive/register/PriceField'
 import Button from '@/components/common/Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Menu from '@/components/common/Menu'
+import { useArchiveStore } from '@/store/archiveStore'
+import { postArchiveData } from '@/lib/archive'
 
 export default function ArchiveRegisterForm() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
+  const archiveData = useArchiveStore((state) => state.archiveData)
+
+  // 파일 상태 수정
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
+  const [imageFiles, setImageFiles] = useState<File[]>([])
+  const [productFiles, setProductFiles] = useState<File[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    console.log('archiveData', archiveData)
+  }, [archiveData])
+
+  useEffect(() => {
+    console.log('imageFiles', imageFiles)
+  }, [imageFiles])
+
+  const createUploadFormData = () => {
+    const formData = new FormData()
+
+    // archiveData 추가
+    if (archiveData) formData.append('data', JSON.stringify(archiveData))
+
+    // 썸네일 추가
+    if (thumbnailFile) {
+      formData.append('thumbnail', thumbnailFile)
+    }
+
+    // 이미지들 추가
+    imageFiles.forEach((file) => {
+      formData.append('images', file)
+    })
+
+    // 제품들 추가
+    productFiles.forEach((file) => {
+      formData.append('products', file)
+    })
+
+    return formData
+  }
+
+  const handleSubmit = async () => {
+    if (!thumbnailFile) {
+      alert('썸네일을 업로드해주세요.')
+      return
+    }
+
+    try {
+      setIsLoading(true)
+      const formData = createUploadFormData()
+      const result = await postArchiveData(formData)
+      console.log('업로드 성공:', result)
+      // 성공 처리 로직
+    } catch (error) {
+      console.error('업로드 실패:', error)
+      alert('업로드에 실패했습니다.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <main>
       <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
@@ -26,17 +90,23 @@ export default function ArchiveRegisterForm() {
               <TitleField />
               <SummaryField />
               <DescriptionField />
-              <ThumbnailField />
-              <ImageUploadField />
-              <ProductUploadField />
+              <ThumbnailField thumbnailFile={thumbnailFile} setThumbnailFile={setThumbnailFile} />
+              <ImageUploadField imageFiles={imageFiles} setImageFiles={setImageFiles} />
+              <ProductUploadField productFiles={productFiles} setProductFiles={setProductFiles} />
               <PriceField />
             </section>
             <section className="flex gap-x-4 pb-[40px]">
               <Button onClick={() => {}} size={'lg'} type={'outline'} customClassName={'w-full'}>
                 이전
               </Button>
-              <Button onClick={() => {}} size={'lg'} type={'active'} customClassName={'w-full'}>
-                완료
+              <Button
+                onClick={handleSubmit}
+                size={'lg'}
+                type={'active'}
+                customClassName={'w-full'}
+                disabled={isLoading}
+              >
+                {isLoading ? '업로드 중...' : '완료'}
               </Button>
             </section>
           </div>
