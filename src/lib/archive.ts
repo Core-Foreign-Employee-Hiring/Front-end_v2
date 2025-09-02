@@ -1,6 +1,12 @@
 import { authorizedFetch } from '@/lib/common'
 import { ApiResponse, ListResponse } from '@/types/common'
-import { PassArchiveCardDataType, PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
+import {
+  InquiryType,
+  PassArchiveCardDataType,
+  PassArchiveDetailDataType,
+  PassArchiveReviewDataType,
+  PurchasedArchiveType,
+} from '@/types/archive'
 
 /**
  * 합격 아카이브 등록
@@ -64,6 +70,129 @@ export const getArchiveReviewData = async (
 ): Promise<ApiResponse<ListResponse<PassArchiveReviewDataType>>> => {
   const response = await authorizedFetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${id}/reviews?page=${page}&size=${size}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 문의하기
+ */
+export const postInquire = async (
+  passArchiveId: string | string[] | undefined,
+  inquiry: string
+): Promise<ApiResponse<boolean>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/inquiries`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ inquiry }),
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 답변하기
+ */
+export const postAnswer = async (inquiryId: number | undefined, answer: string): Promise<ApiResponse<boolean>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/inquiries/${inquiryId}/answers`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ answer }),
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 작성한 문의하기 불러오기
+ */
+export const getSentInquiryList = async (
+  page: number,
+  size: number
+): Promise<ApiResponse<ListResponse<InquiryType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/inquiries/sent?page=${page}&size=${size}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 받은 문의하기 불러오기
+ */
+export const getReceivedInquiryList = async (
+  page: number,
+  size: number
+): Promise<ApiResponse<ListResponse<InquiryType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/inquiries/received?page=${page}&size=${size}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 알람 읽음 처리
+ */
+export const patchReadQnA = async (notificationId: number): Promise<ApiResponse<ListResponse<InquiryType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/notification/archive-inquiries/read`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ notificationIds: [notificationId] }),
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 구매한 아카이브 조회
+ */
+export const getPurchasedArchives = async (
+  page: number,
+  size: number
+): Promise<ApiResponse<ListResponse<PurchasedArchiveType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/purchased-archives?page=${page}&size=${size}`,
     {
       method: 'GET',
       headers: {

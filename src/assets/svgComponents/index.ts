@@ -1,5 +1,6 @@
 export { default as AlarmIcon } from './AlarmIcon'
 export { default as AshbnIcon } from './AshbnIcon'
+export { default as BentArrowIcon } from './BentArrowIcon'
 export { default as CalenderIcon } from './CalenderIcon'
 export { default as CancelIcon } from './CancelIcon'
 export { default as CheckIcon } from './CheckIcon'

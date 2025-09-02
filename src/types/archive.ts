@@ -1,3 +1,5 @@
+import { getPurchasedArchives } from '@/lib/archive'
+
 export interface PassArchiveRegisterType {
   title?: string
   oneLineReview?: string
@@ -30,4 +32,20 @@ export interface PassArchiveReviewDataType {
   star: number
   content: string
   createdAt: string
+}
+export interface PurchasedArchiveType {
+  passArchiveId: number
+  thumbnailUrl: string
+  title: string
+  oneLineReview: string
+  price: number
+  approvedAt: string
+  archiveReviewId: number
+  star: number
+}
+export interface InquiryType {
+  archiveInquiryId: number
+  title: string
+  inquiry: string
+  answer: string | null
 }
