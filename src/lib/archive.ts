@@ -242,3 +242,40 @@ export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>
   const data = await response.json()
   return data
 }
+
+// /**
+//  * 내가 작성한 리뷰 보기
+//  */
+// export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>> => {
+//   const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/latest-inquiry`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//
+//   const data = await response.json()
+//   return data
+// }
+/**
+ * 리뷰쓰기
+ */
+export const postReview = async (
+  passArchiveId: number | undefined,
+  star: number,
+  content: string | undefined
+): Promise<ApiResponse<boolean>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/test/${passArchiveId}/reviews`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ star: star, content: content }),
+    }
+  )
+
+  const data = await response.json()
+  return data
+}

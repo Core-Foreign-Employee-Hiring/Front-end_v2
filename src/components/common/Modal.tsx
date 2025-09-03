@@ -5,9 +5,9 @@ import Button from '@/components/common/Button'
 interface ModalProps {
   title: string
   children: ReactNode
-  onClick: () => void
-  buttonContent: string
-  buttonType: 'active' | 'disabled'
+  onClick?: () => void
+  buttonContent?: string
+  buttonType?: 'active' | 'disabled'
   onClose: () => void
 }
 
@@ -20,7 +20,9 @@ const Modal = ({ title, children, onClick, buttonContent, buttonType, onClose }:
       >
         <Title title={title} onClose={onClose} />
         <Content>{children}</Content>
-        <BottomButton buttonType={buttonType} buttonContent={buttonContent} onClick={onClick} />
+        {buttonContent && onClick && buttonType ? (
+          <BottomButton buttonType={buttonType} buttonContent={buttonContent} onClick={onClick} />
+        ) : null}
       </div>
     </div>
   )

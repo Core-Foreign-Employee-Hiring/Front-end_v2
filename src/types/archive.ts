@@ -40,6 +40,7 @@ export interface PurchasedArchiveType {
   oneLineReview: string
   price: number
   approvedAt: string
+  isReviewed: boolean
   archiveReviewId: number
   star: number
 }

@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgGrayStarIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 26 25" {...props}><path fill="#C5C6CD" d="M11.421 1.203c.683-1.251 2.479-1.251 3.16 0l2.728 5a1.8 1.8 0 0 0 1.25.908l5.598 1.049c1.4.262 1.956 1.97.977 3.005l-3.913 4.14a1.8 1.8 0 0 0-.477 1.468l.733 5.65c.183 1.412-1.27 2.468-2.557 1.857l-5.147-2.443a1.8 1.8 0 0 0-1.543 0L7.084 24.28c-1.288.611-2.74-.445-2.557-1.858l.733-5.649a1.8 1.8 0 0 0-.477-1.468l-3.914-4.14C-.11 10.13.445 8.423 1.846 8.16L7.445 7.11a1.8 1.8 0 0 0 1.249-.907z" /></svg>;
+export default SvgGrayStarIcon;
