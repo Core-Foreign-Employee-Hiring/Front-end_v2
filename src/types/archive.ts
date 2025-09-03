@@ -1,4 +1,4 @@
-import { getPurchasedArchives } from '@/lib/archive'
+import { getLatestInquiry, getPurchasedArchives } from '@/lib/archive'
 
 export interface PassArchiveRegisterType {
   title?: string
@@ -43,9 +43,30 @@ export interface PurchasedArchiveType {
   archiveReviewId: number
   star: number
 }
+export interface PostArchiveType {
+  archiveId: number
+  thumbnailUrl: string
+  title: string
+  oneLineReview: string
+  price: number
+  salesCount: number
+  star: number
+  starCount: number
+}
 export interface InquiryType {
   archiveInquiryId: number
   title: string
   inquiry: string
   answer: string | null
+}
+export interface LatestInquiryType {
+  archiveInquiryId: number
+  profileImage: string
+  name: string
+  title: string
+  oneLineReview: string
+  price: number
+  inquiry: string
+  isAnswered: boolean
+  answer: string
 }

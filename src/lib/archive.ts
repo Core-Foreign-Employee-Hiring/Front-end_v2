@@ -2,9 +2,11 @@ import { authorizedFetch } from '@/lib/common'
 import { ApiResponse, ListResponse } from '@/types/common'
 import {
   InquiryType,
+  LatestInquiryType,
   PassArchiveCardDataType,
   PassArchiveDetailDataType,
   PassArchiveReviewDataType,
+  PostArchiveType,
   PurchasedArchiveType,
 } from '@/types/archive'
 
@@ -200,6 +202,42 @@ export const getPurchasedArchives = async (
       },
     }
   )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 작성한 아카이브 조회
+ */
+export const getPostArchives = async (
+  page: number,
+  size: number
+): Promise<ApiResponse<ListResponse<PostArchiveType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/archives?page=${page}&size=${size}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 보낸 문의 중 가장 최근거 조회
+ */
+export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>> => {
+  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/latest-inquiry`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
   const data = await response.json()
   return data

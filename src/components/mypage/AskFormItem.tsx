@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useModalStore } from '@/store/modalStore'
 
 interface AskFormItemProps extends InquiryType {
-  type: 'Sent' | 'Received'
+  type: '내가 보낸 문의' | '내가 받은 문의'
   isAnswered: boolean
 }
 export default function AskFormItem({ type, isAnswered, answer, archiveInquiryId, inquiry, title }: AskFormItemProps) {
@@ -52,7 +52,7 @@ export default function AskFormItem({ type, isAnswered, answer, archiveInquiryId
             </div>
             <p className="body-md text-gray5">{inquiry}</p>
           </div>
-          {type === 'Received' && (
+          {type === '내가 받은 문의' && (
             <button
               onClick={() => {
                 setState({ isAnswerModalOpen: true, selectedInquiryId: archiveInquiryId })

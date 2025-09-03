@@ -6,8 +6,8 @@ import Header from '@/components/common/Header'
 import Image from 'next/image'
 import Review from '@/components/archive/Review'
 import Button from '@/components/common/Button'
-import { getArchiveDetailData, getArchiveReviewData, postAnswer, postInquire } from '@/lib/archive'
-import { PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
+import { getArchiveDetailData, getArchiveReviewData, getLatestInquiry, postAnswer, postInquire } from '@/lib/archive'
+import { LatestInquiryType, PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
 import Modal from '@/components/common/Modal'
@@ -20,6 +20,7 @@ export default function ReviewDetailPage() {
   const [archiveDetailData, setArchiveDetailData] = useState<PassArchiveDetailDataType>()
   const [reviewData, setReviewData] = useState<PassArchiveReviewDataType[]>()
   const [isLoading, setIsLoading] = useState(false)
+  const [latestInquiryData, setLatestInquiryData] = useState<LatestInquiryType>()
 
   //이미지 클릭시
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -35,7 +36,7 @@ export default function ReviewDetailPage() {
   const [inquiryContent, setInquiryContent] = useState<string>() //문의하기
 
   //답변하기 모달창
-  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false)
+  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(true)
   const [answerContent, setAnswerContent] = useState<string>() //답변하기
 
   //답변보기 모달창
@@ -46,6 +47,13 @@ export default function ReviewDetailPage() {
       setArchiveDetailData(response.data)
     })
   }, [currentPage])
+
+  // 최근 문의한 정보 가져오기
+  useEffect(() => {
+    getLatestInquiry().then((response) => {
+      setLatestInquiryData(response.data)
+    })
+  }, [])
 
   useEffect(() => {
     const loadArchiveData = async () => {
@@ -142,19 +150,25 @@ export default function ReviewDetailPage() {
           <div className="flex flex-col gap-y-4">
             <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
               <div className="flex items-center gap-x-3">
-                <div className="bg-gray2 h-[48px] w-[48px] rounded-full" />
-                <div className="subtitle-md">유저명</div>
+                <div className="relative h-[48px] w-[48px]">
+                  <Image
+                    fill
+                    src={latestInquiryData?.profileImage ?? '/pizza.png'}
+                    alt={'프로필'}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="subtitle-md">{latestInquiryData?.name}</div>
               </div>
               <div className="flex justify-between">
-                <p className="title-md">title</p>
-                <p className="subtitle-lg">129,550원</p>
+                <p className="title-md">{latestInquiryData?.title}</p>
+                <p className="subtitle-lg">{latestInquiryData?.price.toLocaleString()}원</p>
               </div>
-              <div className="body-md text-gray5">설명한줄</div>
+              <div className="body-md text-gray5">{latestInquiryData?.oneLineReview}</div>
             </section>
             <section className="border-gray2 rounded-[20px] border p-5">
               <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">
-                <p className="title-md">문의내용</p>
-                <p className="body-md text-gray5">문의문의문의문의 이문의</p>
+                <p className="title-md">{latestInquiryData?.inquiry}</p>
               </div>
               <textarea
                 onChange={(e) => {

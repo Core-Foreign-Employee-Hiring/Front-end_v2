@@ -9,20 +9,28 @@ import { useEffect, useState } from 'react'
 import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedArchivePage'
 import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage'
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
-import { getPurchasedArchives } from '@/lib/archive'
-import { PurchasedArchiveType } from '@/types/archive'
+import { getPostArchives, getPurchasedArchives } from '@/lib/archive'
+import { PostArchiveType, PurchasedArchiveType } from '@/types/archive'
 
 export default function MyArchiveList() {
   const [isPurchasedArchivePageOpen, setIsPurchasedArchivePageOpen] = useState(false) //내가 구매한
   const [isSoldArchivePageOpen, setIsSoldArchivePageOpen] = useState(false) //내가 판매한
-  const [isPostArchivePageOpen, setPostArchivePageOpen] = useState(false) //내가 작성한
+  const [isPostArchivePageOpen, setIsPostArchivePageOpen] = useState(false) //내가 작성한
 
   const [purchasedArchiveList, setPurchasedArchiveList] = useState<PurchasedArchiveType[]>()
+  const [postArchiveList, setPostArchiveList] = useState<PostArchiveType[]>()
 
   useEffect(() => {
     getPurchasedArchives(0, 2).then((res) => {
       console.log('res', res.data)
       setPurchasedArchiveList(res.data?.content)
+    })
+  }, [])
+
+  useEffect(() => {
+    getPostArchives(0, 3).then((res) => {
+      console.log('res', res.data)
+      setPostArchiveList(res.data?.content)
     })
   }, [])
 
@@ -33,7 +41,7 @@ export default function MyArchiveList() {
       ) : isSoldArchivePageOpen ? (
         <SoldArchivePage setIsSoldArchivePageOpen={setIsSoldArchivePageOpen} />
       ) : isPostArchivePageOpen ? (
-        <PostArchivePage setPostArchivePageOpen={setPostArchivePageOpen} />
+        <PostArchivePage setIsPostArchivePageOpen={setIsPostArchivePageOpen} />
       ) : (
         <div className="flex flex-col gap-y-[32px] px-5">
           {/* 판매한 아카이브 */}
@@ -73,12 +81,19 @@ export default function MyArchiveList() {
           <section className="flex flex-col gap-y-[20px]">
             <section className="flex items-center justify-between">
               <h1 className="title-md">작성한 아카이브</h1>
-              <button className="button text-gray5 px-4">더보기</button>
+              <button
+                onClick={() => {
+                  setIsPostArchivePageOpen(!isPostArchivePageOpen)
+                }}
+                className="button text-gray5 px-4"
+              >
+                더보기
+              </button>
             </section>
             <div className="flex gap-x-[20px] overflow-x-scroll">
-              <PostArchiveCard />
-              <PostArchiveCard />
-              <PostArchiveCard />
+              {postArchiveList?.map((postArchive) => {
+                return <PostArchiveCard key={postArchive.archiveId} {...postArchive} />
+              })}
             </div>
           </section>
 
