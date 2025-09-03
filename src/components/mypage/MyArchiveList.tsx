@@ -1,13 +1,13 @@
 'use client'
 
 import Button from '@/components/common/Button'
-import { GrayRightArrowIcon } from '@/assets/svgComponents'
+import { GrayRightArrowIcon, IIcon } from '@/assets/svgComponents'
 import SoldArchiveCard from '@/components/mypage/SoldArchiveCard'
 import PostArchiveCard from '@/components/mypage/PostArchiveCard'
 import PurchasedArchiveCard from '@/components/mypage/PurchasedArchiveCard'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { getPostArchives, getPurchasedArchives } from '@/lib/archive'
-import { PostArchiveType, PurchasedArchiveType } from '@/types/archive'
+import { getPostArchives, getPurchasedArchives, getSoldArchives, getSoldArchivesRevenue } from '@/lib/archive'
+import { PostArchiveType, PurchasedArchiveType, SoldArchiveType } from '@/types/archive'
 
 interface MyArchiveListProps {
   isPostArchivePageOpen: false
@@ -28,6 +28,9 @@ export default function MyArchiveList({
 }: MyArchiveListProps) {
   const [purchasedArchiveList, setPurchasedArchiveList] = useState<PurchasedArchiveType[]>()
   const [postArchiveList, setPostArchiveList] = useState<PostArchiveType[]>()
+  const [soldArchiveList, setSoldArchiveList] = useState<SoldArchiveType[]>()
+  const [totalRevenue, setTotalRevenue] = useState<string>()
+  const [clickInfo, setClickInfo] = useState(false)
 
   useEffect(() => {
     getPurchasedArchives(0, 2).then((res) => {
@@ -43,6 +46,16 @@ export default function MyArchiveList({
     })
   }, [])
 
+  useEffect(() => {
+    getSoldArchives(0, 3).then((res) => {
+      console.log('res', res.data)
+      setSoldArchiveList(res.data?.content)
+    })
+    getSoldArchivesRevenue().then((res) => {
+      setTotalRevenue(res.data)
+    })
+  }, [])
+
   return (
     <>
       <div className="flex flex-col gap-y-[32px] px-5">
@@ -50,7 +63,14 @@ export default function MyArchiveList({
         <section className="flex w-full flex-col gap-y-[20px]">
           <section className="flex items-center justify-between">
             <h1 className="title-md">판매한 아카이브</h1>
-            <button className="button text-gray5 px-4">더보기</button>
+            <button
+              onClick={() => {
+                setIsSoldArchivePageOpen(!isSoldArchivePageOpen)
+              }}
+              className="button text-gray5 px-4"
+            >
+              더보기
+            </button>
           </section>
           <section className="flex flex-col gap-y-[12px]">
             <div className="flex items-center justify-between">
@@ -59,23 +79,40 @@ export default function MyArchiveList({
                 계좌번호 수정
               </Button>
             </div>
-            <div className="border-gray2 flex items-center justify-between rounded-[16px] border px-5 py-4">
-              <div>
-                <p className="body-sm">총수익</p>
-                <p className="subtitle-md">40,000원</p>
-              </div>
-              <div className="button text-gray4 flex items-center">
-                인출하기
-                <div className="flex h-[24px] w-[24px] items-center justify-center">
-                  <GrayRightArrowIcon width={5} height={9} />
+            <div className="border-gray2 flex flex-col justify-between rounded-[16px] border px-5 py-4">
+              <div className="flex w-full justify-between">
+                <div className="flex flex-col">
+                  <p className="body-sm">총수익</p>
+                  <div className="flex items-center gap-x-1">
+                    <p className="subtitle-md">{totalRevenue}원</p>
+                    <div
+                      onClick={() => {
+                        setClickInfo(!clickInfo)
+                      }}
+                      className="border-gray4 flex h-[16px] w-[16px] items-center justify-center rounded-full border"
+                    >
+                      <IIcon width={2} height={8} />
+                    </div>
+                  </div>
+                </div>
+                <div className="button text-gray4 flex items-center">
+                  인출하기
+                  <div className="flex h-[24px] w-[24px] items-center justify-center">
+                    <GrayRightArrowIcon width={5} height={9} />
+                  </div>
                 </div>
               </div>
+              {clickInfo ? (
+                <div className="text-gray4 bg-gray2 badge-sm mt-2 w-fit rounded-[8px] px-2 py-1">
+                  인출하기를 누르면 2~3일 내 등록 계좌로 입금돼요.
+                </div>
+              ) : null}
             </div>
           </section>
           <section className="flex flex-col">
-            <SoldArchiveCard />
-            <SoldArchiveCard />
-            <SoldArchiveCard />
+            {soldArchiveList?.map((soldArchive) => {
+              return <SoldArchiveCard key={soldArchive.archiveId} {...soldArchive} />
+            })}
           </section>
         </section>
 

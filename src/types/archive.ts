@@ -44,6 +44,15 @@ export interface PurchasedArchiveType {
   archiveReviewId: number
   star: number
 }
+export interface SoldArchiveType {
+  archiveId: number
+  title: string
+  oneLineReview: string
+  price: number
+  soldAt: string
+  isWithdrawn: boolean
+  withdrawalAt: string
+}
 export interface PostArchiveType {
   archiveId: number
   thumbnailUrl: string

@@ -8,6 +8,7 @@ import {
   PassArchiveReviewDataType,
   PostArchiveType,
   PurchasedArchiveType,
+  SoldArchiveType,
 } from '@/types/archive'
 
 /**
@@ -223,6 +224,42 @@ export const getPostArchives = async (
       },
     }
   )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 내가 판매한 아카이브 조회
+ */
+export const getSoldArchives = async (
+  page: number,
+  size: number
+): Promise<ApiResponse<ListResponse<SoldArchiveType>>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/archives/sold?page=${page}&size=${size}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 총 수익
+ */
+export const getSoldArchivesRevenue = async (): Promise<ApiResponse<string>> => {
+  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/archives/sold/revenue`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
   const data = await response.json()
   return data
