@@ -1,0 +1,6 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgDownloadIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 20" {...props}><mask id="download-icon_svg__a" width={20} height={20} x={0} y={0} maskUnits="userSpaceOnUse" style={{
+    maskType: "alpha"
+  }}><path fill="#D9D9D9" d="M0 0h20v20H0z" /></mask><g fill="#6F717C" mask="url(#download-icon_svg__a)"><path d="M5.256 17.124q-.63 0-1.069-.438a1.45 1.45 0 0 1-.437-1.069v-1.635q0-.265.18-.445t.445-.18.445.18q.18.18.18.445v1.635q0 .096.08.176t.176.08h9.488a.25.25 0 0 0 .176-.08.25.25 0 0 0 .08-.176v-1.635q0-.265.18-.445t.445-.18.445.18q.18.18.18.445v1.635q0 .631-.437 1.069a1.46 1.46 0 0 1-1.07.438zM7.774 9.462l1.603 1.602V4.69q0-.266.18-.445.178-.18.445-.18.265 0 .445.18t.18.445v6.375l1.602-1.602a.6.6 0 0 1 .446-.188.64.64 0 0 1 .445.2.64.64 0 0 1 .184.443.59.59 0 0 1-.184.436l-2.591 2.59a.7.7 0 0 1-.527.214.69.69 0 0 1-.527-.213l-2.592-2.591a.58.58 0 0 1-.187-.44.65.65 0 0 1 .187-.439q.195-.193.45-.196.255-.002.441.184" /></g></svg>;
+export default SvgDownloadIcon;

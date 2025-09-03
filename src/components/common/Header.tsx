@@ -1,15 +1,18 @@
 'use client'
 import Image from 'next/image'
-import { AlarmIcon, GlobalIcon, MenuCancelIcon, MenuIcon } from '@/assets/svgComponents'
+import { AlarmIcon, BackIcon, GlobalIcon, MenuCancelIcon, MenuIcon } from '@/assets/svgComponents'
 import { usePathname, useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction } from 'react'
 
 interface HeaderProps {
-  isHomeMenuOpen: boolean
-  setIsHomeMenuOpen: Dispatch<SetStateAction<boolean>>
+  isHomeMenuOpen?: boolean
+  setIsHomeMenuOpen?: Dispatch<SetStateAction<boolean>>
+  title?: string
+  headerType?: 'default' | 'navbar' | 'dynamic'
+  onBack?: () => void
 }
 
-const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
+const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen, title, headerType = 'default', onBack }: HeaderProps) => {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -19,7 +22,7 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
     { title: '스터디', router: '/study' },
   ]
 
-  const renderHeaderType = (headerType: 'default' | 'navbar') => {
+  const renderHeaderType = (headerType: 'default' | 'navbar' | 'dynamic') => {
     switch (headerType) {
       case 'default':
         return (
@@ -69,7 +72,9 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
                 {isHomeMenuOpen ? (
                   <MenuCancelIcon
                     onClick={() => {
-                      setIsHomeMenuOpen(false)
+                      if (setIsHomeMenuOpen) {
+                        setIsHomeMenuOpen(false)
+                      }
                     }}
                     width={32}
                     height={32}
@@ -78,7 +83,9 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
                 ) : (
                   <MenuIcon
                     onClick={() => {
-                      setIsHomeMenuOpen(true)
+                      if (setIsHomeMenuOpen) {
+                        setIsHomeMenuOpen(true)
+                      }
                     }}
                     width={32}
                     height={32}
@@ -126,9 +133,22 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen }: HeaderProps) => {
             })}
           </div>
         )
+      case 'dynamic':
+        return (
+          <div className="relative flex w-full items-center bg-white px-5 py-[14px]">
+            <BackIcon
+              onClick={() => {
+                onBack ? onBack() : router.back()
+              }}
+              width={6}
+              height={12}
+            />
+            <h1 className="subtitle-md absolute left-1/2 -translate-x-1/2 whitespace-nowrap">{title}</h1>
+          </div>
+        )
     }
   }
 
-  return <header className="fixed z-[40] w-full">{renderHeaderType('default')}</header>
+  return <header className="fixed z-[40] w-full">{renderHeaderType(headerType)}</header>
 }
 export default Header

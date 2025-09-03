@@ -3,6 +3,7 @@ import Pagination from '@/components/common/Pagination'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { getPurchasedArchives } from '@/lib/archive'
 import { PurchasedArchiveType } from '@/types/archive'
+import Header from '@/components/common/Header'
 
 interface PurchasedArchivePageProps {
   setIsPurchasedArchivePageOpen: Dispatch<SetStateAction<boolean>>
@@ -21,7 +22,7 @@ export default function PurchasedArchivePage({ setIsPurchasedArchivePageOpen }: 
         setTotalPages(res.data?.totalPages)
       }
     })
-  }, [])
+  }, [currentPage])
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -30,24 +31,20 @@ export default function PurchasedArchivePage({ setIsPurchasedArchivePageOpen }: 
   }
 
   return (
-    <div className="flex flex-col gap-y-5 px-5">
-      <div className="flex justify-between">
-        <h2 className="title-md">구매한 아카이브</h2>
-        <button
-          onClick={() => {
-            setIsPurchasedArchivePageOpen(false)
-          }}
-          className="button text-gray5 px-4 py-3"
-        >
-          닫기
-        </button>
+    <div className="">
+      <Header title={'구매한 아카이브'} headerType={'dynamic'} onBack={() => setIsPurchasedArchivePageOpen(false)} />
+      <div className="flex flex-col gap-y-5 px-5 pt-[60px]">
+        {purchasedArchiveList?.map((purchasedArchive) => {
+          return <PurchasedArchiveCard key={purchasedArchive.passArchiveId} {...purchasedArchive} />
+        })}
+
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage + 1}
+          onPageChange={handlePageChange}
+          showPages={5}
+        />
       </div>
-
-      {purchasedArchiveList?.map((purchasedArchive) => {
-        return <PurchasedArchiveCard key={purchasedArchive.archiveReviewId} {...purchasedArchive} />
-      })}
-
-      <Pagination totalPages={totalPages} currentPage={currentPage + 1} onPageChange={handlePageChange} showPages={5} />
     </div>
   )
 }

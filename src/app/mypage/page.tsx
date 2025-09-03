@@ -5,9 +5,15 @@ import MypageMenu from '@/components/mypage/MypageMenu'
 import UserInfoEditForm from '@/components/mypage/UserInfoEditForm'
 import MyArchiveList from '@/components/mypage/MyArchiveList'
 import AskForm from '@/components/mypage/AskForm'
-import { getSentInquiryList, postAnswer } from '@/lib/archive'
+import { getPurchasedArchives, getSentInquiryList, postAnswer, postReview } from '@/lib/archive'
 import { useModalStore } from '@/store/modalStore'
 import Modal from '@/components/common/Modal'
+import { GrayStarIcon, StarIcon } from '@/assets/svgComponents'
+import Image from 'next/image'
+import StarRating from '@/components/archive/StarRating'
+import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedArchivePage'
+import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage'
+import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -16,7 +22,18 @@ export default function Mypage() {
   const selectedInquiryId = useModalStore((state) => state.selectedInquiryId)
 
   const setState = useModalStore((state) => state.setState)
+  const isViewReviewModalOpen = useModalStore((state) => state.isViewReviewModalOpen)
+  const isWriteReviewModalOpen = useModalStore((state) => state.isWriteReviewModalOpen)
+  const selectedPassArchiveData = useModalStore((state) => state.selectedPassArchiveData)
+
+  const [isPurchasedArchivePageOpen, setIsPurchasedArchivePageOpen] = useState(false) //내가 구매한
+  const [isSoldArchivePageOpen, setIsSoldArchivePageOpen] = useState(false) //내가 판매한
+  const [isPostArchivePageOpen, setIsPostArchivePageOpen] = useState(false) //내가 작성한
+
   const [answerContent, setAnswerContent] = useState<string>()
+
+  const [rating, setRating] = useState(0)
+  const [content, setContent] = useState<string>()
 
   return (
     <main>
@@ -65,18 +82,104 @@ export default function Mypage() {
         </Modal>
       ) : null}
 
-      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
-      <div className="h-[112px]" />
-      <div className="flex flex-col px-5">
-        <h1 className="title-md">마이페이지</h1>
-      </div>
+      {/* 리뷰 보기 모달창 */}
+      {isViewReviewModalOpen ? (
+        <Modal title={'리뷰'} onClose={() => setState({ isViewReviewModalOpen: false })}>
+          <div className="flex flex-col gap-y-6">
+            <div className="flex justify-between">
+              <div className="flex items-center gap-x-1">
+                <StarIcon width={16} height={15} />
+                <div className="badge-md">5.0</div>
+              </div>
+              <p className="small text-gray4">4분 전 작성</p>
+            </div>
+            <p className="body-md">sdf</p>
+          </div>
+        </Modal>
+      ) : null}
 
-      <div className="mt-5 flex flex-col gap-y-[40px]">
-        <MypageMenu setMypageType={setMypageType} mypageType={mypageType} />
-        {mypageType === '회원정보' ? <UserInfoEditForm /> : null}
-        {mypageType === '내 아카이브' ? <MyArchiveList /> : null}
-        {mypageType === '문의하기' ? <AskForm /> : null}
-      </div>
+      {/* 리뷰 작성 모달창 */}
+      {isWriteReviewModalOpen ? (
+        <Modal
+          buttonContent={'작성하기'}
+          onClick={async () => {
+            const res = await postReview(selectedPassArchiveData?.passArchiveId, rating, content)
+            console.log(res)
+            if (res.status === 201) {
+              setState({ isWriteReviewModalOpen: false })
+              //닫으면 데이터 초기화
+            }
+          }}
+          onClose={() => setState({ isWriteReviewModalOpen: false })}
+          title={'리뷰 작성'}
+          buttonType={'active'}
+        >
+          <div className="flex flex-col gap-y-4">
+            <section className="bg-gray1 flex w-full gap-x-[13px] rounded-[20px] p-5">
+              <div className="relative h-[92px] w-[92px]">
+                <Image
+                  src={selectedPassArchiveData?.thumbnailUrl ?? '/pizza.png'}
+                  alt={'썸네일'}
+                  fill
+                  className="rounded-[12px] object-cover"
+                />
+              </div>
+              <div className="flex flex-col gap-y-1">
+                <p className="subtitle-md">{selectedPassArchiveData?.title}</p>
+                <p className="body-sm text-gray5">{selectedPassArchiveData?.oneLineReview}</p>
+                <p className="body-sm">{selectedPassArchiveData?.price.toLocaleString()}원</p>
+                <p className="small text-gray4">{selectedPassArchiveData?.approvedAt} 결제완료</p>
+              </div>
+            </section>
+            <section className="flex flex-col gap-y-2">
+              <p className="subtitle-md">평점</p>
+              <StarRating initialRating={0} maxRating={5} rating={rating} setRating={setRating} />
+            </section>
+            <section className="flex flex-col gap-y-2">
+              <p className="subtitle-md">리뷰</p>
+              <textarea
+                onChange={(e) => {
+                  setContent(e.target.value)
+                }}
+                placeholder={'리뷰를 남겨보세요!'}
+                className="border-gray2 placeholder:text-gray4 h-[148px] w-full rounded-[20px] border p-5 outline-none"
+              />
+            </section>
+          </div>
+        </Modal>
+      ) : null}
+
+      {isPurchasedArchivePageOpen ? (
+        <PurchasedArchivePage setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen} />
+      ) : isSoldArchivePageOpen ? (
+        <SoldArchivePage setIsSoldArchivePageOpen={setIsSoldArchivePageOpen} />
+      ) : isPostArchivePageOpen ? (
+        <PostArchivePage setIsPostArchivePageOpen={setIsPostArchivePageOpen} />
+      ) : (
+        <>
+          <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
+          <div className="h-[112px]" />
+          <div className="flex flex-col px-5">
+            <h1 className="title-md">마이페이지</h1>
+          </div>
+
+          <div className="mt-5 flex flex-col gap-y-[40px]">
+            <MypageMenu setMypageType={setMypageType} mypageType={mypageType} />
+            {mypageType === '회원정보' ? <UserInfoEditForm /> : null}
+            {mypageType === '내 아카이브' ? (
+              <MyArchiveList
+                isPostArchivePageOpen={isPostArchivePageOpen}
+                setIsPostArchivePageOpen={setIsPostArchivePageOpen}
+                isPurchasedArchivePageOpen={isPurchasedArchivePageOpen}
+                setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen}
+                isSoldArchivePageOpen={isSoldArchivePageOpen}
+                setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
+              />
+            ) : null}
+            {mypageType === '문의하기' ? <AskForm /> : null}
+          </div>
+        </>
+      )}
     </main>
   )
 }
