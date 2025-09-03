@@ -192,7 +192,7 @@ export const getPurchasedArchives = async (
   size: number
 ): Promise<ApiResponse<ListResponse<PurchasedArchiveType>>> => {
   const response = await authorizedFetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/purchased-archives?page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/my/purchased-archives?page=${page}&size=${size}`,
     {
       method: 'GET',
       headers: {

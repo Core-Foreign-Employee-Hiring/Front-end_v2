@@ -1,24 +1,61 @@
 import Button from '@/components/common/Button'
+import { PurchasedArchiveType } from '@/types/archive'
+import Image from 'next/image'
+import { StarIcon } from '@/assets/svgComponents'
+import { useRouter } from 'next/navigation'
 
-export default function PurchasedArchiveCard() {
+interface PurchasedArchiveCardProps extends PurchasedArchiveType {}
+
+export default function PurchasedArchiveCard({
+  title,
+  archiveReviewId,
+  passArchiveId,
+  oneLineReview,
+  star,
+  price,
+  thumbnailUrl,
+  approvedAt,
+}: PurchasedArchiveCardProps) {
+  const router = useRouter()
   return (
-    <div className="flex flex-col gap-y-[16px]">
+    <div
+      onClick={() => {
+        router.push(`/archive/${passArchiveId}`)
+      }}
+      className="flex flex-col gap-y-[16px]"
+    >
       <section className="flex gap-x-[13px]">
-        <div className="bg-gray3 h-[84px] w-[80px] rounded-[12px]" />
+        <div className="relative h-[84px] w-[80px]">
+          <Image fill src={thumbnailUrl} alt={'섬네일'} className={'rounded-[12px] object-cover'} />
+        </div>
         <div className="">
-          <h1 className="subtitle-md">제목</h1>
-          <p className="body-sm text-gray5">한줄 설명</p>
+          <h1 className="subtitle-md">{title}</h1>
+          <p className="body-sm text-gray5">{oneLineReview}</p>
           <div className="flex items-center gap-x-[13px]">
-            <p className="body-sm">129,550원</p>
-            <p className="small text-gray4">2025.07.02 결제완료</p>
+            <p className="body-sm">{price.toLocaleString()}원</p>
+            <p className="small text-gray4">{approvedAt} 결제완료</p>
           </div>
-          <p className="subtitle-sm text-gray5">아직 리뷰를 작성하지 않았습니다.</p>
+          {star ? (
+            <div className="flex items-center gap-x-1">
+              <StarIcon width={16} height={15} />
+              <p className="badge-md text-gray5">{star}</p>
+            </div>
+          ) : (
+            <p className="subtitle-sm text-gray5">아직 리뷰를 작성하지 않았습니다.</p>
+          )}
         </div>
       </section>
       <section className="flex gap-x-3">
-        <Button onClick={() => {}} type={'disabled'} size={'lg'} customClassName={'w-full'}>
-          리뷰 작성
-        </Button>
+        {star ? (
+          <Button onClick={() => {}} type={'disabled'} size={'lg'} customClassName={'w-full'}>
+            내 리뷰 보기
+          </Button>
+        ) : (
+          <Button onClick={() => {}} type={'disabled'} size={'lg'} customClassName={'w-full'}>
+            리뷰 작성
+          </Button>
+        )}
+
         <Button onClick={() => {}} type={'outline'} size={'lg'} customClassName={'w-[100px]  whitespace-nowrap'}>
           다운로드
         </Button>

@@ -16,11 +16,17 @@ export default function AskForm() {
       getSentInquiryList(currentPage, 6).then((res) => {
         console.log(res.data?.content)
         setSentInquiryList(res.data?.content)
+        if (res.data?.totalPages) {
+          setTotalPages(res.data?.totalPages)
+        }
       })
     } else if (type === 'Received') {
       getReceivedInquiryList(currentPage, 6).then((res) => {
         console.log(res.data?.content)
         setReceivedInquiryList(res.data?.content)
+        if (res.data?.totalPages) {
+          setTotalPages(res.data?.totalPages)
+        }
       })
     }
   }, [type])
