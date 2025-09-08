@@ -11,6 +11,9 @@ const PhoneNumberField = () => {
   const [verifyCode, setVerifyCode] = useState<string>('')
   const isPhoneVerified = useAuthStore((state) => state.isEmployeePhoneVerified)
 
+  //이미 등록한 전화번호 에러 제어 state
+  const [isPhoneRegisteredError, setIsPhoneRegisteredError] = useState<boolean | undefined>(undefined)
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
@@ -36,7 +39,12 @@ const PhoneNumberField = () => {
               console.log('body', employeeSignUp?.phoneNumber)
               const result = await postMemberVerifyPhone(employeeSignUp.phoneNumber)
               console.log('result', result)
-              setIsVerifyCodeFieldOpen(result.success)
+              if (result.success) {
+                setIsVerifyCodeFieldOpen(result.success)
+              } else if (result.status === 400 && result.message === '이미 등록된 전화번호 입니다.') {
+                console.log('통과')
+                setIsPhoneRegisteredError(true)
+              }
             }
           }}
           customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
@@ -44,6 +52,10 @@ const PhoneNumberField = () => {
           인증번호
         </Button>
       </div>
+
+      {isPhoneRegisteredError === undefined ? null : isPhoneRegisteredError ? (
+        <p className="badge-md text-error">이미 등록된 전화번호입니다.</p>
+      ) : null}
 
       {isVerifyCodeFieldOpen ? (
         <div className="flex flex-col gap-y-2">
@@ -64,7 +76,9 @@ const PhoneNumberField = () => {
               onClick={async () => {
                 const result = await postMemberVerificationPhoneCode(verifyCode)
                 console.log('result', result)
-                setAuthStoreState({ isEmployeePhoneVerified: result.success })
+                if (result.success) {
+                  setAuthStoreState({ isEmployeePhoneVerified: result.success })
+                }
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >

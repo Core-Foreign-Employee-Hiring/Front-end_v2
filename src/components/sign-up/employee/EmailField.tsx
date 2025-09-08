@@ -19,6 +19,9 @@ const EmailField = () => {
   const [verifyCode, setVerifyCode] = useState<string>('')
   const isEmailCodeVerified = useAuthStore((state) => state.isEmployeeEmailVerified) //코드 통과했는지
 
+  //이미 이메일이 등록된 에러
+  const [isEmailRegisteredError, setIsEmailRegisteredError] = useState<boolean | undefined>(undefined)
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
@@ -43,6 +46,9 @@ const EmailField = () => {
               const result = await postMemberVerifyEmail(email)
               console.log('result', result)
               setIsVerifyCodeFieldOpen(result.success)
+              if (result.status === 400) {
+                setIsEmailRegisteredError(false)
+              }
             }
           }}
           customClassName={'whitespace-nowrap'}
@@ -50,6 +56,8 @@ const EmailField = () => {
           인증번호
         </Button>
       </div>
+
+      {isEmailRegisteredError === undefined ? null : <p className="badge-md text-error">이미 등록된 이메일입니다.</p>}
 
       {isVerifyCodeFieldOpen ? (
         <div className="flex flex-col gap-y-2">
@@ -70,7 +78,6 @@ const EmailField = () => {
               onClick={async () => {
                 const result = await postMemberVerificationEmail(verifyCode)
                 console.log('result', result)
-                setAuthStoreState({ isEmployeeEmailVerified: result.success })
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >

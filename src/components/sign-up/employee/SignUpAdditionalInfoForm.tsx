@@ -1,4 +1,3 @@
-import AddressField from '@/components/sign-up/employee/AddressField'
 import BirthDateField from '@/components/sign-up/employee/BirthDateField'
 import GenderField from '@/components/sign-up/employee/GenderField'
 import NationalityField from '@/components/sign-up/employee/NationalityField'
@@ -21,9 +20,6 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
   const router = useRouter()
 
   const isFormValid =
-    !!employeeSignUp.zipcode &&
-    !!employeeSignUp.address1 &&
-    !!employeeSignUp.address2 &&
     !!employeeSignUp.birthDate &&
     !!employeeSignUp.gender &&
     !!employeeSignUp.nationality &&
@@ -36,7 +32,6 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
   return (
     <div className="flex w-full flex-col gap-y-[40px]">
       <section className="flex w-full flex-col gap-y-[32px]">
-        <AddressField />
         <BirthDateField />
         <NationalityField />
         <VisaField />
@@ -44,27 +39,31 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
         <GenderField />
         <TermsOfServiceField />
       </section>
-      <Button onClick={() => setCurrentStep(1)} size={'lg'} type={'outline'}>
-        이전
-      </Button>
-      <Button
-        onClick={async () => {
-          setCurrentStep(2)
-          const result = await postMemberEmployeeRegister(employeeSignUp)
-          if (result.data) {
-            Cookies.set('accessToken', result.data.accessToken)
-            Cookies.set('refreshToken', result.data.accessToken)
-          }
-          console.log('회원가입 response', result)
-          router.back()
-        }}
-        size={'lg'}
-        // type={'active'}
-        type={isFormValid ? 'active' : 'disabled'}
-        customClassName={'w-full'}
-      >
-        다음
-      </Button>
+      <div className="flex gap-x-2">
+        <Button customClassName={'w-full'} onClick={() => setCurrentStep(1)} size={'lg'} type={'outline'}>
+          이전
+        </Button>
+        <Button
+          onClick={async () => {
+            if (isFormValid) {
+              setCurrentStep(2)
+              const result = await postMemberEmployeeRegister(employeeSignUp)
+              if (result.data) {
+                Cookies.set('accessToken', result.data.accessToken)
+                Cookies.set('refreshToken', result.data.accessToken)
+              }
+              console.log('회원가입 response', result)
+              router.push('/')
+            }
+          }}
+          size={'lg'}
+          // type={'active'}
+          type={isFormValid ? 'active' : 'disabled'}
+          customClassName={'w-full'}
+        >
+          다음
+        </Button>
+      </div>
     </div>
   )
 }

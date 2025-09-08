@@ -38,9 +38,9 @@ const IdField = () => {
           onClick={async () => {
             if (employeeSignUp?.userId) {
               const result = await getMemberVerifyUserId(employeeSignUp?.userId)
-              if (result.success) {
+              if (result.status === 200) {
                 setAuthStoreState({ isEmployeeIdVerified: true })
-              } else {
+              } else if (result.status === 400) {
                 setAuthStoreState({ isEmployeeIdVerified: false })
               }
             }
@@ -50,7 +50,7 @@ const IdField = () => {
           중복확인
         </Button>
       </div>
-      {isEmployeeIdVerified && (
+      {isEmployeeIdVerified !== undefined && (
         <div className="badge-md">
           {isEmployeeIdVerified ? (
             <p className="text-main">사용 가능한 아이디입니다.</p>

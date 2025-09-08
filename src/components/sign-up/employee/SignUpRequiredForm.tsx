@@ -6,6 +6,7 @@ import EmailField from '@/components/sign-up/employee/EmailField'
 import { useAuthStore } from '@/store/authStore'
 import { Dispatch, SetStateAction } from 'react'
 import Button from '@/components/common/Button'
+import AddressField from '@/components/sign-up/employee/AddressField'
 interface SignUpRequiredFormProps {
   setCurrentStep: Dispatch<SetStateAction<1 | 2>>
 }
@@ -24,7 +25,10 @@ export default function SignUpRequiredForm({ setCurrentStep }: SignUpRequiredFor
     isEmployeePasswordValid &&
     isEmployeePhoneVerified &&
     isEmployeeEmailVerified &&
-    !!employeeSignUp?.name // name이 undefined, null, 빈 문자열이 아니어야 함
+    !!employeeSignUp?.name &&
+    !!employeeSignUp.zipcode &&
+    !!employeeSignUp.address1 &&
+    !!employeeSignUp.address2 // name이 undefined, null, 빈 문자열이 아니어야 함
 
   return (
     <div className="flex w-full flex-col gap-y-[40px]">
@@ -34,9 +38,14 @@ export default function SignUpRequiredForm({ setCurrentStep }: SignUpRequiredFor
         <NameField />
         <PhoneNumberField />
         <EmailField />
+        <AddressField />
       </section>
       <Button
-        onClick={() => setCurrentStep(2)}
+        onClick={() => {
+          if (isFormValid) {
+            setCurrentStep(2)
+          }
+        }}
         size={'lg'}
         // type={'active'}
         type={isFormValid ? 'active' : 'disabled'}

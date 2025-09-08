@@ -46,7 +46,7 @@ const EmployeeSignUp = () => {
     <div className="flex w-full flex-col items-center justify-center gap-y-[40px]">
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       <div className="flex flex-col items-center justify-center gap-y-[20px]">
-        <div className="title-lg">회원가입(피고용인)</div>
+        <div className="desktop:block title-lg hidden">회원가입(피고용인)</div>
         <ProcessBar totalStep={2} currentStep={currentStep} step1Content={'필수 정보'} step2Content={'추가 정보'} />
       </div>
       {currentStep === 1 && <SignUpRequiredForm setCurrentStep={setCurrentStep} />}
