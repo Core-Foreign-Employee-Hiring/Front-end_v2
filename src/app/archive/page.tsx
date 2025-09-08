@@ -11,6 +11,7 @@ import Pagination from '@/components/common/Pagination'
 import { getArchiveData } from '@/lib/archive'
 import { PassArchiveCardDataType } from '@/types/archive'
 import ArchiveRegisterForm from '@/components/archive/ArchiveRegisterForm'
+import AlarmModal from '@/components/common/AlarmModal'
 
 const ReviewPage = () => {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -22,6 +23,7 @@ const ReviewPage = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [isArchiveRegisterFormOpen, setIsArchiveRegisterFormOpen] = useState(false)
+  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -79,76 +81,95 @@ const ReviewPage = () => {
   return isArchiveRegisterFormOpen ? (
     <ArchiveRegisterForm />
   ) : (
-    <>
-      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
-      <div className="h-[112px]"></div>
+    <main>
+      {isAlarmModalOpen ? (
+        <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
+      ) : null}
+      <Header
+        setIsAlarmModalOpen={setIsAlarmModalOpen}
+        isAlarmModalOpen={isAlarmModalOpen}
+        isHomeMenuOpen={isHomeMenuOpen}
+        setIsHomeMenuOpen={setIsHomeMenuOpen}
+      />
+
       {isHomeMenuOpen ? (
-        <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+        <div>
+          <div className="h-[80px]" />
+          <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+        </div>
       ) : (
-        <main className="px-5">
-          <section className="flex flex-col gap-y-3 whitespace-nowrap">
-            <h1 className="title-lg">합격 아카이브</h1>
-            <div className="subtitle-lg flex gap-x-[5px]">
-              <p className="text-main">{totalElements.toLocaleString()}</p>
-              <p>건</p>
-            </div>
-            <div className="flex gap-x-3">
-              <Input
-                leftIcon={<GraySearchIcon width={24} height={24} />}
-                inputBoxStyle={'default'}
-                placeholder={'궁금한 아카이브를 검색해보세요.'}
-                value={searchKeyword}
-                setValue={(e) => setSearchKeyword(e.target.value)}
-                onKeyPress={handleKeyPress}
-                customClassName={'w-full'}
-              />
-              <Button onClick={handleSearch} type={'active'} size={'lg'} customClassName={'whitespace-nowrap w-[80px]'}>
-                검색
-              </Button>
-              <Button
-                onClick={() => {
-                  setIsArchiveRegisterFormOpen(true)
-                }}
-                type={'outline'}
-                size={'lg'}
-                customClassName={'whitespace-nowrap w-[80px]'}
-              >
-                등록하기
-              </Button>
-            </div>
-          </section>
-
-          {/* 로딩 상태 */}
-          {isLoading ? (
-            <div className="mt-5 flex h-40 items-center justify-center">
-              <p>로딩 중...</p>
-            </div>
-          ) : (
-            <section className="mt-5 grid grid-cols-2 gap-4">
-              {archiveList.length > 0 ? (
-                archiveList.map((archive) => <ArchiveCard key={archive.passArchiveId} {...archive} />)
-              ) : (
-                <div className="col-span-2 flex h-40 items-center justify-center">
-                  <p className="text-gray4">검색 결과가 없습니다.</p>
-                </div>
-              )}
+        <div>
+          <div className="h-[112px]"></div>
+          <div className="px-5">
+            <section className="flex flex-col gap-y-3 whitespace-nowrap">
+              <h1 className="title-lg">합격 아카이브</h1>
+              <div className="subtitle-lg flex gap-x-[5px]">
+                <p className="text-main">{totalElements.toLocaleString()}</p>
+                <p>건</p>
+              </div>
+              <div className="flex gap-x-3">
+                <Input
+                  leftIcon={<GraySearchIcon width={24} height={24} />}
+                  inputBoxStyle={'default'}
+                  placeholder={'궁금한 아카이브를 검색해보세요.'}
+                  value={searchKeyword}
+                  setValue={(e) => setSearchKeyword(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  customClassName={'w-full'}
+                />
+                <Button
+                  onClick={handleSearch}
+                  type={'active'}
+                  size={'lg'}
+                  customClassName={'whitespace-nowrap w-[80px]'}
+                >
+                  검색
+                </Button>
+                <Button
+                  onClick={() => {
+                    setIsArchiveRegisterFormOpen(true)
+                  }}
+                  type={'outline'}
+                  size={'lg'}
+                  customClassName={'whitespace-nowrap w-[80px]'}
+                >
+                  등록하기
+                </Button>
+              </div>
             </section>
-          )}
 
-          {/* 페이지네이션 - 데이터가 있을 때만 표시 */}
-          {totalPages > 0 && (
-            <div className="mt-[24px] mb-[40px] w-full">
-              <Pagination
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-                currentPage={currentPage + 1} // API는 0부터, UI는 1부터
-                showPages={5}
-              />
-            </div>
-          )}
-        </main>
+            {/* 로딩 상태 */}
+            {isLoading ? (
+              <div className="mt-5 flex h-40 items-center justify-center">
+                <p>로딩 중...</p>
+              </div>
+            ) : (
+              <section className="mt-5 grid grid-cols-2 gap-4">
+                {archiveList.length > 0 ? (
+                  archiveList.map((archive) => <ArchiveCard key={archive.passArchiveId} {...archive} />)
+                ) : (
+                  <div className="col-span-2 flex h-40 items-center justify-center">
+                    <p className="text-gray4">검색 결과가 없습니다.</p>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {/* 페이지네이션 - 데이터가 있을 때만 표시 */}
+            {totalPages > 0 && (
+              <div className="mt-[24px] mb-[40px] w-full">
+                <Pagination
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                  currentPage={currentPage + 1} // API는 0부터, UI는 1부터
+                  showPages={5}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       )}
-    </>
+    </main>
   )
 }
 

@@ -18,6 +18,7 @@ import {
 import { useRecruitStore } from '@/store/recruitStore'
 import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import AlarmModal from '@/components/common/AlarmModal'
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('')
@@ -26,6 +27,7 @@ export default function Home() {
   const [isContractTypeFilterOpen, setIsContractTypeFilterOpen] = useState(false)
   const selectedJobCategoryFilterContentList = useRecruitStore((state) => state.selectedJobCategoryFilterContentList)
   const selectedContractTypeFilterContentList = useRecruitStore((state) => state.selectedContractTypeFilterContentList)
+  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
 
   //zustand
   const setState = useRecruitStore((state) => state.setState)
@@ -67,10 +69,21 @@ export default function Home() {
 
   return (
     <div>
-      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
-      <div className="desktop:h-[160px] h-[80px]" />
+      {isAlarmModalOpen ? (
+        <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
+      ) : null}
+      <Header
+        isAlarmModalOpen={isAlarmModalOpen}
+        setIsAlarmModalOpen={setIsAlarmModalOpen}
+        isHomeMenuOpen={isHomeMenuOpen}
+        setIsHomeMenuOpen={setIsHomeMenuOpen}
+      />
+      <div className="h-[80px]"></div>
+
       {isHomeMenuOpen ? (
-        <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+        <div>
+          <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+        </div>
       ) : (
         <div>
           <div className="desktop:mt-[60px] mt-5 flex flex-col gap-y-6 px-5 md:px-5 lg:px-[200px] xl:px-[200px] 2xl:px-[200px]">

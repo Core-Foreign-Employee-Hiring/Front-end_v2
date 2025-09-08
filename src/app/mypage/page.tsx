@@ -14,6 +14,9 @@ import StarRating from '@/components/archive/StarRating'
 import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedArchivePage'
 import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage'
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
+import Menu from '@/components/common/Menu'
+import AlarmModal from '@/components/common/AlarmModal'
+import { set } from 'js-cookie'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -35,8 +38,13 @@ export default function Mypage() {
   const [rating, setRating] = useState(0)
   const [content, setContent] = useState<string>()
 
+  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
+
   return (
     <main>
+      {isAlarmModalOpen ? (
+        <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
+      ) : null}
       {/* 답변하기 모달창 */}
       {isAnswerModalOpen ? (
         <Modal
@@ -157,27 +165,41 @@ export default function Mypage() {
         <PostArchivePage setIsPostArchivePageOpen={setIsPostArchivePageOpen} />
       ) : (
         <>
-          <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
-          <div className="h-[112px]" />
-          <div className="flex flex-col px-5">
-            <h1 className="title-md">마이페이지</h1>
-          </div>
+          <Header
+            isAlarmModalOpen={isAlarmModalOpen}
+            setIsAlarmModalOpen={setIsAlarmModalOpen}
+            setIsHomeMenuOpen={setIsHomeMenuOpen}
+            isHomeMenuOpen={isHomeMenuOpen}
+          />
+          {isHomeMenuOpen ? (
+            <div>
+              <div className="desktop:h-[160px] h-[80px]" />
+              <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+            </div>
+          ) : (
+            <div>
+              <div className="h-[112px]" />
+              <div className="flex flex-col px-5">
+                <h1 className="title-md">마이페이지</h1>
+              </div>
 
-          <div className="mt-5 flex flex-col gap-y-[40px]">
-            <MypageMenu setMypageType={setMypageType} mypageType={mypageType} />
-            {mypageType === '회원정보' ? <UserInfoEditForm /> : null}
-            {mypageType === '내 아카이브' ? (
-              <MyArchiveList
-                isPostArchivePageOpen={isPostArchivePageOpen}
-                setIsPostArchivePageOpen={setIsPostArchivePageOpen}
-                isPurchasedArchivePageOpen={isPurchasedArchivePageOpen}
-                setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen}
-                isSoldArchivePageOpen={isSoldArchivePageOpen}
-                setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
-              />
-            ) : null}
-            {mypageType === '문의하기' ? <AskForm /> : null}
-          </div>
+              <div className="mt-5 flex flex-col gap-y-[40px]">
+                <MypageMenu setMypageType={setMypageType} mypageType={mypageType} />
+                {mypageType === '회원정보' ? <UserInfoEditForm /> : null}
+                {mypageType === '내 아카이브' ? (
+                  <MyArchiveList
+                    isPostArchivePageOpen={isPostArchivePageOpen}
+                    setIsPostArchivePageOpen={setIsPostArchivePageOpen}
+                    isPurchasedArchivePageOpen={isPurchasedArchivePageOpen}
+                    setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen}
+                    isSoldArchivePageOpen={isSoldArchivePageOpen}
+                    setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
+                  />
+                ) : null}
+                {mypageType === '문의하기' ? <AskForm /> : null}
+              </div>
+            </div>
+          )}
         </>
       )}
     </main>

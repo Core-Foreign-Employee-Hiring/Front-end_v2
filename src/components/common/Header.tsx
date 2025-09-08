@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction } from 'react'
 
 interface HeaderProps {
+  setIsAlarmModalOpen?: Dispatch<SetStateAction<boolean>>
+  isAlarmModalOpen?: boolean
   isHomeMenuOpen?: boolean
   setIsHomeMenuOpen?: Dispatch<SetStateAction<boolean>>
   title?: string
@@ -12,7 +14,15 @@ interface HeaderProps {
   onBack?: () => void
 }
 
-const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen, title, headerType = 'default', onBack }: HeaderProps) => {
+const Header = ({
+  isAlarmModalOpen,
+  setIsAlarmModalOpen,
+  isHomeMenuOpen,
+  setIsHomeMenuOpen,
+  title,
+  headerType = 'default',
+  onBack,
+}: HeaderProps) => {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -68,7 +78,13 @@ const Header = ({ isHomeMenuOpen, setIsHomeMenuOpen, title, headerType = 'defaul
             <section className="desktop:gap-x-5 flex items-center">
               <div className="desktop:gap-x-3 flex gap-x-2">
                 <GlobalIcon width={32} height={32} />
-                <AlarmIcon width={32} height={32} />
+                <AlarmIcon
+                  onClick={() => {
+                    setIsAlarmModalOpen(!isAlarmModalOpen)
+                  }}
+                  width={32}
+                  height={32}
+                />
                 {isHomeMenuOpen ? (
                   <MenuCancelIcon
                     onClick={() => {
