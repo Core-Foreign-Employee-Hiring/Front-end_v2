@@ -80,7 +80,9 @@ const Header = ({
                 <GlobalIcon width={32} height={32} />
                 <AlarmIcon
                   onClick={() => {
-                    setIsAlarmModalOpen(!isAlarmModalOpen)
+                    if (setIsAlarmModalOpen && isAlarmModalOpen !== undefined) {
+                      setIsAlarmModalOpen(!isAlarmModalOpen)
+                    }
                   }}
                   width={32}
                   height={32}

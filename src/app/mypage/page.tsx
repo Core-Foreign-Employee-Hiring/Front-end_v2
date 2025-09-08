@@ -16,7 +16,6 @@ import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
 import Menu from '@/components/common/Menu'
 import AlarmModal from '@/components/common/AlarmModal'
-import { set } from 'js-cookie'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
