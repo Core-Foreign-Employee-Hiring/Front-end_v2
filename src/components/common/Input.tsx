@@ -17,7 +17,7 @@ interface InputProps {
   placeholder?: string
   type?: 'text' | 'password' | 'email' | 'tel' | 'date' | 'number'
   customClassName?: string
-  onKeyPress: (e: React.KeyboardEvent) => void
+  onKeyPress?: (e: React.KeyboardEvent) => void
   onClick?: () => void
 }
 
