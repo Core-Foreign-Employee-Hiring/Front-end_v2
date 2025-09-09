@@ -6,7 +6,15 @@ import Header from '@/components/common/Header'
 import Image from 'next/image'
 import Review from '@/components/archive/Review'
 import Button from '@/components/common/Button'
-import { getArchiveDetailData, getArchiveReviewData, getLatestInquiry, postAnswer, postInquire } from '@/lib/archive'
+import {
+  getArchiveDetailData,
+  getArchiveReviewData,
+  getInquiryIsAnswered,
+  getLatestInquiry,
+  getUnreadInquiry,
+  postAnswer,
+  postInquire,
+} from '@/lib/archive'
 import { LatestInquiryType, PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
@@ -21,6 +29,10 @@ export default function ReviewDetailPage() {
   const [reviewData, setReviewData] = useState<PassArchiveReviewDataType[]>()
   const [isLoading, setIsLoading] = useState(false)
   const [latestInquiryData, setLatestInquiryData] = useState<LatestInquiryType>()
+  // 답변이 달렸는지
+  const [inquiryIsAnswered, setInquiryIsAnswered] = useState<boolean | undefined>()
+  // 새로운 문의가 있는지
+  const [hasUnreadInquiry, setHasUnreadInquiry] = useState<boolean | undefined>()
 
   //이미지 클릭시
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -36,7 +48,7 @@ export default function ReviewDetailPage() {
   const [inquiryContent, setInquiryContent] = useState<string>() //문의하기
 
   //답변하기 모달창
-  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(true)
+  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false)
   const [answerContent, setAnswerContent] = useState<string>() //답변하기
 
   //답변보기 모달창
@@ -50,8 +62,10 @@ export default function ReviewDetailPage() {
 
   // 최근 문의한 정보 가져오기
   useEffect(() => {
-    getLatestInquiry().then((response) => {
-      setLatestInquiryData(response.data)
+    getLatestInquiry(params.id).then((response) => {
+      if (response.success) {
+        setLatestInquiryData(response.data)
+      }
     })
   }, [])
 
@@ -61,8 +75,6 @@ export default function ReviewDetailPage() {
         setIsLoading(true)
 
         const response = await getArchiveReviewData(params.id, currentPage, 3)
-
-        console.log('API 전체 응답:', response)
 
         if (response && response.data && Array.isArray(response.data.content)) {
           const archiveReviewList = response.data.content
@@ -91,8 +103,27 @@ export default function ReviewDetailPage() {
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
     setCurrentPage(page - 1) // Pagination은 1부터 시작하지만 API는 0부터 시작
-    console.log(`페이지 ${page}로 이동`)
   }
+
+  // 답변이 달렸는지 확인하는
+  useEffect(() => {
+    if (latestInquiryData) {
+      getInquiryIsAnswered(latestInquiryData.archiveInquiryId).then((result) => {
+        if (result.success) {
+          setInquiryIsAnswered(result.data)
+        }
+      })
+    }
+  }, [latestInquiryData])
+
+  //새로운 문의가 왔는지
+  useEffect(() => {
+    getUnreadInquiry(params.id).then((result) => {
+      if (result.success) {
+        setHasUnreadInquiry(result.data)
+      }
+    })
+  }, [])
 
   return (
     <main>
@@ -120,13 +151,20 @@ export default function ReviewDetailPage() {
               </div>
               <p className="body-md text-gray5">{archiveDetailData?.oneLineReview}</p>
             </section>
-            <textarea
-              onChange={(e) => {
-                setInquiryContent(e.target.value)
-              }}
-              className="border-gray2 h-[280px] rounded-[20px] border p-5 outline-none"
-              placeholder={'문의사항을 입력해주세요.'}
-            />
+            {inquiryIsAnswered === undefined ? (
+              <textarea
+                onChange={(e) => {
+                  setInquiryContent(e.target.value)
+                }}
+                className="border-gray2 h-[280px] rounded-[20px] border p-5 outline-none"
+                placeholder={'문의사항을 입력해주세요.'}
+              />
+            ) : !inquiryIsAnswered ? (
+              <div className="flex h-[213px] flex-col items-center justify-center gap-y-1">
+                <p className="title-md">유저로부터 답변을 기다리는 중 </p>
+                <p className="body-md text-gray5">잠시만 기다려주세요...</p>
+              </div>
+            ) : null}
           </div>
         </Modal>
       ) : null}
@@ -135,17 +173,17 @@ export default function ReviewDetailPage() {
       {isAnswerModalOpen ? (
         <Modal
           buttonContent={'답변 전송하기'}
-          buttonType={'active'}
+          buttonType={answerContent?.length !== 0 ? 'active' : 'disabled'}
           onClose={() => setIsAnswerModalOpen(false)}
           onClick={async () => {
             if (answerContent) {
-              const response = await postAnswer(3, answerContent)
+              const response = await postAnswer(latestInquiryData?.archiveInquiryId, answerContent)
               if (response.status === 201) {
                 setIsAnswerModalOpen(false)
               }
             }
           }}
-          title={'답변 남기기'}
+          title={latestInquiryData?.isAnswered ? '답변 보기' : '답변 남기기'}
         >
           <div className="flex flex-col gap-y-4">
             <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
@@ -167,52 +205,35 @@ export default function ReviewDetailPage() {
               <div className="body-md text-gray5">{latestInquiryData?.oneLineReview}</div>
             </section>
             <section className="border-gray2 rounded-[20px] border p-5">
-              <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">
-                <p className="title-md">{latestInquiryData?.inquiry}</p>
-              </div>
-              <textarea
-                onChange={(e) => {
-                  setAnswerContent(e.target.value)
-                }}
-                className="h-[100px] w-full pt-3 outline-none"
-                placeholder="답변을 입력해주세요."
-              />
-            </section>
-          </div>
-        </Modal>
-      ) : null}
-
-      {/* 답변 보기 */}
-      {isViewAnswerModalOpen ? (
-        <Modal
-          buttonContent={'문의 새로하기'}
-          title={'답변 보기'}
-          buttonType={'active'}
-          onClick={() => {
-            setIsInquireModalOpen(true)
-          }}
-          onClose={() => setIsViewAnswerModalOpen(false)}
-        >
-          <div className="flex flex-col gap-y-4">
-            <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
-              <div className="flex justify-between">
-                <p className="title-md">{archiveDetailData?.title}</p>
-                <p className="subtitle-lg">{archiveDetailData?.price}원</p>
-              </div>
-              <p className="body-md text-gray5">{archiveDetailData?.oneLineReview}</p>
-            </section>
-            <section className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border p-5">
-              <div>
-                <p className="title-md">문의 내용</p>
-                <p className="body-md text-gray5">문의문의문의 이문의</p>
-              </div>
-              <div className="flex items-start gap-x-3">
-                <BentArrowIcon width={13} height={14} />
-                <div className="flex flex-col gap-y-1">
-                  <p className="title-sm text-main">답변내용</p>
-                  <p className="body-md text-gray5">답변답변답변</p>
-                </div>
-              </div>
+              {latestInquiryData?.isAnswered ? (
+                <>
+                  <div
+                    className={`${latestInquiryData.isAnswered ? '' : 'border-b'} border-gray2 flex flex-col gap-y-1 pb-3`}
+                  >
+                    <p className="title-md">{latestInquiryData?.inquiry}</p>
+                  </div>
+                  <div className="flex gap-x-3">
+                    <BentArrowIcon width={16} height={14} />
+                    <div className="flex flex-col gap-y-1">
+                      <p className="title-sm text-main">답변내용</p>
+                      <p className="body-md text-gray5">{latestInquiryData.answer}</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">
+                    <p className="title-md">{latestInquiryData?.inquiry}</p>
+                  </div>
+                  <textarea
+                    onChange={(e) => {
+                      setAnswerContent(e.target.value)
+                    }}
+                    className="h-[100px] w-full pt-3 outline-none"
+                    placeholder="답변을 입력해주세요."
+                  />
+                </>
+              )}
             </section>
           </div>
         </Modal>
@@ -307,9 +328,17 @@ export default function ReviewDetailPage() {
       <div className="fixed bottom-0 flex w-full gap-x-3 bg-white p-5">
         <Button
           onClick={() => {
-            setIsInquireModalOpen(true)
+            if (archiveDetailData?.writer) {
+              //만약 새로운 문의가 왔다면
+              if (hasUnreadInquiry) {
+                setIsAnswerModalOpen(true) // 답변하기 모달창
+              }
+            } else {
+              setIsInquireModalOpen(true) // 문의하기 모달창
+            }
           }}
-          type={'outline'}
+          type={!hasUnreadInquiry ? 'disabled' : 'outline'}
+          disabled={!hasUnreadInquiry}
           size={'lg'}
           customClassName={'flex whitespace-nowrap ew-[72px] h-[52px]'}
         >

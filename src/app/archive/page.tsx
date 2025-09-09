@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Menu from '@/components/common/Menu'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
-import { GraySearchIcon } from '@/assets/svgComponents'
+import { GraySearchIcon, PlusIcon } from '@/assets/svgComponents'
 import ArchiveCard from '@/components/archive/ArchiveCard'
 import Pagination from '@/components/common/Pagination'
 import { getArchiveData } from '@/lib/archive'
@@ -125,16 +125,6 @@ const ReviewPage = () => {
                 >
                   검색
                 </Button>
-                <Button
-                  onClick={() => {
-                    setIsArchiveRegisterFormOpen(true)
-                  }}
-                  type={'outline'}
-                  size={'lg'}
-                  customClassName={'whitespace-nowrap w-[80px]'}
-                >
-                  등록하기
-                </Button>
               </div>
             </section>
 
@@ -167,6 +157,17 @@ const ReviewPage = () => {
               </div>
             )}
           </div>
+          <button
+            onClick={() => {
+              setIsArchiveRegisterFormOpen(!isArchiveRegisterFormOpen)
+            }}
+            className={
+              'button bg-main fixed right-5 bottom-20 z-10 flex h-[48px] items-center justify-center rounded-full px-4 text-white'
+            }
+          >
+            <PlusIcon width={24} height={24} />
+            아카이브 등록하기
+          </button>
         </div>
       )}
     </main>

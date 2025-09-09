@@ -119,7 +119,7 @@ export const postAnswer = async (inquiryId: number | undefined, answer: string):
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ answer }),
+      body: JSON.stringify({ answer: answer }),
     }
   )
 
@@ -269,13 +269,18 @@ export const getSoldArchivesRevenue = async (): Promise<ApiResponse<string>> => 
 /**
  * 내가 보낸 문의 중 가장 최근거 조회
  */
-export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>> => {
-  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/latest-inquiry`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+export const getLatestInquiry = async (
+  passArchiveId: string | string[] | undefined
+): Promise<ApiResponse<LatestInquiryType>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/latest-inquiry`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
 
   const data = await response.json()
   return data
@@ -315,6 +320,42 @@ export const postReview = async (
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ star: star, content: content }),
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 문의하기 답변이 달렸는지
+ */
+export const getInquiryIsAnswered = async (inquiryId: number): Promise<ApiResponse<boolean>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/inquiries/${inquiryId}/is-answered`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 문의하기 새로운 문의가 있는지
+ */
+export const getUnreadInquiry = async (passArchiveId: string | string[] | undefined): Promise<ApiResponse<boolean>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/inquiries/unread`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   )
 

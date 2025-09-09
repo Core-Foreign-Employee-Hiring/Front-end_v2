@@ -26,6 +26,7 @@ export interface PassArchiveDetailDataType {
   imageUrls: string[]
   authorNickname: string
   authorProfileImage: string
+  writer: boolean
 }
 export interface PassArchiveReviewDataType {
   archiveReviewId: number
