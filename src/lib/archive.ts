@@ -8,6 +8,7 @@ import {
   PassArchiveReviewDataType,
   PostArchiveType,
   PurchasedArchiveType,
+  ReviewDetailDataType,
   SoldArchiveType,
 } from '@/types/archive'
 
@@ -280,20 +281,24 @@ export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>
   return data
 }
 
-// /**
-//  * 내가 작성한 리뷰 보기
-//  */
-// export const getLatestInquiry = async (): Promise<ApiResponse<LatestInquiryType>> => {
-//   const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/latest-inquiry`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//
-//   const data = await response.json()
-//   return data
-// }
+/**
+ * 내가 작성한 리뷰 상세
+ */
+export const getReviewDetail = async (reviewId: number): Promise<ApiResponse<ReviewDetailDataType>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/reviews/${reviewId}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
 /**
  * 리뷰쓰기
  */

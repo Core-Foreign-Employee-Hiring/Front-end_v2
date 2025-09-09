@@ -5,7 +5,7 @@ import MypageMenu from '@/components/mypage/MypageMenu'
 import UserInfoEditForm from '@/components/mypage/UserInfoEditForm'
 import MyArchiveList from '@/components/mypage/MyArchiveList'
 import AskForm from '@/components/mypage/AskForm'
-import { getPurchasedArchives, getSentInquiryList, postAnswer, postReview } from '@/lib/archive'
+import { getPurchasedArchives, getReviewDetail, getSentInquiryList, postAnswer, postReview } from '@/lib/archive'
 import { useModalStore } from '@/store/modalStore'
 import Modal from '@/components/common/Modal'
 import { GrayStarIcon, StarIcon } from '@/assets/svgComponents'
@@ -17,6 +17,8 @@ import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage
 import Menu from '@/components/common/Menu'
 import AlarmModal from '@/components/common/AlarmModal'
 import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
+import { ReviewDetailDataType } from '@/types/archive'
+import { formatRelativeTime } from '@/utils/common'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -28,6 +30,8 @@ export default function Mypage() {
   const isViewReviewModalOpen = useModalStore((state) => state.isViewReviewModalOpen)
   const isWriteReviewModalOpen = useModalStore((state) => state.isWriteReviewModalOpen)
   const selectedPassArchiveData = useModalStore((state) => state.selectedPassArchiveData)
+  const selectedReviewId = useModalStore((state) => state.selectedReviewId)
+  const [reviewDetailData, setReviewDetailData] = useState<ReviewDetailDataType | undefined>(undefined)
 
   const [isPurchasedArchivePageOpen, setIsPurchasedArchivePageOpen] = useState(false) //내가 구매한
   const [isSoldArchivePageOpen, setIsSoldArchivePageOpen] = useState(false) //내가 판매한
@@ -41,6 +45,15 @@ export default function Mypage() {
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
 
   const [isChangeAccountFormOpen, setIsChangeAccountFormOpen] = useState(false)
+
+  useEffect(() => {
+    if (selectedReviewId !== undefined && isViewReviewModalOpen) {
+      getReviewDetail(selectedReviewId).then((result) => {
+        console.log('result', result)
+        setReviewDetailData(result.data)
+      })
+    }
+  }, [selectedReviewId, isViewReviewModalOpen])
 
   return (
     <main>
@@ -99,11 +112,13 @@ export default function Mypage() {
             <div className="flex justify-between">
               <div className="flex items-center gap-x-1">
                 <StarIcon width={16} height={15} />
-                <div className="badge-md">5.0</div>
+                <div className="badge-md">{reviewDetailData?.star}</div>
               </div>
-              <p className="small text-gray4">4분 전 작성</p>
+              <p className="small text-gray4">
+                {reviewDetailData ? formatRelativeTime(reviewDetailData?.createAt) : ''} 작성
+              </p>
             </div>
-            <p className="body-md">sdf</p>
+            <p className="body-md">{reviewDetailData?.content}</p>
           </div>
         </Modal>
       ) : null}

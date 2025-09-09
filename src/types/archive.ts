@@ -80,3 +80,8 @@ export interface LatestInquiryType {
   isAnswered: boolean
   answer: string
 }
+export interface ReviewDetailDataType {
+  content: string
+  star: number
+  createAt: string
+}
