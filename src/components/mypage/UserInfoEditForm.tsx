@@ -1,18 +1,27 @@
-import MypageMenu from '@/components/mypage/MypageMenu'
+import { Dispatch, SetStateAction } from 'react'
 import Button from '@/components/common/Button'
 import NameField from '@/components/sign-up/employee/NameField'
 import EmailField from '@/components/sign-up/employee/EmailField'
 import PhoneNumberField from '@/components/sign-up/employee/PhoneNumberField'
 import AddressField from '@/components/sign-up/employee/AddressField'
 
-interface UserInfoEditFormProps {}
+interface UserInfoEditFormProps {
+  setIsChangeAccountFormOpen: Dispatch<SetStateAction<boolean>>
+}
 
-export default function UserInfoEditForm({}: UserInfoEditFormProps) {
+export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInfoEditFormProps) {
   return (
     <section className="px-5">
       <div className="flex items-center justify-between">
         <p className="title-md">회원정보 수정</p>
-        <Button size={'lg'} onClick={() => {}} type={'outline'} customClassName={'h-[46px] px-6'}>
+        <Button
+          size={'lg'}
+          onClick={() => {
+            setIsChangeAccountFormOpen(true)
+          }}
+          type={'outline'}
+          customClassName={'h-[46px] px-6'}
+        >
           아이디 | 비밀번호 변경
         </Button>
       </div>

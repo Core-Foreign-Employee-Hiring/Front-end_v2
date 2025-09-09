@@ -16,6 +16,7 @@ import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
 import Menu from '@/components/common/Menu'
 import AlarmModal from '@/components/common/AlarmModal'
+import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -38,6 +39,8 @@ export default function Mypage() {
   const [content, setContent] = useState<string>()
 
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
+
+  const [isChangeAccountFormOpen, setIsChangeAccountFormOpen] = useState(false)
 
   return (
     <main>
@@ -184,18 +187,27 @@ export default function Mypage() {
 
               <div className="mt-5 flex flex-col gap-y-[40px]">
                 <MypageMenu setMypageType={setMypageType} mypageType={mypageType} />
-                {mypageType === '회원정보' ? <UserInfoEditForm /> : null}
-                {mypageType === '내 아카이브' ? (
-                  <MyArchiveList
-                    isPostArchivePageOpen={isPostArchivePageOpen}
-                    setIsPostArchivePageOpen={setIsPostArchivePageOpen}
-                    isPurchasedArchivePageOpen={isPurchasedArchivePageOpen}
-                    setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen}
-                    isSoldArchivePageOpen={isSoldArchivePageOpen}
-                    setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
-                  />
-                ) : null}
-                {mypageType === '문의하기' ? <AskForm /> : null}
+                {/* 아이디/비밀번호 변경 페이지 */}
+                {isChangeAccountFormOpen ? (
+                  <ChangeAccountForm />
+                ) : (
+                  <>
+                    {mypageType === '회원정보' ? (
+                      <UserInfoEditForm setIsChangeAccountFormOpen={setIsChangeAccountFormOpen} />
+                    ) : null}
+                    {mypageType === '내 아카이브' ? (
+                      <MyArchiveList
+                        isPostArchivePageOpen={isPostArchivePageOpen}
+                        setIsPostArchivePageOpen={setIsPostArchivePageOpen}
+                        isPurchasedArchivePageOpen={isPurchasedArchivePageOpen}
+                        setIsPurchasedArchivePageOpen={setIsPurchasedArchivePageOpen}
+                        isSoldArchivePageOpen={isSoldArchivePageOpen}
+                        setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
+                      />
+                    ) : null}
+                    {mypageType === '문의하기' ? <AskForm /> : null}
+                  </>
+                )}
               </div>
             </div>
           )}
