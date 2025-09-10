@@ -19,6 +19,8 @@ import AlarmModal from '@/components/common/AlarmModal'
 import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
 import { ReviewDetailDataType } from '@/types/archive'
 import { formatRelativeTime } from '@/utils/common'
+import SearchAddressModal from '@/components/common/SearchAddressModal'
+import { useMyPageStore } from '@/store/mypageStore'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -46,6 +48,11 @@ export default function Mypage() {
 
   const [isChangeAccountFormOpen, setIsChangeAccountFormOpen] = useState(false)
 
+  //주소찾기 api 연결을 위한 state
+  const setMyPageState = useMyPageStore((state) => state.setState)
+  const myPageInfo = useMyPageStore((state) => state.myPageInfo)
+  const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
+
   useEffect(() => {
     if (selectedReviewId !== undefined && isViewReviewModalOpen) {
       getReviewDetail(selectedReviewId).then((result) => {
@@ -55,8 +62,34 @@ export default function Mypage() {
     }
   }, [selectedReviewId, isViewReviewModalOpen])
 
+  const handleComplete = async (data: any) => {
+    let fullAddress = data.address
+    let extraAddress = ''
+
+    const { addressType, bname, buildingName, zonecode } = data
+    console.log('data', data)
+
+    if (addressType === 'R') {
+      if (bname !== '') {
+        extraAddress += bname
+      }
+      if (buildingName !== '') {
+        extraAddress += `${extraAddress !== '' && ', '}${buildingName}`
+      }
+      fullAddress += `${extraAddress !== '' ? ` ${extraAddress}` : ''}`
+    }
+    if (myPageInfo) {
+      setMyPageState({
+        ...myPageInfo,
+        myPageInfo: { ...myPageInfo, zipcode: zonecode, address1: fullAddress },
+      })
+    }
+    setState({ isSearchAddressModalOpen: false })
+  }
+
   return (
     <main>
+      {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       {isAlarmModalOpen ? (
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}

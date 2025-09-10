@@ -94,12 +94,12 @@ const ReviewPage = () => {
 
       {isHomeMenuOpen ? (
         <div>
-          <div className="h-[80px]" />
+          <div className="h-[100px]" />
           <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
         </div>
       ) : (
         <div>
-          <div className="h-[112px]"></div>
+          <div className="h-[112px]" />
           <div className="px-5">
             <section className="flex flex-col gap-y-3 whitespace-nowrap">
               <h1 className="title-lg">합격 아카이브</h1>
