@@ -7,8 +7,16 @@ import Button from '@/components/common/Button'
 import { usePathname } from 'next/navigation'
 import { getRecruitDetailData } from '@/lib/recruit'
 import { ApiResponse } from '@/types/common'
-import { RecruitInputDataType } from '@/types/recruit'
+import {
+  ContractEnumType,
+  JobCategoryEnumType,
+  RecruitInputDataType,
+  SalaryEnumType,
+  WorkDaysType,
+  WorkType,
+} from '@/types/recruit'
 import { convertEnumToKorJobCategory } from '@/utils/recruit'
+import { FaceIcon, TripIcon } from '@/assets/svgComponents'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
@@ -37,6 +45,113 @@ const RecruitDetailPage = () => {
     if (number) return number.toLocaleString('ko-KR')
   }
 
+  const changeEnumToKorContractType = (contractType: ContractEnumType | undefined) => {
+    switch (contractType) {
+      case 'INTERN':
+        return '인턴'
+      case 'REGULAR':
+        return '정규직'
+      case 'NEWCOMER':
+        return '신입'
+      case 'EXPERIENCED':
+        return '경력'
+      case 'CONTRACT':
+        return '계약직'
+    }
+  }
+
+  const changeEnumToKorWorkType = (workType: WorkType | undefined) => {
+    switch (workType) {
+      case 'ONSITE':
+        return '온라인'
+      case 'HYBRID':
+        return '혼합근무'
+      case 'REMOTE':
+        return '원격'
+      case 'ETC':
+        return '기타'
+    }
+  }
+
+  const changeEnumToKorWorkDaysType = (workDaysType: WorkDaysType | undefined) => {
+    switch (workDaysType) {
+      case 'WEEKDAYS':
+        return '평일(월, 화, 수, 목, 금)'
+      case 'WEEKENDS':
+        return '주말(토, 일)'
+      case 'FULL_WEEK':
+        return '주 7일(월~일)'
+      case 'SIX_DAYS':
+        return '주 6일'
+      case 'MONDAY':
+        return '월요일'
+      case 'TUESDAY':
+        return '화요일'
+      case 'WEDNESDAY':
+        return '수요일'
+      case 'THURSDAY':
+        return '목요일'
+      case 'FRIDAY':
+        return '금요일'
+      case 'SATURDAY':
+        return '토요일'
+      case 'SUNDAY':
+        return '일요일'
+      default:
+        return '기타'
+    }
+  }
+
+  const changeEnumToKorSalaryType = (salaryType: SalaryEnumType | undefined) => {
+    switch (salaryType) {
+      case 'ANNUAL':
+        return '연봉'
+      case 'MONTHLY':
+        return '월급'
+      case 'WEEKLY':
+        return '주급'
+      case 'DAILY':
+        return '일급'
+      case 'HOURLY':
+        return '시급'
+      default:
+        return '기타'
+    }
+  }
+
+  const changeEnumToKorJobCategory = (category: JobCategoryEnumType | undefined) => {
+    switch (category) {
+      case 'DESIGN':
+        return '디자인'
+      case 'PRODUCTION_MANUFACTURING':
+        return '생산/제조'
+      case 'IT':
+        return 'IT'
+      case 'MARKETING_ADVERTISING':
+        return '마케팅/광고'
+      case 'ENTERTAINMENT':
+        return '엔터테인먼트'
+      case 'MANAGEMENT_OFFICE':
+        return '경영/사무'
+      case 'EDUCATION':
+        return '교육'
+      case 'TRADE_LOGISTICS':
+        return '무역/물류'
+      case 'SALES_CS':
+        return '영업/CS'
+      case 'SERVICE':
+        return '서비스'
+      case 'CONSTRUCTION':
+        return '건설'
+      case 'R_AND_D':
+        return 'R&D'
+      case 'TRANSLATION':
+        return '번역'
+      default:
+        return '기타'
+    }
+  }
+
   return (
     <main>
       <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
@@ -49,27 +164,36 @@ const RecruitDetailPage = () => {
           <div className="h-[80px]" />
           <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
             <section className="flex flex-col gap-y-[24px]">
-              <div className="border-gray2 relative h-[100px] w-[100px] rounded-[12px] border">
-                <Image src={'/pizza.png'} alt={'이미지'} className={'rounded-[12px] object-cover'} fill />
-              </div>
               <div className="flex flex-col gap-y-3">
                 <p className="button text-gray4">~{formatDate(recruitData.recruitEndDate)}</p>
                 <p className="title-md">{recruitData.title}</p>
                 <p className="subtitle-md text-gray5">{recruitData.companyName}</p>
               </div>
             </section>
+            <section className="flex justify-between">
+              <section className="flex flex-col items-center gap-y-2">
+                <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
+                  <FaceIcon width={19} height={19} />
+                </div>
+                <p className="body-md text-main">{changeEnumToKorContractType(recruitData.contractType)}</p>
+              </section>
+              <section className="flex flex-col items-center gap-y-2">
+                <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
+                  <TripIcon width={19} height={17} />
+                </div>
+                <p className="body-md text-main">{changeEnumToKorJobCategory(recruitData.jobCategories[0])}</p>
+              </section>
+              <section className="flex flex-col items-center gap-y-2">
+                <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
+                  <FaceIcon width={19} height={19} />
+                </div>
+                <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
+              </section>
+            </section>
             <section className="flex flex-col gap-y-[20px]">
               <div className="flex">
-                <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">계약형태</div>
-                <p className="body-md w-[80%]">{recruitData.contractType}</p>
-              </div>
-              <div className="flex">
-                <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">직종</div>
-                <p className="body-md w-[80%]">{formatJobCategory()}</p>
-              </div>
-              <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무요일</div>
-                <p className="body-md w-[80%]">{recruitData.workDayType}</p>
+                <p className="body-md w-[80%]">{changeEnumToKorWorkDaysType(recruitData.workDayType)}</p>
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무시간</div>
@@ -78,13 +202,11 @@ const RecruitDetailPage = () => {
                 </p>
               </div>
               <div className="flex">
-                <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무형태</div>
-                <p className="body-md w-[80%]">{recruitData.workType}</p>
-              </div>
-              <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">급여</div>
-                <p className="body-md w-[80%]">{recruitData.salaryType}</p>
-                <p className="body-md">{recruitData.salary}</p>
+                <div className="flex gap-x-2">
+                  <p className="body-md">{changeEnumToKorSalaryType(recruitData.salaryType)}</p>
+                  <p className="body-md">{recruitData.salary?.toLocaleString()}원</p>
+                </div>
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무지</div>
@@ -132,7 +254,7 @@ const RecruitDetailPage = () => {
 
           {/* 회사 정보 */}
           <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
-            <section className="flex flex-col gap-y-[24px]">
+            <section className="flex gap-x-3">
               <div className="border-gray2 relative h-[100px] w-[100px] rounded-[12px] border">
                 <Image src={'/pizza.png'} alt={'이미지'} className={'rounded-[12px] object-cover'} fill />
               </div>
@@ -163,11 +285,11 @@ const RecruitDetailPage = () => {
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">상세정보</div>
-                <p className="body-md w-[80%]">인턴</p>
+                <p className="body-md w-[80%]">{recruitData.others}</p>
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">공고정보</div>
-                <p className="body-md w-[80%]">인턴</p>
+                <p className="body-md w-[80%]">{recruitData.preferences}</p>
               </div>
             </section>
           </section>

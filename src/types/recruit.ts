@@ -22,7 +22,7 @@ export interface RecruitInputDataType {
   isAlwaysRecruiting?: true
   recruitStartDate?: string
   recruitEndDate?: string
-  contractType?: ContractKorType
+  contractType?: ContractEnumType
   directInputContractType?: string
   jobCategories?: JobCategoryEnumType[]
   workType?: WorkType
