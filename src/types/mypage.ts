@@ -15,3 +15,8 @@ export interface MyPageInfoType {
   adInfoAgreementSmsMms: boolean
   adInfoAgreementEmail: boolean
 }
+export interface SettlementAccountType {
+  accountName: string
+  accountNumber: string
+  bankName: string
+}

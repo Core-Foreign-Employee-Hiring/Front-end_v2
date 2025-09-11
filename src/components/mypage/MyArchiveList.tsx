@@ -8,6 +8,8 @@ import PurchasedArchiveCard from '@/components/mypage/PurchasedArchiveCard'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { getPostArchives, getPurchasedArchives, getSoldArchives, getSoldArchivesRevenue } from '@/lib/archive'
 import { PostArchiveType, PurchasedArchiveType, SoldArchiveType } from '@/types/archive'
+import { getSettlementAccount } from '@/lib/mypage'
+import { SettlementAccountType } from '@/types/mypage'
 
 interface MyArchiveListProps {
   isPostArchivePageOpen: false
@@ -31,6 +33,9 @@ export default function MyArchiveList({
   const [soldArchiveList, setSoldArchiveList] = useState<SoldArchiveType[]>()
   const [totalRevenue, setTotalRevenue] = useState<string>()
   const [clickInfo, setClickInfo] = useState(false)
+  //계좌번호 정보 조회
+  const [settlementAccount, setSettlementAccount] = useState<SettlementAccountType>()
+  const [isAccountRegistered, setIsAccountRegistered] = useState(false)
 
   useEffect(() => {
     getPurchasedArchives(0, 2).then((res) => {
@@ -54,6 +59,14 @@ export default function MyArchiveList({
     getSoldArchivesRevenue().then((res) => {
       setTotalRevenue(res.data)
     })
+    getSettlementAccount().then((result) => {
+      if (result.success) {
+        setSettlementAccount(result.data)
+        setIsAccountRegistered(true)
+      } else if (result.status === 404) {
+        setIsAccountRegistered(false)
+      }
+    })
   }, [])
 
   return (
@@ -74,9 +87,18 @@ export default function MyArchiveList({
           </section>
           <section className="flex flex-col gap-y-[12px]">
             <div className="flex items-center justify-between">
-              <p className="body-sm text-gray5">토스뱅크 1000-2185-1683</p>
+              {isAccountRegistered ? (
+                <div className="flex gap-x-1">
+                  <p className="subtitle-sm text-gray5">{settlementAccount?.accountName}</p>
+                  <p className="body-sm text-gray5">
+                    {settlementAccount?.bankName} {settlementAccount?.accountNumber}
+                  </p>
+                </div>
+              ) : (
+                <p className="body-sm text-gray5">등록한 계좌번호가 없어요.</p>
+              )}
               <Button onClick={() => {}} type={'outline'} size={'sm'}>
-                계좌번호 수정
+                {isAccountRegistered ? '계좌번호 수정' : '계좌번호 등록'}
               </Button>
             </div>
             <div className="border-gray2 flex flex-col justify-between rounded-[16px] border px-5 py-4">

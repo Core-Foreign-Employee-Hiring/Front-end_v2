@@ -1,11 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Header from '@/components/common/Header'
 import Pagination from '@/components/common/Pagination'
-import { getPostArchives, getSoldArchives, getSoldArchivesRevenue } from '@/lib/archive'
+import { getSoldArchives, getSoldArchivesRevenue } from '@/lib/archive'
 import { SoldArchiveType } from '@/types/archive'
 import SoldArchiveCard from '@/components/mypage/SoldArchiveCard'
 import Button from '@/components/common/Button'
 import { GrayRightArrowIcon, IIcon } from '@/assets/svgComponents'
+import { getSettlementAccount } from '@/lib/mypage'
+import { SettlementAccountType } from '@/types/mypage'
 
 interface SoldArchivePageProps {
   setIsSoldArchivePageOpen: Dispatch<SetStateAction<boolean>>
@@ -16,6 +18,9 @@ export default function SoldArchivePage({ setIsSoldArchivePageOpen }: SoldArchiv
   const [soldArchiveList, setSoldArchiveList] = useState<SoldArchiveType[]>()
   const [totalRevenue, setTotalRevenue] = useState<string>()
   const [clickInfo, setClickInfo] = useState(false)
+  //계좌번호 정보 조회
+  const [settlementAccount, setSettlementAccount] = useState<SettlementAccountType>()
+  const [isAccountRegistered, setIsAccountRegistered] = useState(false)
 
   useEffect(() => {
     getSoldArchives(currentPage, 2).then((res) => {
@@ -31,6 +36,14 @@ export default function SoldArchivePage({ setIsSoldArchivePageOpen }: SoldArchiv
     getSoldArchivesRevenue().then((res) => {
       setTotalRevenue(res.data)
     })
+    getSettlementAccount().then((result) => {
+      if (result.success) {
+        setSettlementAccount(result.data)
+        setIsAccountRegistered(true)
+      } else if (result.status === 404) {
+        setIsAccountRegistered(false)
+      }
+    })
   }, [])
 
   // 페이지 변경 핸들러
@@ -44,9 +57,18 @@ export default function SoldArchivePage({ setIsSoldArchivePageOpen }: SoldArchiv
       <div className="flex flex-col gap-y-5 px-5 pt-[60px]">
         <section className="flex flex-col gap-y-[12px]">
           <div className="flex items-center justify-between">
-            <p className="body-sm text-gray5">토스뱅크 1000-2185-1683</p>
+            {isAccountRegistered ? (
+              <div className="flex gap-x-1">
+                <p className="subtitle-sm text-gray5">{settlementAccount?.accountName}</p>
+                <p className="body-sm text-gray5">
+                  {settlementAccount?.bankName} {settlementAccount?.accountNumber}
+                </p>
+              </div>
+            ) : (
+              <p className="body-sm text-gray5">등록한 계좌번호가 없어요.</p>
+            )}
             <Button onClick={() => {}} type={'outline'} size={'sm'}>
-              계좌번호 수정
+              {isAccountRegistered ? '계좌번호 수정' : '계좌번호 등록'}
             </Button>
           </div>
           <div className="border-gray2 flex flex-col justify-between rounded-[16px] border px-5 py-4">
