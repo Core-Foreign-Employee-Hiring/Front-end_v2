@@ -7,7 +7,7 @@ import MyArchiveList from '@/components/mypage/MyArchiveList'
 import AskForm from '@/components/mypage/AskForm'
 import { getInquiryDetail, getReviewDetail, postAnswer, postReview } from '@/lib/archive'
 import { useModalStore } from '@/store/modalStore'
-import Modal from '@/components/common/Modal'
+import BottomModal from '@/components/common/BottomModal'
 import { StarIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
 import StarRating from '@/components/archive/StarRating'
@@ -15,12 +15,13 @@ import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedA
 import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage'
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
 import Menu from '@/components/common/Menu'
-import AlarmModal from '@/components/common/AlarmModal'
+import AlarmModal from '@/components/modal/AlarmModal'
 import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
 import { InquiryDetailType, ReviewDetailDataType } from '@/types/archive'
 import { formatRelativeTime } from '@/utils/common'
 import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useMyPageStore } from '@/store/mypageStore'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -49,6 +50,8 @@ export default function Mypage() {
   const [isChangeAccountFormOpen, setIsChangeAccountFormOpen] = useState(false)
   // 문의 디테일
   const [inquiryDetail, setInquiryDetail] = useState<InquiryDetailType | undefined>()
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   //주소찾기 api 연결을 위한 state
   const setMyPageState = useMyPageStore((state) => state.setState)
@@ -97,13 +100,19 @@ export default function Mypage() {
 
   return (
     <main>
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       {isAlarmModalOpen ? (
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}
       {/* 답변하기 모달창 */}
       {/*{isAnswerModalOpen ? (*/}
-      {/*  <Modal*/}
+      {/*  <BottomModal*/}
       {/*    buttonContent={'답변 전송하기'}*/}
       {/*    buttonType={'active'}*/}
       {/*    onClose={() => setState({ isAnswerModalOpen: false })}*/}
@@ -139,12 +148,12 @@ export default function Mypage() {
       {/*        />*/}
       {/*      </section>*/}
       {/*    </div>*/}
-      {/*  </Modal>*/}
+      {/*  </BottomModal>*/}
       {/*) : null}*/}
 
       {/* 리뷰 보기 모달창 */}
       {isViewReviewModalOpen ? (
-        <Modal title={'리뷰'} onClose={() => setState({ isViewReviewModalOpen: false })}>
+        <BottomModal title={'리뷰'} onClose={() => setState({ isViewReviewModalOpen: false })}>
           <div className="flex flex-col gap-y-6">
             <div className="flex justify-between">
               <div className="flex items-center gap-x-1">
@@ -157,12 +166,12 @@ export default function Mypage() {
             </div>
             <p className="body-md">{reviewDetailData?.content}</p>
           </div>
-        </Modal>
+        </BottomModal>
       ) : null}
 
       {/* 리뷰 작성 모달창 */}
       {isWriteReviewModalOpen ? (
-        <Modal
+        <BottomModal
           buttonContent={'작성하기'}
           onClick={async () => {
             const res = await postReview(selectedPassArchiveData?.passArchiveId, rating, content)
@@ -208,7 +217,7 @@ export default function Mypage() {
               />
             </section>
           </div>
-        </Modal>
+        </BottomModal>
       ) : null}
 
       {isPurchasedArchivePageOpen ? (
@@ -220,6 +229,8 @@ export default function Mypage() {
       ) : (
         <>
           <Header
+            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
             isAlarmModalOpen={isAlarmModalOpen}
             setIsAlarmModalOpen={setIsAlarmModalOpen}
             setIsHomeMenuOpen={setIsHomeMenuOpen}

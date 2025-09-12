@@ -1,6 +1,6 @@
 import { authorizedFetch } from '@/lib/common'
 import { ApiResponse } from '@/types/common'
-import { MyPageInfoType, SettlementAccountType } from '@/types/mypage'
+import { MyPageInfoType, SettlementAccountType, SettlementWithDrawerInfoType } from '@/types/mypage'
 
 /**
  * 현재 사용자 아이디 체크 API
@@ -126,6 +126,21 @@ export const patchModifyProfile = async (profileData: MyPageInfoType | undefined
  */
 export const getSettlementAccount = async (): Promise<ApiResponse<SettlementAccountType>> => {
   const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/settlement/account`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 마이페이지 인출자 정보 조회
+ */
+export const getSettlementWithDrawer = async (): Promise<ApiResponse<SettlementWithDrawerInfoType>> => {
+  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/settlement/withdrawer`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

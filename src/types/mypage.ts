@@ -20,3 +20,10 @@ export interface SettlementAccountType {
   accountNumber: string
   bankName: string
 }
+export interface SettlementWithDrawerInfoType {
+  accountName: string
+  accountNumber: string
+  bankName: string
+  phoneNumber: string
+  email: string
+}

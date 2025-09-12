@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Button from '@/components/common/Button'
 import { getAlarmArchiveInquiry, patchAlarmArchiveInquiry } from '@/lib/alarm'
 import { ArchiveInquiryNotificationType } from '@/types/alarm'
-import Modal from '@/components/common/Modal'
+import BottomModal from '@/components/common/BottomModal'
 import { StarIcon } from '@/assets/svgComponents'
 interface AlarmModalProps {
   setIsAlarmModalOpen: Dispatch<SetStateAction<boolean>>
@@ -27,7 +27,7 @@ export default function AlarmModal({ setIsAlarmModalOpen, isAlarmModalOpen }: Al
   }, [])
 
   return isInquiryModalOpen ? (
-    <Modal
+    <BottomModal
       buttonType={'active'}
       onClick={() => {}}
       buttonContent={selectedInquiry?.inquiryType === 'ANSWER' ? undefined : '답변 전송하기'}
@@ -76,7 +76,7 @@ export default function AlarmModal({ setIsAlarmModalOpen, isAlarmModalOpen }: Al
           </section>
         </div>
       )}
-    </Modal>
+    </BottomModal>
   ) : (
     <div
       onClick={() => {

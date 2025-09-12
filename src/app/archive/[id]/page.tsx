@@ -18,10 +18,11 @@ import {
 import { LatestInquiryType, PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
-import Modal from '@/components/common/Modal'
+import BottomModal from '@/components/common/BottomModal'
 import { BentArrowIcon } from '@/assets/svgComponents'
 import { postPaymentTestConfirm } from '@/lib/payment'
 import Menu from '@/components/common/Menu'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 export default function ReviewDetailPage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -54,6 +55,9 @@ export default function ReviewDetailPage() {
 
   //답변보기 모달창
   const [isViewAnswerModalOpen, setIsViewAnswerModalOpen] = useState(false)
+
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   useEffect(() => {
     getArchiveDetailData(params.id).then((response) => {
@@ -130,7 +134,7 @@ export default function ReviewDetailPage() {
     <main>
       {/* 문의하기 모달창 */}
       {/*{isInquireModalOpen ? (*/}
-      {/*  <Modal*/}
+      {/*  <BottomModal*/}
       {/*    buttonContent={'문의 전송하기'}*/}
       {/*    buttonType={inquiryContent ? 'active' : 'disabled'}*/}
       {/*    onClick={async () => {*/}
@@ -167,12 +171,12 @@ export default function ReviewDetailPage() {
       {/*        </div>*/}
       {/*      ) : null}*/}
       {/*    </div>*/}
-      {/*  </Modal>*/}
+      {/*  </BottomModal>*/}
       {/*) : null}*/}
 
       {/* 답변하기 모달창 */}
       {/*{isAnswerModalOpen ? (*/}
-      {/*  <Modal*/}
+      {/*  <BottomModal*/}
       {/*    buttonContent={'답변 전송하기'}*/}
       {/*    buttonType={answerContent?.length !== 0 ? 'active' : 'disabled'}*/}
       {/*    onClose={() => setIsAnswerModalOpen(false)}*/}
@@ -237,7 +241,7 @@ export default function ReviewDetailPage() {
       {/*        )}*/}
       {/*      </section>*/}
       {/*    </div>*/}
-      {/*  </Modal>*/}
+      {/*  </BottomModal>*/}
       {/*) : null}*/}
 
       {/* 이미지 모달창 */}
@@ -248,7 +252,18 @@ export default function ReviewDetailPage() {
           setIsImageModalOpen={setIsImageModalOpen}
         />
       ) : null}
-      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
+      <Header
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsHomeMenuOpen={setIsHomeMenuOpen}
+        isHomeMenuOpen={isHomeMenuOpen}
+      />
       {isHomeMenuOpen ? (
         <div>
           <div className="h-[80px]" />

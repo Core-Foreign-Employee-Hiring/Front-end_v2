@@ -11,7 +11,7 @@ interface ModalProps {
   onClose: () => void
 }
 
-const Modal = ({ title, children, onClick, buttonContent, buttonType, onClose }: ModalProps) => {
+const BottomModal = ({ title, children, onClick, buttonContent, buttonType, onClose }: ModalProps) => {
   return (
     <div onClick={onClose} className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
       <div
@@ -27,7 +27,7 @@ const Modal = ({ title, children, onClick, buttonContent, buttonType, onClose }:
     </div>
   )
 }
-export default Modal
+export default BottomModal
 
 function Title({ title, onClose }: { title: string; onClose: () => void }) {
   return (
@@ -58,6 +58,6 @@ function BottomButton({
   )
 }
 
-Modal.Title = Title
-Modal.Content = Content
-Modal.BottomButton = BottomButton
+BottomModal.Title = Title
+BottomModal.Content = Content
+BottomModal.BottomButton = BottomButton

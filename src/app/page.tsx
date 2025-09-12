@@ -18,7 +18,8 @@ import {
 import { useRecruitStore } from '@/store/recruitStore'
 import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
-import AlarmModal from '@/components/common/AlarmModal'
+import AlarmModal from '@/components/modal/AlarmModal'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('')
@@ -28,6 +29,8 @@ export default function Home() {
   const selectedJobCategoryFilterContentList = useRecruitStore((state) => state.selectedJobCategoryFilterContentList)
   const selectedContractTypeFilterContentList = useRecruitStore((state) => state.selectedContractTypeFilterContentList)
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   //zustand
   const setState = useRecruitStore((state) => state.setState)
@@ -69,10 +72,18 @@ export default function Home() {
 
   return (
     <div>
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
       {isAlarmModalOpen ? (
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}
       <Header
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
         isAlarmModalOpen={isAlarmModalOpen}
         setIsAlarmModalOpen={setIsAlarmModalOpen}
         isHomeMenuOpen={isHomeMenuOpen}

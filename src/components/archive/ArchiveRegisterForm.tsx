@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import Menu from '@/components/common/Menu'
 import { useArchiveStore } from '@/store/archiveStore'
 import { postArchiveData } from '@/lib/archive'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 export default function ArchiveRegisterForm() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -23,6 +24,9 @@ export default function ArchiveRegisterForm() {
   const [imageFiles, setImageFiles] = useState<File[]>([])
   const [productFiles, setProductFiles] = useState<File[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   useEffect(() => {
     console.log('archiveData', archiveData)
@@ -78,7 +82,18 @@ export default function ArchiveRegisterForm() {
 
   return (
     <main>
-      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
+      <Header
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        setIsHomeMenuOpen={setIsHomeMenuOpen}
+        isHomeMenuOpen={isHomeMenuOpen}
+      />
       {isHomeMenuOpen ? (
         <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
       ) : (

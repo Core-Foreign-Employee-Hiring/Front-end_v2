@@ -17,11 +17,14 @@ import {
 } from '@/types/recruit'
 import { convertEnumToKorJobCategory } from '@/utils/recruit'
 import { FaceIcon, TripIcon } from '@/assets/svgComponents'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   useEffect(() => {
     getRecruitDetailData(pathName).then((response: ApiResponse<RecruitInputDataType>) => {
@@ -154,7 +157,18 @@ const RecruitDetailPage = () => {
 
   return (
     <main>
-      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
+      <Header
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        isHomeMenuOpen={isHomeMenuOpen}
+        setIsHomeMenuOpen={setIsHomeMenuOpen}
+      />
       {isHomeMenuOpen ? (
         <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
       ) : !recruitData ? (

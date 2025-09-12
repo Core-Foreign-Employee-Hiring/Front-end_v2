@@ -7,6 +7,8 @@ import { Dispatch, SetStateAction } from 'react'
 interface HeaderProps {
   setIsAlarmModalOpen?: Dispatch<SetStateAction<boolean>>
   isAlarmModalOpen?: boolean
+  setIsLanguageSelectModalOpen?: Dispatch<SetStateAction<boolean>>
+  isLanguageSelectModalOpen?: boolean
   isHomeMenuOpen?: boolean
   setIsHomeMenuOpen?: Dispatch<SetStateAction<boolean>>
   title?: string
@@ -17,6 +19,8 @@ interface HeaderProps {
 const Header = ({
   isAlarmModalOpen,
   setIsAlarmModalOpen,
+  setIsLanguageSelectModalOpen,
+  isLanguageSelectModalOpen,
   isHomeMenuOpen,
   setIsHomeMenuOpen,
   title,
@@ -77,7 +81,15 @@ const Header = ({
 
             <section className="desktop:gap-x-5 flex items-center">
               <div className="desktop:gap-x-3 flex gap-x-2">
-                <GlobalIcon width={32} height={32} />
+                <GlobalIcon
+                  onClick={() => {
+                    if (setIsLanguageSelectModalOpen && isLanguageSelectModalOpen !== undefined) {
+                      setIsLanguageSelectModalOpen(!isLanguageSelectModalOpen)
+                    }
+                  }}
+                  width={32}
+                  height={32}
+                />
                 {/*<AlarmIcon*/}
                 {/*  onClick={() => {*/}
                 {/*    if (setIsAlarmModalOpen && isAlarmModalOpen !== undefined) {*/}

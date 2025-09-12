@@ -8,8 +8,12 @@ import PurchasedArchiveCard from '@/components/mypage/PurchasedArchiveCard'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { getPostArchives, getPurchasedArchives, getSoldArchives, getSoldArchivesRevenue } from '@/lib/archive'
 import { PostArchiveType, PurchasedArchiveType, SoldArchiveType } from '@/types/archive'
-import { getSettlementAccount } from '@/lib/mypage'
-import { SettlementAccountType } from '@/types/mypage'
+import { getSettlementAccount, getSettlementWithDrawer } from '@/lib/mypage'
+import { SettlementAccountType, SettlementWithDrawerInfoType } from '@/types/mypage'
+import WithdrawModal from '@/components/modal/WithdrawModal'
+import ServicePreparingModal from '@/components/modal/ServicePreparingModal'
+import AccountRegisterModal from '@/components/modal/AccountRegisterModal'
+import ErrorModal from '@/components/common/ErrorModal'
 
 interface MyArchiveListProps {
   isPostArchivePageOpen: false
@@ -33,9 +37,18 @@ export default function MyArchiveList({
   const [soldArchiveList, setSoldArchiveList] = useState<SoldArchiveType[]>()
   const [totalRevenue, setTotalRevenue] = useState<string>()
   const [clickInfo, setClickInfo] = useState(false)
+  const [settleWithDrawerInfo, setSettleWithDrawerInfo] = useState<SettlementWithDrawerInfoType | undefined>()
   //계좌번호 정보 조회
   const [settlementAccount, setSettlementAccount] = useState<SettlementAccountType>()
   const [isAccountRegistered, setIsAccountRegistered] = useState(false)
+  //인출하기 모달창 제어
+  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
+  //서비스 준비중 모달 제어
+  const [isServicePreparingModalOpen, setIsServicePreparingModalOpen] = useState(false)
+  //게좌번호 수정/등록 모달 제어
+  const [isAccountRegisterModalOpen, setIsAccountRegisterModalOpen] = useState(false)
+  //등록된 계좌가 없다는 에러
+  const [isNoAccountErrorModalOpen, setIsNoAccountErrorModalOpen] = useState(false)
 
   useEffect(() => {
     getPurchasedArchives(0, 2).then((res) => {
@@ -71,6 +84,37 @@ export default function MyArchiveList({
 
   return (
     <>
+      {isNoAccountErrorModalOpen ? (
+        <ErrorModal
+          isModalOpen={isNoAccountErrorModalOpen}
+          setIsModalOpen={setIsNoAccountErrorModalOpen}
+          content={'등록된 계좌가 없습니다.'}
+        />
+      ) : null}
+      {isServicePreparingModalOpen ? (
+        <ServicePreparingModal
+          functionContent={'인출하기'}
+          isServicePreparingModalOpen={isServicePreparingModalOpen}
+          setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}
+        />
+      ) : null}
+      {isWithdrawModalOpen ? (
+        <WithdrawModal
+          isAccountRegisterModalOpen={isAccountRegisterModalOpen}
+          setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}
+          isServicePreparingModalOpen={isServicePreparingModalOpen}
+          setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}
+          isWithdrawModalOpen={isWithdrawModalOpen}
+          setIsWithdrawModalOpen={setIsWithdrawModalOpen}
+        />
+      ) : null}
+      {isAccountRegisterModalOpen ? (
+        <AccountRegisterModal
+          isAccountRegistered={isAccountRegistered}
+          isAccountRegisterModalOpen={isAccountRegisterModalOpen}
+          setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}
+        ></AccountRegisterModal>
+      ) : null}
       <div className="flex flex-col gap-y-[32px] px-5">
         {/* 판매한 아카이브 */}
         <section className="flex w-full flex-col gap-y-[20px]">
@@ -97,7 +141,13 @@ export default function MyArchiveList({
               ) : (
                 <p className="body-sm text-gray5">등록한 계좌번호가 없어요.</p>
               )}
-              <Button onClick={() => {}} type={'outline'} size={'sm'}>
+              <Button
+                onClick={() => {
+                  setIsAccountRegisterModalOpen(!isAccountRegisterModalOpen)
+                }}
+                type={'outline'}
+                size={'sm'}
+              >
                 {isAccountRegistered ? '계좌번호 수정' : '계좌번호 등록'}
               </Button>
             </div>
@@ -117,7 +167,12 @@ export default function MyArchiveList({
                     </div>
                   </div>
                 </div>
-                <div className="button text-gray4 flex items-center">
+                <div
+                  onClick={() => {
+                    setIsWithdrawModalOpen(true)
+                  }}
+                  className="button text-gray4 flex items-center"
+                >
                   인출하기
                   <div className="flex h-[24px] w-[24px] items-center justify-center">
                     <GrayRightArrowIcon width={5} height={9} />

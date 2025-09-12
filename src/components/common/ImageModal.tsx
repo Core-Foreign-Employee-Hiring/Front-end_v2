@@ -33,7 +33,7 @@ export default function ImageModal({ ImageUrl, setSelectedImageUrl, setIsImageMo
         />
         <Image
           src={ImageUrl || '/pizza.png'}
-          alt="Modal Image"
+          alt="BottomModal Image"
           width={0}
           height={0}
           sizes="90vw"

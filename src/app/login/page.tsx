@@ -13,7 +13,8 @@ import { UserDataType } from '@/types/common'
 import Header from '@/components/common/Header'
 import FindAccountProcess from '@/components/login/FindAccountProcess'
 import Menu from '@/components/common/Menu'
-import AlarmModal from '@/components/common/AlarmModal'
+import AlarmModal from '@/components/modal/AlarmModal'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 const LoginPage = () => {
   const router = useRouter()
@@ -30,6 +31,8 @@ const LoginPage = () => {
   //홈 메뉴 모달
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   // 컴포넌트 마운트 시 저장된 로그인 정보 불러오기
   useEffect(() => {
@@ -127,7 +130,15 @@ const LoginPage = () => {
       {isAlarmModalOpen ? (
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
       <Header
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
         headerType={'default'}
         setIsAlarmModalOpen={setIsAlarmModalOpen}
         isAlarmModalOpen={isAlarmModalOpen}

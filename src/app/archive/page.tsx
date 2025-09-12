@@ -11,7 +11,8 @@ import Pagination from '@/components/common/Pagination'
 import { getArchiveData } from '@/lib/archive'
 import { PassArchiveCardDataType } from '@/types/archive'
 import ArchiveRegisterForm from '@/components/archive/ArchiveRegisterForm'
-import AlarmModal from '@/components/common/AlarmModal'
+import AlarmModal from '@/components/modal/AlarmModal'
+import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 const ReviewPage = () => {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -24,6 +25,9 @@ const ReviewPage = () => {
 
   const [isArchiveRegisterFormOpen, setIsArchiveRegisterFormOpen] = useState(false)
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
+
+  //언어 선택 모달창 제어
+  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -82,10 +86,18 @@ const ReviewPage = () => {
     <ArchiveRegisterForm />
   ) : (
     <main>
+      {isLanguageSelectModalOpen ? (
+        <LanguageSelectModal
+          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+        />
+      ) : null}
       {isAlarmModalOpen ? (
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}
       <Header
+        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
         setIsAlarmModalOpen={setIsAlarmModalOpen}
         isAlarmModalOpen={isAlarmModalOpen}
         isHomeMenuOpen={isHomeMenuOpen}
