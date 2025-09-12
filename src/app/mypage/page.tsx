@@ -5,10 +5,10 @@ import MypageMenu from '@/components/mypage/MypageMenu'
 import UserInfoEditForm from '@/components/mypage/UserInfoEditForm'
 import MyArchiveList from '@/components/mypage/MyArchiveList'
 import AskForm from '@/components/mypage/AskForm'
-import { getPurchasedArchives, getReviewDetail, getSentInquiryList, postAnswer, postReview } from '@/lib/archive'
+import { getInquiryDetail, getReviewDetail, postAnswer, postReview } from '@/lib/archive'
 import { useModalStore } from '@/store/modalStore'
 import Modal from '@/components/common/Modal'
-import { GrayStarIcon, StarIcon } from '@/assets/svgComponents'
+import { StarIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
 import StarRating from '@/components/archive/StarRating'
 import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedArchivePage'
@@ -17,7 +17,7 @@ import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage
 import Menu from '@/components/common/Menu'
 import AlarmModal from '@/components/common/AlarmModal'
 import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
-import { ReviewDetailDataType } from '@/types/archive'
+import { InquiryDetailType, ReviewDetailDataType } from '@/types/archive'
 import { formatRelativeTime } from '@/utils/common'
 import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useMyPageStore } from '@/store/mypageStore'
@@ -47,6 +47,8 @@ export default function Mypage() {
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
 
   const [isChangeAccountFormOpen, setIsChangeAccountFormOpen] = useState(false)
+  // 문의 디테일
+  const [inquiryDetail, setInquiryDetail] = useState<InquiryDetailType | undefined>()
 
   //주소찾기 api 연결을 위한 state
   const setMyPageState = useMyPageStore((state) => state.setState)
@@ -87,6 +89,12 @@ export default function Mypage() {
     setState({ isSearchAddressModalOpen: false })
   }
 
+  useEffect(() => {
+    getInquiryDetail(selectedReviewId).then((result) => {
+      setInquiryDetail(result.data)
+    })
+  }, [])
+
   return (
     <main>
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
@@ -94,49 +102,45 @@ export default function Mypage() {
         <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
       ) : null}
       {/* 답변하기 모달창 */}
-      {isAnswerModalOpen ? (
-        <Modal
-          buttonContent={'답변 전송하기'}
-          buttonType={'active'}
-          onClose={() => setState({ isAnswerModalOpen: false })}
-          onClick={async () => {
-            if (answerContent) {
-              const response = await postAnswer(selectedInquiryId, answerContent)
-              if (response.status === 201) {
-                setState({ isAnswerModalOpen: false })
-              }
-            }
-          }}
-          title={'답변 남기기'}
-        >
-          <div className="flex flex-col gap-y-4">
-            <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
-              <div className="flex items-center gap-x-3">
-                <div className="bg-gray2 h-[48px] w-[48px] rounded-full" />
-                <div className="subtitle-md">유저명</div>
-              </div>
-              <div className="flex justify-between">
-                <p className="title-md">title</p>
-                <p className="subtitle-lg">129,550원</p>
-              </div>
-              <div className="body-md text-gray5">설명한줄</div>
-            </section>
-            <section className="border-gray2 rounded-[20px] border p-5">
-              <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">
-                <p className="title-md">문의내용</p>
-                <p className="body-md text-gray5">문의문의문의문의 이문의</p>
-              </div>
-              <textarea
-                onChange={(e) => {
-                  setAnswerContent(e.target.value)
-                }}
-                className="h-[100px] w-full pt-3 outline-none"
-                placeholder="답변을 입력해주세요."
-              />
-            </section>
-          </div>
-        </Modal>
-      ) : null}
+      {/*{isAnswerModalOpen ? (*/}
+      {/*  <Modal*/}
+      {/*    buttonContent={'답변 전송하기'}*/}
+      {/*    buttonType={'active'}*/}
+      {/*    onClose={() => setState({ isAnswerModalOpen: false })}*/}
+      {/*    onClick={async () => {*/}
+      {/*      if (answerContent) {*/}
+      {/*        const response = await postAnswer(selectedInquiryId, answerContent)*/}
+      {/*        if (response.status === 201) {*/}
+      {/*          setState({ isAnswerModalOpen: false })*/}
+      {/*        }*/}
+      {/*      }*/}
+      {/*    }}*/}
+      {/*    title={'답변 남기기'}*/}
+      {/*  >*/}
+      {/*    <div className="flex flex-col gap-y-4">*/}
+      {/*      <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">*/}
+      {/*        <div className="flex justify-between">*/}
+      {/*          <p className="title-md">{inquiryDetail?.title}</p>*/}
+      {/*          <p className="subtitle-lg">{''}원</p>*/}
+      {/*        </div>*/}
+      {/*        <div className="body-md text-gray5">{''}</div>*/}
+      {/*      </section>*/}
+      {/*      <section className="border-gray2 rounded-[20px] border p-5">*/}
+      {/*        <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">*/}
+      {/*          <p className="title-md">문의내용</p>*/}
+      {/*          <p className="body-md text-gray5">{inquiryDetail?.inquiry}</p>*/}
+      {/*        </div>*/}
+      {/*        <textarea*/}
+      {/*          onChange={(e) => {*/}
+      {/*            setAnswerContent(e.target.value)*/}
+      {/*          }}*/}
+      {/*          className="h-[100px] w-full pt-3 outline-none"*/}
+      {/*          placeholder="답변을 입력해주세요."*/}
+      {/*        />*/}
+      {/*      </section>*/}
+      {/*    </div>*/}
+      {/*  </Modal>*/}
+      {/*) : null}*/}
 
       {/* 리뷰 보기 모달창 */}
       {isViewReviewModalOpen ? (
@@ -253,7 +257,7 @@ export default function Mypage() {
                         setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
                       />
                     ) : null}
-                    {mypageType === '문의하기' ? <AskForm /> : null}
+                    {/*{mypageType === '문의하기' ? <AskForm /> : null}*/}
                   </>
                 )}
               </div>

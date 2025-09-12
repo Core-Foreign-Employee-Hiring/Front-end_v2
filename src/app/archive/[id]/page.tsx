@@ -129,116 +129,116 @@ export default function ReviewDetailPage() {
   return (
     <main>
       {/* 문의하기 모달창 */}
-      {isInquireModalOpen ? (
-        <Modal
-          buttonContent={'문의 전송하기'}
-          buttonType={inquiryContent ? 'active' : 'disabled'}
-          onClick={async () => {
-            if (inquiryContent) {
-              const response = await postInquire(params.id, inquiryContent)
-              if (response.status === 201) {
-                setIsInquireModalOpen(false)
-              }
-            }
-          }}
-          title={'문의하기'}
-          onClose={() => setIsInquireModalOpen(false)}
-        >
-          <div className="flex flex-col gap-y-4">
-            <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
-              <div className="flex justify-between">
-                <p className="title-md">{archiveDetailData?.title}</p>
-                <p className="subtitle-lg">{archiveDetailData?.price}원</p>
-              </div>
-              <p className="body-md text-gray5">{archiveDetailData?.oneLineReview}</p>
-            </section>
-            {inquiryIsAnswered === undefined ? (
-              <textarea
-                onChange={(e) => {
-                  setInquiryContent(e.target.value)
-                }}
-                className="border-gray2 h-[280px] rounded-[20px] border p-5 outline-none"
-                placeholder={'문의사항을 입력해주세요.'}
-              />
-            ) : !inquiryIsAnswered ? (
-              <div className="flex h-[213px] flex-col items-center justify-center gap-y-1">
-                <p className="title-md">유저로부터 답변을 기다리는 중 </p>
-                <p className="body-md text-gray5">잠시만 기다려주세요...</p>
-              </div>
-            ) : null}
-          </div>
-        </Modal>
-      ) : null}
+      {/*{isInquireModalOpen ? (*/}
+      {/*  <Modal*/}
+      {/*    buttonContent={'문의 전송하기'}*/}
+      {/*    buttonType={inquiryContent ? 'active' : 'disabled'}*/}
+      {/*    onClick={async () => {*/}
+      {/*      if (inquiryContent) {*/}
+      {/*        const response = await postInquire(params.id, inquiryContent)*/}
+      {/*        if (response.status === 201) {*/}
+      {/*          setIsInquireModalOpen(false)*/}
+      {/*        }*/}
+      {/*      }*/}
+      {/*    }}*/}
+      {/*    title={'문의하기'}*/}
+      {/*    onClose={() => setIsInquireModalOpen(false)}*/}
+      {/*  >*/}
+      {/*    <div className="flex flex-col gap-y-4">*/}
+      {/*      <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">*/}
+      {/*        <div className="flex justify-between">*/}
+      {/*          <p className="title-md">{archiveDetailData?.title}</p>*/}
+      {/*          <p className="subtitle-lg">{archiveDetailData?.price}원</p>*/}
+      {/*        </div>*/}
+      {/*        <p className="body-md text-gray5">{archiveDetailData?.oneLineReview}</p>*/}
+      {/*      </section>*/}
+      {/*      {inquiryIsAnswered === undefined ? (*/}
+      {/*        <textarea*/}
+      {/*          onChange={(e) => {*/}
+      {/*            setInquiryContent(e.target.value)*/}
+      {/*          }}*/}
+      {/*          className="border-gray2 h-[280px] rounded-[20px] border p-5 outline-none"*/}
+      {/*          placeholder={'문의사항을 입력해주세요.'}*/}
+      {/*        />*/}
+      {/*      ) : !inquiryIsAnswered ? (*/}
+      {/*        <div className="flex h-[213px] flex-col items-center justify-center gap-y-1">*/}
+      {/*          <p className="title-md">유저로부터 답변을 기다리는 중 </p>*/}
+      {/*          <p className="body-md text-gray5">잠시만 기다려주세요...</p>*/}
+      {/*        </div>*/}
+      {/*      ) : null}*/}
+      {/*    </div>*/}
+      {/*  </Modal>*/}
+      {/*) : null}*/}
 
       {/* 답변하기 모달창 */}
-      {isAnswerModalOpen ? (
-        <Modal
-          buttonContent={'답변 전송하기'}
-          buttonType={answerContent?.length !== 0 ? 'active' : 'disabled'}
-          onClose={() => setIsAnswerModalOpen(false)}
-          onClick={async () => {
-            if (answerContent) {
-              const response = await postAnswer(latestInquiryData?.archiveInquiryId, answerContent)
-              if (response.status === 201) {
-                setIsAnswerModalOpen(false)
-              }
-            }
-          }}
-          title={latestInquiryData?.isAnswered ? '답변 보기' : '답변 남기기'}
-        >
-          <div className="flex flex-col gap-y-4">
-            <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">
-              <div className="flex items-center gap-x-3">
-                <div className="relative h-[48px] w-[48px]">
-                  <Image
-                    fill
-                    src={latestInquiryData?.profileImage ?? '/pizza.png'}
-                    alt={'프로필'}
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <div className="subtitle-md">{latestInquiryData?.name}</div>
-              </div>
-              <div className="flex justify-between">
-                <p className="title-md">{latestInquiryData?.title}</p>
-                <p className="subtitle-lg">{latestInquiryData?.price.toLocaleString()}원</p>
-              </div>
-              <div className="body-md text-gray5">{latestInquiryData?.oneLineReview}</div>
-            </section>
-            <section className="border-gray2 rounded-[20px] border p-5">
-              {latestInquiryData?.isAnswered ? (
-                <>
-                  <div
-                    className={`${latestInquiryData.isAnswered ? '' : 'border-b'} border-gray2 flex flex-col gap-y-1 pb-3`}
-                  >
-                    <p className="title-md">{latestInquiryData?.inquiry}</p>
-                  </div>
-                  <div className="flex gap-x-3">
-                    <BentArrowIcon width={16} height={14} />
-                    <div className="flex flex-col gap-y-1">
-                      <p className="title-sm text-main">답변내용</p>
-                      <p className="body-md text-gray5">{latestInquiryData.answer}</p>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">
-                    <p className="title-md">{latestInquiryData?.inquiry}</p>
-                  </div>
-                  <textarea
-                    onChange={(e) => {
-                      setAnswerContent(e.target.value)
-                    }}
-                    className="h-[100px] w-full pt-3 outline-none"
-                    placeholder="답변을 입력해주세요."
-                  />
-                </>
-              )}
-            </section>
-          </div>
-        </Modal>
-      ) : null}
+      {/*{isAnswerModalOpen ? (*/}
+      {/*  <Modal*/}
+      {/*    buttonContent={'답변 전송하기'}*/}
+      {/*    buttonType={answerContent?.length !== 0 ? 'active' : 'disabled'}*/}
+      {/*    onClose={() => setIsAnswerModalOpen(false)}*/}
+      {/*    onClick={async () => {*/}
+      {/*      if (answerContent) {*/}
+      {/*        const response = await postAnswer(latestInquiryData?.archiveInquiryId, answerContent)*/}
+      {/*        if (response.status === 201) {*/}
+      {/*          setIsAnswerModalOpen(false)*/}
+      {/*        }*/}
+      {/*      }*/}
+      {/*    }}*/}
+      {/*    title={latestInquiryData?.isAnswered ? '답변 보기' : '답변 남기기'}*/}
+      {/*  >*/}
+      {/*    <div className="flex flex-col gap-y-4">*/}
+      {/*      <section className="bg-gray1 flex flex-col gap-y-1 rounded-[20px] p-5">*/}
+      {/*        <div className="flex items-center gap-x-3">*/}
+      {/*          <div className="relative h-[48px] w-[48px]">*/}
+      {/*            <Image*/}
+      {/*              fill*/}
+      {/*              src={latestInquiryData?.profileImage ?? '/pizza.png'}*/}
+      {/*              alt={'프로필'}*/}
+      {/*              className="rounded-full object-cover"*/}
+      {/*            />*/}
+      {/*          </div>*/}
+      {/*          <div className="subtitle-md">{latestInquiryData?.name}</div>*/}
+      {/*        </div>*/}
+      {/*        <div className="flex justify-between">*/}
+      {/*          <p className="title-md">{latestInquiryData?.title}</p>*/}
+      {/*          <p className="subtitle-lg">{latestInquiryData?.price.toLocaleString()}원</p>*/}
+      {/*        </div>*/}
+      {/*        <div className="body-md text-gray5">{latestInquiryData?.oneLineReview}</div>*/}
+      {/*      </section>*/}
+      {/*      <section className="border-gray2 rounded-[20px] border p-5">*/}
+      {/*        {latestInquiryData?.isAnswered ? (*/}
+      {/*          <>*/}
+      {/*            <div*/}
+      {/*              className={`${latestInquiryData.isAnswered ? '' : 'border-b'} border-gray2 flex flex-col gap-y-1 pb-3`}*/}
+      {/*            >*/}
+      {/*              <p className="title-md">{latestInquiryData?.inquiry}</p>*/}
+      {/*            </div>*/}
+      {/*            <div className="flex gap-x-3">*/}
+      {/*              <BentArrowIcon width={16} height={14} />*/}
+      {/*              <div className="flex flex-col gap-y-1">*/}
+      {/*                <p className="title-sm text-main">답변내용</p>*/}
+      {/*                <p className="body-md text-gray5">{latestInquiryData.answer}</p>*/}
+      {/*              </div>*/}
+      {/*            </div>*/}
+      {/*          </>*/}
+      {/*        ) : (*/}
+      {/*          <>*/}
+      {/*            <div className="border-gray2 flex flex-col gap-y-1 border-b pb-3">*/}
+      {/*              <p className="title-md">{latestInquiryData?.inquiry}</p>*/}
+      {/*            </div>*/}
+      {/*            <textarea*/}
+      {/*              onChange={(e) => {*/}
+      {/*                setAnswerContent(e.target.value)*/}
+      {/*              }}*/}
+      {/*              className="h-[100px] w-full pt-3 outline-none"*/}
+      {/*              placeholder="답변을 입력해주세요."*/}
+      {/*            />*/}
+      {/*          </>*/}
+      {/*        )}*/}
+      {/*      </section>*/}
+      {/*    </div>*/}
+      {/*  </Modal>*/}
+      {/*) : null}*/}
 
       {/* 이미지 모달창 */}
       {isImageModalOpen ? (

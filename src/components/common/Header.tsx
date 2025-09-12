@@ -78,15 +78,15 @@ const Header = ({
             <section className="desktop:gap-x-5 flex items-center">
               <div className="desktop:gap-x-3 flex gap-x-2">
                 <GlobalIcon width={32} height={32} />
-                <AlarmIcon
-                  onClick={() => {
-                    if (setIsAlarmModalOpen && isAlarmModalOpen !== undefined) {
-                      setIsAlarmModalOpen(!isAlarmModalOpen)
-                    }
-                  }}
-                  width={32}
-                  height={32}
-                />
+                {/*<AlarmIcon*/}
+                {/*  onClick={() => {*/}
+                {/*    if (setIsAlarmModalOpen && isAlarmModalOpen !== undefined) {*/}
+                {/*      setIsAlarmModalOpen(!isAlarmModalOpen)*/}
+                {/*    }*/}
+                {/*  }}*/}
+                {/*  width={32}*/}
+                {/*  height={32}*/}
+                {/*/>*/}
                 {isHomeMenuOpen ? (
                   <MenuCancelIcon
                     onClick={() => {

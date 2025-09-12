@@ -1,6 +1,7 @@
 import { authorizedFetch } from '@/lib/common'
 import { ApiResponse, ListResponse } from '@/types/common'
 import {
+  InquiryDetailType,
   InquiryType,
   LatestInquiryType,
   PassArchiveCardDataType,
@@ -289,7 +290,7 @@ export const getLatestInquiry = async (
 /**
  * 내가 작성한 리뷰 상세
  */
-export const getReviewDetail = async (reviewId: number): Promise<ApiResponse<ReviewDetailDataType>> => {
+export const getReviewDetail = async (reviewId: number | undefined): Promise<ApiResponse<ReviewDetailDataType>> => {
   const response = await authorizedFetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/reviews/${reviewId}`,
     {
@@ -351,6 +352,24 @@ export const getInquiryIsAnswered = async (inquiryId: number): Promise<ApiRespon
 export const getUnreadInquiry = async (passArchiveId: string | string[] | undefined): Promise<ApiResponse<boolean>> => {
   const response = await authorizedFetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/inquiries/unread`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}
+
+/**
+ * 아카이브 문의 조회
+ */
+export const getInquiryDetail = async (inquiryId: number | undefined): Promise<ApiResponse<InquiryDetailType>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/inquiries/${inquiryId}`,
     {
       method: 'GET',
       headers: {

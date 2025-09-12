@@ -1,5 +1,3 @@
-import { getLatestInquiry, getPurchasedArchives } from '@/lib/archive'
-
 export interface PassArchiveRegisterType {
   title?: string
   oneLineReview?: string
@@ -85,4 +83,11 @@ export interface ReviewDetailDataType {
   content: string
   star: number
   createAt: string
+}
+export interface InquiryDetailType {
+  archiveInquiryId: number
+  title: string
+  inquiry: string
+  isAnswered: boolean
+  isRead: boolean
 }
