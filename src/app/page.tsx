@@ -4,7 +4,13 @@ import Header from '@/components/common/Header'
 import RecruitCard from '@/components/recruit/RecruitCard'
 import Input from '@/components/common/Input'
 import { useState } from 'react'
-import { DropboxArrowDownIcon, DropboxArrowUpIcon, GrayCancelIcon, GraySearchIcon } from '@/assets/svgComponents'
+import {
+  AirplaneIcon,
+  DropboxArrowDownIcon,
+  DropboxArrowUpIcon,
+  GrayCancelIcon,
+  GraySearchIcon,
+} from '@/assets/svgComponents'
 import Menu from '@/components/common/Menu'
 import Filter from '@/components/recruit/Filter'
 import {
@@ -20,8 +26,12 @@ import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import AlarmModal from '@/components/modal/AlarmModal'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
+import Image from 'next/image'
+import Button from '@/components/common/Button'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   const [searchValue, setSearchValue] = useState('')
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [isJobCategoryFilterOpen, setIsJobCategoryFilterOpen] = useState(false)
@@ -105,7 +115,32 @@ export default function Home() {
               inputBoxStyle={'default'}
               placeholder={'채용 공고를 검색해보세요.'}
             />
-            {searchValue ? null : <div className="h-[232px] w-full bg-[#D9D9D9]"></div>}
+            {searchValue ? null : (
+              <div className="relative flex h-[204px] flex-col items-center justify-center rounded-[32px]">
+                <div className="absolute z-20 flex flex-col items-center justify-center gap-y-3">
+                  <div className="flex flex-col items-center justify-center gap-y-[7px]">
+                    <AirplaneIcon width={18} height={18} />
+                    <h1 className="title-md text-white">
+                      Your first step at Korea
+                      <br />
+                      Korfit will be with you.
+                    </h1>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      router.push('/landing')
+                    }}
+                    size={'sm'}
+                    type={'outline'}
+                    customClassName={'bg-white rounded-[12px]'}
+                  >
+                    What is Korfit? →
+                  </Button>
+                </div>
+
+                <Image src={'/home-image.png'} alt={'홈'} fill className="object-cover"></Image>
+              </div>
+            )}
             <section>
               <div className="flex flex-col gap-y-3">
                 <div className="title-lg">공고 전체</div>

@@ -1,3 +1,4 @@
+export { default as AirplaneIcon } from './AirplaneIcon'
 export { default as AlarmIcon } from './AlarmIcon'
 export { default as AshbnIcon } from './AshbnIcon'
 export { default as BackIcon } from './BackIcon'

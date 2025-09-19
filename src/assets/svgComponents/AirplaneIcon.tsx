@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgAirplaneIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 19 19" {...props}><path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.873} d="m3.06 15.791 2.123 2.356 1.386-.852-.542-2.785 3.795-3.453 4.291 7.33 2.027-1.44-3.226-8.609L17.553 3.7c1.412-1.413.213-2.612.213-2.612s-1.199-1.199-2.611.214L10.516 5.94 1.904 2.712.464 4.739l7.331 4.29-3.546 3.774-2.692-.52-.852 1.385z" /></svg>;
+export default SvgAirplaneIcon;
