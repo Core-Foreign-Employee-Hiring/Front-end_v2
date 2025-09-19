@@ -71,7 +71,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="">
       {isLanguageSelectModalOpen ? (
         <LanguageSelectModal
           isLanguageSelectModalOpen={isLanguageSelectModalOpen}

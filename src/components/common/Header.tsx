@@ -179,6 +179,6 @@ const Header = ({
     }
   }
 
-  return <header className="fixed z-[40] w-full">{renderHeaderType(headerType)}</header>
+  return <header className="fixed z-[40] w-[375px] w-full">{renderHeaderType(headerType)}</header>
 }
 export default Header

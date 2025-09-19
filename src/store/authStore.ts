@@ -12,6 +12,13 @@ interface SetAuthStoreType {
   isEmployeePasswordMatch?: boolean | undefined //pw가 확인 비밀번호와 일치하는지
   isEmployeePhoneVerified?: boolean | undefined // 휴대폰 번호 인증을 했는지
   isEmployeeEmailVerified?: boolean | undefined // 이메일 인증을 했는지
+  //아이디찾기 결과값
+  idResultData?:
+    | {
+        userId: string
+        createdAt: string
+      }
+    | undefined
   allOptions?: boolean
 }
 
@@ -28,6 +35,13 @@ interface AuthStoreType {
   isEmployeeEmailVerified: boolean | undefined // 이메일 인증을 했는지
   allOptions: boolean
   //고용인
+  //아이디찾기 결과값
+  idResultData:
+    | {
+        userId: string
+        createdAt: string
+      }
+    | undefined
   setState: (params: SetAuthStoreType) => void
 }
 
@@ -43,6 +57,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   isEmployeePhoneVerified: undefined, // 휴대폰 번호 인증을 했는지
   isEmployeeEmailVerified: undefined, // 이메일 인증을 했는지
   allOptions: false,
+  idResultData: undefined,
   setState: (params: SetAuthStoreType) => {
     set((state) => ({
       ...state,

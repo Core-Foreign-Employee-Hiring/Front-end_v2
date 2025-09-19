@@ -53,3 +53,25 @@ export const formatRelativeTime = (dateString: string): string => {
 
   return `${year}.${monthNumber}.${date}`
 }
+
+/**
+ * 날짜 포멧 함수
+ * @param dateString 예시:2025-09-19T15:23:04.111Z
+ */
+export function formatDate(dateString: string): string {
+  try {
+    const date = new Date(dateString)
+
+    if (isNaN(date.getTime())) {
+      return '잘못된 날짜'
+    }
+
+    const year = date.getFullYear().toString().slice(-2)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+
+    return `${year}.${month}.${day}`
+  } catch (error) {
+    return '날짜 오류'
+  }
+}

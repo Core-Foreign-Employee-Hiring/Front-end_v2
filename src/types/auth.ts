@@ -31,3 +31,9 @@ export interface ResponseLoginType {
   refreshToken: string
   role: 'EMPLOYER' | 'EMPLOYEE'
 }
+
+export interface FindPWRequestDataType {
+  userId: string
+  name: string
+  email: string
+}
