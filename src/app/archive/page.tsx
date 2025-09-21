@@ -83,7 +83,7 @@ const ReviewPage = () => {
   }, [searchKeyword, currentPage]) // searchKeyword와 currentPage 변경 시 실행
 
   return isArchiveRegisterFormOpen ? (
-    <ArchiveRegisterForm />
+    <ArchiveRegisterForm setIsArchiveRegisterFormOpen={setIsArchiveRegisterFormOpen} />
   ) : (
     <main>
       {isLanguageSelectModalOpen ? (

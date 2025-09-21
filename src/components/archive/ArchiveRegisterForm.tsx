@@ -9,13 +9,18 @@ import ImageUploadField from '@/components/archive/register/ImageUploadField'
 import ProductUploadField from '@/components/archive/register/ProductUploadField'
 import PriceField from '@/components/archive/register/PriceField'
 import Button from '@/components/common/Button'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Menu from '@/components/common/Menu'
 import { useArchiveStore } from '@/store/archiveStore'
 import { postArchiveData } from '@/lib/archive'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
+import InquiryUrlField from '@/components/archive/register/InquiryUrlField'
 
-export default function ArchiveRegisterForm() {
+interface ArchiveRegisterFormProps {
+  setIsArchiveRegisterFormOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: ArchiveRegisterFormProps) {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const archiveData = useArchiveStore((state) => state.archiveData)
 
@@ -108,10 +113,18 @@ export default function ArchiveRegisterForm() {
               <ThumbnailField thumbnailFile={thumbnailFile} setThumbnailFile={setThumbnailFile} />
               <ImageUploadField imageFiles={imageFiles} setImageFiles={setImageFiles} />
               <ProductUploadField productFiles={productFiles} setProductFiles={setProductFiles} />
+              <InquiryUrlField />
               <PriceField />
             </section>
             <section className="flex gap-x-4 pb-[40px]">
-              <Button onClick={() => {}} size={'lg'} type={'outline'} customClassName={'w-full'}>
+              <Button
+                onClick={() => {
+                  setIsArchiveRegisterFormOpen(false)
+                }}
+                size={'lg'}
+                type={'outline'}
+                customClassName={'w-full'}
+              >
                 이전
               </Button>
               <Button
