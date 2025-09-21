@@ -381,3 +381,23 @@ export const getInquiryDetail = async (inquiryId: number | undefined): Promise<A
   const data = await response.json()
   return data
 }
+
+/**
+ * 아카이브 문의하기 링크 조회 API
+ */
+export const getPassArchivesPassArchiveIdInquiryUrl = async (
+  passArchiveId: string | string[] | undefined
+): Promise<ApiResponse<string>> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/inquiry-url`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}

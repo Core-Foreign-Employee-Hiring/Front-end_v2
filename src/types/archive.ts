@@ -3,6 +3,7 @@ export interface PassArchiveRegisterType {
   oneLineReview?: string
   description?: string
   price?: number
+  inquiryUrl?: string
 }
 export interface PassArchiveCardDataType {
   passArchiveId: number

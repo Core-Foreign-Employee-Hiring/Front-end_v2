@@ -11,7 +11,7 @@ interface ArchiveStoreType {
 }
 
 export const useArchiveStore = create<ArchiveStoreType>((set) => ({
-  archiveData: undefined,
+  archiveData: { price: 0 },
   setState: (params: SetArchiveStoreType) => {
     set((state) => ({
       ...state,
