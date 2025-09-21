@@ -189,37 +189,52 @@ const RecruitDetailPage = () => {
                 <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
                   <FaceIcon width={19} height={19} />
                 </div>
-                <p className="body-md text-main">{changeEnumToKorContractType(recruitData.contractType)}</p>
+                <p className="body-md text-main">{changeEnumToKorJobCategory(recruitData.jobCategories?.[0])}</p>
               </section>
               <section className="flex flex-col items-center gap-y-2">
                 <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
                   <TripIcon width={19} height={17} />
                 </div>
-                <p className="body-md text-main">{changeEnumToKorJobCategory(recruitData.jobCategories[0])}</p>
+                <div className="flex flex-col">
+                  <p className="body-md text-main">{changeEnumToKorContractType(recruitData.contractType)}</p>
+                  <p className="body-md text-gray4">{recruitData.directInputContractType}</p>
+                </div>
               </section>
               <section className="flex flex-col items-center gap-y-2">
                 <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
                   <FaceIcon width={19} height={19} />
                 </div>
-                <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
+                <div className="flex flex-col">
+                  <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
+                  <p className="body-md text-gray4">{recruitData.directInputWorkType}</p>
+                </div>
               </section>
             </section>
             <section className="flex flex-col gap-y-[20px]">
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무요일</div>
-                <p className="body-md w-[80%]">{changeEnumToKorWorkDaysType(recruitData.workDayType)}</p>
+                <div className="flex w-[80%] flex-col">
+                  <p className="body-md">{changeEnumToKorWorkDaysType(recruitData.workDayType)}</p>
+                  <p className="body-md text-gray5">{recruitData.directInputWorkDayType}</p>
+                </div>
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무시간</div>
-                <p className="body-md w-[80%]">
-                  {recruitData.workStartTime} ~ {recruitData.workEndTime}
-                </p>
+                <div className="flex w-[80%] flex-col">
+                  <p className="body-md">
+                    {recruitData.workStartTime} ~ {recruitData.workEndTime}
+                  </p>
+                  <p className="body-md text-gray5">{recruitData.directInputWorkTime}</p>
+                </div>
               </div>
               <div className="flex">
                 <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">급여</div>
-                <div className="flex gap-x-2">
-                  <p className="body-md">{changeEnumToKorSalaryType(recruitData.salaryType)}</p>
-                  <p className="body-md">{recruitData.salary?.toLocaleString()}원</p>
+                <div className="flex w-[80%] flex-col">
+                  <div className="flex gap-x-2">
+                    <p className="body-md">{changeEnumToKorSalaryType(recruitData.salaryType)}</p>
+                    <p className="body-md">{recruitData.salary?.toLocaleString()}원</p>
+                  </div>
+                  <p className="body-md text-gray5">{recruitData.directInputSalaryType}</p>
                 </div>
               </div>
               <div className="flex">
