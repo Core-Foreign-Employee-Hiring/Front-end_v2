@@ -18,12 +18,10 @@ export default function PriceField() {
         <div className="flex items-center gap-x-3">
           <Input
             type="number"
-            value={archiveData?.price ?? ''}
-            setValue={(e) => {
-              setState({ ...archiveData, archiveData: { ...archiveData, price: parseInt(e.target.value) } })
-            }}
+            value={0}
+            setValue={(e) => {}}
             placeholder={'숫자만 입력해주세요.'}
-            inputBoxStyle={'default'}
+            inputBoxStyle={'disabled'}
             customClassName={'w-[240px]'}
           />
           <p className="subtitle-md">원</p>
