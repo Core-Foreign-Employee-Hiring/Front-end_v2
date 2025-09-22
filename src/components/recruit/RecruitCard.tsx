@@ -48,7 +48,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       onClick={() => {
         router.push(`/${recruit.recruitId}`)
       }}
-      className="desktop:border-gray2 desktop:p-6 desktop:rounded-[32px] desktop:border desktop:gap-y-[20px] flex w-full flex-col gap-y-[8px] rounded-[24px]"
+      className="flex w-full flex-col gap-y-[8px] rounded-[24px]"
     >
       <div className="relative h-[133px] w-full">
         <Image

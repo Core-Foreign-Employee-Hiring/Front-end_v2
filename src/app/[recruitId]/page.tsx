@@ -247,17 +247,19 @@ const RecruitDetailPage = () => {
           </section>
 
           {/* 상세 정보 */}
-          <section className="flex flex-col gap-y-[12px]">
-            <h2 className="title-lg">상세 정보 (모집 포스터)</h2>
-            <div className="relative h-[500px] w-[335px] rounded-[32px]">
-              <Image
-                src={recruitData.posterImageUrl || '/pizza.png'}
-                alt={'이미지'}
-                className={'rounded-[32px] object-cover'}
-                fill
-              />
-            </div>
-          </section>
+          {recruitData.posterImageUrl ? (
+            <section className="flex flex-col gap-y-[12px]">
+              <h2 className="title-lg">상세 정보 (모집 포스터)</h2>
+              <div className="relative h-[500px] w-[335px] rounded-[32px]">
+                <Image
+                  src={recruitData.posterImageUrl || '/pizza.png'}
+                  alt={'이미지'}
+                  className={'rounded-[32px] object-cover'}
+                  fill
+                />
+              </div>
+            </section>
+          ) : null}
 
           {/* 근무지 정보 */}
           <section className="border-gray2 flex flex-col gap-y-[12px]">
@@ -322,7 +324,6 @@ const RecruitDetailPage = () => {
               </div>
             </section>
           </section>
-
           <div className="h-[80px]" />
         </div>
       )}

@@ -40,7 +40,7 @@ export const authorizedFetch = async (input: RequestInfo, init: RequestInit = {}
  */
 const refreshAccessToken = async (): Promise<boolean> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/member/token-reissue`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/token-reissue`, {
       method: 'GET',
       credentials: 'include', // refreshToken이 쿠키에 있다고 가정
     })

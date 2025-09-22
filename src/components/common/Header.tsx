@@ -40,10 +40,10 @@ const Header = ({
     switch (headerType) {
       case 'default':
         return (
-          <div className="desktop:h-[100px] desktop:px-[200px] border-gray2 flex h-[80px] items-center justify-between border-b bg-white px-[32px]">
+          <div className="border-gray2 flex h-[80px] items-center justify-between border-b bg-white px-[32px]">
             <div className="flex items-center gap-x-[55px]">
               <Image
-                className="desktop:hidden block"
+                className=""
                 onClick={() => {
                   router.push('/')
                 }}
@@ -52,35 +52,10 @@ const Header = ({
                 height={32}
                 alt="로고"
               />
-              <Image
-                className="desktop:block hidden"
-                onClick={() => {
-                  router.push('/')
-                }}
-                src={'/logo.svg'}
-                width={154}
-                height={48}
-                alt="로고"
-              />
-              <div className="desktop:block desktop:gap-x-[52px] flex hidden">
-                {navContents.map((nav) => {
-                  return (
-                    <button
-                      key={nav.title}
-                      onClick={() => {
-                        router.push(nav.router)
-                      }}
-                      className={`${pathname === nav.router ? 'text-main' : ''} title-sm`}
-                    >
-                      {nav.title}
-                    </button>
-                  )
-                })}
-              </div>
             </div>
 
-            <section className="desktop:gap-x-5 flex items-center">
-              <div className="desktop:gap-x-3 flex gap-x-2">
+            <section className="flex items-center">
+              <div className="flex gap-x-2">
                 <GlobalIcon
                   onClick={() => {
                     if (setIsLanguageSelectModalOpen && isLanguageSelectModalOpen !== undefined) {
@@ -90,15 +65,6 @@ const Header = ({
                   width={32}
                   height={32}
                 />
-                {/*<AlarmIcon*/}
-                {/*  onClick={() => {*/}
-                {/*    if (setIsAlarmModalOpen && isAlarmModalOpen !== undefined) {*/}
-                {/*      setIsAlarmModalOpen(!isAlarmModalOpen)*/}
-                {/*    }*/}
-                {/*  }}*/}
-                {/*  width={32}*/}
-                {/*  height={32}*/}
-                {/*/>*/}
                 {isHomeMenuOpen ? (
                   <MenuCancelIcon
                     onClick={() => {
@@ -108,7 +74,6 @@ const Header = ({
                     }}
                     width={32}
                     height={32}
-                    className="desktop:hidden block"
                   />
                 ) : (
                   <MenuIcon
@@ -119,28 +84,8 @@ const Header = ({
                     }}
                     width={32}
                     height={32}
-                    className="desktop:hidden block"
                   />
                 )}
-              </div>
-              <div className="desktop:block flex hidden w-full items-center gap-x-2 whitespace-nowrap">
-                <button
-                  onClick={() => {
-                    router.push('/login')
-                  }}
-                  className="text-gray4"
-                >
-                  로그인
-                </button>
-                <div className="border-gray4 h-[14px] border-r-[1px]"></div>
-                <button
-                  onClick={() => {
-                    router.push('/sign-up')
-                  }}
-                  className="text-gray4"
-                >
-                  회원가입
-                </button>
               </div>
             </section>
           </div>
@@ -179,6 +124,8 @@ const Header = ({
     }
   }
 
-  return <header className="fixed z-[40] w-[375px] w-full">{renderHeaderType(headerType)}</header>
+  return (
+    <header className="fixed left-1/2 z-[40] mx-auto w-[375px] -translate-x-1/2">{renderHeaderType(headerType)}</header>
+  )
 }
 export default Header
