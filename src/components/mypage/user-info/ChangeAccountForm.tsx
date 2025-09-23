@@ -53,7 +53,7 @@ export default function ChangeAccountForm() {
   }, [checkPW])
 
   return (
-    <div>
+    <div className="relative h-[calc(85vh-112px)]">
       <div className="flex flex-col gap-y-[32px] px-5">
         <section className="flex flex-col gap-y-3">
           <h2 className="subtitle-lg">로그인 변경</h2>

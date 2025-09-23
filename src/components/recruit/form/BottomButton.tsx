@@ -16,7 +16,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
     switch (currentStep) {
       case 1:
         return (
-          <div className="fixed bottom-0 flex w-full gap-x-4 bg-white px-[26px] pt-[10px] pb-[32px]">
+          <div className="absolute bottom-0 flex w-full gap-x-4 bg-white px-[26px] pt-[10px] pb-[32px]">
             <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
               임시저장
             </Button>
@@ -35,7 +35,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
         )
       case 2:
         return (
-          <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
+          <div className="absolute bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
             <Button
               buttonType={'button'}
               onClick={() => {
@@ -65,7 +65,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
         )
       default:
         return (
-          <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
+          <div className="absolute bottom-0 flex w-full gap-x-3 bg-white px-[26px] pt-[10px] pb-[32px]">
             <Button
               buttonType={'button'}
               onClick={() => {

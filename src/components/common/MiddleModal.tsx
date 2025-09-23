@@ -18,7 +18,7 @@ export default function MiddleModal({ title, setIsModalOpen, isModalOpen, childr
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="mx-5 flex w-full flex-col gap-y-[24px] rounded-[32px] bg-white p-6"
+        className="mx-5 flex w-[375px] flex-col gap-y-[24px] rounded-[32px] bg-white p-6"
       >
         <section className="flex items-center justify-between">
           <h2 className="title-lg">{title}</h2>

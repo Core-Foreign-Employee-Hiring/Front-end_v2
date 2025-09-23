@@ -126,16 +126,7 @@ const LoginPage = () => {
   return findAccountProcess ? (
     <FindAccountProcess setFindAccountProcess={setFindAccountProcess} />
   ) : (
-    <main>
-      {isAlarmModalOpen ? (
-        <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
-      ) : null}
-      {isLanguageSelectModalOpen ? (
-        <LanguageSelectModal
-          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        />
-      ) : null}
+    <div>
       <Header
         isLanguageSelectModalOpen={isLanguageSelectModalOpen}
         setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
@@ -145,97 +136,113 @@ const LoginPage = () => {
         setIsHomeMenuOpen={setIsHomeMenuOpen}
         isHomeMenuOpen={isHomeMenuOpen}
       />
-      {isHomeMenuOpen ? (
-        <div>
-          <div className="desktop:h-[160px] h-[80px]" />
-          <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
-        </div>
-      ) : (
-        <div className="flex min-h-screen flex-col items-center justify-center">
-          <div className="desktop:w-[600px] laptop:w-[600px] flex w-full flex-col items-center justify-center">
-            <Image className="desktop:block hidden" src={'/logo.svg'} width={266} height={68} alt="로고" />
-            <h1 className="title-lg desktop:mt-[80px] mt-[40px]">로그인</h1>
-            <div className="mt-[40px] flex w-full flex-col items-center justify-center gap-y-[32px] px-5">
-              <div className="w-full">
-                <section className="flex w-full flex-col gap-y-2">
-                  <div className="subtitle-lg">아이디</div>
-                  <Input
-                    value={loginData?.userId ?? ''}
-                    setValue={(e) => handleInputChange('userId', e.target.value)}
-                    customClassName={'w-full'}
-                    inputBoxStyle={'default'}
-                    type={'email'}
-                    placeholder={'아이디를 입력해주세요.'}
-                  />
-                </section>
-                <section className="mt-8 flex w-full flex-col gap-y-2">
-                  <div className="subtitle-lg">비밀번호</div>
-                  <Input
-                    rightIcon={
-                      showPassword ? (
-                        <NonEyeIcon
-                          width={24}
-                          height={24}
-                          onClick={() => {
-                            setShowPassword(!showPassword)
-                          }}
-                        />
-                      ) : (
-                        <EyeIcon
-                          width={24}
-                          height={24}
-                          onClick={() => {
-                            setShowPassword(!showPassword)
-                          }}
-                        />
-                      )
-                    }
-                    value={loginData?.password ?? ''}
-                    setValue={(e) => handleInputChange('password', e.target.value)}
-                    inputBoxStyle={'default'}
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder={'비밀번호를 입력해주세요.'}
-                  />
-                  {loginError && <p className="badge-md text-error">아이디 또는 비밀번호가 맞지 않아요</p>}
-                </section>
-                <section className="mt-5 flex w-full justify-between">
-                  <div className="flex cursor-pointer gap-x-2" onClick={handleRememberMe}>
-                    {rememberMe ? <CheckIcon width={24} height={24} /> : <UnCheckIcon width={24} height={24} />}
-                    <p className="subtitle-md text-gray5">아이디 저장</p>
-                  </div>
-                  <div
-                    onClick={() => {
-                      setFindAccountProcess(!findAccountProcess)
-                    }}
-                    className="flex items-center gap-x-2"
-                  >
-                    <button className="text-gray5 button">아이디 찾기</button>
-                    <div className="border-gray5 h-[14px] border-r-[1px]"></div>
-                    <button className="text-gray5 button">비밀번호 찾기</button>
-                  </div>
-                </section>
-                <Button onClick={handleLogin} customClassName={'h-[52px] mt-[24px] w-full'} type={'active'} size={'lg'}>
-                  로그인
-                </Button>
-              </div>
-              <div className="border-gray2 h-[1px] w-full border-b"></div>
+      <div className="relative mx-auto min-h-screen w-[375px] bg-white">
+        {isAlarmModalOpen ? (
+          <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
+        ) : null}
+        {isLanguageSelectModalOpen ? (
+          <LanguageSelectModal
+            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
+            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
+          />
+        ) : null}
 
-              <div className="flex flex-col items-center justify-center gap-y-1">
-                <p className="body-sm text-gray5">Korfit 회원이 되어 더 많은 서비스를 즐겨보세요!</p>
-                <button
-                  onClick={() => {
-                    router.push('/sign-up')
-                  }}
-                  className="button text-main border-main border-b"
-                >
-                  회원가입
-                </button>
+        {isHomeMenuOpen ? (
+          <div>
+            <div className="h-[80px]" />
+            <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
+          </div>
+        ) : (
+          <div className="flex min-h-screen flex-col items-center justify-center">
+            <div className="flex w-full flex-col items-center justify-center">
+              <h1 className="title-lg mt-[40px]">로그인</h1>
+              <div className="mt-[40px] flex w-full flex-col items-center justify-center gap-y-[32px] px-5">
+                <div className="w-full">
+                  <section className="flex w-full flex-col gap-y-2">
+                    <div className="subtitle-lg">아이디</div>
+                    <Input
+                      value={loginData?.userId ?? ''}
+                      setValue={(e) => handleInputChange('userId', e.target.value)}
+                      customClassName={'w-full'}
+                      inputBoxStyle={'default'}
+                      type={'email'}
+                      placeholder={'아이디를 입력해주세요.'}
+                    />
+                  </section>
+                  <section className="mt-8 flex w-full flex-col gap-y-2">
+                    <div className="subtitle-lg">비밀번호</div>
+                    <Input
+                      rightIcon={
+                        showPassword ? (
+                          <NonEyeIcon
+                            width={24}
+                            height={24}
+                            onClick={() => {
+                              setShowPassword(!showPassword)
+                            }}
+                          />
+                        ) : (
+                          <EyeIcon
+                            width={24}
+                            height={24}
+                            onClick={() => {
+                              setShowPassword(!showPassword)
+                            }}
+                          />
+                        )
+                      }
+                      value={loginData?.password ?? ''}
+                      setValue={(e) => handleInputChange('password', e.target.value)}
+                      inputBoxStyle={'default'}
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder={'비밀번호를 입력해주세요.'}
+                    />
+                    {loginError && <p className="badge-md text-error">아이디 또는 비밀번호가 맞지 않아요</p>}
+                  </section>
+                  <section className="mt-5 flex w-full justify-between">
+                    <div className="flex cursor-pointer gap-x-2" onClick={handleRememberMe}>
+                      {rememberMe ? <CheckIcon width={24} height={24} /> : <UnCheckIcon width={24} height={24} />}
+                      <p className="subtitle-md text-gray5">아이디 저장</p>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setFindAccountProcess(!findAccountProcess)
+                      }}
+                      className="flex items-center gap-x-2"
+                    >
+                      <button className="text-gray5 button">아이디 찾기</button>
+                      <div className="border-gray5 h-[14px] border-r-[1px]"></div>
+                      <button className="text-gray5 button">비밀번호 찾기</button>
+                    </div>
+                  </section>
+                  <Button
+                    onClick={handleLogin}
+                    customClassName={'h-[52px] mt-[24px] w-full'}
+                    type={'active'}
+                    size={'lg'}
+                  >
+                    로그인
+                  </Button>
+                </div>
+                <div className="border-gray2 h-[1px] w-full border-b"></div>
+
+                <div className="flex flex-col items-center justify-center gap-y-1">
+                  <p className="body-sm text-gray5">Korfit 회원이 되어 더 많은 서비스를 즐겨보세요!</p>
+                  <button
+                    onClick={() => {
+                      router.push('/sign-up')
+                    }}
+                    className="button text-main border-main border-b"
+                  >
+                    회원가입
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </main>
+        )}
+      </div>
+    </div>
   )
 }
 export default LoginPage

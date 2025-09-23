@@ -32,7 +32,7 @@ export default function PostArchivePage({ setIsPostArchivePageOpen }: PostArchiv
   return (
     <div>
       <Header title={'작성한 아카이브'} headerType={'dynamic'} onBack={() => setIsPostArchivePageOpen(false)} />
-      <div className="flex flex-col gap-y-5 px-5 pt-[60px]">
+      <div className="flex flex-col gap-y-5 px-5">
         {postArchiveList?.map((postArchive) => {
           return <PostArchiveCard {...postArchive} key={postArchive.archiveId} />
         })}

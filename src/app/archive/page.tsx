@@ -85,7 +85,7 @@ const ReviewPage = () => {
   return isArchiveRegisterFormOpen ? (
     <ArchiveRegisterForm setIsArchiveRegisterFormOpen={setIsArchiveRegisterFormOpen} />
   ) : (
-    <main>
+    <main className="">
       {isLanguageSelectModalOpen ? (
         <LanguageSelectModal
           isLanguageSelectModalOpen={isLanguageSelectModalOpen}
@@ -110,7 +110,7 @@ const ReviewPage = () => {
           <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
         </div>
       ) : (
-        <div>
+        <div className="relative mx-auto min-h-screen w-[375px] bg-white">
           <div className="h-[112px]" />
           <div className="px-5">
             <section className="flex flex-col gap-y-3 whitespace-nowrap">
@@ -159,7 +159,7 @@ const ReviewPage = () => {
 
             {/* 페이지네이션 - 데이터가 있을 때만 표시 */}
             {totalPages > 0 && (
-              <div className="mt-[24px] mb-[40px] w-full">
+              <div className="mt-[24px] w-full pb-[40px]">
                 <Pagination
                   totalPages={totalPages}
                   onPageChange={handlePageChange}
@@ -173,9 +173,11 @@ const ReviewPage = () => {
             onClick={() => {
               setIsArchiveRegisterFormOpen(!isArchiveRegisterFormOpen)
             }}
-            className={
-              'button bg-main fixed right-5 bottom-20 z-10 flex h-[48px] items-center justify-center rounded-full px-4 text-white'
-            }
+            className="button bg-main fixed bottom-20 left-1/2 z-10 flex h-[48px] -translate-x-1/2 items-center justify-center rounded-full px-4 text-white"
+            style={{
+              marginLeft: '85px', // 375px - 20px(right-5) = 355px
+              transform: 'translateX(-50%) translateX(85px)',
+            }}
           >
             <PlusIcon width={24} height={24} />
             아카이브 등록하기

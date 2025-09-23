@@ -59,8 +59,8 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
   ]
 
   return (
-    <>
-      <div className="flex flex-col gap-y-[16px] p-5">
+    <div className="flex h-[calc(100vh-112px)] flex-col">
+      <div className="flex flex-1 flex-col gap-y-[16px] p-5">
         {userData ? (
           <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
             <div className="flex items-center gap-x-4">
@@ -131,7 +131,7 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
         </section>
       </div>
       {userData && (
-        <div className="fixed bottom-5 w-full px-5">
+        <div className="w-full px-5">
           <Button
             type={'outline'}
             size={'lg'}
@@ -149,6 +149,6 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
           </Button>
         </div>
       )}
-    </>
+    </div>
   )
 }

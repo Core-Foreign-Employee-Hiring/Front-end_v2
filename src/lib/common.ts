@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { useAuthStore } from '@/store/authStore'
 
 /**
  * 기본 api 요청 함수
@@ -40,9 +41,18 @@ export const authorizedFetch = async (input: RequestInfo, init: RequestInit = {}
  */
 const refreshAccessToken = async (): Promise<boolean> => {
   try {
+    const refreshToken = Cookies.get('refreshToken')
+
+    if (!refreshToken) {
+      console.warn('🔐 Refresh token이 없습니다')
+      return false
+    }
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/token-reissue`, {
       method: 'GET',
-      credentials: 'include', // refreshToken이 쿠키에 있다고 가정
+      headers: {
+        'Authorization-Refresh': refreshToken,
+      },
+      credentials: 'include', // refreshToken 이 쿠키에 있다고 가정
     })
 
     if (!res.ok) {

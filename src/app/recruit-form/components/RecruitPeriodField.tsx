@@ -23,7 +23,7 @@ export default function RecruitPeriodField() {
               },
             })
           }
-          customClassName={'w-full'}
+          customClassName={'w-full body-sm'}
           inputBoxStyle={'default'}
           onClick={() => {}}
           placeholder={'모집 시작일'}
@@ -40,7 +40,7 @@ export default function RecruitPeriodField() {
               },
             })
           }
-          customClassName={'w-full'}
+          customClassName={'w-full body-sm'}
           inputBoxStyle={'default'}
           onClick={() => {}}
           placeholder={'모집 종료일'}

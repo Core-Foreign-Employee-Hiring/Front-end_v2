@@ -136,7 +136,7 @@ export default function RecruitFormPage() {
   }, [recruitPostData])
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="relative mx-auto min-h-screen w-[375px] bg-white">
       <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
 
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
