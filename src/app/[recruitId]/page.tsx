@@ -205,40 +205,45 @@ const RecruitDetailPage = () => {
                   />
                 </div>
               ) : null}
-              <div className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border p-5">
-                {recruitData.mainTasks ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">주요업무</div>
-                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
-                      {recruitData.mainTasks}
-                    </p>
-                  </div>
-                ) : null}
-                {recruitData.qualifications ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">자격요건</div>
-                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
-                      {recruitData.qualifications}
-                    </p>
-                  </div>
-                ) : null}
-                {recruitData.preferences ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">우대사항</div>
-                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
-                      {recruitData.preferences}
-                    </p>
-                  </div>
-                ) : null}
-                {recruitData.others ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">기타</div>
-                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
-                      {recruitData.others}
-                    </p>
-                  </div>
-                ) : null}
-              </div>
+              {(recruitData.mainTasks ||
+                recruitData.qualifications ||
+                recruitData.preferences ||
+                recruitData.others) && (
+                <div className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border p-5">
+                  {recruitData.mainTasks ? (
+                    <div className="flex">
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">주요업무</div>
+                      <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                        {recruitData.mainTasks}
+                      </p>
+                    </div>
+                  ) : null}
+                  {recruitData.qualifications ? (
+                    <div className="flex">
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">자격요건</div>
+                      <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                        {recruitData.qualifications}
+                      </p>
+                    </div>
+                  ) : null}
+                  {recruitData.preferences ? (
+                    <div className="flex">
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">우대사항</div>
+                      <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                        {recruitData.preferences}
+                      </p>
+                    </div>
+                  ) : null}
+                  {recruitData.others ? (
+                    <div className="flex">
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">기타</div>
+                      <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                        {recruitData.others}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              )}
             </section>
 
             {/* 근무지 정보 */}
