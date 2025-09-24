@@ -161,11 +161,11 @@ export const convertKorToEnumSalaryType = (category: SalaryKorType): SalaryEnumT
 export const changeEnumToKorWorkType = (workType: WorkType | undefined) => {
   switch (workType) {
     case 'ONSITE':
-      return '온라인'
+      return '대면'
     case 'HYBRID':
       return '혼합근무'
     case 'REMOTE':
-      return '원격'
+      return '비대면'
     case 'ETC':
       return '기타'
   }
