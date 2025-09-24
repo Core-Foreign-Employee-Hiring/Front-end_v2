@@ -17,7 +17,7 @@ import {
   convertEnumToKorSalaryType,
   SalaryTypeClassName,
 } from '@/utils/recruit'
-import { ChairIcon, FaceIcon, TripIcon } from '@/assets/svgComponents'
+import { FaceIcon, TripIcon } from '@/assets/svgComponents'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import ApplicationModal from '@/components/modal/ApplicationModal'
 
@@ -128,7 +128,7 @@ const RecruitDetailPage = () => {
                     <div className="flex w-[80%] flex-wrap gap-1">
                       {recruitData.jobCategories.map((jobCategory) => {
                         return (
-                          <div className="badge-md text-gray4 bg-gray2 rounded-[8px] px-2 py-1">
+                          <div key={jobCategory} className="badge-md text-gray4 bg-gray2 rounded-[8px] px-2 py-1">
                             {convertEnumToKorJobCategory(jobCategory)}
                           </div>
                         )
