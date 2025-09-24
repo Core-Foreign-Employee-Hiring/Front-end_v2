@@ -1,11 +1,10 @@
 import Cookies from 'js-cookie'
-import { useAuthStore } from '@/store/authStore'
 
 /**
  * 기본 api 요청 함수
- * @param input
+ * @param input 요청 url
  * @param init
- * @param retry
+ * @param retry 리프래시 토큰 갱신
  */
 export const authorizedFetch = async (input: RequestInfo, init: RequestInit = {}, retry = true): Promise<Response> => {
   const accessToken = Cookies.get('accessToken')
@@ -47,10 +46,11 @@ const refreshAccessToken = async (): Promise<boolean> => {
       console.warn('🔐 Refresh token이 없습니다')
       return false
     }
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/token-reissue`, {
       method: 'GET',
       headers: {
-        'Authorization-Refresh': refreshToken,
+        'Authorization-Refresh': `Bearer ${refreshToken}`,
       },
       credentials: 'include', // refreshToken 이 쿠키에 있다고 가정
     })
@@ -65,9 +65,19 @@ const refreshAccessToken = async (): Promise<boolean> => {
     const newAccessToken = res.headers.get('Authorization')
     const newRefreshToken = res.headers.get('Authorization-Refresh')
 
+    console.log('newAccessToken', newAccessToken)
+    console.log('newRefreshToken', newRefreshToken)
+
     if (newAccessToken && newRefreshToken) {
-      Cookies.set('accessToken', newAccessToken)
-      Cookies.set('refreshToken', newRefreshToken)
+      // Bearer 접두사가 있으면 제거, 없으면 그대로 사용
+      const cleanAccessToken = newAccessToken.startsWith('Bearer ')
+        ? newAccessToken.slice(7) // 'Bearer ' 길이만큼 제거
+        : newAccessToken
+
+      const cleanRefreshToken = newRefreshToken.startsWith('Bearer ') ? newRefreshToken.slice(7) : newRefreshToken
+
+      Cookies.set('accessToken', cleanAccessToken)
+      Cookies.set('refreshToken', cleanRefreshToken)
       return true
     }
 
