@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-import Image from 'next/image'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { CheckIcon, EyeIcon, NonEyeIcon, UnCheckIcon } from '@/assets/svgComponents'
