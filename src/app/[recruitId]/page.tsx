@@ -20,6 +20,7 @@ import {
 import { FaceIcon, TripIcon } from '@/assets/svgComponents'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import ApplicationModal from '@/components/modal/ApplicationModal'
+import ImageModal from '@/components/common/ImageModal'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
@@ -29,6 +30,9 @@ const RecruitDetailPage = () => {
   const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
   //지원하기 모달창 제어
   const [isApplicationMethodModalOpen, setIsApplicationMethodModalOpen] = useState(false)
+  //이미지 모달창 제어
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false)
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>()
 
   useEffect(() => {
     getRecruitDetailData(pathName).then((response: ApiResponse<RecruitInputDataType>) => {
@@ -55,6 +59,13 @@ const RecruitDetailPage = () => {
 
   return (
     <main>
+      {isImageModalOpen ? (
+        <ImageModal
+          ImageUrl={selectedImageUrl}
+          setSelectedImageUrl={setSelectedImageUrl}
+          setIsImageModalOpen={setIsImageModalOpen}
+        />
+      ) : null}
       {isApplicationMethodModalOpen && (
         <ApplicationModal
           applicationMethod={recruitData?.applicationMethod}
@@ -198,6 +209,10 @@ const RecruitDetailPage = () => {
               {recruitData.posterImageUrl ? (
                 <div className="relative h-[500px] w-[335px] rounded-[32px]">
                   <Image
+                    onClick={() => {
+                      setSelectedImageUrl(recruitData?.posterImageUrl)
+                      setIsImageModalOpen(true)
+                    }}
                     src={recruitData.posterImageUrl || '/pizza.png'}
                     alt={'이미지'}
                     className={'rounded-[32px] object-cover'}
@@ -274,6 +289,10 @@ const RecruitDetailPage = () => {
                 {recruitData.companyImageUrl ? (
                   <div className="border-gray2 relative h-[100px] w-[100px] rounded-[12px] border">
                     <Image
+                      onClick={() => {
+                        setSelectedImageUrl(recruitData?.companyImageUrl)
+                        setIsImageModalOpen(true)
+                      }}
                       src={recruitData.companyImageUrl}
                       alt={'이미지'}
                       className={'rounded-[12px] object-cover'}

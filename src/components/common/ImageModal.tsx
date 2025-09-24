@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { CancelIcon } from '@/assets/svgComponents'
+import { CancelIcon, WhiteCancelIcon } from '@/assets/svgComponents'
 import { Dispatch, SetStateAction } from 'react'
 
 interface ImageModalProps {
@@ -25,12 +25,14 @@ export default function ImageModal({ ImageUrl, setSelectedImageUrl, setIsImageMo
       className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] p-4"
     >
       <div className="relative" onClick={handleImageClick}>
-        <CancelIcon
+        <button
           onClick={handleCloseModal}
-          className="absolute -top-10 -right-10 z-60 cursor-pointer text-white transition-colors hover:text-gray-300"
-          width={32}
-          height={32}
-        />
+          className="absolute -top-10 -right-10 z-60 flex cursor-pointer items-center gap-x-1 px-4 py-1 text-white transition-colors"
+        >
+          <p className="button text-white">닫기</p>
+          <WhiteCancelIcon width={20} height={20} />
+        </button>
+
         <Image
           src={ImageUrl || '/pizza.png'}
           alt="BottomModal Image"
