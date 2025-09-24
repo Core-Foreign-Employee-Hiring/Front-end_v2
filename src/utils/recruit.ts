@@ -158,7 +158,7 @@ export const convertKorToEnumSalaryType = (category: SalaryKorType): SalaryEnumT
   }
 }
 
-export const changeEnumToKorWorkType = (workType: WorkType | undefined) => {
+export const changeEnumToKorWorkType = (workType: WorkType | undefined | null) => {
   switch (workType) {
     case 'ONSITE':
       return '대면'
@@ -166,7 +166,7 @@ export const changeEnumToKorWorkType = (workType: WorkType | undefined) => {
       return '혼합근무'
     case 'REMOTE':
       return '비대면'
-    case 'ETC':
+    default:
       return '기타'
   }
 }

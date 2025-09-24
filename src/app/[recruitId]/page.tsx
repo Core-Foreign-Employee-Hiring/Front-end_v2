@@ -116,19 +116,15 @@ const RecruitDetailPage = () => {
                     </div>
                   </section>
                 ) : null}
-                {recruitData.workType ? (
-                  <section className="flex flex-col items-center gap-y-2">
-                    <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
-                      <TripIcon width={19} height={19} />
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
-                      <p className="body-md text-gray4">{recruitData.directInputWorkType}</p>
-                    </div>
-                  </section>
-                ) : (
-                  <div className="h-[124px] w-[90px]"></div>
-                )}
+                <section className="flex flex-col items-center gap-y-2">
+                  <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
+                    <TripIcon width={19} height={19} />
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
+                    <p className="body-md text-gray4">{recruitData.directInputWorkType}</p>
+                  </div>
+                </section>
               </section>
 
               <section className="flex flex-col gap-y-[20px]">
