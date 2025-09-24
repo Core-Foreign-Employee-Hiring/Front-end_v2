@@ -51,12 +51,12 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       className="flex w-full flex-col gap-y-[8px] rounded-[24px]"
     >
       <div className="relative h-[133px] w-full">
-        <Image
-          src={recruit.companyImageUrl || '/pizza.png'}
-          alt={'이미지'}
-          fill
-          className="rounded-[12px] object-cover"
-        ></Image>
+        {recruit.companyImageUrl ? (
+          <Image src={recruit.companyImageUrl} alt={'이미지'} fill className="rounded-[12px] object-cover" />
+        ) : (
+          <div className="bg-gray2 w-full rounded-[12px]" />
+        )}
+
         <div className="absolute z-10 h-[133px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
         <p className="badge-sm absolute top-2 right-2 z-10 text-white">~{formatDate(recruit.recruitEndDate)}까지</p>
       </div>
@@ -71,12 +71,20 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       </div>
 
       <div className="flex items-center gap-x-1">
-        <div
-          className={`${styleBySalaryType(recruit.salaryType)} badge-sm flex h-[22px] w-[37px] items-center justify-center rounded-[8px] border`}
-        >
-          {convertEnumToKorSalaryType(recruit.salaryType)}
-        </div>
-        <p className="button">{formatNumberWithComma(recruit.salary)}원</p>
+        {recruit.salaryType || recruit.salary ? (
+          <>
+            {recruit.salaryType && (
+              <div
+                className={`${styleBySalaryType(recruit.salaryType)} badge-sm flex h-[22px] w-[37px] items-center justify-center rounded-[8px] border`}
+              >
+                {convertEnumToKorSalaryType(recruit.salaryType)}
+              </div>
+            )}
+            {recruit.salary && <p className="button">{formatNumberWithComma(recruit.salary)}원</p>}
+          </>
+        ) : (
+          <div className="h-[22px]" />
+        )}
       </div>
     </div>
   )
