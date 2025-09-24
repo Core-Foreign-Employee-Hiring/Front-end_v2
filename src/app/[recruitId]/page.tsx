@@ -264,26 +264,26 @@ const RecruitDetailPage = () => {
             ) : null}
 
             {/* 근무지 정보 */}
-            <section className="border-gray2 flex flex-col gap-y-[12px]">
-              <h2 className="title-lg">근무지 정보</h2>
-              <section className="border-gray2 flex flex-col gap-y-[16px] rounded-[32px] border p-5">
-                <div className="bg-gray1 h-[240px] w-full"></div>
-                <div className="flex flex-col gap-y-[12px]">
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px]">우편번호</div>
-                    <p className="body-md w-[80%]">{recruitData.zipcode}</p>
-                  </div>
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px]">주소</div>
-                    <p className="body-md w-[80%]">{recruitData.address1}</p>
-                  </div>
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px]">상세 주소</div>
-                    <p className="body-md w-[80%]">{recruitData.address2}</p>
-                  </div>
-                </div>
-              </section>
-            </section>
+            {/*<section className="border-gray2 flex flex-col gap-y-[12px]">*/}
+            {/*  <h2 className="title-lg">근무지 정보</h2>*/}
+            {/*  <section className="border-gray2 flex flex-col gap-y-[16px] rounded-[32px] border p-5">*/}
+            {/*    <div className="bg-gray1 h-[240px] w-full"></div>*/}
+            {/*    <div className="flex flex-col gap-y-[12px]">*/}
+            {/*      <div className="flex">*/}
+            {/*        <div className="subtitle-md text-gray4 w-[80px]">우편번호</div>*/}
+            {/*        <p className="body-md w-[80%]">{recruitData.zipcode}</p>*/}
+            {/*      </div>*/}
+            {/*      <div className="flex">*/}
+            {/*        <div className="subtitle-md text-gray4 w-[80px]">주소</div>*/}
+            {/*        <p className="body-md w-[80%]">{recruitData.address1}</p>*/}
+            {/*      </div>*/}
+            {/*      <div className="flex">*/}
+            {/*        <div className="subtitle-md text-gray4 w-[80px]">상세 주소</div>*/}
+            {/*        <p className="body-md w-[80%]">{recruitData.address2}</p>*/}
+            {/*      </div>*/}
+            {/*    </div>*/}
+            {/*  </section>*/}
+            {/*</section>*/}
 
             {/* 회사 정보 */}
             <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
