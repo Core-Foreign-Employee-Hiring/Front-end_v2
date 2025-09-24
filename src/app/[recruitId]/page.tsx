@@ -93,19 +93,11 @@ const RecruitDetailPage = () => {
                 </div>
               </section>
 
-              <section className="flex justify-between">
-                {recruitData.jobCategories ? (
-                  <section className="flex flex-col items-center gap-y-2">
-                    <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
-                      <FaceIcon width={19} height={19} />
-                    </div>
-                    <p className="body-md text-main">{convertEnumToKorJobCategory(recruitData.jobCategories?.[0])}</p>
-                  </section>
-                ) : null}
+              <section className="flex justify-evenly">
                 {recruitData.contractType ? (
                   <section className="flex flex-col items-center gap-y-2">
                     <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
-                      <TripIcon width={19} height={17} />
+                      <FaceIcon width={19} height={19} />
                     </div>
                     <div className="flex flex-col items-center">
                       <p className="body-md text-main">{convertEnumToKorContractType(recruitData.contractType)}</p>
@@ -116,7 +108,7 @@ const RecruitDetailPage = () => {
                 {recruitData.workType ? (
                   <section className="flex flex-col items-center gap-y-2">
                     <div className="bg-gray1 flex h-[44px] w-[44px] items-center justify-center rounded-full">
-                      <ChairIcon width={19} height={19} />
+                      <TripIcon width={19} height={19} />
                     </div>
                     <div className="flex flex-col items-center">
                       <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
@@ -129,6 +121,21 @@ const RecruitDetailPage = () => {
               </section>
 
               <section className="flex flex-col gap-y-[20px]">
+                <div className="border-gray2 border-b"></div>
+                {recruitData.jobCategories ? (
+                  <div className="flex items-center">
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">직종</div>
+                    <div className="flex w-[80%] flex-wrap gap-1">
+                      {recruitData.jobCategories.map((jobCategory) => {
+                        return (
+                          <div className="badge-md text-gray4 bg-gray2 rounded-[8px] px-2 py-1">
+                            {convertEnumToKorJobCategory(jobCategory)}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ) : null}
                 {recruitData.workDayType ? (
                   <div className="flex">
                     <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무요일</div>
@@ -140,6 +147,7 @@ const RecruitDetailPage = () => {
                     </div>
                   </div>
                 ) : null}
+
                 {recruitData.workStartTime || recruitData.workEndTime ? (
                   <div className="flex">
                     <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무시간</div>
@@ -153,6 +161,7 @@ const RecruitDetailPage = () => {
                     </div>
                   </div>
                 ) : null}
+
                 {recruitData.salary ? (
                   <div className="flex">
                     <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">급여</div>
@@ -184,9 +193,9 @@ const RecruitDetailPage = () => {
             </section>
 
             {/* 상세 정보 */}
-            {recruitData.posterImageUrl ? (
-              <section className="flex flex-col gap-y-[12px]">
-                <h2 className="title-lg">상세 정보 (모집 포스터)</h2>
+            <section className="flex flex-col gap-y-[12px]">
+              <h2 className="title-lg">상세 정보 (모집 포스터)</h2>
+              {recruitData.posterImageUrl ? (
                 <div className="relative h-[500px] w-[335px] rounded-[32px]">
                   <Image
                     src={recruitData.posterImageUrl || '/pizza.png'}
@@ -195,8 +204,42 @@ const RecruitDetailPage = () => {
                     fill
                   />
                 </div>
-              </section>
-            ) : null}
+              ) : null}
+              <div className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border p-5">
+                {recruitData.mainTasks ? (
+                  <div className="flex">
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">주요업무</div>
+                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                      {recruitData.mainTasks}
+                    </p>
+                  </div>
+                ) : null}
+                {recruitData.qualifications ? (
+                  <div className="flex">
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">자격요건</div>
+                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                      {recruitData.qualifications}
+                    </p>
+                  </div>
+                ) : null}
+                {recruitData.preferences ? (
+                  <div className="flex">
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">우대사항</div>
+                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                      {recruitData.preferences}
+                    </p>
+                  </div>
+                ) : null}
+                {recruitData.others ? (
+                  <div className="flex">
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">기타</div>
+                    <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
+                      {recruitData.others}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+            </section>
 
             {/* 근무지 정보 */}
             {/*<section className="border-gray2 flex flex-col gap-y-[12px]">*/}
@@ -221,7 +264,7 @@ const RecruitDetailPage = () => {
             {/*</section>*/}
 
             {/* 회사 정보 */}
-            <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
+            <section className="flex flex-col gap-y-[24px] rounded-[32px]">
               <section className="flex gap-x-3">
                 {recruitData.companyImageUrl ? (
                   <div className="border-gray2 relative h-[100px] w-[100px] rounded-[12px] border">
@@ -267,18 +310,6 @@ const RecruitDetailPage = () => {
                   <div className="flex">
                     <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">설립일</div>
                     <p className="body-md w-[80%]">{recruitData.establishedDate}</p>
-                  </div>
-                ) : null}
-                {recruitData.others ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">상세정보</div>
-                    <p className="body-md w-[80%]">{recruitData.others}</p>
-                  </div>
-                ) : null}
-                {recruitData.preferences ? (
-                  <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">공고정보</div>
-                    <p className="body-md w-[80%]">{recruitData.preferences}</p>
                   </div>
                 ) : null}
               </section>
