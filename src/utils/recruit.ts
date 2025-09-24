@@ -1,10 +1,13 @@
 import {
+  CompanyType,
   ContractEnumType,
   ContractKorType,
   JobCategoryEnumType,
   JobCategoryKorType,
   SalaryEnumType,
   SalaryKorType,
+  WorkDaysType,
+  WorkType,
 } from '@/types/recruit'
 
 export const jobCategoryList: JobCategoryKorType[] = [
@@ -120,6 +123,7 @@ export const convertEnumToKorContractType = (category: ContractEnumType): Contra
       return '정규직'
   }
 }
+
 export const convertEnumToKorSalaryType = (category: SalaryEnumType): SalaryKorType => {
   switch (category) {
     case 'ANNUAL':
@@ -136,6 +140,7 @@ export const convertEnumToKorSalaryType = (category: SalaryEnumType): SalaryKorT
       return '기타'
   }
 }
+
 export const convertKorToEnumSalaryType = (category: SalaryKorType): SalaryEnumType => {
   switch (category) {
     case '연봉':
@@ -150,5 +155,87 @@ export const convertKorToEnumSalaryType = (category: SalaryKorType): SalaryEnumT
       return 'MONTHLY'
     default:
       return 'ETC'
+  }
+}
+
+export const changeEnumToKorWorkType = (workType: WorkType | undefined) => {
+  switch (workType) {
+    case 'ONSITE':
+      return '온라인'
+    case 'HYBRID':
+      return '혼합근무'
+    case 'REMOTE':
+      return '원격'
+    case 'ETC':
+      return '기타'
+  }
+}
+
+export const SalaryTypeClassName = (salaryEnumType: SalaryEnumType) => {
+  switch (salaryEnumType) {
+    case 'HOURLY':
+      return 'flex items-center justify-center badge-sm text-sub3 border-sub3 border h-[22px] px-2 rounded-[8px]'
+    case 'ANNUAL':
+      return 'flex items-center justify-center badge-sm text-main-dark border-main-dark border h-[22px] px-2 rounded-[8px]'
+    case 'MONTHLY':
+      return 'flex items-center justify-center badge-sm text-sub2 border-sub2 border h-[22px] px-2 rounded-[8px]'
+    case 'WEEKLY':
+      return 'flex items-center justify-center badge-sm text-sub5 border-sub5 border h-[22px] px-2 rounded-[8px]'
+    case 'DAILY':
+      return 'flex items-center justify-center badge-sm text-sub1 border-sub1 border h-[22px] px-2 rounded-[8px]'
+    default:
+      return 'flex items-center justify-center badge-sm text-main border-main border h-[22px] px-2 rounded-[8px]'
+  }
+}
+
+export const changeCompanyTypeEnumToKor = (companyEnumType: CompanyType) => {
+  switch (companyEnumType) {
+    case 'LARGE_CORPORATION':
+      return '대기업'
+    case 'MIDSIZE_COMPANY':
+      return '중견기업'
+    case 'SMALL_MEDIUM_ENTERPRISE':
+      return '중소기업'
+    case 'MICRO_BUSINESS':
+      return '소상공인'
+    case 'SOLE_PROPRIETOR':
+      return '개인사업자'
+    case 'CORPORATION':
+      return '법인기업'
+    case 'SOCIAL_ENTERPRISE':
+      return '사회적기업'
+    case 'COOPERATIVE':
+      return '협동조합'
+    default:
+      return '기타'
+  }
+}
+
+export const changeEnumToKorWorkDaysType = (workDaysType: WorkDaysType | undefined) => {
+  switch (workDaysType) {
+    case 'WEEKDAYS':
+      return '평일(월, 화, 수, 목, 금)'
+    case 'WEEKENDS':
+      return '주말(토, 일)'
+    case 'FULL_WEEK':
+      return '주 7일(월~일)'
+    case 'SIX_DAYS':
+      return '주 6일'
+    case 'MONDAY':
+      return '월요일'
+    case 'TUESDAY':
+      return '화요일'
+    case 'WEDNESDAY':
+      return '수요일'
+    case 'THURSDAY':
+      return '목요일'
+    case 'FRIDAY':
+      return '금요일'
+    case 'SATURDAY':
+      return '토요일'
+    case 'SUNDAY':
+      return '일요일'
+    default:
+      return '기타'
   }
 }

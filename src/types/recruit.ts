@@ -40,10 +40,11 @@ export interface RecruitInputDataType {
   qualifications?: string
   preferences?: string
   others?: string
-  applicationMethod?: 'WEBSITE' | 'PHONE_SMS' | 'EMAIL'
+  applicationMethod?: ApplicationMethodType
   directInputApplicationMethod?: string
   recruitPublishStatus?: 'DRAFT' | 'PUBLISHED' //임시저장, 최종등록
 }
+export type ApplicationMethodType = 'WEBSITE' | 'PHONE_SMS' | 'EMAIL'
 
 export type CompanyType =
   | 'LARGE_CORPORATION'
@@ -89,6 +90,7 @@ export type JobCategoryKorType =
   | 'R&D'
   | '무역/물류'
   | '기타'
+
 export type JobCategoryEnumType =
   | 'DESIGN'
   | 'PRODUCTION_MANUFACTURING'

@@ -157,6 +157,14 @@ const RecruitDetailPage = () => {
 
   return (
     <main>
+      {isApplicationMethodModalOpen && (
+        <ApplicationModal
+          applicationMethod={recruitData?.applicationMethod}
+          directInputApplicationMethod={recruitData?.directInputApplicationMethod}
+          isApplicationMethodModalOpen={isApplicationMethodModalOpen}
+          setIsApplicationMethodModalOpen={setIsApplicationMethodModalOpen}
+        />
+      )}
       <Header
         isLanguageSelectModalOpen={isLanguageSelectModalOpen}
         setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
