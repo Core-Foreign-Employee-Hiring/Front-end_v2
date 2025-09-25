@@ -115,6 +115,9 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
             onClick={async () => {
               setStep(2)
               const result = await patchModifyProfile(myPageInfo)
+              if (result.success) {
+                setStep(1)
+              }
               console.log('수정완료', result)
             }}
             type={canComplete() ? 'active' : 'disabled'}

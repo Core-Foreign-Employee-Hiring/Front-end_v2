@@ -16,7 +16,7 @@ const BottomModal = ({ title, children, onClick, buttonContent, buttonType, onCl
     <div onClick={onClose} className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
       <div
         onClick={(e) => e.stopPropagation()}
-        className="absolute bottom-0 flex w-full flex-col gap-y-[16px] rounded-t-[32px] bg-white p-6"
+        className="absolute bottom-0 flex w-[375px] flex-col gap-y-[16px] rounded-t-[32px] bg-white p-6"
       >
         <Title title={title} onClose={onClose} />
         <Content>{children}</Content>
