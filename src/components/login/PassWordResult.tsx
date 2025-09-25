@@ -2,6 +2,8 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'reac
 import Button from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { EyeIcon, NonEyeIcon } from '@/assets/svgComponents'
+import { useAuthStore } from '@/store/authStore'
+import { postMemberPasswordResetModify } from '@/lib/auth'
 
 interface PassWordResultProps {
   setStep: Dispatch<SetStateAction<number>>
@@ -15,6 +17,20 @@ export default function PassWordResult({ setStep, setFindAccountProcess }: PassW
 
   const [showPassword, setShowPassword] = useState(false)
   const [showCheckPassword, setShowCheckPassword] = useState(false)
+
+  const setState = useAuthStore((state) => state.setState)
+  const modifyPWRequestData = useAuthStore((state) => state.modifyPWRequestData)
+
+  useEffect(() => {
+    if (modifyPWRequestData?.code && modifyPWRequestData.newPassword) {
+      postMemberPasswordResetModify(modifyPWRequestData).then((result) => {
+        if (result.success) {
+          setStep(1)
+          setFindAccountProcess(false)
+        }
+      })
+    }
+  }, [modifyPWRequestData])
 
   //비밀번호 문구
   useEffect(() => {
@@ -113,11 +129,13 @@ export default function PassWordResult({ setStep, setFindAccountProcess }: PassW
         ) : null}
       </div>
 
-      <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-5 pb-5">
+      <div className="fixed bottom-0 flex w-[375px] gap-x-3 bg-white px-5 pb-5">
         <Button
           onClick={async () => {
-            setStep(1)
-            setFindAccountProcess(false)
+            setState({
+              ...modifyPWRequestData,
+              modifyPWRequestData: { ...modifyPWRequestData, newPassword: checkPassword },
+            })
           }}
           buttonType={'submit'}
           disabled={!(newPassword && isPasswordMatch && isPasswordValid)}

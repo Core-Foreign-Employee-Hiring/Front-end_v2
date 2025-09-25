@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { EmployeeLoginType, EmployeeSignUpType } from '@/types/auth'
+import { EmployeeLoginType, EmployeeSignUpType, ModifyPWRequestDataType } from '@/types/auth'
 
 interface SetAuthStoreType {
   role?: 'Employer' | 'Employee'
@@ -20,6 +20,7 @@ interface SetAuthStoreType {
         createdAt: string
       }
     | undefined
+  modifyPWRequestData?: ModifyPWRequestDataType | undefined
   allOptions?: boolean
 }
 
@@ -44,6 +45,7 @@ interface AuthStoreType {
         createdAt: string
       }
     | undefined
+  modifyPWRequestData?: ModifyPWRequestDataType | undefined
   setState: (params: SetAuthStoreType) => void
 }
 
@@ -59,6 +61,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   isEmployeePhoneVerified: undefined, // 휴대폰 번호 인증을 했는지
   isEmployeeEmailVerified: undefined, // 이메일 인증을 했는지
   isAuthenticated: undefined, //로그인이 되어있는 상태인지
+  modifyPWRequestData: undefined,
   allOptions: false,
   idResultData: undefined,
   setState: (params: SetAuthStoreType) => {

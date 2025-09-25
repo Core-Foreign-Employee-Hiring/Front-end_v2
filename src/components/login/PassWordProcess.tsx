@@ -3,12 +3,13 @@ import Button from '@/components/common/Button'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { FindPWRequestDataType } from '@/types/auth'
 import { postMemberPasswordResetSendCode, postMemberPasswordResetVerifyCode, postMemberVerifyEmail } from '@/lib/auth'
+import { useAuthStore } from '@/store/authStore'
 
 interface PassWordProcessProps {
   setStep: Dispatch<SetStateAction<number>>
 }
 
-export default function PassWordProcess({}: PassWordProcessProps) {
+export default function PassWordProcess({ setStep }: PassWordProcessProps) {
   const [findPWRequestData, setFindPWRequestData] = useState<FindPWRequestDataType>()
   // 이메일 정규식 검사 함수
   const isValidEmail = (email: string) => {
@@ -23,6 +24,9 @@ export default function PassWordProcess({}: PassWordProcessProps) {
 
   // 로딩 상태 추가
   const [isEmailVerificationLoading, setIsEmailVerificationLoading] = useState<boolean>(false)
+
+  const setState = useAuthStore((state) => state.setState)
+  const modifyPWRequestData = useAuthStore((state) => state.modifyPWRequestData)
 
   return (
     <div className="flex flex-col gap-y-[24px]">
@@ -124,10 +128,14 @@ export default function PassWordProcess({}: PassWordProcessProps) {
           ) : null}
         </section>
       </div>
-      <div className="fixed bottom-0 w-full bg-white px-5 pb-5">
+      <div className="fixed bottom-0 w-[375px] bg-white px-5 pb-5">
         <Button
           onClick={async () => {
             const result = await postMemberPasswordResetVerifyCode(verifyCode)
+            if (result.success) {
+              setState({ ...modifyPWRequestData, modifyPWRequestData: { ...modifyPWRequestData, code: verifyCode } })
+              setStep(2)
+            }
           }}
           buttonType={'submit'}
           type={verifyCode ? 'active' : 'disabled'}

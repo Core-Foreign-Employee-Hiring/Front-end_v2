@@ -37,3 +37,9 @@ export interface FindPWRequestDataType {
   name: string
   email: string
 }
+
+//비밀번호 변경 데이터 타입
+export interface ModifyPWRequestDataType {
+  code?: string
+  newPassword?: string
+}

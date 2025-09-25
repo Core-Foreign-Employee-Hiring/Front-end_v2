@@ -132,7 +132,7 @@ export default function IdProcess({ setStep }: IdProcessProps) {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full bg-white px-5 pb-5">
+      <div className="fixed bottom-0 w-[375px] bg-white px-5 pb-5">
         <Button
           onClick={async () => {
             setStep(2)

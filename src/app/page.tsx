@@ -90,7 +90,6 @@ export default function Home() {
         isHomeMenuOpen={isHomeMenuOpen}
         setIsHomeMenuOpen={setIsHomeMenuOpen}
       />
-      {/*<div className="h-[80px]"></div>*/}
 
       <div className="mx-auto min-h-screen w-[375px] bg-white pt-[80px]">
         {isLanguageSelectModalOpen ? (

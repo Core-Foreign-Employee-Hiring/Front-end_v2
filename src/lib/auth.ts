@@ -1,5 +1,11 @@
 import { ApiResponse } from '@/types/common'
-import { EmployeeLoginType, EmployeeSignUpType, FindPWRequestDataType, ResponseLoginType } from '@/types/auth'
+import {
+  EmployeeLoginType,
+  EmployeeSignUpType,
+  FindPWRequestDataType,
+  ModifyPWRequestDataType,
+  ResponseLoginType,
+} from '@/types/auth'
 
 /**
  * 피고용인 회원가입
@@ -168,12 +174,29 @@ export const postMemberPasswordResetSendCode = async (
  * 비밀번호 재설정 - 코드 검증 API
  */
 export const postMemberPasswordResetVerifyCode = async (code: string): Promise<ApiResponse<void>> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/password-reset/send-code`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/password-reset/verify-code`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ code: code }),
+  })
+
+  return await response.json()
+}
+
+/**
+ * 비밀번호 재설정 - 코드 검증 API
+ */
+export const postMemberPasswordResetModify = async (
+  modifyData: ModifyPWRequestDataType
+): Promise<ApiResponse<void>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/password-reset/modify`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(modifyData),
   })
 
   return await response.json()

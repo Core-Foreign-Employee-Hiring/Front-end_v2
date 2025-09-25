@@ -22,7 +22,7 @@ export default function IdResult({ setStep, setType, setFindAccountProcess }: Id
         </div>
       ) : null}
 
-      <div className="fixed bottom-0 flex w-full gap-x-3 bg-white px-5 pb-5">
+      <div className="fixed bottom-0 flex w-[375px] gap-x-3 bg-white px-5 pb-5">
         <Button
           onClick={async () => {
             setType('pw')
