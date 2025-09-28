@@ -63,15 +63,15 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
 
       <div className="flex flex-col gap-y-1">
         <div className="flex items-center justify-between">
-          <p className="subtitle-lg">{formatJobCategory()}</p>
+          <p className="subtitle-lg line-clamp-2">{recruit.title}</p>
         </div>
 
+        <p className="subtitle-md">{formatJobCategory()}</p>
         <p className="body-sm text-gray5">{recruit.companyName}</p>
-        <p className="body-sm text-gray5">{convertEnumToKorContractType(recruit.contractType)}</p>
       </div>
 
       <div className="flex items-center gap-x-1">
-        {recruit.salaryType || recruit.salary ? (
+        {recruit.salaryType && recruit.salary ? (
           <>
             {recruit.salaryType && (
               <div

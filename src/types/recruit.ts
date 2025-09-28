@@ -3,11 +3,12 @@ export interface RecruitResponseContentType {
   companyImageUrl: string
   companyName: string
   recruitEndDate: string
-  contractType: ContractEnumType
+  title: string
   jobCategories: JobCategoryEnumType[]
   salaryType: SalaryEnumType
   salary: number
 }
+
 export interface RecruitInputDataType {
   title?: string
   companyName?: string
