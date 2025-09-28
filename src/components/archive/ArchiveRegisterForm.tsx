@@ -123,12 +123,15 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
         setIsHomeMenuOpen={setIsHomeMenuOpen}
         isHomeMenuOpen={isHomeMenuOpen}
       />
+      <div className="pt-[80px]">
+        <Header headerType={'dynamic'} title={'합격 아카이브 등록'}></Header>
+      </div>
       {isHomeMenuOpen ? (
         <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
       ) : (
         <>
           <div className="" />
-          <div className="relative mx-auto flex min-h-screen w-[375px] flex-col gap-y-[40px] bg-white px-5 pt-[112px]">
+          <div className="relative mx-auto flex min-h-screen w-[375px] flex-col gap-y-[40px] bg-white px-5 pt-[60px]">
             <h1 className="title-md">합격 아카이브 등록</h1>
             <section className="flex flex-col gap-y-[32px]">
               <TitleField />
