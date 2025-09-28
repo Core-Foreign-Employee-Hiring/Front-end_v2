@@ -173,14 +173,14 @@ const ReviewPage = () => {
             onClick={() => {
               setIsArchiveRegisterFormOpen(!isArchiveRegisterFormOpen)
             }}
-            className="button bg-main fixed bottom-20 left-1/2 z-10 flex h-[48px] -translate-x-1/2 items-center justify-center rounded-full px-4 text-white"
+            className="button bg-main fixed bottom-20 left-1/2 z-10 flex h-[48px] -translate-x-1/2 items-center justify-center rounded-full pr-5 pl-3 whitespace-nowrap text-white"
             style={{
               marginLeft: '85px', // 375px - 20px(right-5) = 355px
               transform: 'translateX(-50%) translateX(85px)',
             }}
           >
             <PlusIcon width={24} height={24} />
-            아카이브 등록하기
+            아카이브 등록
           </button>
         </div>
       )}
