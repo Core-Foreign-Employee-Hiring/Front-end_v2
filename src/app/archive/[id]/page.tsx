@@ -6,15 +6,8 @@ import Header from '@/components/common/Header'
 import Image from 'next/image'
 import Review from '@/components/archive/Review'
 import Button from '@/components/common/Button'
-import {
-  getArchiveDetailData,
-  getArchiveReviewData,
-  getInquiryIsAnswered,
-  getLatestInquiry,
-  getPassArchivesPassArchiveIdInquiryUrl,
-  getUnreadInquiry,
-} from '@/lib/archive'
-import { LatestInquiryType, PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
+import { getArchiveDetailData, getArchiveReviewData, getPassArchivesPassArchiveIdInquiryUrl } from '@/lib/archive'
+import { PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/archive'
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
 import BottomModal from '@/components/common/BottomModal'
@@ -22,6 +15,7 @@ import { postPaymentTestConfirm } from '@/lib/payment'
 import Menu from '@/components/common/Menu'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import Link from 'next/link'
+import PurchaseModal from '@/components/modal/PurchaseModal'
 
 export default function ReviewDetailPage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -45,6 +39,26 @@ export default function ReviewDetailPage() {
 
   //언어 선택 모달창 제어
   const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
+  //구매하기 모달창 제어
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
+
+  // 구매하기 모달창 자동 닫기 효과
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+
+    if (isPurchaseModalOpen) {
+      timer = setTimeout(() => {
+        setIsPurchaseModalOpen(false)
+      }, 2000) // 2초 후 자동 닫기
+    }
+
+    // 컴포넌트 언마운트 시 또는 의존성 변경 시 타이머 정리
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  }, [isPurchaseModalOpen])
 
   useEffect(() => {
     getArchiveDetailData(params.id).then((response) => {
@@ -95,6 +109,9 @@ export default function ReviewDetailPage() {
 
   return (
     <main>
+      {isPurchaseModalOpen && (
+        <PurchaseModal isModalOpen={isPurchaseModalOpen} setIsModalOpen={setIsPurchaseModalOpen} />
+      )}
       <Header headerType="dynamic" title={'합격 아카이브'} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white">
         {isInquireModalOpen ? (
@@ -239,8 +256,10 @@ export default function ReviewDetailPage() {
               </Button>
               <Button
                 onClick={async () => {
-                  const res = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
-                  console.log('결제', res)
+                  const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
+                  if (result.success) {
+                    setIsPurchaseModalOpen(true)
+                  }
                 }}
                 type={'active'}
                 size={'lg'}
