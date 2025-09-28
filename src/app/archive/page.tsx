@@ -85,7 +85,7 @@ const ReviewPage = () => {
   return isArchiveRegisterFormOpen ? (
     <ArchiveRegisterForm setIsArchiveRegisterFormOpen={setIsArchiveRegisterFormOpen} />
   ) : (
-    <main className="">
+    <main className="relative mx-auto min-h-screen w-[375px] bg-white">
       {isLanguageSelectModalOpen ? (
         <LanguageSelectModal
           isLanguageSelectModalOpen={isLanguageSelectModalOpen}
@@ -110,7 +110,7 @@ const ReviewPage = () => {
           <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
         </div>
       ) : (
-        <div className="relative mx-auto min-h-screen w-[375px] bg-white">
+        <div className="">
           <div className="h-[112px]" />
           <div className="px-5">
             <section className="flex flex-col gap-y-3 whitespace-nowrap">
