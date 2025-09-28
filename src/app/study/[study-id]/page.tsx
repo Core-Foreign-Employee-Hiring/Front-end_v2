@@ -3,6 +3,7 @@
 import Header from '@/components/common/Header'
 import Image from 'next/image'
 import ProjectCard from '@/components/study/ProjectCard'
+import Link from 'next/link'
 
 export default function StudyDetailPage() {
   return (
@@ -33,6 +34,23 @@ export default function StudyDetailPage() {
               <p className="body-sm text-gray5">2025. 09. 13 - 2025. 09. 14</p>
             </div>
             <div className="flex items-start">
+              <div className="badge-sm text-gray4 mt-1 w-[80px] whitespace-nowrap">프로젝트 기사</div>
+              <div className="flex flex-col gap-y-1">
+                <Link
+                  href={'https://www.veritas-a.com/news/articleView.html?idxno=572820'}
+                  className="text-main body-sm truncate"
+                >
+                  링크 바로가기
+                </Link>
+                <Link
+                  href={'https://www.ccreview.co.kr/news/articleView.html?idxno=335607'}
+                  className="text-main body-sm"
+                >
+                  링크 바로가기
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-start">
               <div className="badge-sm text-gray4 w-[80px]">참여 인원</div>
               <div className="flex flex-col gap-y-1">
                 <div className="flex gap-x-3">
@@ -43,44 +61,57 @@ export default function StudyDetailPage() {
                 <div className="flex gap-x-3">
                   <div className="text-gray5 body-sm w-[60px] whitespace-nowrap">내국인</div>
                   <div className="body-sm text-gray5">|</div>
-                  <div className="text-gray5 body-sm w-full">21명</div>
+                  <div className="text-gray5 body-sm w-full">22명</div>
                 </div>
               </div>
             </div>
-            <div className="bg-gray2 h-[188px] w-full rounded-[16px]"></div>
+            <div className="relative h-[188px] w-full rounded-[16px]">
+              <Image
+                src="/study/git/group_photo.jpeg"
+                priority
+                alt="단체사진"
+                className="rounded-[16px] object-cover"
+                fill
+              />
+            </div>
           </section>
 
           {/* 프로젝트 */}
           <section className="flex flex-col gap-y-[32px] px-[17.5px]">
             <ProjectCard
+              id={1}
               description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
-              projectImageUrl={'/pizza.png'}
+              projectImageUrl={'/study/git/project/A_thumbnail.jpeg'}
+              projectName={'ROOMIO'}
+              teamName={'스페이스'}
+            />
+            <ProjectCard
+              id={2}
+              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
+              projectImageUrl={'/study/git/project/B_thumbnail.jpeg'}
+              projectName={'EZIP'}
+              teamName={'KONNECTION'}
+            />
+            <ProjectCard
+              id={3}
+              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
+              projectImageUrl={'/study/git/project/C_thumbnail.jpeg'}
+              projectName={'Kuide'}
+              teamName={'C앗'}
+            />
+            <ProjectCard
+              id={4}
+              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
+              projectImageUrl={'/study/git/project/D_thumbnail.png'}
               projectName={'KORI'}
               teamName={'TOGETHER KOREA'}
             />
             <ProjectCard
+              id={5}
               description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
-              projectImageUrl={'/pizza.png'}
-              projectName={'KORI'}
-              teamName={'TOGETHER KOREA'}
-            />
-            <ProjectCard
-              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
-              projectImageUrl={'/pizza.png'}
-              projectName={'KORI'}
-              teamName={'TOGETHER KOREA'}
-            />
-            <ProjectCard
-              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
-              projectImageUrl={'/pizza.png'}
-              projectName={'KORI'}
-              teamName={'TOGETHER KOREA'}
-            />
-            <ProjectCard
-              description={'외국인 노동자의 안정적인 한국 생활과 정착을 돕는 플랫폼'}
-              projectImageUrl={'/pizza.png'}
-              projectName={'KORI'}
-              teamName={'TOGETHER KOREA'}
+              projectImageUrl={'/study/git/project/E_thumbnail.png'}
+              projectName={'KO-DIC'}
+              teamName={'базар'}
             />
           </section>
         </div>

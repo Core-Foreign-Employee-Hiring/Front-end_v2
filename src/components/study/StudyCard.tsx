@@ -20,7 +20,12 @@ export default function StudyCard({ title, description, period, teamCount, membe
       className="flex flex-col gap-y-3"
     >
       <div className="relative h-[175px] w-full">
-        <Image src={'/pizza.png'} alt="스터디 카드" className="rounded-[16px] object-cover" fill></Image>
+        <Image
+          src={'/study/git/group_photo.jpeg'}
+          alt="스터디 카드"
+          className="rounded-[16px] object-cover"
+          fill
+        ></Image>
         <div className="absolute z-10 h-[175px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40" />
       </div>
       <div className="flex flex-col gap-y-1">

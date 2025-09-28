@@ -4,6 +4,7 @@ import Header from '@/components/common/Header'
 import Button from '@/components/common/Button'
 import Image from 'next/image'
 import { GrayRightArrowIcon } from '@/assets/svgComponents'
+import { ROOMIOData } from '@/utils/study'
 
 export default function ProjectDetailPage() {
   return (
@@ -68,7 +69,11 @@ export default function ProjectDetailPage() {
             </div>
           </section>
         </div>
-        <></>
+        <div className="mt-[24px]">
+          {ROOMIOData.pptImageUrls.map((pptImageUrl) => {
+            return <Image alt="최종 장표 사진" src={pptImageUrl} key={pptImageUrl} width={375} height={210}></Image>
+          })}
+        </div>
       </div>
     </main>
   )

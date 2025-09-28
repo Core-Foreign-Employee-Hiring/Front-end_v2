@@ -74,7 +74,7 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
             <Button
               buttonType={'submit'}
               onClick={() => {
-                // router.push('/')
+                router.push('/')
               }}
               customClassName={'w-full'}
               type={'active'}

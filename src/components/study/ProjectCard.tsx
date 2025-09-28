@@ -7,14 +7,15 @@ interface ProjectCardProps {
   projectName: string
   description: string
   teamName: string
+  id: number
 }
 
-export default function ProjectCard({ projectImageUrl, projectName, description, teamName }: ProjectCardProps) {
+export default function ProjectCard({ projectImageUrl, projectName, description, teamName, id }: ProjectCardProps) {
   const router = useRouter()
   return (
     <div
       onClick={() => {
-        router.push('/study/1/1')
+        router.push(`/study/1/${id}`)
       }}
       className="flex flex-col gap-y-3"
     >
