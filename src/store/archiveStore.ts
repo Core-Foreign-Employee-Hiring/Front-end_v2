@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { PassArchiveRegisterType } from '@/types/archive'
 
 interface SetArchiveStoreType {
-  archiveData: PassArchiveRegisterType
+  archiveData: PassArchiveRegisterType | undefined
 }
 
 interface ArchiveStoreType {
