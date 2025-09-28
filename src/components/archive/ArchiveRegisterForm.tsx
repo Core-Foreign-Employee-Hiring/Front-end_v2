@@ -9,7 +9,7 @@ import ImageUploadField from '@/components/archive/register/ImageUploadField'
 import ProductUploadField from '@/components/archive/register/ProductUploadField'
 import PriceField from '@/components/archive/register/PriceField'
 import Button from '@/components/common/Button'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import Menu from '@/components/common/Menu'
 import { useArchiveStore } from '@/store/archiveStore'
 import { postArchiveData } from '@/lib/archive'
@@ -33,6 +33,22 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
 
   //언어 선택 모달창 제어
   const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
+
+  // 필수 필드 검증
+  const isFormValid = useMemo(() => {
+    if (!archiveData) return false
+
+    return !!(
+      archiveData.title?.trim() &&
+      archiveData.oneLineReview?.trim() &&
+      archiveData.description?.trim() &&
+      archiveData.price !== undefined &&
+      archiveData.price >= 0 &&
+      archiveData.inquiryUrl?.trim() &&
+      thumbnailFile &&
+      productFiles.length > 0
+    )
+  }, [archiveData, thumbnailFile, productFiles])
 
   useEffect(() => {
     console.log('archiveData', archiveData)
@@ -77,7 +93,10 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
       const formData = createUploadFormData()
       const result = await postArchiveData(formData)
       if (result.success) {
-        setState({ archiveData: undefined })
+        setState({ archiveData: { price: 0 } })
+        setThumbnailFile(null)
+        setImageFiles([])
+        setProductFiles([])
         setIsArchiveRegisterFormOpen(false)
       }
       console.log('업로드 성공:', result)
@@ -126,7 +145,10 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
                 buttonType={'button'}
                 onClick={() => {
                   setIsArchiveRegisterFormOpen(false)
-                  setState({ archiveData: undefined })
+                  setState({ archiveData: { price: 0 } })
+                  setThumbnailFile(null)
+                  setImageFiles([])
+                  setProductFiles([])
                 }}
                 size={'lg'}
                 type={'outline'}
@@ -138,9 +160,9 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
                 buttonType={'submit'}
                 onClick={handleSubmit}
                 size={'lg'}
-                type={'active'}
+                type={!isLoading && isFormValid ? 'active' : 'disabled'}
                 customClassName={'w-full'}
-                disabled={isLoading}
+                disabled={isLoading || !isFormValid}
               >
                 {isLoading ? '업로드 중...' : '완료'}
               </Button>
