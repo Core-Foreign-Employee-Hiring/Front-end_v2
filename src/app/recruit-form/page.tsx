@@ -138,9 +138,12 @@ export default function RecruitFormPage() {
   return (
     <form onSubmit={handleSubmit} className="relative mx-auto min-h-screen w-[375px] bg-white">
       <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
+      <div className="pt-[80px]">
+        <Header headerType={'dynamic'} />
+      </div>
 
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
-      <div className="h-[80px]" />
+      <div className="h-[20px]" />
       {currentStep === 1 && <RecruitFormStep1 currentStep={currentStep} companyLogoImgRef={companyLogoImgRef} />}
       {currentStep === 2 && <RecruitFormStep2 currentStep={currentStep} />}
       {currentStep === 3 && <RecruitFormStep3 currentStep={currentStep} posterImgRef={posterImgRef} />}
