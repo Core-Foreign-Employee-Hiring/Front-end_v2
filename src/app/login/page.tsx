@@ -33,17 +33,16 @@ const LoginPage = () => {
   //언어 선택 모달창 제어
   const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
-  // 컴포넌트 마운트 시 저장된 로그인 정보 불러오기
+  // 컴포넌트 마운트 시 저장된 아이디만 불러오기
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedUserId = localStorage.getItem('savedUserId')
-      const savedPassword = localStorage.getItem('savedPassword')
 
-      if (savedUserId && savedPassword) {
+      if (savedUserId) {
         setAuthState({
           loginData: {
+            ...loginData,
             userId: savedUserId,
-            password: savedPassword,
           },
         })
         setRememberMe(true)
@@ -56,15 +55,13 @@ const LoginPage = () => {
     setRememberMe(!rememberMe)
   }
 
-  // 로그인 정보 저장/삭제
-  const saveLoginData = (save: boolean) => {
+  // 아이디만 저장/삭제
+  const saveUserId = (save: boolean) => {
     if (typeof window !== 'undefined') {
-      if (save && loginData) {
-        localStorage.setItem('savedUserId', loginData.userId || '')
-        localStorage.setItem('savedPassword', loginData.password || '')
+      if (save && loginData?.userId) {
+        localStorage.setItem('savedUserId', loginData.userId)
       } else {
         localStorage.removeItem('savedUserId')
-        localStorage.removeItem('savedPassword')
       }
     }
   }
@@ -81,8 +78,8 @@ const LoginPage = () => {
         // 로그인 성공 시 에러 상태 초기화
         setLoginError(false)
 
-        // 아이디 저장 설정에 따라 저장/삭제
-        saveLoginData(rememberMe)
+        // 아이디 저장 설정에 따라 아이디만 저장/삭제
+        saveUserId(rememberMe)
 
         // 토큰 저장
         Cookies.set('accessToken', result.data.accessToken)
