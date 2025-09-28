@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function KorfitStudySection() {
+export default function KorfitStudySectionDesktop() {
   const router = useRouter()
   const controls5 = useAnimation()
   const [ref5, inView5] = useInView({

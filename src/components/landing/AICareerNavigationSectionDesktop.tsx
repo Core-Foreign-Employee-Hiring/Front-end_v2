@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 
-export default function AICareerNavigationSection() {
+export default function AICareerNavigationSectionDesktop() {
   const controls3 = useAnimation()
   const [ref3, inView3] = useInView({
     triggerOnce: true,

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 
-export default function PortfolioSupportSection() {
+export default function PortfolioSupportSectionDesktop() {
   const controls4 = useAnimation()
   const [ref4, inView4] = useInView({
     triggerOnce: true,
