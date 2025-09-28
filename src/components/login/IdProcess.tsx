@@ -22,6 +22,7 @@ export default function IdProcess({ setStep }: IdProcessProps) {
 
   // 로딩 상태 추가
   const [isPhoneNumberVerificationLoading, setIsPhoneNumberVerificationLoading] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(undefined)
 
   //아이디 찾기 결과값 저장
   const setState = useAuthStore((state) => state.setState)
@@ -135,10 +136,14 @@ export default function IdProcess({ setStep }: IdProcessProps) {
       <div className="fixed bottom-0 w-[375px] bg-white px-5 pb-5">
         <Button
           onClick={async () => {
-            setStep(2)
             if (verifyCode) {
               const result = await postMemberFindIdVerifyCode(verifyCode)
-              setState({ idResultData: result.data })
+              if (result.success) {
+                setState({ idResultData: result.data })
+                setStep(2)
+              } else if (result.status === 400) {
+                setIsPhoneVerified(false)
+              }
             }
           }}
           buttonType={'submit'}
