@@ -24,16 +24,15 @@ export default function ArchiveCard({
     >
       <div className="relative h-[104px] w-full rounded-[16px]">
         <div className="absolute z-10 h-[104px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
-        <Image
-          src={thumbnailUrl ? thumbnailUrl : '/pizza.png'}
-          alt={title}
-          fill
-          className={'rounded-[16px] object-cover'}
-        />
+        {thumbnailUrl ? (
+          <Image src={thumbnailUrl} alt={title} fill className={'rounded-[16px] object-cover'} />
+        ) : (
+          <div className="bg-gray1 h-[104px] w-full rounded-[16px]" />
+        )}
       </div>
       <section className="flex flex-col gap-y-1">
         <div className="subtitle-md">{title}</div>
-        <p className="body-sm text-gray5">{oneLineReview}</p>
+        <p className="body-sm text-gray5 truncate">{oneLineReview}</p>
         <p className="subtitle-md">{price}원</p>
         <div className="flex items-center gap-x-1">
           <StarIcon width={20} height={20} />
