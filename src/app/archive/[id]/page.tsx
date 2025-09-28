@@ -18,7 +18,6 @@ import { LatestInquiryType, PassArchiveDetailDataType, PassArchiveReviewDataType
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
 import BottomModal from '@/components/common/BottomModal'
-import { BentArrowIcon } from '@/assets/svgComponents'
 import { postPaymentTestConfirm } from '@/lib/payment'
 import Menu from '@/components/common/Menu'
 import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
@@ -30,11 +29,6 @@ export default function ReviewDetailPage() {
   const [archiveDetailData, setArchiveDetailData] = useState<PassArchiveDetailDataType>()
   const [reviewData, setReviewData] = useState<PassArchiveReviewDataType[]>()
   const [isLoading, setIsLoading] = useState(false)
-  const [latestInquiryData, setLatestInquiryData] = useState<LatestInquiryType>()
-  // 답변이 달렸는지
-  const [inquiryIsAnswered, setInquiryIsAnswered] = useState<boolean | undefined>()
-  // 새로운 문의가 있는지
-  const [hasUnreadInquiry, setHasUnreadInquiry] = useState<boolean | undefined>()
 
   //이미지 클릭시
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -62,15 +56,6 @@ export default function ReviewDetailPage() {
       }
     })
   }, [currentPage])
-
-  // 최근 문의한 정보 가져오기
-  useEffect(() => {
-    getLatestInquiry(params.id).then((response) => {
-      if (response.success) {
-        setLatestInquiryData(response.data)
-      }
-    })
-  }, [])
 
   useEffect(() => {
     const loadArchiveData = async () => {
@@ -108,43 +93,24 @@ export default function ReviewDetailPage() {
     setCurrentPage(page - 1) // Pagination은 1부터 시작하지만 API는 0부터 시작
   }
 
-  // 답변이 달렸는지 확인하는
-  useEffect(() => {
-    if (latestInquiryData) {
-      getInquiryIsAnswered(latestInquiryData.archiveInquiryId).then((result) => {
-        if (result.success) {
-          setInquiryIsAnswered(result.data)
-        }
-      })
-    }
-  }, [latestInquiryData])
-
-  //새로운 문의가 왔는지
-  useEffect(() => {
-    getUnreadInquiry(params.id).then((result) => {
-      if (result.success) {
-        setHasUnreadInquiry(result.data)
-      }
-    })
-  }, [])
-
   return (
     <main>
-      <Header
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-      />
+      <Header headerType="dynamic" title={'합격 아카이브'} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white">
         {isInquireModalOpen ? (
           <BottomModal onClose={() => setIsInquireModalOpen(false)} title={'문의하기'}>
             <div className="flex flex-col gap-y-4">
               <section className="border-gray2 flex h-[237px] flex-col items-center justify-center gap-y-2 rounded-[20px] border p-5">
-                <p className="title-md">
+                <p className="title-md text-center">
                   문의는 오픈채팅에서 <br /> 진행하실 수 있습니다.
                 </p>
-                {inquiryUrl ? <Link href={inquiryUrl}>{inquiryUrl}</Link> : <p>등록된 URL이 없습니다.</p>}
+                {inquiryUrl ? (
+                  <Link href={inquiryUrl} className="text-main">
+                    {inquiryUrl}
+                  </Link>
+                ) : (
+                  <p>등록된 URL이 없습니다.</p>
+                )}
               </section>
             </div>
           </BottomModal>
@@ -170,23 +136,32 @@ export default function ReviewDetailPage() {
           </div>
         ) : (
           <>
-            <div className="h-[120px]" />
+            <div className="h-[60px]" />
             <div className="flex flex-col gap-y-6 px-5">
               {/* 요약본 카드 */}
               <section className="border-gray2 flex flex-col gap-y-6 rounded-[32px] border p-5">
-                <div className="relative h-[223px] w-full rounded-[16px]">
-                  <div className="absolute z-10 h-[133px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
-                  <Image
+                {archiveDetailData?.thumbnailUrl ? (
+                  <div
                     onClick={() => {
                       setSelectedImageUrl(archiveDetailData?.thumbnailUrl)
                       setIsImageModalOpen(true)
                     }}
-                    alt={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
-                    src={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
-                    fill
-                    className={'rounded-[16px]'}
-                  />
-                </div>
+                    className="relative h-[223px] w-full rounded-[16px]"
+                  >
+                    <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
+                    <Image
+                      alt={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
+                      src={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
+                      fill
+                      className={'rounded-[16px]'}
+                    />
+                  </div>
+                ) : (
+                  <div className="h-[223px] w-full rounded-[16px]">
+                    <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
+                    <div className="bg-gray1"></div>
+                  </div>
+                )}
                 <section className="flex flex-col gap-y-3">
                   <div>
                     <h1 className="subtitle-md">{archiveDetailData?.title}</h1>
@@ -228,9 +203,13 @@ export default function ReviewDetailPage() {
                   <p className="subtitle-md">리뷰</p>
                 </section>
                 <section>
-                  {reviewData?.map((review) => {
-                    return <Review key={review.archiveReviewId} {...review} />
-                  })}
+                  {reviewData && reviewData.length > 0 ? (
+                    reviewData.map((review) => {
+                      return <Review key={review.archiveReviewId} {...review} />
+                    })
+                  ) : (
+                    <p className="badge-md text-gray5 mt-2">등록된 리뷰가 없습니다.</p>
+                  )}
                 </section>
 
                 {totalPages > 0 && (
@@ -252,8 +231,7 @@ export default function ReviewDetailPage() {
                 onClick={() => {
                   setIsInquireModalOpen(true)
                 }}
-                type={!hasUnreadInquiry ? 'disabled' : 'outline'}
-                disabled={!hasUnreadInquiry}
+                type={'outline'}
                 size={'lg'}
                 customClassName={'flex whitespace-nowrap ew-[72px] h-[52px]'}
               >
