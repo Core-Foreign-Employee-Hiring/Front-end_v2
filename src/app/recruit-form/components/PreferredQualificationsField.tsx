@@ -6,9 +6,7 @@ export default function PreferredQualificationsField() {
   const preferences = useRecruitStore((state) => state.recruitPostData.preferences)
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg">
-        우대 사항 <span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg">우대 사항</p>
       <textarea
         value={preferences}
         onChange={(e) => {

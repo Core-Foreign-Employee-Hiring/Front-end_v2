@@ -57,9 +57,7 @@ export default function CompanyLogoImageField({ companyLogoImgRef }: CompanyLogo
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        회사 로고<span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg flex gap-x-1">회사 로고</p>
       <div className="flex items-center gap-x-3">
         <p className="subtitle-md text-gray5">이미지 업로드</p>
         <div onClick={() => companyLogoImgRef.current?.click()} className="relative">

@@ -6,9 +6,7 @@ export default function AdditionalInformationField() {
   const others = useRecruitStore((state) => state.recruitPostData.others)
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg">
-        기타 <span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg">기타</p>
       <textarea
         value={others}
         onChange={(e) => {

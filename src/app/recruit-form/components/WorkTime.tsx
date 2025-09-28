@@ -57,6 +57,7 @@ export default function WorkTime() {
             {timeContents.map((time) => {
               return (
                 <button
+                  type={'button'}
                   key={time}
                   onClick={() => {
                     setState({ ...recruitPostData, recruitPostData: { ...recruitPostData, workStartTime: time } })
@@ -78,7 +79,8 @@ export default function WorkTime() {
           >
             {timeContents.map((time) => {
               return (
-                <div
+                <button
+                  type={'button'}
                   key={time}
                   onClick={() => {
                     setState({ ...recruitPostData, recruitPostData: { ...recruitPostData, workEndTime: time } })
@@ -87,7 +89,7 @@ export default function WorkTime() {
                   className="body-sm flex h-[60px] items-center px-4"
                 >
                   {time}
-                </div>
+                </button>
               )
             })}
           </DropBox>

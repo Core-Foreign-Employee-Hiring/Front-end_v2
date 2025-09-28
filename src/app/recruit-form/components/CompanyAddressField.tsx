@@ -25,6 +25,7 @@ export default function CompanyAddressField() {
           customClassName={'w-full'}
         />
         <Button
+          buttonType={'button'}
           onClick={() => {
             setModalState({ isSearchAddressModalOpen: true })
           }}

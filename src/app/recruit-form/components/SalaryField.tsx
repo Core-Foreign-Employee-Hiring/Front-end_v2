@@ -57,6 +57,7 @@ export default function SalaryField() {
             {salaryContents.map((salaryType) => {
               return (
                 <button
+                  type={'button'}
                   key={salaryType.eng}
                   onClick={() => {
                     setState({
@@ -74,6 +75,7 @@ export default function SalaryField() {
           </DropBox>
           <div className="flex w-full items-center gap-x-3">
             <Input
+              type="number"
               value={salary !== undefined ? String(salary) : ''}
               setValue={(e) => {
                 setState({

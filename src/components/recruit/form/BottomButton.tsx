@@ -17,9 +17,6 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
       case 1:
         return (
           <div className="absolute bottom-0 flex w-full gap-x-4 bg-white px-[26px] pt-[10px] pb-[32px]">
-            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
-              임시저장
-            </Button>
             <Button
               buttonType={'button'}
               onClick={() => {
@@ -41,14 +38,11 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
               onClick={() => {
                 setCurrentStep(1)
               }}
-              customClassName={'w-[96px] whitespace-nowrap'}
+              customClassName={'w-full whitespace-nowrap'}
               type={'outline'}
               size={'lg'}
             >
               이전
-            </Button>
-            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
-              임시저장
             </Button>
             <Button
               buttonType={'button'}
@@ -71,19 +65,16 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
               onClick={() => {
                 setCurrentStep(2)
               }}
-              customClassName={'w-[96px] whitespace-nowrap'}
+              customClassName={'w-full whitespace-nowrap'}
               type={'outline'}
               size={'lg'}
             >
               이전
             </Button>
-            <Button buttonType={'button'} onClick={() => {}} customClassName={'w-full'} type={'outline'} size={'lg'}>
-              임시저장
-            </Button>
             <Button
               buttonType={'submit'}
               onClick={() => {
-                router.push('/')
+                // router.push('/')
               }}
               customClassName={'w-full'}
               type={'active'}

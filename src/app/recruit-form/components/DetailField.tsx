@@ -58,9 +58,7 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        상세 정보<span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg flex gap-x-1">상세 정보</p>
       <div className="flex items-center gap-x-3">
         <p className="subtitle-md text-gray5">채용 포스터 업로드</p>
         <div onClick={() => posterImgRef.current?.click()} className="relative">

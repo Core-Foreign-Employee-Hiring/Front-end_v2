@@ -57,7 +57,8 @@ export default function JobCategoryField() {
           const isSelected = isJobCategorySelected(content)
 
           return (
-            <div
+            <button
+              type={'button'}
               key={content}
               onClick={() => handleJobCategoryToggle(content)}
               className={`body-sm hover:bg-gray2 flex h-[60px] cursor-pointer items-center px-4 transition-colors ${
@@ -66,7 +67,7 @@ export default function JobCategoryField() {
             >
               {content}
               {isSelected && <span className="text-main ml-auto text-sm">✓</span>}
-            </div>
+            </button>
           )
         })}
       </DropBox>
