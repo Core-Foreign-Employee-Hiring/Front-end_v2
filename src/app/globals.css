@@ -40,10 +40,11 @@
 
 /* 전역 폰트 스타일 */
 body {
-  font-family: Pretendard, 'Pretendard Variable', sans-serif;
+  font-family: var(--font-pretendard), sans-serif; /* Pretendard를 기본 폰트로 */
   background-color: #F7F8F9;
   color: #1e1e1e;
 }
+
 
 /* 스크롤 바 */
 ::-webkit-scrollbar {
