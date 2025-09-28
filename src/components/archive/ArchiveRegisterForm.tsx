@@ -23,6 +23,7 @@ interface ArchiveRegisterFormProps {
 export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: ArchiveRegisterFormProps) {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const archiveData = useArchiveStore((state) => state.archiveData)
+  const setState = useArchiveStore((state) => state.setState)
 
   // 파일 상태 수정
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
@@ -66,8 +67,8 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
   }
 
   const handleSubmit = async () => {
-    if (!thumbnailFile) {
-      alert('썸네일을 업로드해주세요.')
+    if (!productFiles) {
+      alert('판매할 상품을 업로드해주세요.')
       return
     }
 
@@ -75,6 +76,10 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
       setIsLoading(true)
       const formData = createUploadFormData()
       const result = await postArchiveData(formData)
+      if (result.success) {
+        setState({ archiveData: undefined })
+        setIsArchiveRegisterFormOpen(false)
+      }
       console.log('업로드 성공:', result)
       // 성공 처리 로직
     } catch (error) {
@@ -118,8 +123,10 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
             </section>
             <section className="flex gap-x-4 pb-[40px]">
               <Button
+                buttonType={'button'}
                 onClick={() => {
                   setIsArchiveRegisterFormOpen(false)
+                  setState({ archiveData: undefined })
                 }}
                 size={'lg'}
                 type={'outline'}
@@ -128,6 +135,7 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
                 이전
               </Button>
               <Button
+                buttonType={'submit'}
                 onClick={handleSubmit}
                 size={'lg'}
                 type={'active'}
