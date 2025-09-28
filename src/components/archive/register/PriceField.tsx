@@ -26,16 +26,17 @@ export default function PriceField() {
           />
           <p className="subtitle-md">원</p>
         </div>
-        <div className="subtitle-md text-gray5 flex gap-x-2">
-          <div
-            onClick={() => {
-              setState({ ...archiveData, archiveData: { ...archiveData, price: 0 } })
-            }}
-          >
-            {archiveData?.price === 0 ? <CheckIcon width={24} height={24} /> : <UnCheckIcon width={24} height={24} />}
-          </div>
-          <p>무료</p>
-        </div>
+        <p className="badge-sm text-gray5">* 현재 무료 상품만 업로드 가능합니다.</p>
+        {/*<div className="subtitle-md text-gray5 flex gap-x-2">*/}
+        {/*  <div*/}
+        {/*    onClick={() => {*/}
+        {/*      setState({ ...archiveData, archiveData: { ...archiveData, price: 0 } })*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    {archiveData?.price === 0 ? <CheckIcon width={24} height={24} /> : <UnCheckIcon width={24} height={24} />}*/}
+        {/*  </div>*/}
+        {/*  <p>무료</p>*/}
+        {/*</div>*/}
       </div>
     </div>
   )
