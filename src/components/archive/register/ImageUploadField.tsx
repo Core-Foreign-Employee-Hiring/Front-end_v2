@@ -30,9 +30,7 @@ export default function ImageUploadField({ imageFiles, setImageFiles }: ImageUpl
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        이미지 <span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg flex gap-x-1">이미지</p>
       <Button
         size={'sm'}
         onClick={handleUploadClick}
