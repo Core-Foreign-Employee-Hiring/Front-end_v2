@@ -21,6 +21,10 @@ const EmailField = () => {
 
   //이미 이메일이 등록된 에러
   const [isEmailRegisteredError, setIsEmailRegisteredError] = useState<boolean | undefined>(undefined)
+  const [emailRegisteredErrorMessage, setEmailRegisteredErrorMessage] = useState<string | undefined>(undefined)
+
+  // 로딩 상태 추가
+  const [isEmailVerificationLoading, setIsEmailVerificationLoading] = useState<boolean>(false)
 
   return (
     <section className="flex flex-col gap-y-2">
@@ -32,6 +36,10 @@ const EmailField = () => {
           value={email}
           setValue={(e) => {
             setAuthStoreState({ ...employeeSignUp, employeeSignUp: { ...employeeSignUp, email: e.target.value } })
+            setIsEmailRegisteredError(undefined)
+            setIsVerifyCodeFieldOpen(undefined)
+            setVerifyCode('')
+            setAuthStoreState({ isEmployeeEmailVerified: undefined })
           }}
           inputBoxStyle={'default'}
           type={'email'}
@@ -42,22 +50,41 @@ const EmailField = () => {
           size={'lg'}
           type={isEmailValid ? 'active' : 'disabled'}
           onClick={async () => {
+            setAuthStoreState({ isEmployeeEmailVerified: undefined })
+            setIsEmailVerificationLoading(true)
             if (email) {
-              const result = await postMemberVerifyEmail(email)
-              console.log('result', result)
-              setIsVerifyCodeFieldOpen(result.success)
-              if (result.status === 400) {
-                setIsEmailRegisteredError(false)
+              try {
+                const result = await postMemberVerifyEmail(email)
+                if (result.success) {
+                  console.log('result', result)
+                  setIsVerifyCodeFieldOpen(result.success)
+                } else if (result.status === 400) {
+                  setIsEmailRegisteredError(false)
+                  setEmailRegisteredErrorMessage(result.message)
+                }
+              } catch (error) {
+                console.error('이메일 인증 요청 실패:', error)
+              } finally {
+                setIsEmailVerificationLoading(false) // 로딩 종료
               }
             }
           }}
           customClassName={'whitespace-nowrap'}
         >
-          인증번호
+          {isEmailVerificationLoading ? (
+            <div className="flex items-center gap-x-2">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+              <span>전송 중...</span>
+            </div>
+          ) : (
+            '인증번호'
+          )}
         </Button>
       </div>
 
-      {isEmailRegisteredError === undefined ? null : <p className="badge-md text-error">이미 등록된 이메일입니다.</p>}
+      {isEmailRegisteredError === undefined ? null : (
+        <p className="badge-md text-error">{emailRegisteredErrorMessage}</p>
+      )}
 
       {isVerifyCodeFieldOpen ? (
         <div className="flex flex-col gap-y-2">
@@ -66,6 +93,7 @@ const EmailField = () => {
               value={verifyCode}
               setValue={(e) => {
                 setVerifyCode(e.target.value)
+                setAuthStoreState({ isEmployeeEmailVerified: undefined })
               }}
               inputBoxStyle={'default'}
               type={'text'}
@@ -78,6 +106,11 @@ const EmailField = () => {
               onClick={async () => {
                 const result = await postMemberVerificationEmail(verifyCode)
                 console.log('result', result)
+                if (result.success) {
+                  setAuthStoreState({ isEmployeeEmailVerified: true })
+                } else if (result.status === 400) {
+                  setAuthStoreState({ isEmployeeEmailVerified: false })
+                }
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >

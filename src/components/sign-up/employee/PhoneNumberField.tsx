@@ -14,6 +14,9 @@ const PhoneNumberField = () => {
   //이미 등록한 전화번호 에러 제어 state
   const [isPhoneRegisteredError, setIsPhoneRegisteredError] = useState<boolean | undefined>(undefined)
 
+  // 로딩 상태 추가
+  const [isPhoneNumberVerificationLoading, setIsPhoneNumberVerificationLoading] = useState<boolean>(false)
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
@@ -25,6 +28,10 @@ const PhoneNumberField = () => {
           setValue={(e: ChangeEvent<HTMLInputElement>) => {
             const onlyDigits = e.target.value.replace(/\D/g, '')
             setAuthStoreState({ ...employeeSignUp, employeeSignUp: { ...employeeSignUp, phoneNumber: onlyDigits } })
+            setIsPhoneRegisteredError(undefined)
+            setIsVerifyCodeFieldOpen(undefined)
+            setVerifyCode('')
+            setAuthStoreState({ isEmployeePhoneVerified: undefined })
           }}
           inputBoxStyle={'default'}
           type={'text'}
@@ -35,21 +42,36 @@ const PhoneNumberField = () => {
           size={'lg'}
           type={employeeSignUp?.phoneNumber?.length === 11 ? 'active' : 'disabled'}
           onClick={async () => {
+            setAuthStoreState({ isEmployeePhoneVerified: undefined })
             if (employeeSignUp?.phoneNumber) {
+              setIsPhoneNumberVerificationLoading(true) // 로딩 시작
               console.log('body', employeeSignUp?.phoneNumber)
-              const result = await postMemberVerifyPhone(employeeSignUp.phoneNumber)
-              console.log('result', result)
-              if (result.success) {
-                setIsVerifyCodeFieldOpen(result.success)
-              } else if (result.status === 400 && result.message === '이미 등록된 전화번호 입니다.') {
-                console.log('통과')
-                setIsPhoneRegisteredError(true)
+              try {
+                const result = await postMemberVerifyPhone(employeeSignUp.phoneNumber)
+                console.log('result', result)
+                if (result.success) {
+                  setIsVerifyCodeFieldOpen(result.success)
+                } else if (result.status === 400 && result.message === '이미 등록된 전화번호 입니다.') {
+                  console.log('통과')
+                  setIsPhoneRegisteredError(true)
+                }
+              } catch (error) {
+                console.error('연락처 인증 요청 실패:', error)
+              } finally {
+                setIsPhoneNumberVerificationLoading(false) // 로딩 종료
               }
             }
           }}
           customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
         >
-          인증번호
+          {isPhoneNumberVerificationLoading ? (
+            <div className="flex items-center gap-x-2">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+              <span>전송 중...</span>
+            </div>
+          ) : (
+            '인증번호'
+          )}
         </Button>
       </div>
 
@@ -64,6 +86,7 @@ const PhoneNumberField = () => {
               value={verifyCode}
               setValue={(e) => {
                 setVerifyCode(e.target.value)
+                setAuthStoreState({ isEmployeePhoneVerified: undefined })
               }}
               inputBoxStyle={'default'}
               type={'text'}
