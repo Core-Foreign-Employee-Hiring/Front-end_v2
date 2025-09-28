@@ -115,8 +115,8 @@ const Header = ({
               onClick={() => {
                 onBack ? onBack() : router.back()
               }}
-              width={6}
-              height={12}
+              width={14}
+              height={14}
             />
             <h1 className="subtitle-md absolute left-1/2 -translate-x-1/2 whitespace-nowrap">{title}</h1>
           </div>
