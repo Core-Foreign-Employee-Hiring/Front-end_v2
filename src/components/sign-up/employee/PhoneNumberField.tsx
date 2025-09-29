@@ -51,7 +51,7 @@ const PhoneNumberField = () => {
                 console.log('result', result)
                 if (result.success) {
                   setIsVerifyCodeFieldOpen(result.success)
-                } else if (result.status === 400 && result.message === '이미 등록된 전화번호 입니다.') {
+                } else if (result.status === 400) {
                   console.log('통과')
                   setIsPhoneRegisteredError(true)
                 }
@@ -101,6 +101,8 @@ const PhoneNumberField = () => {
                 console.log('result', result)
                 if (result.success) {
                   setAuthStoreState({ isEmployeePhoneVerified: result.success })
+                } else if (result.status === 400) {
+                  setAuthStoreState({ isEmployeePhoneVerified: false })
                 }
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}

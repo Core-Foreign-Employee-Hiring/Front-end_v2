@@ -11,7 +11,7 @@ import {
  * 피고용인 회원가입
  */
 export const postMemberEmployeeRegister = async (data: EmployeeSignUpType): Promise<ApiResponse<ResponseLoginType>> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/employee-register`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/member/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
