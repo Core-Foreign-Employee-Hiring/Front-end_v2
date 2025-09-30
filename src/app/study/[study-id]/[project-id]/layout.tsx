@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'KORFIT | 공고 등록 페이지',
+  title: 'KORFIT | 프로젝트 상세페이지',
   description:
     '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     '취업 역량 강화',
   ],
   openGraph: {
-    title: 'KORFIT | 외국인을 위한 한국 취업 플랫폼',
+    title: 'KORFIT 프로젝트 상세페이지',
     description:
       '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
     url: 'https://forwork-xi.vercel.app',

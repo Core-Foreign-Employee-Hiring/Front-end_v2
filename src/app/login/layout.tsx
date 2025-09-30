@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'KORFIT | 외국인을 위한 한국 취업 플랫폼',
+  title: 'KORFIT | 로그인 페이지',
   description:
     '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
   keywords: [
