@@ -19,19 +19,6 @@ export default function SignUpRequiredForm({ setCurrentStep }: SignUpRequiredFor
   const isEmployeePhoneVerified = useAuthStore((state) => state.isEmployeePhoneVerified) // 전화번호 인증
   const isEmployeeEmailVerified = useAuthStore((state) => state.isEmployeeEmailVerified) // 전화번호 인증
 
-  // 디버깅용 콘솔 로그 추가
-  console.log('검증 상태:', {
-    isEmployeeIdVerified,
-    isEmployeePasswordMatch,
-    isEmployeePasswordValid,
-    isEmployeePhoneVerified,
-    isEmployeeEmailVerified,
-    name: employeeSignUp?.name,
-    zipcode: employeeSignUp?.zipcode,
-    address1: employeeSignUp?.address1,
-    address2: employeeSignUp?.address2,
-  })
-
   const isFormValid =
     isEmployeeIdVerified &&
     isEmployeePasswordMatch &&
