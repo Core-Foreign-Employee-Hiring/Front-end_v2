@@ -7,7 +7,7 @@ type ModalType = 'TITLE' | 'GENERAL'
 interface MiddleModalProps {
   modalType: ModalType
   title?: string
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  setIsModalOpen?: Dispatch<SetStateAction<boolean>>
   isModalOpen: boolean
   children: ReactNode
 }
@@ -30,7 +30,9 @@ export default function MiddleModal({
               <h2 className="title-lg">{title}</h2>
               <CancelIcon
                 onClick={() => {
-                  setIsModalOpen(!isModalOpen)
+                  if (setIsModalOpen) {
+                    setIsModalOpen(!isModalOpen)
+                  }
                 }}
                 width={32}
                 height={32}
@@ -54,7 +56,9 @@ export default function MiddleModal({
   return (
     <div
       onClick={() => {
-        setIsModalOpen(!isModalOpen)
+        if (setIsModalOpen) {
+          setIsModalOpen(!isModalOpen)
+        }
       }}
       className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]"
     >

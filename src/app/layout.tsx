@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import Script from 'next/script'
+import GlobalModals from '@/components/modal/GlobalModals'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -56,6 +57,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable} antialiased`}>
         {children}
+        <GlobalModals />
       </body>
     </html>
   )

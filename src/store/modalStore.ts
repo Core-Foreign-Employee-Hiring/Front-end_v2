@@ -16,6 +16,8 @@ interface SetModalStoreType {
   selectedReviewId?: number | undefined
   //선택된 합격 아카이브 Id
   selectedPassArchiveData?: PurchasedArchiveType | undefined
+  //로그인 만료되어있을 때 띄우는 state
+  isTokenExpiredModalOpen: boolean
 }
 
 interface ModalStoreType {
@@ -33,6 +35,8 @@ interface ModalStoreType {
   selectedReviewId: number | undefined
   //선택된 합격 아카이브 Id
   selectedPassArchiveData: PurchasedArchiveType | undefined
+  //로그인 만료되어 있을 때 띄우는 state
+  isTokenExpiredModalOpen: boolean
   setState: (params: SetModalStoreType) => void
 }
 
@@ -50,6 +54,7 @@ export const useModalStore = create<ModalStoreType>((set) => ({
   selectedReviewId: undefined,
   //선택된 합격 아카이브 Id
   selectedPassArchiveData: undefined,
+  isTokenExpiredModalOpen: false,
   setState: (params: SetModalStoreType) => {
     set((state) => ({
       ...state,

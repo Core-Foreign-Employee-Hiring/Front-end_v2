@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { useModalStore } from '@/store/modalStore'
 
 /**
  * 기본 api 요청 함수
@@ -43,6 +44,7 @@ const refreshAccessToken = async (): Promise<boolean> => {
     const refreshToken = Cookies.get('refreshToken')
 
     if (!refreshToken) {
+      useModalStore.getState().setState({ isTokenExpiredModalOpen: true })
       console.warn('🔐 Refresh token이 없습니다')
       return false
     }
@@ -56,6 +58,7 @@ const refreshAccessToken = async (): Promise<boolean> => {
     })
 
     if (!res.ok) {
+      useModalStore.getState().setState({ isTokenExpiredModalOpen: true })
       console.warn('🔐 Refresh token 만료 또는 유효하지 않음')
       Cookies.remove('accessToken') // 로그인 상태 초기화
       Cookies.remove('refreshToken') // 로그인 상태 초기화
