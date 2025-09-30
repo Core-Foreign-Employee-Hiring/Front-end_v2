@@ -139,7 +139,7 @@ export default function RecruitHomePage() {
                     </Button>
                   </div>
 
-                  <Image src={'/home-image.png'} alt={'홈'} fill className="object-cover"></Image>
+                  <Image src={'/home-image.png'} alt={'홈'} fill className="object-cover" priority></Image>
                 </div>
               )}
               <section>

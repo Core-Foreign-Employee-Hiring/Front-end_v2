@@ -21,6 +21,7 @@ export default function StudyCard({ title, description, period, teamCount, membe
     >
       <div className="relative h-[175px] w-full">
         <Image
+          priority
           src={'/study/git/group_photo.jpeg'}
           alt="스터디 카드"
           className="rounded-[16px] object-cover"
