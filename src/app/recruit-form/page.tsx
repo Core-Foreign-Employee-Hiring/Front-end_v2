@@ -71,6 +71,7 @@ export default function RecruitFormPage() {
       formData.append('file', file)
 
       const response: ApiResponse<string> = await postS3File(formData)
+      console.log('s3업로드', response)
 
       if (response.success) {
         return response.data
@@ -110,18 +111,22 @@ export default function RecruitFormPage() {
         }
       }
 
-      // 업로드된 이미지 URL들을 recruitPostData에 저장
-      setState({
+      // 업데이트된 데이터를 변수로 생성
+      const updatedRecruitData = {
         ...recruitPostData,
-        recruitPostData: {
-          ...recruitPostData,
-          companyImageUrl,
-          posterImageUrl,
-        },
+        companyImageUrl: companyImageUrl,
+        posterImageUrl: posterImageUrl,
+      }
+
+      // 스토어에 저장
+      setState({
+        recruitPostData: updatedRecruitData,
       })
 
       console.log('이미지 업로드 완료 - 회사로고:', companyImageUrl, '포스터:', posterImageUrl)
-      const data = await postRecruit(recruitPostData)
+
+      // 업데이트된 데이터를 직접 사용
+      const data = await postRecruit(updatedRecruitData)
       console.log('공고 생성', data)
 
       // router.push('/')
