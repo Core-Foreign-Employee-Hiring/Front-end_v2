@@ -10,7 +10,6 @@ const PhoneNumberField = () => {
   const [isVerifyCodeFieldOpen, setIsVerifyCodeFieldOpen] = useState<boolean | undefined>()
   const [verifyCode, setVerifyCode] = useState<string>('')
   const isPhoneVerified = useAuthStore((state) => state.isEmployeePhoneVerified)
-
   //이미 등록한 전화번호 에러 제어 state
   const [isPhoneRegisteredError, setIsPhoneRegisteredError] = useState<boolean | undefined>(undefined)
 

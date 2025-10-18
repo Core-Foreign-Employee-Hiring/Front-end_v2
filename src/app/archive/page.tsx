@@ -1,8 +1,6 @@
 'use client'
 
-import Header from '@/components/common/Header'
 import { useEffect, useState } from 'react'
-import Menu from '@/components/common/Menu'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { GraySearchIcon, PlusIcon } from '@/assets/svgComponents'
@@ -11,11 +9,8 @@ import Pagination from '@/components/common/Pagination'
 import { getArchiveData } from '@/lib/archive'
 import { PassArchiveCardDataType } from '@/types/archive'
 import ArchiveRegisterForm from '@/components/archive/ArchiveRegisterForm'
-import AlarmModal from '@/components/modal/AlarmModal'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 const ReviewPage = () => {
-  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [totalPages, setTotalPages] = useState<number>(0)
   const [totalElements, setTotalElements] = useState<number>(0)
@@ -24,10 +19,6 @@ const ReviewPage = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [isArchiveRegisterFormOpen, setIsArchiveRegisterFormOpen] = useState(false)
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
-
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -85,106 +76,74 @@ const ReviewPage = () => {
   return isArchiveRegisterFormOpen ? (
     <ArchiveRegisterForm setIsArchiveRegisterFormOpen={setIsArchiveRegisterFormOpen} />
   ) : (
-    <main className="relative mx-auto min-h-screen w-[375px] bg-white">
-      {isLanguageSelectModalOpen ? (
-        <LanguageSelectModal
-          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        />
-      ) : null}
-      {isAlarmModalOpen ? (
-        <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
-      ) : null}
-      <Header
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        setIsAlarmModalOpen={setIsAlarmModalOpen}
-        isAlarmModalOpen={isAlarmModalOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-      />
-
-      {isHomeMenuOpen ? (
-        <div>
-          <div className="h-[100px]" />
-          <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
-        </div>
-      ) : (
-        <div className="">
-          <div className="h-[112px]" />
-          <div className="px-5">
-            <section className="flex flex-col gap-y-3 whitespace-nowrap">
-              <h1 className="title-lg">합격 아카이브</h1>
-              <div className="subtitle-lg flex gap-x-[5px]">
-                <p className="text-main">{totalElements.toLocaleString()}</p>
-                <p>건</p>
-              </div>
-              <div className="flex gap-x-3">
-                <Input
-                  leftIcon={<GraySearchIcon width={24} height={24} />}
-                  inputBoxStyle={'default'}
-                  placeholder={'궁금한 아카이브를 검색해보세요.'}
-                  value={searchKeyword}
-                  setValue={(e) => setSearchKeyword(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  customClassName={'w-full'}
-                />
-                <Button
-                  onClick={handleSearch}
-                  type={'active'}
-                  size={'lg'}
-                  customClassName={'whitespace-nowrap w-[80px]'}
-                >
-                  검색
-                </Button>
-              </div>
-            </section>
-
-            {/* 로딩 상태 */}
-            {isLoading ? (
-              <div className="mt-5 flex h-40 items-center justify-center">
-                <p>로딩 중...</p>
-              </div>
-            ) : (
-              <section className="mt-5 grid grid-cols-2 gap-4">
-                {archiveList.length > 0 ? (
-                  archiveList.map((archive) => <ArchiveCard key={archive.passArchiveId} {...archive} />)
-                ) : (
-                  <div className="col-span-2 flex h-40 items-center justify-center">
-                    <p className="text-gray4">검색 결과가 없습니다.</p>
-                  </div>
-                )}
-              </section>
-            )}
-
-            {/* 페이지네이션 - 데이터가 있을 때만 표시 */}
-            {totalPages > 0 && (
-              <div className="mt-[24px] w-full pb-[40px]">
-                <Pagination
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                  currentPage={currentPage + 1} // API는 0부터, UI는 1부터
-                  showPages={5}
-                />
-              </div>
-            )}
+    <div>
+      <div className="h-[20px]" />
+      <div className="px-5">
+        <section className="flex flex-col gap-y-3 whitespace-nowrap">
+          <h1 className="title-lg">합격 아카이브</h1>
+          <div className="subtitle-lg flex gap-x-[5px]">
+            <p className="text-main">{totalElements.toLocaleString()}</p>
+            <p>건</p>
           </div>
-          <button
-            onClick={() => {
-              setIsArchiveRegisterFormOpen(!isArchiveRegisterFormOpen)
-            }}
-            className="button bg-main fixed bottom-20 left-1/2 z-10 flex h-[48px] -translate-x-1/2 items-center justify-center rounded-full pr-5 pl-3 whitespace-nowrap text-white"
-            style={{
-              marginLeft: '85px', // 375px - 20px(right-5) = 355px
-              transform: 'translateX(-50%) translateX(85px)',
-            }}
-          >
-            <PlusIcon width={24} height={24} />
-            아카이브 등록
-          </button>
-        </div>
-      )}
-    </main>
+          <div className="flex gap-x-3">
+            <Input
+              leftIcon={<GraySearchIcon width={24} height={24} />}
+              inputBoxStyle={'default'}
+              placeholder={'궁금한 아카이브를 검색해보세요.'}
+              value={searchKeyword}
+              setValue={(e) => setSearchKeyword(e.target.value)}
+              onKeyPress={handleKeyPress}
+              customClassName={'w-full'}
+            />
+            <Button onClick={handleSearch} type={'active'} size={'lg'} customClassName={'whitespace-nowrap w-[80px]'}>
+              검색
+            </Button>
+          </div>
+        </section>
+
+        {/* 로딩 상태 */}
+        {isLoading ? (
+          <div className="mt-5 flex h-40 items-center justify-center">
+            <p>로딩 중...</p>
+          </div>
+        ) : (
+          <section className="mt-5 grid grid-cols-2 gap-4">
+            {archiveList.length > 0 ? (
+              archiveList.map((archive) => <ArchiveCard key={archive.passArchiveId} {...archive} />)
+            ) : (
+              <div className="col-span-2 flex h-40 items-center justify-center">
+                <p className="text-gray4">검색 결과가 없습니다.</p>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 페이지네이션 - 데이터가 있을 때만 표시 */}
+        {totalPages > 0 && (
+          <div className="mt-[24px] w-full pb-[40px]">
+            <Pagination
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              currentPage={currentPage + 1} // API는 0부터, UI는 1부터
+              showPages={5}
+            />
+          </div>
+        )}
+      </div>
+      <button
+        onClick={() => {
+          setIsArchiveRegisterFormOpen(!isArchiveRegisterFormOpen)
+        }}
+        className="button bg-main fixed bottom-20 left-1/2 z-10 flex h-[48px] -translate-x-1/2 items-center justify-center rounded-full pr-5 pl-3 whitespace-nowrap text-white"
+        style={{
+          marginLeft: '85px', // 375px - 20px(right-5) = 355px
+          transform: 'translateX(-50%) translateX(85px)',
+        }}
+      >
+        <PlusIcon width={24} height={24} />
+        아카이브 등록
+      </button>
+    </div>
   )
 }
 

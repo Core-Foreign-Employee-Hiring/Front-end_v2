@@ -1,3 +1,5 @@
+'use client'
+
 import { nationalityInfoData } from '@/lib/common'
 import { useEffect, useMemo, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   MobileArchiveIcon,
   MobileHomeIcon,
@@ -9,17 +11,16 @@ import {
 import Button from '@/components/common/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { UserDataType } from '@/types/common'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
+import { useModalStore } from '@/store/modalStore'
 
-interface MenuProps {
-  setIsHomeMenuOpen: Dispatch<SetStateAction<boolean>>
-}
-
-export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
+export default function Menu() {
   const pathname = usePathname()
   const router = useRouter()
   const [userData, setUserData] = useState<UserDataType | null>(null)
+  const setModalState = useModalStore((state) => state.setState)
+  const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
 
   useEffect(() => {
     // 클라이언트 사이드에서만 localStorage 접근
@@ -36,6 +37,26 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
       }
     }
   }, [])
+
+  // 🔥 useCallback으로 함수 메모이제이션
+  const handleNavigate = useCallback(
+    (path: string) => {
+      router.push(path)
+      setModalState({ isHomeMenuOpen: false })
+    },
+    [router, setModalState]
+  )
+
+  // 🔥 로그아웃 함수 분리
+  const handleLogout = useCallback(() => {
+    Cookies.remove('accessToken')
+    Cookies.remove('refreshToken')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('userData')
+    }
+    setUserData(null)
+    setModalState({ isHomeMenuOpen: false })
+  }, [setModalState])
 
   const navContents = [
     {
@@ -59,96 +80,71 @@ export default function Menu({ setIsHomeMenuOpen }: MenuProps) {
   ]
 
   return (
-    <div className="flex h-[calc(100vh-112px)] flex-col">
-      <div className="flex flex-1 flex-col gap-y-[16px] p-5">
-        {userData ? (
-          <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
-            <div className="flex items-center gap-x-4">
-              <div className="flex flex-col gap-y-1">
-                <p className="subtitle-md">{userData.name}님</p>
-                <p className="body-sm text-gray4">{userData.userId}</p>
+    isHomeMenuOpen && (
+      <div className="flex h-[calc(100vh-112px)] w-[375px] flex-col bg-white">
+        <div className="flex flex-1 flex-col gap-y-[16px] p-5">
+          {userData ? (
+            <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
+              <div className="flex items-center gap-x-4">
+                <div className="flex flex-col gap-y-1">
+                  <p className="subtitle-md">{userData.name}님</p>
+                  <p className="body-sm text-gray4">{userData.userId}</p>
+                </div>
               </div>
-            </div>
-            <Button
-              onClick={() => {
-                router.push('/mypage')
-                setIsHomeMenuOpen(false)
-              }}
-              type={'outline'}
-              customClassName={'w-full bg-white'}
-              size={'lg'}
-            >
-              마이페이지
-            </Button>
-          </section>
-        ) : (
-          <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
-            <div className="flex items-center gap-x-4">
-              <p className="subtitle-md">로그인이 필요해요</p>
-            </div>
-            <div className="flex gap-x-3">
               <Button
-                onClick={() => {
-                  router.push('/sign-up')
-                  setIsHomeMenuOpen(false)
-                }}
+                onClick={() => handleNavigate('/mypage')}
                 type={'outline'}
                 customClassName={'w-full bg-white'}
                 size={'lg'}
               >
-                회원가입
+                마이페이지
               </Button>
-              <Button
-                onClick={() => {
-                  router.push('/login')
-                  setIsHomeMenuOpen(false)
-                }}
-                type={'active'}
-                customClassName={'w-full'}
-                size={'lg'}
-              >
-                로그인
-              </Button>
-            </div>
-          </section>
-        )}
-        <section className="flex flex-col">
-          {navContents.map((content) => {
-            return (
-              <div
-                key={content.title}
-                onClick={() => {
-                  router.push(content.router)
-                  setIsHomeMenuOpen(false)
-                }}
-                className="flex h-[52px] items-center gap-x-2 px-4"
-              >
-                {pathname === content.router ? content.selectedIcon : content.unSelectedIcon}{' '}
-                <p className={`${pathname === content.router ? 'text-main' : 'text-gray5'} button`}>{content.title}</p>
+            </section>
+          ) : (
+            <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
+              <div className="flex items-center gap-x-4">
+                <p className="subtitle-md">로그인이 필요해요</p>
               </div>
-            )
-          })}
-        </section>
-      </div>
-      {userData && (
-        <div className="w-full px-5">
-          <Button
-            type={'outline'}
-            size={'lg'}
-            onClick={() => {
-              Cookies.remove('accessToken')
-              Cookies.remove('refreshToken')
-              if (typeof window !== 'undefined') {
-                localStorage.removeItem('userData')
-              }
-              setIsHomeMenuOpen(false)
-            }}
-            customClassName={'w-full'}
-          >
-            로그아웃
-          </Button>
+              <div className="flex gap-x-3">
+                <Button
+                  onClick={() => handleNavigate('/sign-up')}
+                  type={'outline'}
+                  customClassName={'w-full bg-white'}
+                  size={'lg'}
+                >
+                  회원가입
+                </Button>
+                <Button onClick={() => handleNavigate('/login')} type={'active'} customClassName={'w-full'} size={'lg'}>
+                  로그인
+                </Button>
+              </div>
+            </section>
+          )}
+          <section className="flex flex-col">
+            {navContents.map((content) => {
+              return (
+                <div
+                  key={content.title}
+                  onClick={() => handleNavigate(content.router)}
+                  className="flex h-[52px] items-center gap-x-2 px-4"
+                >
+                  {pathname === content.router ? content.selectedIcon : content.unSelectedIcon}{' '}
+                  <p className={`${pathname === content.router ? 'text-main' : 'text-gray5'} button`}>
+                    {content.title}
+                  </p>
+                </div>
+              )
+            })}
+          </section>
         </div>
-      )}
-    </div>
+        {userData && (
+          <div className="w-full px-5">
+            <Button type={'outline'} size={'lg'} onClick={handleLogout} customClassName={'w-full'}>
+              로그아웃
+            </Button>
+          </div>
+        )}
+      </div>
+    )
   )
 }

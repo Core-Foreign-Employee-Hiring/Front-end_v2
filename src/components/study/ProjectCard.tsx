@@ -1,3 +1,4 @@
+'use client'
 import { PersonIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'

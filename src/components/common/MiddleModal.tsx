@@ -5,7 +5,7 @@ import Button from '@/components/common/Button'
 type ModalType = 'TITLE' | 'GENERAL'
 
 interface MiddleModalProps {
-  modalType: ModalType
+  modalType?: ModalType
   title?: string
   setIsModalOpen?: Dispatch<SetStateAction<boolean>>
   isModalOpen: boolean

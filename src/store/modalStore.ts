@@ -17,7 +17,13 @@ interface SetModalStoreType {
   //선택된 합격 아카이브 Id
   selectedPassArchiveData?: PurchasedArchiveType | undefined
   //로그인 만료되어있을 때 띄우는 state
-  isTokenExpiredModalOpen: boolean
+  isTokenExpiredModalOpen?: boolean
+  //언어 지원 모달창 띄우는 state
+  isLanguageSelectModalOpen?: boolean
+  //알림 모달창 state
+  isAlarmModalOpen?: boolean
+  //홈메뉴
+  isHomeMenuOpen?: boolean
 }
 
 interface ModalStoreType {
@@ -37,6 +43,13 @@ interface ModalStoreType {
   selectedPassArchiveData: PurchasedArchiveType | undefined
   //로그인 만료되어 있을 때 띄우는 state
   isTokenExpiredModalOpen: boolean
+  //언어 지원 모달창 띄우는 state
+  isLanguageSelectModalOpen: boolean
+  //알림 모달창 state
+  isAlarmModalOpen: boolean
+  //홈메뉴
+  isHomeMenuOpen: boolean
+
   setState: (params: SetModalStoreType) => void
 }
 
@@ -55,6 +68,12 @@ export const useModalStore = create<ModalStoreType>((set) => ({
   //선택된 합격 아카이브 Id
   selectedPassArchiveData: undefined,
   isTokenExpiredModalOpen: false,
+  //언어 지원 모달창 띄우는 state
+  isLanguageSelectModalOpen: false,
+  //알림 모달창 state
+  isAlarmModalOpen: false,
+  //홈메뉴
+  isHomeMenuOpen: false,
   setState: (params: SetModalStoreType) => {
     set((state) => ({
       ...state,

@@ -4,12 +4,12 @@ import { getAlarmArchiveInquiry, patchAlarmArchiveInquiry } from '@/lib/alarm'
 import { ArchiveInquiryNotificationType } from '@/types/alarm'
 import BottomModal from '@/components/common/BottomModal'
 import { StarIcon } from '@/assets/svgComponents'
-interface AlarmModalProps {
-  setIsAlarmModalOpen: Dispatch<SetStateAction<boolean>>
-  isAlarmModalOpen: boolean
-}
+import { useModalStore } from '@/store/modalStore'
 
-export default function AlarmModal({ setIsAlarmModalOpen, isAlarmModalOpen }: AlarmModalProps) {
+export default function AlarmModal() {
+  const isAlarmModalOpen = useModalStore((state) => state.isAlarmModalOpen)
+  const setModalState = useModalStore((state) => state.setState)
+
   const [alarmList, setAlarmList] = useState<ArchiveInquiryNotificationType[] | undefined>([])
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false)
   const [selectedInquiry, setSelectedInquiry] = useState<{
@@ -80,7 +80,7 @@ export default function AlarmModal({ setIsAlarmModalOpen, isAlarmModalOpen }: Al
   ) : (
     <div
       onClick={() => {
-        setIsAlarmModalOpen(!isAlarmModalOpen)
+        setModalState({ isAlarmModalOpen: !isAlarmModalOpen })
       }}
       className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]"
     >

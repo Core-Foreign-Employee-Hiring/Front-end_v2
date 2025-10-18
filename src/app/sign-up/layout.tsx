@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import Header from '@/components/common/Header'
 
 export const metadata: Metadata = {
   title: 'KORFIT | 회원가입 페이지',
@@ -61,7 +62,10 @@ export default async function RecruitLayout({
 }>) {
   return (
     <div className="">
-      <main className="">{children}</main>
+      <main className="">
+        <Header headerType={'dynamic'} title={'회원가입'} />
+        {children}
+      </main>
     </div>
   )
 }

@@ -12,13 +12,10 @@ import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
 import BottomModal from '@/components/common/BottomModal'
 import { postPaymentTestConfirm } from '@/lib/payment'
-import Menu from '@/components/common/Menu'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import Link from 'next/link'
 import PurchaseModal from '@/components/modal/PurchaseModal'
 
 export default function ReviewDetailPage() {
-  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const params = useParams()
   const [archiveDetailData, setArchiveDetailData] = useState<PassArchiveDetailDataType>()
   const [reviewData, setReviewData] = useState<PassArchiveReviewDataType[]>()
@@ -37,8 +34,6 @@ export default function ReviewDetailPage() {
   const [isInquireModalOpen, setIsInquireModalOpen] = useState(false)
   const [inquiryUrl, setInquiryUrl] = useState<string>('')
 
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
   //구매하기 모달창 제어
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
 
@@ -140,136 +135,123 @@ export default function ReviewDetailPage() {
             setIsImageModalOpen={setIsImageModalOpen}
           />
         ) : null}
-        {isLanguageSelectModalOpen ? (
-          <LanguageSelectModal
-            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-          />
-        ) : null}
-        {isHomeMenuOpen ? (
-          <div>
-            <div className="h-[80px]" />
-            <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
-          </div>
-        ) : (
-          <>
-            <div className="h-[60px]" />
-            <div className="flex flex-col gap-y-6 px-5">
-              {/* 요약본 카드 */}
-              <section className="border-gray2 flex flex-col gap-y-6 rounded-[32px] border p-5">
-                {archiveDetailData?.thumbnailUrl ? (
-                  <div
-                    onClick={() => {
-                      setSelectedImageUrl(archiveDetailData?.thumbnailUrl)
-                      setIsImageModalOpen(true)
-                    }}
-                    className="relative h-[223px] w-full rounded-[16px]"
-                  >
-                    <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
-                    <Image
-                      alt={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
-                      src={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
-                      fill
-                      className={'rounded-[16px]'}
-                    />
-                  </div>
-                ) : (
-                  <div className="h-[223px] w-full rounded-[16px]">
-                    <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
-                    <div className="bg-gray1"></div>
-                  </div>
-                )}
-                <section className="flex flex-col gap-y-3">
-                  <div>
-                    <h1 className="subtitle-md">{archiveDetailData?.title}</h1>
-                    <p className="body-sm text-gray5">{archiveDetailData?.oneLineReview}</p>
-                  </div>
-                  <p className="subtitle-lg">{archiveDetailData?.price}원</p>
-                </section>
+        <>
+          <div className="h-[60px]" />
+          <div className="flex flex-col gap-y-6 px-5">
+            {/* 요약본 카드 */}
+            <section className="border-gray2 flex flex-col gap-y-6 rounded-[32px] border p-5">
+              {archiveDetailData?.thumbnailUrl ? (
+                <div
+                  onClick={() => {
+                    setSelectedImageUrl(archiveDetailData?.thumbnailUrl)
+                    setIsImageModalOpen(true)
+                  }}
+                  className="relative h-[223px] w-full rounded-[16px]"
+                >
+                  <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
+                  <Image
+                    alt={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
+                    src={archiveDetailData ? archiveDetailData.thumbnailUrl : '/pizza.png'} //이후에 바꾸기
+                    fill
+                    className={'rounded-[16px]'}
+                  />
+                </div>
+              ) : (
+                <div className="h-[223px] w-full rounded-[16px]">
+                  <div className="absolute z-10 h-[223px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
+                  <div className="bg-gray1"></div>
+                </div>
+              )}
+              <section className="flex flex-col gap-y-3">
+                <div>
+                  <h1 className="subtitle-md">{archiveDetailData?.title}</h1>
+                  <p className="body-sm text-gray5">{archiveDetailData?.oneLineReview}</p>
+                </div>
+                <p className="subtitle-lg">{archiveDetailData?.price}원</p>
               </section>
+            </section>
 
-              {/* content */}
-              <section className="flex flex-col gap-y-8">
-                <section className="flex flex-col gap-y-3">
-                  <p className="subtitle-md">설명</p>
-                  <p className="body-md">{archiveDetailData?.description}</p>
-                </section>
-                <section className="flex overflow-x-scroll">
-                  {archiveDetailData?.imageUrls.map((imageUrl) => {
-                    return (
-                      <div key={imageUrl} className="relative flex h-[250px] w-[286px] flex-shrink-0 whitespace-nowrap">
-                        <Image
-                          onClick={() => {
-                            setSelectedImageUrl(imageUrl)
-                            setIsImageModalOpen(true)
-                          }}
-                          alt={imageUrl ? imageUrl : '/pizza.png'}
-                          src={imageUrl ? imageUrl : '/pizza.png'}
-                          fill
-                          className="rounded-[16px] object-cover"
-                        />
-                      </div>
-                    )
-                  })}
-                </section>
+            {/* content */}
+            <section className="flex flex-col gap-y-8">
+              <section className="flex flex-col gap-y-3">
+                <p className="subtitle-md">설명</p>
+                <p className="body-md">{archiveDetailData?.description}</p>
               </section>
+              <section className="flex overflow-x-scroll">
+                {archiveDetailData?.imageUrls.map((imageUrl) => {
+                  return (
+                    <div key={imageUrl} className="relative flex h-[250px] w-[286px] flex-shrink-0 whitespace-nowrap">
+                      <Image
+                        onClick={() => {
+                          setSelectedImageUrl(imageUrl)
+                          setIsImageModalOpen(true)
+                        }}
+                        alt={imageUrl ? imageUrl : '/pizza.png'}
+                        src={imageUrl ? imageUrl : '/pizza.png'}
+                        fill
+                        className="rounded-[16px] object-cover"
+                      />
+                    </div>
+                  )
+                })}
+              </section>
+            </section>
 
-              {/* review */}
+            {/* review */}
+            <section>
               <section>
-                <section>
-                  <p className="subtitle-md">리뷰</p>
-                </section>
-                <section>
-                  {reviewData && reviewData.length > 0 ? (
-                    reviewData.map((review) => {
-                      return <Review key={review.archiveReviewId} {...review} />
-                    })
-                  ) : (
-                    <p className="badge-md text-gray5 mt-2">등록된 리뷰가 없습니다.</p>
-                  )}
-                </section>
-
-                {totalPages > 0 && (
-                  <div className="mt-[24px] mb-[40px] w-full">
-                    <Pagination
-                      totalPages={totalPages}
-                      onPageChange={handlePageChange}
-                      currentPage={currentPage + 1} // API는 0부터, UI는 1부터
-                      showPages={5}
-                    />
-                  </div>
+                <p className="subtitle-md">리뷰</p>
+              </section>
+              <section>
+                {reviewData && reviewData.length > 0 ? (
+                  reviewData.map((review) => {
+                    return <Review key={review.archiveReviewId} {...review} />
+                  })
+                ) : (
+                  <p className="badge-md text-gray5 mt-2">등록된 리뷰가 없습니다.</p>
                 )}
               </section>
-            </div>
 
-            <div className="h-[100px]" />
-            <div className="absolute bottom-0 flex w-full gap-x-3 bg-white p-5">
-              <Button
-                onClick={() => {
-                  setIsInquireModalOpen(true)
-                }}
-                type={'outline'}
-                size={'lg'}
-                customClassName={'flex whitespace-nowrap ew-[72px] h-[52px]'}
-              >
-                문의
-              </Button>
-              <Button
-                onClick={async () => {
-                  const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
-                  if (result.success) {
-                    setIsPurchaseModalOpen(true)
-                  }
-                }}
-                type={'active'}
-                size={'lg'}
-                customClassName={'w-full h-[52px]'}
-              >
-                구매하기
-              </Button>
-            </div>
-          </>
-        )}
+              {totalPages > 0 && (
+                <div className="mt-[24px] mb-[40px] w-full">
+                  <Pagination
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                    currentPage={currentPage + 1} // API는 0부터, UI는 1부터
+                    showPages={5}
+                  />
+                </div>
+              )}
+            </section>
+          </div>
+
+          <div className="h-[100px]" />
+          <div className="absolute bottom-0 flex w-full gap-x-3 bg-white p-5">
+            <Button
+              onClick={() => {
+                setIsInquireModalOpen(true)
+              }}
+              type={'outline'}
+              size={'lg'}
+              customClassName={'flex whitespace-nowrap ew-[72px] h-[52px]'}
+            >
+              문의
+            </Button>
+            <Button
+              onClick={async () => {
+                const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
+                if (result.success) {
+                  setIsPurchaseModalOpen(true)
+                }
+              }}
+              type={'active'}
+              size={'lg'}
+              customClassName={'w-full h-[52px]'}
+            >
+              구매하기
+            </Button>
+          </div>
+        </>
       </div>
     </main>
   )

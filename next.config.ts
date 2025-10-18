@@ -3,6 +3,15 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    // WebP와 AVIF 우선 사용
+    formats: ['image/avif', 'image/webp'],
+
+    // 🔥 디바이스 크기 - 실제 사용되는 크기에 맞게
+    deviceSizes: [375, 425, 768, 1024],
+
+    // 🔥 이미지 크기 - 실제 사용되는 크기
+    imageSizes: [50, 100, 188, 210, 335, 375, 600, 800],
+
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,6 +26,52 @@ const nextConfig: NextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+  },
+  // 성능 최적화
+  compress: true,
+
+  // 정적 생성 시간 증가 허용 (더 나은 최적화)
+  // 각 정적 페이지를 생성할 때 최대 120초(2분)까지 대기한다.
+  // 만약 120초 이내에 완료되지 않으면 빌드를 실패처리한다.
+  staticPageGenerationTimeout: 120,
+
+  // 🔥 bfcache 지원
+  experimental: {
+    optimizePackageImports: ['@/components', '@/utils'],
+  },
+
+  // 🔥 Headers 설정 - bfcache 최적화
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          // bfcache 방해 제거
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+          // 보안 헤더
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+        ],
+      },
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+    ]
   },
 }
 

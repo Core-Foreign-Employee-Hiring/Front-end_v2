@@ -1,11 +1,9 @@
-'use client'
-
 import Header from '@/components/common/Header'
 import Image from 'next/image'
 import ProjectCard from '@/components/study/ProjectCard'
 import Link from 'next/link'
 
-export default function StudyDetailPage() {
+export default async function StudyDetailPage() {
   return (
     <main>
       <Header headerType={'dynamic'} title={'GIT 해커톤'} />

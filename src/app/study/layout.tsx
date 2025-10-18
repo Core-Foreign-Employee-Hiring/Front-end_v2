@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import Header from '@/components/common/Header'
+import Menu from '@/components/common/Menu'
 
 export const metadata: Metadata = {
   title: 'KORFIT | 스터디 홈 페이지',
@@ -59,9 +61,5 @@ export default async function RecruitLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
-  return (
-    <div className="">
-      <main className="">{children}</main>
-    </div>
-  )
+  return <div className="">{children}</div>
 }
