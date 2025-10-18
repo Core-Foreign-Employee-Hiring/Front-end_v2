@@ -43,6 +43,56 @@ const nextConfig: NextConfig = {
   // 🔥 Headers 설정 - bfcache 최적화
   async headers() {
     return [
+      // 🔥 1. 폰트 - 매우 길게 (1년)
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+            // max-age=31536000 = 1년
+            // immutable = 절대 변하지 않음
+          },
+        ],
+      },
+
+      // 🔥 2. 이미지 - 길게 (30일)
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+            // max-age=2592000 = 30일
+            // stale-while-revalidate=86400 = 24시간 더 낡은 캐시 사용 가능
+          },
+        ],
+      },
+
+      // 🔥 3. SVG 로고 - 길게 (1년)
+      {
+        source: '/*.svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+
+      // 🔥 4. JavaScript/CSS - 중간 정도 (1년, 파일 해시 기반)
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+            // Next.js가 파일 해시로 관리하므로 안전함
+          },
+        ],
+      },
+
+      // 🔥 5. HTML 페이지 - 짧게 (1시간)
       {
         source: '/:path*',
         headers: [
