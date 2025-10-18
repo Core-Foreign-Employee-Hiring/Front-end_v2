@@ -11,7 +11,7 @@ import {
 import Button from '@/components/common/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { UserDataType } from '@/types/common'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useModalStore } from '@/store/modalStore'
 
@@ -37,6 +37,26 @@ export default function Menu() {
       }
     }
   }, [])
+
+  // 🔥 useCallback으로 함수 메모이제이션
+  const handleNavigate = useCallback(
+    (path: string) => {
+      router.push(path)
+      setModalState({ isHomeMenuOpen: false })
+    },
+    [router, setModalState]
+  )
+
+  // 🔥 로그아웃 함수 분리
+  const handleLogout = useCallback(() => {
+    Cookies.remove('accessToken')
+    Cookies.remove('refreshToken')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('userData')
+    }
+    setUserData(null)
+    setModalState({ isHomeMenuOpen: false })
+  }, [setModalState])
 
   const navContents = [
     {
@@ -72,10 +92,7 @@ export default function Menu() {
                 </div>
               </div>
               <Button
-                onClick={() => {
-                  router.push('/mypage')
-                  setModalState({ isHomeMenuOpen: false })
-                }}
+                onClick={() => handleNavigate('/mypage')}
                 type={'outline'}
                 customClassName={'w-full bg-white'}
                 size={'lg'}
@@ -90,25 +107,14 @@ export default function Menu() {
               </div>
               <div className="flex gap-x-3">
                 <Button
-                  onClick={() => {
-                    router.push('/sign-up')
-                    setModalState({ isHomeMenuOpen: false })
-                  }}
+                  onClick={() => handleNavigate('/sign-up')}
                   type={'outline'}
                   customClassName={'w-full bg-white'}
                   size={'lg'}
                 >
                   회원가입
                 </Button>
-                <Button
-                  onClick={() => {
-                    router.push('/login')
-                    setModalState({ isHomeMenuOpen: false })
-                  }}
-                  type={'active'}
-                  customClassName={'w-full'}
-                  size={'lg'}
-                >
+                <Button onClick={() => handleNavigate('/login')} type={'active'} customClassName={'w-full'} size={'lg'}>
                   로그인
                 </Button>
               </div>
@@ -119,10 +125,7 @@ export default function Menu() {
               return (
                 <div
                   key={content.title}
-                  onClick={() => {
-                    router.push(content.router)
-                    setModalState({ isHomeMenuOpen: false })
-                  }}
+                  onClick={() => handleNavigate(content.router)}
                   className="flex h-[52px] items-center gap-x-2 px-4"
                 >
                   {pathname === content.router ? content.selectedIcon : content.unSelectedIcon}{' '}
@@ -136,19 +139,7 @@ export default function Menu() {
         </div>
         {userData && (
           <div className="w-full px-5">
-            <Button
-              type={'outline'}
-              size={'lg'}
-              onClick={() => {
-                Cookies.remove('accessToken')
-                Cookies.remove('refreshToken')
-                if (typeof window !== 'undefined') {
-                  localStorage.removeItem('userData')
-                }
-                setModalState({ isHomeMenuOpen: false })
-              }}
-              customClassName={'w-full'}
-            >
+            <Button type={'outline'} size={'lg'} onClick={handleLogout} customClassName={'w-full'}>
               로그아웃
             </Button>
           </div>
