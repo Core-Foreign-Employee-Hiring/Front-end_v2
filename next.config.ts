@@ -69,9 +69,9 @@ const nextConfig: NextConfig = {
         ],
       },
 
-      // 🔥 3. SVG 로고 - 길게 (1년)
+      // SVG 파일 - 길게 (수정됨)
       {
-        source: '/*.svg',
+        source: '/:path*.svg',
         headers: [
           {
             key: 'Cache-Control',
