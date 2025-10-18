@@ -56,8 +56,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable} antialiased`}>
-        {children}
         <GlobalModals />
+        {children}
       </body>
     </html>
   )

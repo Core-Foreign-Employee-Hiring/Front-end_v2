@@ -13,7 +13,6 @@ import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import Menu from '@/components/common/Menu'
 import { useArchiveStore } from '@/store/archiveStore'
 import { postArchiveData } from '@/lib/archive'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import InquiryUrlField from '@/components/archive/register/InquiryUrlField'
 
 interface ArchiveRegisterFormProps {
@@ -30,9 +29,6 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
   const [imageFiles, setImageFiles] = useState<File[]>([])
   const [productFiles, setProductFiles] = useState<File[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   // 필수 필드 검증
   const isFormValid = useMemo(() => {
@@ -111,18 +107,7 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
 
   return (
     <main>
-      {isLanguageSelectModalOpen ? (
-        <LanguageSelectModal
-          isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-          setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        />
-      ) : null}
-      <Header
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-      />
+      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
       <div className="pt-[80px]">
         <Header headerType={'dynamic'} title={'합격 아카이브 등록'}></Header>
       </div>

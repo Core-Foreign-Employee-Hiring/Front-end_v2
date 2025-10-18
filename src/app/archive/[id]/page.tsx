@@ -13,7 +13,6 @@ import ImageModal from '@/components/common/ImageModal'
 import BottomModal from '@/components/common/BottomModal'
 import { postPaymentTestConfirm } from '@/lib/payment'
 import Menu from '@/components/common/Menu'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import Link from 'next/link'
 import PurchaseModal from '@/components/modal/PurchaseModal'
 
@@ -37,8 +36,6 @@ export default function ReviewDetailPage() {
   const [isInquireModalOpen, setIsInquireModalOpen] = useState(false)
   const [inquiryUrl, setInquiryUrl] = useState<string>('')
 
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
   //구매하기 모달창 제어
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
 
@@ -138,12 +135,6 @@ export default function ReviewDetailPage() {
             ImageUrl={selectedImageUrl}
             setSelectedImageUrl={setSelectedImageUrl}
             setIsImageModalOpen={setIsImageModalOpen}
-          />
-        ) : null}
-        {isLanguageSelectModalOpen ? (
-          <LanguageSelectModal
-            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
           />
         ) : null}
         {isHomeMenuOpen ? (

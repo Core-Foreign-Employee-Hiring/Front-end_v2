@@ -15,13 +15,11 @@ import PurchasedArchivePage from '@/components/mypage/my-archive-list/PurchasedA
 import SoldArchivePage from '@/components/mypage/my-archive-list/SoldArchivePage'
 import PostArchivePage from '@/components/mypage/my-archive-list/PostArchivePage'
 import Menu from '@/components/common/Menu'
-import AlarmModal from '@/components/modal/AlarmModal'
 import ChangeAccountForm from '@/components/mypage/user-info/ChangeAccountForm'
 import { InquiryDetailType, ReviewDetailDataType } from '@/types/archive'
 import { formatRelativeTime } from '@/utils/common'
 import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useMyPageStore } from '@/store/mypageStore'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 
 export default function Mypage() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
@@ -100,25 +98,9 @@ export default function Mypage() {
 
   return (
     <div>
-      <Header
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        isAlarmModalOpen={isAlarmModalOpen}
-        setIsAlarmModalOpen={setIsAlarmModalOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-      />
+      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
       <main className="mx-auto min-h-screen w-[375px] bg-white pt-[80px]">
-        {isLanguageSelectModalOpen ? (
-          <LanguageSelectModal
-            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-          />
-        ) : null}
         {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
-        {isAlarmModalOpen ? (
-          <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
-        ) : null}
 
         {/* 리뷰 보기 모달창 */}
         {isViewReviewModalOpen ? (

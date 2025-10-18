@@ -24,8 +24,6 @@ import {
 import { useRecruitStore } from '@/store/recruitStore'
 import { ContractKorType, JobCategoryKorType } from '@/types/recruit'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
-import AlarmModal from '@/components/modal/AlarmModal'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import Image from 'next/image'
 import Button from '@/components/common/Button'
 import { useRouter } from 'next/navigation'
@@ -82,26 +80,9 @@ export default function RecruitHomePage() {
 
   return (
     <div>
-      <Header
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        isAlarmModalOpen={isAlarmModalOpen}
-        setIsAlarmModalOpen={setIsAlarmModalOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-      />
+      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
 
       <div className="mx-auto min-h-screen w-[375px] bg-white pt-[80px]">
-        {isLanguageSelectModalOpen ? (
-          <LanguageSelectModal
-            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-          />
-        ) : null}
-        {isAlarmModalOpen ? (
-          <AlarmModal setIsAlarmModalOpen={setIsAlarmModalOpen} isAlarmModalOpen={isAlarmModalOpen} />
-        ) : null}
-
         {isHomeMenuOpen ? (
           <div>
             <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />

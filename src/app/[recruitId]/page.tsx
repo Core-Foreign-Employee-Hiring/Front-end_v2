@@ -18,7 +18,6 @@ import {
   SalaryTypeClassName,
 } from '@/utils/recruit'
 import { FaceIcon, TripIcon } from '@/assets/svgComponents'
-import LanguageSelectModal from '@/components/modal/LanguageSelectModal'
 import ApplicationModal from '@/components/modal/ApplicationModal'
 import ImageModal from '@/components/common/ImageModal'
 
@@ -26,8 +25,6 @@ const RecruitDetailPage = () => {
   const pathName = usePathname()
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
   //지원하기 모달창 제어
   const [isApplicationMethodModalOpen, setIsApplicationMethodModalOpen] = useState(false)
   //이미지 모달창 제어
@@ -74,19 +71,8 @@ const RecruitDetailPage = () => {
           setIsApplicationMethodModalOpen={setIsApplicationMethodModalOpen}
         />
       )}
-      <Header
-        isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-        setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-        isHomeMenuOpen={isHomeMenuOpen}
-        setIsHomeMenuOpen={setIsHomeMenuOpen}
-      />
+      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white pt-[80px]">
-        {isLanguageSelectModalOpen ? (
-          <LanguageSelectModal
-            isLanguageSelectModalOpen={isLanguageSelectModalOpen}
-            setIsLanguageSelectModalOpen={setIsLanguageSelectModalOpen}
-          />
-        ) : null}
         {isHomeMenuOpen ? (
           <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
         ) : !recruitData ? (

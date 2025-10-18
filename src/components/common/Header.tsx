@@ -2,33 +2,21 @@
 import Image from 'next/image'
 import { AlarmIcon, BackIcon, GlobalIcon, MenuCancelIcon, MenuIcon } from '@/assets/svgComponents'
 import { usePathname, useRouter } from 'next/navigation'
-import { Dispatch, SetStateAction } from 'react'
+import { useModalStore } from '@/store/modalStore'
 
 interface HeaderProps {
-  setIsAlarmModalOpen?: Dispatch<SetStateAction<boolean>>
-  isAlarmModalOpen?: boolean
-  setIsLanguageSelectModalOpen?: Dispatch<SetStateAction<boolean>>
-  isLanguageSelectModalOpen?: boolean
-  isHomeMenuOpen?: boolean
-  setIsHomeMenuOpen?: Dispatch<SetStateAction<boolean>>
   title?: string
   headerType?: 'default' | 'navbar' | 'dynamic'
   onBack?: () => void
 }
 
-const Header = ({
-  isAlarmModalOpen,
-  setIsAlarmModalOpen,
-  setIsLanguageSelectModalOpen,
-  isLanguageSelectModalOpen,
-  isHomeMenuOpen,
-  setIsHomeMenuOpen,
-  title,
-  headerType = 'default',
-  onBack,
-}: HeaderProps) => {
+const Header = ({ title, headerType = 'default', onBack }: HeaderProps) => {
   const pathname = usePathname()
   const router = useRouter()
+  const isLanguageSelectModalOpen = useModalStore((state) => state.isLanguageSelectModalOpen)
+  const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
+
+  const setModalState = useModalStore((state) => state.setState)
 
   const navContents = [
     { title: '홈', router: '/' },
@@ -58,9 +46,7 @@ const Header = ({
               <div className="flex gap-x-2">
                 <GlobalIcon
                   onClick={() => {
-                    if (setIsLanguageSelectModalOpen && isLanguageSelectModalOpen !== undefined) {
-                      setIsLanguageSelectModalOpen(!isLanguageSelectModalOpen)
-                    }
+                    setModalState({ isLanguageSelectModalOpen: !isLanguageSelectModalOpen })
                   }}
                   width={32}
                   height={32}
@@ -68,9 +54,7 @@ const Header = ({
                 {isHomeMenuOpen ? (
                   <MenuCancelIcon
                     onClick={() => {
-                      if (setIsHomeMenuOpen) {
-                        setIsHomeMenuOpen(false)
-                      }
+                      setModalState({ isHomeMenuOpen: false })
                     }}
                     width={32}
                     height={32}
@@ -78,9 +62,7 @@ const Header = ({
                 ) : (
                   <MenuIcon
                     onClick={() => {
-                      if (setIsHomeMenuOpen) {
-                        setIsHomeMenuOpen(true)
-                      }
+                      setModalState({ isHomeMenuOpen: true })
                     }}
                     width={32}
                     height={32}

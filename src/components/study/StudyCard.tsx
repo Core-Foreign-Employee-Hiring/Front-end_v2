@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { CalenderIcon, PersonIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
