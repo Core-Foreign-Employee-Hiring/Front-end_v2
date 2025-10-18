@@ -43,10 +43,6 @@ export default async function ProjectDetailPage({
 
   const data = PROJECT_DATA_MAP[projectId] || PROJECT_DATA_MAP['default']
 
-  console.log('studyId:', studyId)
-  console.log('projectId:', projectId)
-  console.log('data:', data.projectTitle)
-
   return (
     <main className="relative mx-auto min-h-screen w-[375px] bg-white">
       <div>
