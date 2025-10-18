@@ -14,7 +14,6 @@ import { useRouter } from 'next/navigation'
 import { ApiResponse } from '@/types/common'
 
 export default function RecruitFormPage() {
-  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
   const recruitPostData = useRecruitStore((state) => state.recruitPostData)
   const setState = useRecruitStore((state) => state.setState)
@@ -142,8 +141,7 @@ export default function RecruitFormPage() {
 
   return (
     <form onSubmit={handleSubmit} className="relative mx-auto min-h-screen w-[375px] bg-white">
-      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
-      <div className="pt-[80px]">
+      <div className="">
         <Header headerType={'dynamic'} />
       </div>
 

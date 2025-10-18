@@ -61,14 +61,5 @@ export default async function RecruitLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
-  return (
-    <div className="">
-      <main className="relative mx-auto min-h-screen w-[375px] bg-white">
-        <Header />
-        <div className="h-[80px]" />
-        <Menu />
-        {children}
-      </main>
-    </div>
-  )
+  return <div className="">{children}</div>
 }

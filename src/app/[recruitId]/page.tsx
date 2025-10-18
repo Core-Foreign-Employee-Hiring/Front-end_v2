@@ -1,7 +1,6 @@
 'use client'
 import Header from '@/components/common/Header'
 import { useEffect, useState } from 'react'
-import Menu from '@/components/common/Menu'
 import Image from 'next/image'
 import Button from '@/components/common/Button'
 import { usePathname } from 'next/navigation'
@@ -23,7 +22,6 @@ import ImageModal from '@/components/common/ImageModal'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
-  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
   //지원하기 모달창 제어
   const [isApplicationMethodModalOpen, setIsApplicationMethodModalOpen] = useState(false)
@@ -71,11 +69,8 @@ const RecruitDetailPage = () => {
           setIsApplicationMethodModalOpen={setIsApplicationMethodModalOpen}
         />
       )}
-      <Header isHomeMenuOpen={isHomeMenuOpen} setIsHomeMenuOpen={setIsHomeMenuOpen} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white pt-[80px]">
-        {isHomeMenuOpen ? (
-          <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
-        ) : !recruitData ? (
+        {!recruitData ? (
           <div>로딩중</div>
         ) : (
           <div className="flex flex-col gap-y-[40px] px-5">

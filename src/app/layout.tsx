@@ -1,9 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import Script from 'next/script'
-import GlobalModals from '@/components/modal/GlobalModals'
+import React from 'react'
+import LayoutContent from '@/components/common/LayoutContent'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -19,6 +21,7 @@ const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
   variable: '--font-pretendard',
   display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -32,32 +35,60 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={pretendard.className}>
+    <html lang="ko" className={pretendard.className}>
       <head>
-        {/* GA 스크립트 삽입 */}
+        {/* 폰트 preload */}
+        <link
+          rel="preload"
+          href="/fonts/PretendardVariable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
+        {/* DNS prefetch & preconnect */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+
+        {/* 크리티컬 CSS 인라인 */}
+        <style>{`
+          html, body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            font-family: var(--font-pretendard), system-ui, sans-serif;
+          }
+          main {
+            width: 375px;
+            margin: 0 auto;
+            background: white;
+          }
+        `}</style>
+
+        {/* 🔥 GA 스크립트 - defer 옵션으로 파싱 블로킹 방지 */}
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          async
         />
         <Script
           id="gtag-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = gtag;
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
           }}
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable} antialiased`}>
-        <GlobalModals />
-        {children}
+        <LayoutContent>{children}</LayoutContent>
       </body>
     </html>
   )

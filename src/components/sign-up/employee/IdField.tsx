@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'
 import { getMemberVerifyUserId } from '@/lib/auth'
