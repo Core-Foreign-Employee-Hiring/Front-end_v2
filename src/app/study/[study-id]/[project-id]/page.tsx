@@ -1,5 +1,3 @@
-// app/study/[study-id]/[project-id]/page.tsx
-
 import Header from '@/components/common/Header'
 import Image from 'next/image'
 import { EZIPData, KODICData, KORIData, KuuidData, ROOMIOData, StudyDataType } from '@/utils/study'
@@ -23,7 +21,6 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ 'study-id': string; 'project-id': string }> }) {
-  // 🔥 await를 꼭 붙이기
   const { 'study-id': studyId, 'project-id': projectId } = await params
 
   const data = PROJECT_DATA_MAP[projectId] || PROJECT_DATA_MAP['default']
@@ -38,7 +35,6 @@ export default async function ProjectDetailPage({
 }: {
   params: Promise<{ 'study-id': string; 'project-id': string }>
 }) {
-  // 🔥 await를 꼭 붙이기
   const { 'study-id': studyId, 'project-id': projectId } = await params
 
   const data = PROJECT_DATA_MAP[projectId] || PROJECT_DATA_MAP['default']
