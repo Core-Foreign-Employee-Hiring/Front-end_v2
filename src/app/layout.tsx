@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -25,21 +23,38 @@ const pretendard = localFont({
   preload: true,
 })
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.korfit.co.kr'
+
 export const metadata: Metadata = {
   title: 'Korfit - 외국인을 위한 한국 취업 로드맵',
   description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
-  keywords: ['한국 취업', '외국인 채용', '취업 가이드', '비자'],
+  keywords: [
+    'KORFIT',
+    '외국인 취업',
+    '한국 취업',
+    '외국인 채용',
+    '취업 로드맵',
+    'AI 취업 코칭',
+    '10단계 역량 검증',
+    '외국인 구직',
+    '한국 일자리',
+    '글로벌 인재',
+    '취업 플랫폼',
+    '채용 정보',
+    '포트폴리오 지원',
+    '취업 역량 강화',
+  ],
 
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://www.korfit.co.kr/',
+    url: `${SITE_URL}/`,
     siteName: 'Korfit',
     title: 'Korfit - 외국인을 위한 한국 취업 로드맵',
     description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
     images: [
       {
-        url: 'https://www.korfit.co.kr/og-image.png',
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: 'Korfit',
@@ -65,7 +80,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://www.korfit.co.kr/',
+    canonical: `${SITE_URL}/`,
   },
 }
 
@@ -111,10 +126,10 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Korfit',
-              url: 'https://korfit.vercel.app',
-              logo: 'https://korfit.vercel.app/logo.svg',
+              url: `${SITE_URL}`,
+              logo: `${SITE_URL}/logo.svg`,
               description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
-              sameAs: ['https://www.linkedin.com/company/korfit'],
+              sameAs: ['https://www.instagram.com/korfit_official'],
             }),
           }}
         />

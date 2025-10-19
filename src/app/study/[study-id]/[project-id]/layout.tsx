@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.korfit.co.kr'
+
 export const metadata: Metadata = {
   title: 'KORFIT | 프로젝트 상세페이지',
   description:
@@ -25,11 +27,11 @@ export const metadata: Metadata = {
     title: 'KORFIT 프로젝트 상세페이지',
     description:
       '외국인을 위한 한국 취업 로드맵 서비스 KORFIT. 10단계 역량 검증 시스템, AI 취업 코칭, 포트폴리오 지원으로 성공적인 한국 취업을 시작하세요.',
-    url: 'https://forwork-xi.vercel.app',
+    url: `${SITE_URL}/`,
     siteName: 'KORFIT',
     images: [
       {
-        url: 'https://coreforwork.s3.ap-northeast-2.amazonaws.com/file/FowfcOVfTZCgKLuU/file_2025-07-22_00:23:20.png',
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: 'KORFIT - 외국인을 위한 한국 취업 플랫폼',
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://forwork-xi.vercel.app', // 실제 도메인으로 수정 필요
+    canonical: `${SITE_URL}/`,
   },
 }
 
