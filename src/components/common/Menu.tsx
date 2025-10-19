@@ -11,7 +11,7 @@ import {
 import Button from '@/components/common/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { UserDataType } from '@/types/common'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useModalStore } from '@/store/modalStore'
 
@@ -21,24 +21,58 @@ export default function Menu() {
   const [userData, setUserData] = useState<UserDataType | null>(null)
   const setModalState = useModalStore((state) => state.setState)
   const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
-
+  const abortControllerRef = useRef<AbortController | null>(null)
+  // 🔥 bfcache 진입/복원 처리
   useEffect(() => {
-    // 클라이언트 사이드에서만 localStorage 접근
-    if (typeof window !== 'undefined') {
-      const storedUserData = localStorage.getItem('userData')
-      if (storedUserData) {
-        try {
-          const parsedUserData: UserDataType = JSON.parse(storedUserData)
-          setUserData(parsedUserData)
-        } catch (error) {
-          console.error('Failed to parse user data from localStorage:', error)
-          setUserData(null)
-        }
+    const handlePagehide = () => {
+      // 진행 중인 작업 취소
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
       }
+    }
+
+    const handlePageshow = (event: Event) => {
+      const e = event as any
+      if (e.persisted) {
+        // bfcache에서 복원되었을 때
+        // 필요한 상태 재설정
+        console.log('Menu: bfcache에서 복원됨')
+      }
+    }
+
+    window.addEventListener('pagehide', handlePagehide)
+    window.addEventListener('pageshow', handlePageshow)
+
+    return () => {
+      window.removeEventListener('pagehide', handlePagehide)
+      window.removeEventListener('pageshow', handlePageshow)
     }
   }, [])
 
-  // 🔥 useCallback으로 함수 메모이제이션
+  // 🔥 클라이언트 사이드 데이터 로드 - 더 효율적으로
+  useEffect(() => {
+    // 첫 마운트 시에만 실행
+    const controller = new AbortController()
+    abortControllerRef.current = controller
+
+    if (typeof window !== 'undefined') {
+      try {
+        const storedUserData = localStorage.getItem('userData')
+        if (storedUserData && !controller.signal.aborted) {
+          const parsedUserData: UserDataType = JSON.parse(storedUserData)
+          setUserData(parsedUserData)
+        }
+      } catch (error) {
+        console.error('Failed to parse user data from localStorage:', error)
+        setUserData(null)
+      }
+    }
+
+    return () => {
+      controller.abort()
+    }
+  }, [])
+
   const handleNavigate = useCallback(
     (path: string) => {
       router.push(path)
@@ -47,7 +81,6 @@ export default function Menu() {
     [router, setModalState]
   )
 
-  // 🔥 로그아웃 함수 분리
   const handleLogout = useCallback(() => {
     Cookies.remove('accessToken')
     Cookies.remove('refreshToken')
