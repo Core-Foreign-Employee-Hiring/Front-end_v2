@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://korfit.vercel.app',
+    url: 'https://www.korfit.co.kr/',
     siteName: 'Korfit',
     title: 'Korfit - 외국인을 위한 한국 취업 로드맵',
     description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
     images: [
       {
-        url: 'https://korfit.vercel.app/og-image.png',
+        url: 'https://www.korfit.co.kr/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Korfit',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://korfit.vercel.app',
+    canonical: 'https://www.korfit.co.kr/',
   },
 }
 
@@ -77,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.className}>
       <head>
+        <meta httpEquiv="Cache-Control" content="public, max-age=3600" />
         <link
           rel="preload"
           href="/fonts/PretendardVariable.woff2"
@@ -128,14 +129,23 @@ export default function RootLayout({
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = gtag;
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // 🔥 bfcache 감지 후 GA 이벤트 전송
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+            page_path: window.location.pathname,
+          });
+        }
+      });
+      
+      gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+        page_path: window.location.pathname,
+      });
+    `,
           }}
         />
       </head>
