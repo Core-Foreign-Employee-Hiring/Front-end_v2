@@ -29,14 +29,10 @@ import { useRouter } from 'next/navigation'
 export default function RecruitHomePage() {
   const router = useRouter()
   const [searchValue, setSearchValue] = useState('')
-  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false)
   const [isJobCategoryFilterOpen, setIsJobCategoryFilterOpen] = useState(false)
   const [isContractTypeFilterOpen, setIsContractTypeFilterOpen] = useState(false)
   const selectedJobCategoryFilterContentList = useRecruitStore((state) => state.selectedJobCategoryFilterContentList)
   const selectedContractTypeFilterContentList = useRecruitStore((state) => state.selectedContractTypeFilterContentList)
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false)
-  //언어 선택 모달창 제어
-  const [isLanguageSelectModalOpen, setIsLanguageSelectModalOpen] = useState(false)
 
   //zustand
   const setState = useRecruitStore((state) => state.setState)
@@ -117,157 +113,6 @@ export default function RecruitHomePage() {
           <p className="subtitle-lg text-main">
             {totalElements} <span className="text-black">건</span>
           </p>
-          <section className="relative flex gap-x-2">
-            <section
-              onClick={() => {
-                setIsJobCategoryFilterOpen(!isJobCategoryFilterOpen)
-              }}
-              className={`${isJobCategoryFilterOpen ? 'border-gray5' : 'border-gray2'} flex h-[36px] w-fit items-center gap-x-2 rounded-[12px] border pr-3 pl-4`}
-            >
-              <div className="flex items-center gap-x-1">
-                <p className="button text-gray5">직종</p>
-                {selectedJobCategoryFilterContentList.length === 0 ? null : (
-                  <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
-                    {selectedJobCategoryFilterContentList.length}
-                  </div>
-                )}
-              </div>
-              {isJobCategoryFilterOpen ? (
-                <DropboxArrowUpIcon width={24} height={24} />
-              ) : (
-                <DropboxArrowDownIcon width={24} height={24} />
-              )}
-            </section>
-            {isJobCategoryFilterOpen && (
-              <Filter>
-                <div className="flex flex-col gap-y-[32px]">
-                  <div className="flex flex-col gap-y-4">
-                    <Filter.SelectedList>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedJobCategoryFilterContentList.map((content) => {
-                          return (
-                            <div
-                              onClick={() => {
-                                setState({
-                                  selectedJobCategoryFilterContentList: selectedJobCategoryFilterContentList.filter(
-                                    (item) => item !== content
-                                  ),
-                                })
-                              }}
-                              className="badge-sm text-gray5 bg-gray1 border-gray3 flex h-[36px] items-center justify-center gap-x-1 rounded-[12px] border pr-2 pl-3"
-                              key={content}
-                            >
-                              {convertEnumToKorJobCategory(content)}
-                              <GrayCancelIcon width={20} height={20} />
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </Filter.SelectedList>
-                    <Filter.ContentList>
-                      <div className="flex flex-wrap gap-2">
-                        {jobCategoryList.map((content) => {
-                          return (
-                            <div
-                              onClick={() => handleJobCategoryToggle(content)}
-                              className={`${selectedJobCategoryFilterContentList.includes(convertKorToEnumJobCategory(content)) ? 'bg-main-light border-main text-main' : 'border-gray2 bg-white'} button text-gray5 flex h-[36px] items-center justify-center rounded-[12px] border px-4`}
-                              key={content}
-                            >
-                              {content}
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </Filter.ContentList>
-                  </div>
-                  <Filter.BottomButton
-                    resetHandler={() => {
-                      setState({ selectedJobCategoryFilterContentList: [] })
-                    }}
-                    applyHandler={() => {
-                      setIsJobCategoryFilterOpen(false)
-                    }}
-                    selectedListLength={selectedJobCategoryFilterContentList.length}
-                  />
-                </div>
-              </Filter>
-            )}
-
-            <section
-              onClick={() => {
-                setIsContractTypeFilterOpen(!isContractTypeFilterOpen)
-              }}
-              className={`${isContractTypeFilterOpen ? 'border-gray5' : 'border-gray2'} flex h-[36px] w-fit items-center gap-x-2 rounded-[12px] border pr-3 pl-4`}
-            >
-              <div className="flex items-center gap-x-1">
-                <p className="button text-gray5">계약형태</p>
-                {selectedContractTypeFilterContentList.length === 0 ? null : (
-                  <div className="bg-main badge-md flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
-                    {selectedContractTypeFilterContentList.length}
-                  </div>
-                )}
-              </div>
-              {isContractTypeFilterOpen ? (
-                <DropboxArrowUpIcon width={24} height={24} />
-              ) : (
-                <DropboxArrowDownIcon width={24} height={24} />
-              )}
-            </section>
-            {isContractTypeFilterOpen && (
-              <Filter>
-                <div className="flex flex-col gap-y-[32px]">
-                  <div className="flex flex-col gap-y-4">
-                    <Filter.SelectedList>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedContractTypeFilterContentList.map((content) => {
-                          return (
-                            <div
-                              onClick={() => {
-                                setState({
-                                  selectedContractTypeFilterContentList: selectedContractTypeFilterContentList.filter(
-                                    (item) => item !== content
-                                  ),
-                                })
-                              }}
-                              className="badge-sm text-gray5 bg-gray1 border-gray3 flex h-[36px] items-center justify-center gap-x-1 rounded-[12px] border pr-2 pl-3"
-                              key={content}
-                            >
-                              {convertEnumToKorContractType(content)}
-                              <GrayCancelIcon width={20} height={20} />
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </Filter.SelectedList>
-                    <Filter.ContentList>
-                      <div className="flex flex-wrap gap-2">
-                        {contractTypeList.map((content) => {
-                          return (
-                            <div
-                              onClick={() => handleContractToggle(content)}
-                              className={`${selectedContractTypeFilterContentList.includes(convertKorToEnumContractType(content)) ? 'bg-main-light border-main text-main' : 'border-gray2 bg-white'} button text-gray5 flex h-[36px] items-center justify-center rounded-[12px] border px-4`}
-                              key={content}
-                            >
-                              {content}
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </Filter.ContentList>
-                  </div>
-                  <Filter.BottomButton
-                    resetHandler={() => {
-                      setState({ selectedContractTypeFilterContentList: [] })
-                    }}
-                    applyHandler={() => {
-                      setIsContractTypeFilterOpen(false)
-                    }}
-                    selectedListLength={selectedContractTypeFilterContentList.length}
-                  />
-                </div>
-              </Filter>
-            )}
-          </section>
         </div>
 
         {/* 에러 표시 */}
