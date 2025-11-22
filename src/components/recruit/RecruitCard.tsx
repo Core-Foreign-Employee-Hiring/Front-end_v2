@@ -3,7 +3,8 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { RecruitResponseContentType, SalaryEnumType } from '@/types/recruit'
-import { convertEnumToKorContractType, convertEnumToKorJobCategory, convertEnumToKorSalaryType } from '@/utils/recruit'
+import { convertEnumToKorJobCategory } from '@/utils/recruit'
+import { LocationIcon } from '@/assets/svgComponents'
 
 interface RecruitCardProps {
   recruit: RecruitResponseContentType
@@ -44,48 +45,31 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
   }
 
   return (
-    <div
-      onClick={() => {
-        router.push(`/${recruit.recruitId}`)
-      }}
-      className="flex w-full flex-col gap-y-[8px] rounded-[24px]"
-    >
-      <div className="relative h-[133px] w-full">
-        {recruit.companyImageUrl ? (
-          <Image src={recruit.companyImageUrl} alt={'이미지'} fill className="rounded-[12px] object-cover" />
-        ) : (
-          <div className="bg-gray2 w-full rounded-[12px]" />
-        )}
-
-        <div className="absolute z-10 h-[133px] w-full rounded-[12px] bg-gradient-to-t from-white to-black opacity-40"></div>
-        <p className="badge-sm absolute top-2 right-2 z-10 text-white">~{formatDate(recruit.recruitEndDate)}까지</p>
-      </div>
-
-      <div className="flex flex-col gap-y-1">
-        <div className="flex items-center justify-between">
-          <p className="subtitle-lg line-clamp-2">{recruit.title}</p>
+    <div className="rounded-4 border-gray2 flex flex-col gap-y-3 border bg-white p-4">
+      <section>
+        <div className="relative h-[84px] w-[84px]">
+          <Image src={recruit.companyImageUrl} alt={'회사로고'} fill className="absolute rounded-[16px]" />
         </div>
-
-        <p className="subtitle-md">{formatJobCategory()}</p>
-        <p className="body-sm text-gray5">{recruit.companyName}</p>
-      </div>
-
-      <div className="flex items-center gap-x-1">
-        {recruit.salaryType && recruit.salary ? (
-          <>
-            {recruit.salaryType && (
-              <div
-                className={`${styleBySalaryType(recruit.salaryType)} badge-sm flex h-[22px] w-[37px] items-center justify-center rounded-[8px] border`}
-              >
-                {convertEnumToKorSalaryType(recruit.salaryType)}
-              </div>
-            )}
-            {recruit.salary && <p className="button">{formatNumberWithComma(recruit.salary)}원</p>}
-          </>
-        ) : (
-          <div className="h-[22px]" />
-        )}
-      </div>
+        <div className="flex flex-col gap-y-1">
+          <p className="button text-gray4">{recruit.recruitEndDate}</p>
+          <p className="subtitle-md">{recruit.title}</p>
+          <p className="small text-gray5">{recruit.companyName}</p>
+        </div>
+      </section>
+      <section className="flex justify-between">
+        <div className="flex items-center gap-x-1">
+          <div className="badge-sm text-gray4 bg-gray2 flex h-[24px] items-center justify-center rounded-[8px] px-2">
+            {recruit.jobCategories[0]} 외 {recruit.jobCategories.length}종
+          </div>
+          <div className="badge-sm text-main-light bg-gray2 flex h-[24px] items-center justify-center rounded-[8px] px-2">
+            인턴
+          </div>
+        </div>
+        <div className="flex items-center gap-x-1">
+          <LocationIcon width={16} height={16} />
+          <p className="badge-sm text-gray5">서울시 강남구</p>
+        </div>
+      </section>
     </div>
   )
 }
