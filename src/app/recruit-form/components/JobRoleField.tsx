@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useRecruitStore } from '@/store/recruitStore'
 import JobRoleFilter from '@/components/filter/JobRoleFilter'
 import { JobCategoryType, JobRoleType } from '@/types/recruit'
-import { switchJobRoleCodeToLabel } from '@/utils/filterList'
+import { getJobRoleLabel, getSelectedCategoriesFromRoles, SUB_CATEGORY_MAP } from '@/utils/filterList'
 import { XIcon } from '@/assets/svgComponents'
 
 export default function JobRoleField() {
@@ -21,10 +21,8 @@ export default function JobRoleField() {
     setSelectedJobRoles((prev) => {
       const current = prev || []
 
-      // 이미 있으면 추가 안 함
       if (current.includes(selectedJobRole)) return prev
 
-      // 최대 5개까지만 추가
       if (current.length >= 5) return prev
 
       return [...current, selectedJobRole]
@@ -32,14 +30,27 @@ export default function JobRoleField() {
   }
 
   const onApply = () => {
-    setState({ ...recruitPostData, ...recruitPostData, recruitPostData: { jobRoles: selectedJobRoles } })
+    setState({
+      ...recruitPostData,
+      recruitPostData: {
+        ...recruitPostData,
+        jobRoles: selectedJobRoles,
+        jobCategories: getSelectedCategoriesFromRoles(selectedJobRoles),
+      },
+    })
     onClose()
   }
 
   const onReset = () => {
     setSelectedJobCategory(undefined)
     setSelectedJobRoles(undefined)
-    setState({ ...recruitPostData, ...recruitPostData, recruitPostData: { jobRoles: undefined } })
+    setState({
+      ...recruitPostData,
+      recruitPostData: {
+        ...recruitPostData,
+        jobRoles: undefined,
+      },
+    })
     onClose()
   }
 
@@ -76,12 +87,12 @@ export default function JobRoleField() {
         </Button>
       </section>
       <section className="flex gap-x-2 overflow-x-scroll">
-        {selectedJobRoles?.map((selectedJobRole) => (
+        {recruitPostData.jobRoles?.map((selectedJobRole) => (
           <div
             key={selectedJobRole}
             className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
           >
-            {switchJobRoleCodeToLabel(selectedJobRole)}
+            {getJobRoleLabel(selectedJobRole)}
             <XIcon onClick={() => deleteJobRoles(selectedJobRole)} width={20} height={20} />
           </div>
         ))}
