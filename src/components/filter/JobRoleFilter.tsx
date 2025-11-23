@@ -85,7 +85,8 @@ export default function JobRoleFilter({
             placeholder="직군 또는 직무를 검색해보세요."
           />
           <section className="border-gray2 flex h-[500px] gap-x-3 rounded-[12px] border p-3">
-            <div className="flex w-full flex-col gap-y-2 overflow-y-scroll">
+            {/* 왼쪽: 직군 리스트 (30%) */}
+            <div className="flex w-[40%] flex-shrink-0 flex-col gap-y-1 overflow-y-scroll">
               {(searchQuery ? filteredCategories : JOB_CATEGORY_LIST).map((jobCategory) => (
                 <button
                   type={'button'}
@@ -98,15 +99,19 @@ export default function JobRoleFilter({
                     searchQuery && filteredCategories.some((cat) => cat.code === jobCategory.code)
                       ? 'rounded-[12px] border border-yellow-300 bg-yellow-100'
                       : ''
-                  } button text-gray5 flex h-[36px] w-full flex-shrink items-center justify-center py-3 whitespace-nowrap transition-colors`}
+                  } badge-sm text-gray5 flex h-[36px] w-full flex-shrink items-center justify-center py-3 whitespace-nowrap transition-colors`}
                   key={jobCategory.code}
                 >
                   {jobCategory.label}
                 </button>
               ))}
             </div>
+
+            {/* 구분선 */}
             <div className="border-gray2 border-r" />
-            <div className="flex w-full flex-col gap-y-2 overflow-y-scroll">
+
+            {/* 오른쪽: 직무 리스트 (70%) */}
+            <div className="flex w-full flex-col gap-y-1 overflow-y-scroll">
               {displayedRoles.length > 0 ? (
                 displayedRoles.map((jobRole) => (
                   <button
@@ -114,16 +119,16 @@ export default function JobRoleFilter({
                     onClick={() => {
                       addJobRoles(jobRole.code)
                     }}
-                    className={`button text-gray5 flex h-[36px] w-full items-center justify-between rounded-[8px] py-3 transition-colors ${
+                    className={`badge-sm text-gray5 flex h-[36px] w-full items-center justify-between rounded-[8px] px-2 py-3 text-start whitespace-nowrap transition-colors ${
                       searchQuery && filteredRoles.some((role) => role.code === jobRole.code) ? 'bg-yellow-50' : ''
                     }`}
                     key={jobRole.code}
                   >
-                    <p>{jobRole.label}</p>
+                    <p className="truncate">{jobRole.label}</p>
                     {selectedJobRoles?.includes(jobRole.code) ? (
-                      <CheckIcon width={20} height={20} />
+                      <CheckIcon width={16} height={16} className="ml-2 flex-shrink-0" />
                     ) : (
-                      <UnCheckIcon width={20} height={20} />
+                      <UnCheckIcon width={16} height={16} className="ml-2 flex-shrink-0" />
                     )}
                   </button>
                 ))
