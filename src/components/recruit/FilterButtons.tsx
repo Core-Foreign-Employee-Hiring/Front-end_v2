@@ -9,6 +9,7 @@ import JobRoleFilter from '@/components/filter/JobRoleFilter'
 import LanguageFilter from '@/components/filter/LanguageFilter'
 import RegionFilter from '@/components/filter/RegionFilter'
 import ContractFilter from '@/components/filter/ContractFilter'
+import { convertEnumToKorContractType } from '@/utils/recruit'
 
 export default function FilterButtons() {
   const setState = useRecruitStore((state) => state.setState)
@@ -340,9 +341,13 @@ export default function FilterButtons() {
 
       <button
         onClick={onContractClose}
-        className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap"
+        className={`${selectedContractFilterContent === undefined ? 'text-gray5 border-gray2' : 'text-main border-gray2'} flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap`}
       >
-        <p className="button text-gray5">계약형태</p>
+        <p className="button">
+          {selectedContractFilterContent === undefined
+            ? '계약형태'
+            : convertEnumToKorContractType(selectedContractFilterContent)}
+        </p>
         {isContractFilterOpen ? (
           <DropboxArrowUpIcon width={20} height={20} />
         ) : (
