@@ -22,16 +22,8 @@ export default function RecruitFormPage() {
   const router = useRouter()
 
   //이미지
-  const companyLogoImgRef = useRef<HTMLInputElement | null>(null)
-  const posterImgRef = useRef<HTMLInputElement | null>(null)
-
-  // 스텝 변경시 스크롤 상단 이동
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }, [currentStep])
+  const [companyLogoFile, setCompanyLogoFile] = useState<File | null>(null)
+  const [posterFile, setPosterFile] = useState<File | null>(null)
 
   /**
    * 카카오 맵
@@ -87,24 +79,22 @@ export default function RecruitFormPage() {
   /**
    * form 형식 제출 함수
    */
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault() // 새로고침 방지
-
+  const handleSubmit = async () => {
     try {
       let companyImageUrl = ''
       let posterImageUrl = ''
 
       // 회사 로고 이미지 업로드
-      if (companyLogoImgRef.current?.files?.[0]) {
-        const uploadedCompanyLogoUrl = await uploadImageFile(companyLogoImgRef.current.files[0])
+      if (companyLogoFile) {
+        const uploadedCompanyLogoUrl = await uploadImageFile(companyLogoFile)
         if (uploadedCompanyLogoUrl) {
           companyImageUrl = uploadedCompanyLogoUrl
         }
       }
 
       // 포스터 이미지 업로드
-      if (posterImgRef.current?.files?.[0]) {
-        const uploadedPosterUrl = await uploadImageFile(posterImgRef.current.files[0])
+      if (posterFile) {
+        const uploadedPosterUrl = await uploadImageFile(posterFile)
         if (uploadedPosterUrl) {
           posterImageUrl = uploadedPosterUrl
         }
@@ -128,16 +118,12 @@ export default function RecruitFormPage() {
       const data = await postRecruit(updatedRecruitData)
       console.log('공고 생성', data)
 
-      // router.push('/')
+      router.push('/')
     } catch (error) {
       console.error('제출 중 오류:', error)
       // 필요시 에러 처리 로직 추가
     }
   }
-
-  useEffect(() => {
-    console.log('recruitPostData', recruitPostData)
-  }, [recruitPostData])
 
   return (
     <form onSubmit={handleSubmit} className="relative mx-auto min-h-screen w-[375px] bg-white">
@@ -147,11 +133,11 @@ export default function RecruitFormPage() {
 
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       <div className="h-[20px]" />
-      {currentStep === 1 && <RecruitFormStep1 currentStep={currentStep} companyLogoImgRef={companyLogoImgRef} />}
+      {currentStep === 1 && <RecruitFormStep1 currentStep={currentStep} setCompanyLogoFile={setCompanyLogoFile} />}
       {currentStep === 2 && <RecruitFormStep2 currentStep={currentStep} />}
-      {currentStep === 3 && <RecruitFormStep3 currentStep={currentStep} posterImgRef={posterImgRef} />}
+      {currentStep === 3 && <RecruitFormStep3 currentStep={currentStep} setPosterFile={setPosterFile} />}
       <div className="h-[100px]" />
-      <BottomButton currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      <BottomButton handleSubmit={handleSubmit} currentStep={currentStep} setCurrentStep={setCurrentStep} />
     </form>
   )
 }

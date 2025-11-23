@@ -15,7 +15,7 @@ interface ButtonProps {
   size: 'lg' | 'sm'
   customClassName?: string
   children: ReactNode
-  onClick: () => void
+  onClick?: () => void
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   disabled?: boolean
@@ -41,7 +41,7 @@ const Button = ({
     if (buttonType === 'button') {
       e.preventDefault() // form submit 방지
     }
-    onClick()
+    onClick ? onClick() : null
   }
 
   return (

@@ -23,6 +23,7 @@ import ImageModal from '@/components/common/ImageModal'
 const RecruitDetailPage = () => {
   const pathName = usePathname()
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
+  console.log('recruitData', recruitData)
   //지원하기 모달창 제어
   const [isApplicationMethodModalOpen, setIsApplicationMethodModalOpen] = useState(false)
   //이미지 모달창 제어
@@ -75,7 +76,7 @@ const RecruitDetailPage = () => {
         ) : (
           <div className="flex flex-col gap-y-[40px] px-5">
             <Header headerType="dynamic" title="공고" />
-            <div className="h-[20px]"></div>
+
             <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
               <section className="flex flex-col gap-y-[24px]">
                 <div className="flex flex-col gap-y-3">

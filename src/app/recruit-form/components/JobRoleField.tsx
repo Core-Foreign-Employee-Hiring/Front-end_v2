@@ -21,7 +21,9 @@ export default function JobRoleField() {
     setSelectedJobRoles((prev) => {
       const current = prev || []
 
-      if (current.includes(selectedJobRole)) return prev
+      if (current.includes(selectedJobRole)) {
+        return current.filter((role) => role !== selectedJobRole)
+      }
 
       if (current.length >= 5) return prev
 
@@ -77,6 +79,7 @@ export default function JobRoleField() {
           직무 <span className="text-main">*</span>
         </p>
         <Button
+          buttonType="button"
           type={'outline'}
           onClick={() => {
             setIsFilterOpen(true)
@@ -88,13 +91,14 @@ export default function JobRoleField() {
       </section>
       <section className="flex gap-x-2 overflow-x-scroll">
         {recruitPostData.jobRoles?.map((selectedJobRole) => (
-          <div
+          <button
+            type={'button'}
             key={selectedJobRole}
             className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
           >
             {getJobRoleLabel(selectedJobRole)}
             <XIcon onClick={() => deleteJobRoles(selectedJobRole)} width={20} height={20} />
-          </div>
+          </button>
         ))}
       </section>
     </div>

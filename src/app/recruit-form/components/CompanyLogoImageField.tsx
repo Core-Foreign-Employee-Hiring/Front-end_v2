@@ -1,7 +1,8 @@
 'use client'
+
 import { AshbnIcon, UploadIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
-import { RefObject, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useRecruitStore } from '@/store/recruitStore'
 
 interface FileInfo {
@@ -10,12 +11,12 @@ interface FileInfo {
 }
 
 interface CompanyLogoImageFieldProps {
-  companyLogoImgRef: RefObject<HTMLInputElement | null>
+  setCompanyLogoFile: Dispatch<SetStateAction<File | null>>
 }
-
-export default function CompanyLogoImageField({ companyLogoImgRef }: CompanyLogoImageFieldProps) {
+export default function CompanyLogoImageField({ setCompanyLogoFile }: CompanyLogoImageFieldProps) {
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null)
-
+  // [추가] input 클릭을 위한 내부 ref (파일 데이터 전송용 아님)
+  const inputRef = useRef<HTMLInputElement>(null)
   const setState = useRecruitStore((state) => state.setState)
   const uploadImage = useRecruitStore((state) => state.s3CompanyLogoUrl)
 
@@ -35,12 +36,14 @@ export default function CompanyLogoImageField({ companyLogoImgRef }: CompanyLogo
   /**
    * 이미지 미리보기 설정
    */
-  const handleImagePreview = async () => {
-    const files = companyLogoImgRef.current?.files
+  const handleImagePreview = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
     const reader = new FileReader()
 
     if (files && files[0]) {
       const file = files[0]
+
+      setCompanyLogoFile(file)
 
       // 파일 정보 저장
       setFileInfo({
@@ -60,20 +63,28 @@ export default function CompanyLogoImageField({ companyLogoImgRef }: CompanyLogo
       <p className="subtitle-lg flex gap-x-1">회사 로고</p>
       <div className="flex items-center gap-x-3">
         <p className="subtitle-md text-gray5">이미지 업로드</p>
-        <div onClick={() => companyLogoImgRef.current?.click()} className="relative">
+
+        {/* [수정 1] onClick이 있는 div 안에서 input을 제거했습니다. */}
+        <div
+          onClick={() => inputRef.current?.click()}
+          className="relative cursor-pointer" // cursor-pointer 추가 추천
+        >
           <div className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3">
             <UploadIcon width={20} height={20} />
             <p className="button text-gray5">파일 업로드</p>
           </div>
-          <input
-            type="file"
-            id={'input-file'}
-            ref={companyLogoImgRef}
-            name="input-file"
-            onChange={handleImagePreview}
-            className="hidden"
-          />
         </div>
+
+        {/* [수정 2] input을 div 밖으로 뺐습니다. */}
+        <input
+          type="file"
+          id={'company-logo-input'}
+          ref={inputRef}
+          // name 속성은 제거해도 됩니다 (ref 사용시 불필요)
+          onChange={handleImagePreview}
+          className="hidden"
+          accept="image/*"
+        />
       </div>
       {uploadImage && (
         <div className="border-gray2 flex items-center justify-between rounded-[16px] border px-5 py-[18px]">

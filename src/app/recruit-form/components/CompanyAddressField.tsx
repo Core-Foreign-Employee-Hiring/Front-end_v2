@@ -11,7 +11,7 @@ export default function CompanyAddressField() {
   return (
     <div className="flex flex-col gap-y-3">
       <p className="subtitle-lg flex gap-x-1">
-        회사주소<span className="text-main">*</span>
+        근무주소<span className="text-main">*</span>
       </p>
       <div className="flex gap-x-2">
         <Input

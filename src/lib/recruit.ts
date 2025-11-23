@@ -1,4 +1,11 @@
-import { ContractEnumType, JobCategoryEnumType, RecruitResponseContentType } from '@/types/recruit'
+import {
+  ContractEnumType,
+  JobRoleType,
+  LanguageType,
+  RecruitResponseContentType,
+  RegionType,
+  VisaType,
+} from '@/types/recruit'
 import { ApiResponse, ListResponse } from '@/types/common'
 import { authorizedFetch } from '@/lib/common'
 
@@ -9,10 +16,13 @@ export const getTotalRecruit = async (params: {
   page: number
   size: number
   searchValue?: string
-  jobCategories?: JobCategoryEnumType[]
-  contractTypes?: ContractEnumType[]
+  contract?: ContractEnumType
+  jobRoles?: JobRoleType[]
+  languages?: LanguageType[]
+  regions?: RegionType[]
+  visas?: VisaType[]
 }): Promise<ApiResponse<ListResponse<RecruitResponseContentType>>> => {
-  const { page = 0, size = 20, searchValue, jobCategories, contractTypes } = params
+  const { page = 0, size = 20, searchValue, contract, jobRoles, languages, regions, visas } = params
 
   const searchParams = new URLSearchParams()
   searchParams.append('page', page.toString())
@@ -22,16 +32,32 @@ export const getTotalRecruit = async (params: {
     searchParams.append('keyword', searchValue)
   }
 
-  if (jobCategories && jobCategories.length > 0) {
-    jobCategories.forEach((category) => {
-      searchParams.append('jobCategories', category)
+  if (visas && visas.length > 0) {
+    visas.forEach((visa) => {
+      searchParams.append('visa', visa)
     })
   }
 
-  if (contractTypes && contractTypes.length > 0) {
-    contractTypes.forEach((type) => {
-      searchParams.append('contractTypes', type)
+  if (regions && regions.length > 0) {
+    regions.forEach((region) => {
+      searchParams.append('workRegions', region)
     })
+  }
+
+  if (languages && languages.length > 0) {
+    languages.forEach((language) => {
+      searchParams.append('languages', language)
+    })
+  }
+
+  if (jobRoles && jobRoles.length > 0) {
+    jobRoles.forEach((jobRole) => {
+      searchParams.append('workRegions', jobRole)
+    })
+  }
+
+  if (contract) {
+    searchParams.append('contractType', contract)
   }
 
   const response = await authorizedFetch(

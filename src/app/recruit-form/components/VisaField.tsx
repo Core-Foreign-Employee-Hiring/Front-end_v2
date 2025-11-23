@@ -1,32 +1,32 @@
 import Button from '@/components/common/Button'
+import { getVisaLabel } from '@/utils/filterList'
 import { XIcon } from '@/assets/svgComponents'
 import { useState } from 'react'
 import { useRecruitStore } from '@/store/recruitStore'
-import { LanguageType } from '@/types/recruit'
-import LanguageFilter from '@/components/filter/LanguageFilter'
-import { getLanguageLabel } from '@/utils/filterList'
+import { VisaType } from '@/types/recruit'
+import VisaFilter from '@/components/filter/VisaFilter'
 
-export default function LanguageField() {
+export default function VisaField() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const recruitPostData = useRecruitStore((state) => state.recruitPostData)
   const setState = useRecruitStore((state) => state.setState)
-  const [selectedLanguages, setSelectedLanguages] = useState<LanguageType[] | undefined>(undefined)
+  const [selectedVisas, setSelectedVisas] = useState<VisaType[] | undefined>(undefined)
 
-  const deleteLanguages = (selectedLanguage: LanguageType) => {
-    setSelectedLanguages((prev) => prev?.filter((language) => language !== selectedLanguage))
+  const deleteVisas = (selectedVisa: VisaType) => {
+    setSelectedVisas((prev) => prev?.filter((visa) => visa !== selectedVisa))
   }
 
-  const addLanguages = (selectedLanguage: LanguageType) => {
-    setSelectedLanguages((prev) => {
+  const addVisas = (selectedVisa: VisaType) => {
+    setSelectedVisas((prev) => {
       const current = prev || []
 
-      if (current.includes(selectedLanguage)) {
-        return current.filter((language) => language !== selectedLanguage)
+      if (current.includes(selectedVisa)) {
+        return current.filter((visa) => visa !== selectedVisa)
       }
 
       if (current.length >= 5) return prev
 
-      return [...current, selectedLanguage]
+      return [...current, selectedVisa]
     })
   }
 
@@ -35,19 +35,19 @@ export default function LanguageField() {
       ...recruitPostData,
       recruitPostData: {
         ...recruitPostData,
-        languageTypes: selectedLanguages,
+        visas: selectedVisas,
       },
     })
     onClose()
   }
 
   const onReset = () => {
-    setSelectedLanguages(undefined)
+    setSelectedVisas(undefined)
     setState({
       ...recruitPostData,
       recruitPostData: {
         ...recruitPostData,
-        languageTypes: undefined,
+        visas: undefined,
       },
     })
     onClose()
@@ -60,10 +60,10 @@ export default function LanguageField() {
   return (
     <div className="flex flex-col gap-y-3">
       {isFilterOpen && (
-        <LanguageFilter
-          addLanguages={addLanguages}
-          deleteLanguages={deleteLanguages}
-          selectedLanguages={selectedLanguages}
+        <VisaFilter
+          addVisas={addVisas}
+          deleteVisas={deleteVisas}
+          selectedVisas={selectedVisas}
           onApply={onApply}
           onReset={onReset}
           onClose={onClose}
@@ -71,10 +71,10 @@ export default function LanguageField() {
       )}
       <section className="flex w-full items-center justify-between">
         <p className="subtitle-lg">
-          관련 언어 <span className="text-main">*</span>
+          비자 <span className="text-main">*</span>
         </p>
         <Button
-          buttonType={'button'}
+          buttonType="button"
           type={'outline'}
           onClick={() => {
             setIsFilterOpen(true)
@@ -85,16 +85,16 @@ export default function LanguageField() {
         </Button>
       </section>
       <section className="flex gap-x-2 overflow-x-scroll">
-        {recruitPostData.languageTypes?.map((selectedLanguage) => (
+        {recruitPostData.visas?.map((selectedVisa) => (
           <button
             type="button"
-            key={selectedLanguage}
+            key={selectedVisa}
             className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
           >
-            {getLanguageLabel(selectedLanguage)}
+            {getVisaLabel(selectedVisa)}
             <XIcon
               onClick={() => {
-                deleteLanguages(selectedLanguage)
+                deleteVisas(selectedVisa)
               }}
               width={20}
               height={20}

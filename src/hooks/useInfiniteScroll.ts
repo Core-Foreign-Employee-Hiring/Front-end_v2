@@ -1,11 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getTotalRecruit } from '@/lib/recruit'
-import { RecruitResponseContentType, JobCategoryEnumType, ContractEnumType } from '@/types/recruit'
+import {
+  RecruitResponseContentType,
+  ContractEnumType,
+  JobRoleType,
+  LanguageType,
+  RegionType,
+  VisaType,
+} from '@/types/recruit'
 
 interface UseInfiniteScrollParams {
   searchValue?: string
-  jobCategories?: JobCategoryEnumType[]
-  contractTypes?: ContractEnumType[]
+  contract?: ContractEnumType
+  jobRoles?: JobRoleType[]
+  languages?: LanguageType[]
+  regions?: RegionType[]
+  visas?: VisaType[]
   size?: number
 }
 
@@ -32,8 +42,11 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
           page: pageNumber,
           size: params.size || 20,
           searchValue: params.searchValue,
-          jobCategories: params.jobCategories,
-          contractTypes: params.contractTypes,
+          contract: params.contract,
+          jobRoles: params.jobRoles,
+          languages: params.languages,
+          regions: params.regions,
+          visas: params.visas,
         })
 
         if (response.success && response.data) {
@@ -53,7 +66,16 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
         setLoading(false)
       }
     },
-    [params.searchValue, params.jobCategories, params.contractTypes, params.size, loading]
+    [
+      params.searchValue,
+      params.contract,
+      params.jobRoles,
+      params.languages,
+      params.regions,
+      params.visas,
+      params.size,
+      loading,
+    ]
   )
 
   // 다음 페이지 로드
@@ -110,7 +132,15 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
   // 초기 데이터 로드 및 필터 변경 감지
   useEffect(() => {
     resetData()
-  }, [params.searchValue, params.jobCategories, params.contractTypes])
+  }, [
+    params.searchValue,
+    params.contract,
+    params.jobRoles,
+    params.languages,
+    params.regions,
+    params.visas,
+    params.size,
+  ])
 
   return {
     data,

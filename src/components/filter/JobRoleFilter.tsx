@@ -87,7 +87,8 @@ export default function JobRoleFilter({
           <section className="border-gray2 flex h-[500px] gap-x-3 rounded-[12px] border p-3">
             <div className="flex w-full flex-col gap-y-2 overflow-y-scroll">
               {(searchQuery ? filteredCategories : JOB_CATEGORY_LIST).map((jobCategory) => (
-                <div
+                <button
+                  type={'button'}
                   onClick={() => setSelectedJobCategory(jobCategory.code)}
                   className={`${
                     jobCategory.code === selectedCategory
@@ -101,14 +102,15 @@ export default function JobRoleFilter({
                   key={jobCategory.code}
                 >
                   {jobCategory.label}
-                </div>
+                </button>
               ))}
             </div>
             <div className="border-gray2 border-r" />
             <div className="flex w-full flex-col gap-y-2 overflow-y-scroll">
               {displayedRoles.length > 0 ? (
                 displayedRoles.map((jobRole) => (
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       addJobRoles(jobRole.code)
                     }}
@@ -123,7 +125,7 @@ export default function JobRoleFilter({
                     ) : (
                       <UnCheckIcon width={20} height={20} />
                     )}
-                  </div>
+                  </button>
                 ))
               ) : searchQuery ? (
                 <p className="p-4 text-sm text-gray-400">검색 결과가 없습니다</p>
@@ -132,13 +134,14 @@ export default function JobRoleFilter({
           </section>
           <section className="flex gap-x-2 overflow-x-scroll">
             {selectedJobRoles?.map((selectedJobRole) => (
-              <div
+              <button
+                type="button"
                 key={selectedJobRole}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
               >
                 {getJobRoleLabel(selectedJobRole)}
                 <XIcon onClick={() => deleteJobRoles(selectedJobRole)} width={20} height={20} />
-              </div>
+              </button>
             ))}
           </section>
         </div>

@@ -2,16 +2,14 @@
 
 import Button from '@/components/common/Button'
 import { Dispatch, SetStateAction } from 'react'
-import { useRouter } from 'next/navigation'
 
 interface BottomButtonProps {
   currentStep: 1 | 2 | 3
   setCurrentStep: Dispatch<SetStateAction<1 | 2 | 3>>
+  handleSubmit: () => Promise<void>
 }
 
-export default function BottomButton({ currentStep, setCurrentStep }: BottomButtonProps) {
-  const router = useRouter()
-
+export default function BottomButton({ currentStep, setCurrentStep, handleSubmit }: BottomButtonProps) {
   const renderBottomButton = (currentStep: 1 | 2 | 3) => {
     switch (currentStep) {
       case 1:
@@ -71,17 +69,14 @@ export default function BottomButton({ currentStep, setCurrentStep }: BottomButt
             >
               이전
             </Button>
-            <Button
-              buttonType={'submit'}
+            <button
+              type={'button'}
               onClick={() => {
-                router.push('/')
+                handleSubmit()
               }}
-              customClassName={'w-full'}
-              type={'active'}
-              size={'lg'}
             >
               완료
-            </Button>
+            </button>
           </div>
         )
     }

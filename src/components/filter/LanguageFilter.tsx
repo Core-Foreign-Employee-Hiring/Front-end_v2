@@ -43,17 +43,20 @@ export default function LanguageFilter({
           />
           <section className="flex flex-wrap gap-2">
             {filteredLanguages.map((language) => (
-              <div
+              <button
+                key={language.code}
+                type="button"
                 onClick={() => addLanguages(language.code)}
                 className={`${selectedLanguages?.includes(language.code) ? 'border-main bg-main-light text-main' : 'border-gray2 text-gray5'} button rounded-[12px] border px-4 py-3`}
               >
                 {language.label}
-              </div>
+              </button>
             ))}
           </section>
           <section className="flex gap-x-2 overflow-x-scroll">
             {selectedLanguages?.map((selectedLanguage) => (
-              <div
+              <button
+                type="button"
                 key={selectedLanguage}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
               >
@@ -65,7 +68,7 @@ export default function LanguageFilter({
                   width={20}
                   height={20}
                 />
-              </div>
+              </button>
             ))}
           </section>
         </div>

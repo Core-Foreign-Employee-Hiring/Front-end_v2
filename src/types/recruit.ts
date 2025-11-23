@@ -4,6 +4,8 @@ export interface RecruitResponseContentType {
   companyName: string
   recruitEndDate: string
   title: string
+  address1: string
+  address2: string
   jobCategories: JobCategoryEnumType[]
   salaryType: SalaryEnumType
   salary: number
@@ -76,6 +78,7 @@ export type VisaType =
   | 'E7'
   | 'E8'
   | 'E9'
+  | 'E10'
   | 'F1'
   | 'F2'
   | 'F3'

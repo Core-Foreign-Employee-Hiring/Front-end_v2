@@ -1,7 +1,7 @@
 'use client'
 import { AshbnIcon, UploadIcon } from '@/assets/svgComponents'
 import Image from 'next/image'
-import { RefObject, useState } from 'react'
+import { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useRecruitStore } from '@/store/recruitStore'
 
 interface FileInfo {
@@ -10,13 +10,13 @@ interface FileInfo {
 }
 
 interface DetailFieldProps {
-  posterImgRef: RefObject<HTMLInputElement | null>
+  setPosterFile: Dispatch<SetStateAction<File | null>>
 }
 
-export default function DetailField({ posterImgRef }: DetailFieldProps) {
+export default function DetailField({ setPosterFile }: DetailFieldProps) {
   //이미지
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null)
-
+  const inputRef = useRef<HTMLInputElement>(null)
   const setState = useRecruitStore((state) => state.setState)
   const uploadImage = useRecruitStore((state) => state.s3PosterUrl)
 
@@ -36,12 +36,13 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
   /**
    * 이미지 미리보기 설정
    */
-  const handleImagePreview = async () => {
-    const files = posterImgRef.current?.files
+  const handleImagePreview = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
     const reader = new FileReader()
 
     if (files && files[0]) {
       const file = files[0]
+      setPosterFile(file)
 
       // 파일 정보 저장
       setFileInfo({
@@ -61,20 +62,13 @@ export default function DetailField({ posterImgRef }: DetailFieldProps) {
       <p className="subtitle-lg flex gap-x-1">상세 정보</p>
       <div className="flex items-center gap-x-3">
         <p className="subtitle-md text-gray5">채용 포스터 업로드</p>
-        <div onClick={() => posterImgRef.current?.click()} className="relative">
+        <div onClick={() => inputRef.current?.click()} className="relative">
           <div className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3">
             <UploadIcon width={20} height={20} />
             <p className="button text-gray5">파일 업로드</p>
           </div>
-          <input
-            type="file"
-            id={'input-file'}
-            ref={posterImgRef}
-            name="input-file"
-            onChange={handleImagePreview}
-            className="hidden"
-          />
         </div>
+        <input type="file" id={'poster-input'} ref={inputRef} onChange={handleImagePreview} className="hidden" />
       </div>
       {uploadImage && (
         <div className="border-gray2 flex items-center justify-between rounded-[16px] border px-5 py-[18px]">
