@@ -34,7 +34,7 @@ export const getTotalRecruit = async (params: {
 
   if (visas && visas.length > 0) {
     visas.forEach((visa) => {
-      searchParams.append('visa', visa)
+      searchParams.append('visas', visa)
     })
   }
 
