@@ -61,7 +61,7 @@ export default function JobRoleField() {
           setSelectedJobCategory={setSelectedJobCategory}
         />
       )}
-      <section className="flex w-full justify-between">
+      <section className="flex w-full items-center justify-between">
         <p className="subtitle-lg">
           직무 <span className="text-main">*</span>
         </p>
@@ -72,7 +72,7 @@ export default function JobRoleField() {
           }}
           size={'sm'}
         >
-          직무 선택
+          {selectedJobRoles && selectedJobRoles.length > 0 ? '직무 수정' : '직무 선택'}
         </Button>
       </section>
       <section className="flex gap-x-2 overflow-x-scroll">
