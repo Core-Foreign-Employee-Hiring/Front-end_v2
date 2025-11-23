@@ -52,7 +52,7 @@ export const getTotalRecruit = async (params: {
 
   if (jobRoles && jobRoles.length > 0) {
     jobRoles.forEach((jobRole) => {
-      searchParams.append('workRegions', jobRole)
+      searchParams.append('jobRoles', jobRole)
     })
   }
 
