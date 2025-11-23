@@ -73,7 +73,7 @@ export default function FilterButtons() {
 
   const onVisaFilterReset = () => {
     setSelectedVisas(undefined)
-    setState({ selectedVisaFilterContentList: undefined })
+    setState({ selectedVisaFilterContentList: [] })
     onVisaClose()
   }
 
@@ -107,7 +107,7 @@ export default function FilterButtons() {
   const onJobRoleReset = () => {
     setSelectedJobCategory(undefined)
     setSelectedJobRoles(undefined)
-    setState({ selectedJobRoleFilterContentList: undefined })
+    setState({ selectedJobRoleFilterContentList: [] })
     onJobRoleClose()
   }
 
@@ -143,7 +143,7 @@ export default function FilterButtons() {
   const onLanguageReset = () => {
     setSelectedLanguages(undefined)
     setState({
-      selectedLanguageFilterContentList: undefined,
+      selectedLanguageFilterContentList: [],
     })
     onLanguageClose()
   }
@@ -177,7 +177,7 @@ export default function FilterButtons() {
 
   const onRegionFilterReset = () => {
     setSelectedRegions(undefined)
-    setState({ selectedRegionFilterContentList: undefined })
+    setState({ selectedRegionFilterContentList: [] })
     onRegionClose()
   }
 
