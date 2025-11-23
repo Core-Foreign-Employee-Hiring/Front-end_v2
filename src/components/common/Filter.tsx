@@ -8,8 +8,15 @@ interface FilterProps {
 }
 export default function Filter({ onClose, children }: FilterProps) {
   return (
-    <div onClick={onClose} className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
-      <div className="flex h-[772px] flex-col gap-y-6 bg-white p-5">{children}</div>
+    <div
+      onClick={(e) => {
+        onClose()
+      }}
+      className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]"
+    >
+      <div onClick={(e) => e.stopPropagation()} className="flex w-[355px] flex-col gap-y-6 bg-white p-5">
+        {children}
+      </div>
     </div>
   )
 }
@@ -18,7 +25,7 @@ function Title({ title, onClose }: { title: string; onClose: () => void }) {
   return (
     <div className="flex items-center justify-between">
       <h1 className="title-lg">{title}</h1>
-      <CancelIcon onClick={onClose} width={32} height={32} />
+      <CancelIcon onClick={onClose} width={24} height={24} />
     </div>
   )
 }
@@ -27,13 +34,13 @@ function Content({ children }: { children: ReactNode }) {
   return <div>{children}</div>
 }
 
-function BottomButton({ onApply, onReset }: { children: ReactNode; onApply: () => void; onReset: () => void }) {
+function BottomButton({ onApply, onReset }: { onApply: () => void; onReset: () => void }) {
   return (
     <div className="flex gap-x-2">
-      <Button onClick={onReset} size={'lg'} buttonType={'button'} type={'outline'}>
+      <Button onClick={onReset} size={'lg'} buttonType={'button'} type={'outline'} customClassName={'w-full'}>
         초기화
       </Button>
-      <Button type={'active'} size={'lg'} buttonType={'submit'} onClick={onApply}>
+      <Button type={'active'} size={'lg'} buttonType={'button'} onClick={onApply} customClassName={'w-full'}>
         적용
       </Button>
     </div>
