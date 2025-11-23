@@ -1,4 +1,4 @@
-import { JobCategoryType, JobRoleType } from '@/types/recruit'
+import { JobCategoryType, JobRoleType, LanguageType } from '@/types/recruit'
 
 export const VisaList = ['']
 export const NationalityList = [
@@ -270,6 +270,33 @@ export const WORK_REGIONS = [
   { code: 'JEONNAM', label: '전라남도', short: '전남' },
 ] as const
 
+export const LANGUAGE_LIST = [
+  { code: 'ENGLISH', label: '영어' },
+  { code: 'CHINESE', label: '중국어' },
+  { code: 'HINDI', label: '힌디어' },
+  { code: 'SPANISH', label: '스페인어' },
+  { code: 'FRENCH', label: '프랑스어' },
+  { code: 'ARABIC', label: '아랍어' },
+  { code: 'BENGALI', label: '벵골어' },
+  { code: 'PORTUGUESE', label: '포르투갈어' },
+  { code: 'RUSSIAN', label: '러시아어' },
+  { code: 'URDU', label: '우르두어' },
+  { code: 'INDONESIAN', label: '인도네시아어' },
+  { code: 'GERMAN', label: '독일어' },
+  { code: 'JAPANESE', label: '일본어' },
+  { code: 'SWAHILI', label: '스와힐리어' },
+  { code: 'MARATHI', label: '마라티어' },
+  { code: 'TELUGU', label: '텔루구어' },
+  { code: 'TURKISH', label: '튀르키예어' },
+  { code: 'TAMIL', label: '타밀어' },
+  { code: 'VIETNAMESE', label: '베트남어' },
+  { code: 'KOREAN', label: '한국어' },
+  { code: 'ITALIAN', label: '이탈리아어' },
+  { code: 'PERSIAN', label: '페르시아어' },
+  { code: 'POLISH', label: '폴란드어' },
+  { code: 'UKRAINIAN', label: '우크라이나어' },
+] as const
+
 export const JOB_CATEGORY_LIST: { code: JobCategoryType; label: string }[] = [
   { code: 'IT_DEVELOPMENT', label: 'IT/개발' },
   { code: 'BUSINESS_MANAGEMENT', label: '경영/비즈니스' },
@@ -500,7 +527,7 @@ type SubCategoryMap = {
   [K in JobCategoryType]?: typeof IT_DEVELOPMENT_LIST
 }
 
-const SUB_CATEGORY_MAP: SubCategoryMap = {
+export const SUB_CATEGORY_MAP: SubCategoryMap = {
   IT_DEVELOPMENT: IT_DEVELOPMENT_LIST,
   BUSINESS_MANAGEMENT: BUSINESS_MANAGEMENT_LIST,
   MARKETING_ADVERTISING: MARKETING_ADVERTISING_LIST,
@@ -527,7 +554,7 @@ export const getJobRoleList = (category: JobCategoryType | undefined) => {
   return SUB_CATEGORY_MAP[category] || []
 }
 
-export const switchJobRoleCodeToLabel = (jobRole: JobRoleType) => {
+export const getJobRoleLabel = (jobRole: JobRoleType) => {
   switch (jobRole) {
     // IT / 개발
     case 'SOFTWARE_ENGINEER':
@@ -901,4 +928,73 @@ export const switchJobRoleCodeToLabel = (jobRole: JobRoleType) => {
     default:
       return ''
   }
+}
+export function getLanguageLabel(lang: LanguageType): string {
+  switch (lang) {
+    case 'ENGLISH':
+      return '영어'
+    case 'CHINESE':
+      return '중국어'
+    case 'HINDI':
+      return '힌디어'
+    case 'SPANISH':
+      return '스페인어'
+    case 'FRENCH':
+      return '프랑스어'
+    case 'ARABIC':
+      return '아랍어'
+    case 'BENGALI':
+      return '벵골어'
+    case 'PORTUGUESE':
+      return '포르투갈어'
+    case 'RUSSIAN':
+      return '러시아어'
+    case 'URDU':
+      return '우르두어'
+    case 'INDONESIAN':
+      return '인도네시아어'
+    case 'GERMAN':
+      return '독일어'
+    case 'JAPANESE':
+      return '일본어'
+    case 'SWAHILI':
+      return '스와힐리어'
+    case 'MARATHI':
+      return '마라티어'
+    case 'TELUGU':
+      return '텔루구어'
+    case 'TURKISH':
+      return '튀르키예어'
+    case 'TAMIL':
+      return '타밀어'
+    case 'VIETNAMESE':
+      return '베트남어'
+    case 'KOREAN':
+      return '한국어'
+    case 'ITALIAN':
+      return '이탈리아어'
+    case 'PERSIAN':
+      return '페르시아어'
+    case 'POLISH':
+      return '폴란드어'
+    case 'UKRAINIAN':
+      return '우크라이나어'
+    default:
+      return ''
+  }
+}
+export const getSelectedCategoriesFromRoles = (selectedJobRoles: JobRoleType[] | undefined): JobCategoryType[] => {
+  if (!selectedJobRoles || selectedJobRoles.length === 0) return []
+
+  const selectedCategories = new Set<JobCategoryType>()
+
+  selectedJobRoles.forEach((role) => {
+    Object.entries(SUB_CATEGORY_MAP).forEach(([category, roles]) => {
+      if (roles.some((r) => r.code === role)) {
+        selectedCategories.add(category as JobCategoryType)
+      }
+    })
+  })
+
+  return Array.from(selectedCategories)
 }

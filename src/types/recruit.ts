@@ -20,6 +20,7 @@ export interface RecruitInputDataType {
   establishedDate?: string
   businessType?: string
   jobRoles?: JobRoleType[]
+  jobCategories?: JobCategoryType[]
   languageTypes?: LanguageType[]
   visas?: VisaType[]
   nationality?: NationalityType
@@ -28,7 +29,6 @@ export interface RecruitInputDataType {
   recruitEndDate?: string
   contractType?: ContractEnumType
   directInputContractType?: string
-  jobCategories?: JobCategoryEnumType[]
   workType?: WorkType
   directInputWorkType?: string
   workDayType?: WorkDaysType

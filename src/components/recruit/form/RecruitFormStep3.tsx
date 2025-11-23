@@ -7,6 +7,7 @@ import AdditionalInformationField from '@/app/recruit-form/components/Additional
 import ApplicationMethodField from '@/app/recruit-form/components/ApplicationMethodField'
 import { RefObject } from 'react'
 import JobRoleField from '@/app/recruit-form/components/JobRoleField'
+import LanguageField from '@/app/recruit-form/components/LanguageField'
 
 interface RecruitFormStep3Props {
   currentStep: 1 | 2 | 3
@@ -32,6 +33,7 @@ export default function RecruitFormStep3({ currentStep, posterImgRef }: RecruitF
         <section className="flex flex-col gap-y-[16px]">
           <p className="subtitle-lg text-gray5">상세정보 직접입력</p>
           <JobRoleField />
+          <LanguageField />
           <MainTaskField />
           <QualificationField />
           <PreferredQualificationsField />
