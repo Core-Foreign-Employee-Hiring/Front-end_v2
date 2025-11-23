@@ -8,9 +8,12 @@ interface LanguageSelectModalProps {}
 export default function LanguageSelectModal({}: LanguageSelectModalProps) {
   const isLanguageSelectModalOpen = useModalStore((state) => state.isLanguageSelectModalOpen)
   const setModalState = useModalStore((state) => state.setState)
+  const onClose = () => {
+    setModalState({ isLanguageSelectModalOpen: !isLanguageSelectModalOpen })
+  }
 
   return (
-    <MiddleModal isModalOpen={isLanguageSelectModalOpen} title={'언어 선택'}>
+    <MiddleModal onClose={onClose} isModalOpen={isLanguageSelectModalOpen} title={'언어 선택'}>
       <div className={'flex flex-col gap-y-6'}>
         <div className="bg-gray1 flex h-[52px] items-center justify-between rounded-[16px] px-4 py-3">
           <CheckIcon width={24} height={24} />

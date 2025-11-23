@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { CancelIcon } from '@/assets/svgComponents'
 import Button from '@/components/common/Button'
+import { motion } from 'framer-motion'
 
 interface FilterProps {
   children: ReactNode
@@ -8,16 +9,29 @@ interface FilterProps {
 }
 export default function Filter({ onClose, children }: FilterProps) {
   return (
-    <div
-      onClick={(e) => {
-        onClose()
-      }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
       className="fixed inset-0 z-60 flex items-center justify-center bg-[rgba(0,0,0,0.3)]"
     >
-      <div onClick={(e) => e.stopPropagation()} className="flex w-[355px] flex-col gap-y-6 bg-white p-5">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{
+          type: 'spring',
+          damping: 25,
+          stiffness: 300,
+        }}
+        onClick={(e) => e.stopPropagation()}
+        className="flex w-[355px] flex-col gap-y-6 rounded-[16px] bg-white p-5"
+      >
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

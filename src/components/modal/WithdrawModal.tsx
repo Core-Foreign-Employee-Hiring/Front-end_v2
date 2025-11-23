@@ -33,13 +33,12 @@ export default function WithdrawModal({
     })
   }, [])
 
+  const onClose = () => {
+    setIsWithdrawModalOpen(!isWithdrawModalOpen)
+  }
+
   return (
-    <MiddleModal
-      modalType={'TITLE'}
-      title={'인출하시겠습니까?'}
-      setIsModalOpen={setIsWithdrawModalOpen}
-      isModalOpen={isWithdrawModalOpen}
-    >
+    <MiddleModal modalType={'TITLE'} title={'인출하시겠습니까?'} isModalOpen={isWithdrawModalOpen} onClose={onClose}>
       <div className="flex flex-col gap-y-6">
         {isNoAccountError ? (
           <div className="flex items-center justify-between">

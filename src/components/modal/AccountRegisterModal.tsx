@@ -16,9 +16,14 @@ export default function AccountRegisterModal({
   isAccountRegistered,
 }: AccountRegisterModalProps) {
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false)
+
+  const onClose = () => {
+    setIsAccountRegisterModalOpen(!isAccountRegisterModalOpen)
+  }
+
   return (
     <MiddleModal
-      setIsModalOpen={setIsAccountRegisterModalOpen}
+      onClose={onClose}
       isModalOpen={isAccountRegisterModalOpen}
       title={isAccountRegistered ? '계좌번호 수정' : '계좌번호 등록'}
     >

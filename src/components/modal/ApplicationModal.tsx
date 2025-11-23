@@ -73,12 +73,12 @@ export default function ApplicationModal({
     }
   }
 
+  const onClose = () => {
+    setIsApplicationMethodModalOpen(!isApplicationMethodModalOpen)
+  }
+
   return (
-    <MiddleModal
-      modalType={'GENERAL'}
-      isModalOpen={isApplicationMethodModalOpen}
-      setIsModalOpen={setIsApplicationMethodModalOpen}
-    >
+    <MiddleModal modalType={'GENERAL'} isModalOpen={isApplicationMethodModalOpen} onClose={onClose}>
       <div className="flex flex-col gap-y-[40px]">
         <section className="flex flex-col items-center justify-center gap-y-4">
           <p className="subtitle-lg">

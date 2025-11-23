@@ -9,8 +9,11 @@ interface PurchaseModalProps {
 }
 
 export default function PurchaseModal({ isModalOpen, setIsModalOpen }: PurchaseModalProps) {
+  const onClose = () => {
+    setIsModalOpen(!isModalOpen)
+  }
   return (
-    <MiddleModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} modalType={'GENERAL'}>
+    <MiddleModal isModalOpen={isModalOpen} onClose={onClose} modalType={'GENERAL'}>
       <div className="flex flex-col gap-y-[40px]">
         <div className="flex flex-col gap-y-2">
           <p className="title-md">
