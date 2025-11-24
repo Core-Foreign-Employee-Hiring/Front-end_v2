@@ -11,43 +11,43 @@ export interface RecruitResponseContentType {
   salary: number
 }
 export interface RecruitInputDataType {
-  title?: string
-  companyName?: string
-  companyImageUrl?: string
-  zipcode?: string
-  address1?: string
-  address2?: string
-  companyType?: CompanyType
-  representativeName?: string
-  establishedDate?: string
-  businessType?: string
-  jobRoles?: JobRoleType[]
-  jobCategories?: JobCategoryType[]
-  languageTypes?: LanguageType[]
-  visas?: VisaType[]
-  nationality?: NationalityType
-  isAlwaysRecruiting?: true
-  recruitStartDate?: string
-  recruitEndDate?: string
-  contractType?: ContractEnumType
-  directInputContractType?: string
-  workType?: WorkType
-  directInputWorkType?: string
-  workDayType?: WorkDaysType
-  directInputWorkDayType?: string
-  workStartTime?: string
-  workEndTime?: string
-  directInputWorkTime?: string
-  salaryType?: SalaryEnumType
-  salary?: number
-  directInputSalaryType?: string
-  posterImageUrl?: string
-  mainTasks?: string
-  qualifications?: string
-  preferences?: string
-  others?: string
-  applicationMethod?: ApplicationMethodType
-  directInputApplicationMethod?: string
+  title?: string | null
+  companyImageUrl?: string | null
+  companyName?: string | null
+  zipcode?: string | null
+  address1?: string | null
+  address2?: string | null
+  companyType?: CompanyType | null
+  representativeName?: string | null
+  establishedDate?: string | null
+  businessType?: string | null
+  jobRoles?: JobRoleType[] | null
+  languageTypes?: LanguageType[] | null
+  visas?: VisaType[] | null
+  isAlwaysRecruiting?: true | null
+  recruitStartDate?: string | null
+  recruitEndDate?: string | null
+  contractType?: ContractEnumType | null
+  nationality?: NationalityType | null
+  directInputContractType?: string | null
+  jobCategories?: JobCategoryType[] | null
+  workType?: WorkType | null
+  directInputWorkType?: string | null
+  workDayType?: WorkDaysType | null
+  directInputWorkDayType?: string | null
+  workStartTime?: string | null
+  workEndTime?: string | null
+  directInputWorkTime?: string | null
+  salaryType?: SalaryEnumType | null
+  salary?: number | null
+  directInputSalaryType?: string | null
+  posterImageUrl?: string | null
+  mainTasks?: string | null
+  qualifications?: string | null
+  preferences?: string | null
+  others?: string | null
+  applicationMethod?: ApplicationMethodType | null
+  directInputApplicationMethod?: string | null
   recruitPublishStatus?: 'DRAFT' | 'PUBLISHED' //임시저장, 최종등록
 }
 export type ApplicationMethodType = 'WEBSITE' | 'PHONE_SMS' | 'EMAIL'

@@ -2,7 +2,7 @@
 
 import Header from '@/components/common/Header'
 import BottomButton from '@/components/recruit/form/BottomButton'
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import RecruitFormStep1 from '@/components/recruit/form/RecruitFormStep1'
 import RecruitFormStep2 from '@/components/recruit/form/RecruitFormStep2'
 import RecruitFormStep3 from '@/components/recruit/form/RecruitFormStep3'

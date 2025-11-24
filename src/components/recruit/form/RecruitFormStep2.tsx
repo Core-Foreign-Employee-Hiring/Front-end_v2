@@ -6,6 +6,7 @@ import WorkDaysField from '@/app/recruit-form/components/WorkDaysField'
 import WorkTime from '@/app/recruit-form/components/WorkTime'
 import SalaryField from '@/app/recruit-form/components/SalaryField'
 import JobCategoryField from '@/app/recruit-form/components/JobCategoryField'
+import JobRoleField from '@/app/recruit-form/components/JobRoleField'
 
 interface RecruitFormStep2Props {
   currentStep: 1 | 2 | 3
@@ -27,7 +28,7 @@ export default function RecruitFormStep2({ currentStep }: RecruitFormStep2Props)
       <div className="mt-[40px] mb-[100px] flex flex-col gap-y-[32px]">
         <RecruitPeriodField />
         <RecruitContractTypeField />
-        <JobCategoryField />
+        <JobRoleField />
         <WorkTypeField />
         <WorkDaysField />
         <WorkTime />

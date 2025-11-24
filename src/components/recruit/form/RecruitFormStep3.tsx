@@ -33,7 +33,6 @@ export default function RecruitFormStep3({ currentStep, setPosterFile }: Recruit
         <DetailField setPosterFile={setPosterFile} />
         <section className="flex flex-col gap-y-[16px]">
           <p className="subtitle-lg text-gray5">상세정보 직접입력</p>
-          <JobRoleField />
           <LanguageField />
           <VisaField />
           <MainTaskField />
