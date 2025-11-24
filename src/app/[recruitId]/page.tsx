@@ -55,6 +55,8 @@ const RecruitDetailPage = () => {
 
   return (
     <main>
+      <Header headerType="dynamic" title="공고" />
+
       {isImageModalOpen ? (
         <ImageModal
           ImageUrl={selectedImageUrl}
@@ -75,8 +77,6 @@ const RecruitDetailPage = () => {
           <div>로딩중</div>
         ) : (
           <div className="flex flex-col gap-y-[40px] px-5">
-            <Header headerType="dynamic" title="공고" />
-
             <section className="border-gray2 flex flex-col gap-y-[24px] rounded-[32px] border p-5">
               <section className="flex flex-col gap-y-[24px]">
                 <div className="flex flex-col gap-y-3">
