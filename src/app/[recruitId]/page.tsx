@@ -19,6 +19,7 @@ import {
 import { FaceIcon, TripIcon } from '@/assets/svgComponents'
 import ApplicationModal from '@/components/modal/ApplicationModal'
 import ImageModal from '@/components/common/ImageModal'
+import { getJobCategoryLabel } from '@/utils/filterList'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
@@ -38,10 +39,10 @@ const RecruitDetailPage = () => {
   }, [])
 
   const formatJobCategory = () => {
-    return recruitData?.jobCategories?.map((category) => convertEnumToKorJobCategory(category)).join('/')
+    return recruitData?.jobCategories?.map((category) => getJobCategoryLabel(category)).join('/')
   }
 
-  const formatDate = (dateString: string | undefined) => {
+  const formatDate = (dateString: string | undefined | null) => {
     if (dateString) {
       // "2025-07-16" -> ["2025", "07", "16"]
       const [year, month, day] = dateString.split('-')

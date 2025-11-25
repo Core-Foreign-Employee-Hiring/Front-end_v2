@@ -24,8 +24,6 @@ export default function VisaField() {
         return current.filter((visa) => visa !== selectedVisa)
       }
 
-      if (current.length >= 5) return prev
-
       return [...current, selectedVisa]
     })
   }
@@ -70,9 +68,7 @@ export default function VisaField() {
         />
       )}
       <section className="flex w-full items-center justify-between">
-        <p className="subtitle-lg">
-          비자 <span className="text-main">*</span>
-        </p>
+        <p className="subtitle-lg">비자</p>
         <Button
           buttonType="button"
           type={'outline'}
@@ -84,24 +80,19 @@ export default function VisaField() {
           언어 선택
         </Button>
       </section>
-      <section className="flex gap-x-2 overflow-x-scroll">
-        {recruitPostData.visas?.map((selectedVisa) => (
-          <button
-            type="button"
-            key={selectedVisa}
-            className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
-          >
-            {getVisaLabel(selectedVisa)}
-            <XIcon
-              onClick={() => {
-                deleteVisas(selectedVisa)
-              }}
-              width={20}
-              height={20}
-            />
-          </button>
-        ))}
-      </section>
+      {recruitPostData.visas && recruitPostData.visas.length > 0 && (
+        <section className="flex gap-x-2 overflow-x-scroll">
+          {recruitPostData.visas?.map((selectedVisa) => (
+            <button
+              type="button"
+              key={selectedVisa}
+              className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
+            >
+              {getVisaLabel(selectedVisa)}
+            </button>
+          ))}
+        </section>
+      )}
     </div>
   )
 }

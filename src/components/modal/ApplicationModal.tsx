@@ -8,8 +8,8 @@ import useClipboard from '@/hooks/useClipboard'
 interface ApplicationModalProps {
   isApplicationMethodModalOpen: true
   setIsApplicationMethodModalOpen: Dispatch<SetStateAction<boolean>>
-  applicationMethod: ApplicationMethodType | undefined
-  directInputApplicationMethod: string | undefined
+  applicationMethod: ApplicationMethodType | undefined | null
+  directInputApplicationMethod: string | undefined | null
 }
 
 export default function ApplicationModal({
@@ -20,7 +20,7 @@ export default function ApplicationModal({
 }: ApplicationModalProps) {
   const { copyToClipboard, isLoading } = useClipboard()
 
-  const renderApplicationMethod = (applicationMethod: ApplicationMethodType | undefined) => {
+  const renderApplicationMethod = (applicationMethod: ApplicationMethodType | undefined | null) => {
     switch (applicationMethod) {
       case 'EMAIL':
         return '‘이메일 지원’'
@@ -31,7 +31,7 @@ export default function ApplicationModal({
     }
   }
 
-  const renderDirectInputApplicationMethodButton = (applicationMethod: ApplicationMethodType | undefined) => {
+  const renderDirectInputApplicationMethodButton = (applicationMethod: ApplicationMethodType | undefined | null) => {
     if (!directInputApplicationMethod) return
 
     switch (applicationMethod) {

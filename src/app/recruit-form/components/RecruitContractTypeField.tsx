@@ -1,6 +1,6 @@
 import Input from '@/components/common/Input'
 import { useRecruitStore } from '@/store/recruitStore'
-import { ContractKorType } from '@/types/recruit'
+import { ContractEnumType, ContractKorType } from '@/types/recruit'
 
 interface RecruitContractTypeFieldProps {}
 
@@ -10,7 +10,7 @@ export default function RecruitContractTypeField({}: RecruitContractTypeFieldPro
   const contractType = useRecruitStore((state) => state.recruitPostData.contractType)
   const directInputContractType = useRecruitStore((state) => state.recruitPostData.directInputContractType)
 
-  const contractContents: { kor: string; eng: ContractKorType }[] = [
+  const contractContents: { kor: string; eng: ContractEnumType }[] = [
     { kor: '정규직', eng: 'REGULAR' },
     { kor: '계약직', eng: 'CONTRACT' },
     { kor: '인턴', eng: 'INTERN' },
@@ -37,7 +37,7 @@ export default function RecruitContractTypeField({}: RecruitContractTypeFieldPro
                 })
               }}
               key={type.eng}
-              className={`${contractType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[73px] items-center justify-center rounded-[12px] border' : 'border-gray2 button text-gray5 flex h-[40px] w-[73px] items-center justify-center rounded-[12px] border'}`}
+              className={`${contractType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[73px] items-center justify-center rounded-[12px] border transition hover:opacity-[80%] hover:duration-75' : 'border-gray2 hover:border-gray3 button text-gray5 flex h-[40px] w-[73px] items-center justify-center rounded-[12px] border transition hover:duration-75'} cursor-pointer`}
             >
               {type.kor}
             </button>

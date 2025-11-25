@@ -41,7 +41,7 @@ export default function WorkDaysField() {
               onClick={() => {
                 setWorkDaysType(undefined)
               }}
-              className="bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full"
+              className="bg-main flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full transition hover:opacity-[80%] hover:duration-75"
             >
               <div className="h-[10px] w-[10px] rounded-full bg-white" />
             </button>
@@ -51,7 +51,7 @@ export default function WorkDaysField() {
               onClick={() => {
                 setWorkDaysType('list')
               }}
-              className="border-gray3 h-[20px] w-[20px] rounded-full border-[1.6px]"
+              className="border-gray3 h-[20px] w-[20px] cursor-pointer rounded-full border-[1.6px] transition hover:opacity-[80%] hover:duration-75"
             />
           )}
           <p className="button text-gray5">목록에서 선택</p>
@@ -71,7 +71,7 @@ export default function WorkDaysField() {
                     })
                   }}
                   key={type.eng}
-                  className={`${workDayType === type.eng ? 'border-main button text-main bg-main-light flex h-[40px] items-center rounded-[12px] border px-4' : 'border-gray2 button text-gray5 flex h-[40px] items-center rounded-[12px] border px-4'}`}
+                  className={`${workDayType === type.eng ? 'border-main button text-main bg-main-light flex h-[40px] cursor-pointer items-center rounded-[12px] border px-4 transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 button text-gray5 flex h-[40px] cursor-pointer items-center rounded-[12px] border px-4 transition hover:duration-75'}`}
                 >
                   {type.kor}
                 </button>
@@ -85,19 +85,21 @@ export default function WorkDaysField() {
         <div className="flex items-center gap-x-2">
           {workDaysType === 'direct' ? (
             <button
+              type={'button'}
               onClick={() => {
                 setWorkDaysType(undefined)
               }}
-              className="bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full"
+              className="bg-main flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full transition hover:opacity-[80%] hover:duration-75"
             >
               <div className="h-[10px] w-[10px] rounded-full bg-white"></div>
             </button>
           ) : (
             <button
+              type={'button'}
               onClick={() => {
                 setWorkDaysType('direct')
               }}
-              className="border-gray3 h-[20px] w-[20px] rounded-full border-[1.6px]"
+              className="border-gray3 h-[20px] w-[20px] cursor-pointer rounded-full border-[1.6px] transition hover:opacity-[80%] hover:duration-75"
             />
           )}
           <p className="button text-gray5">직접 선택</p>
@@ -107,6 +109,7 @@ export default function WorkDaysField() {
             {workDaysDirectContents.map((type) => {
               return (
                 <button
+                  type={'button'}
                   onClick={() => {
                     setState({
                       recruitPostData: {
@@ -116,7 +119,7 @@ export default function WorkDaysField() {
                     })
                   }}
                   key={type.eng}
-                  className={`${workDayType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[78px] items-center justify-center rounded-[12px] border' : 'border-gray2 button text-gray5 flex h-[40px] w-[78px] items-center justify-center rounded-[12px] border'}`}
+                  className={`${workDayType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] w-[78px] cursor-pointer items-center justify-center rounded-[12px] border transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 button text-gray5 flex h-[40px] w-[78px] cursor-pointer items-center justify-center rounded-[12px] border transition hover:duration-75'}`}
                 >
                   {type.kor}
                 </button>

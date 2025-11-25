@@ -2,6 +2,7 @@
 
 import Button from '@/components/common/Button'
 import { Dispatch, SetStateAction } from 'react'
+import { useRecruitStore } from '@/store/recruitStore'
 
 interface BottomButtonProps {
   currentStep: 1 | 2 | 3
@@ -10,6 +11,7 @@ interface BottomButtonProps {
 }
 
 export default function BottomButton({ currentStep, setCurrentStep, handleSubmit }: BottomButtonProps) {
+  const recruitData = useRecruitStore((state) => state.recruitPostData)
   const renderBottomButton = (currentStep: 1 | 2 | 3) => {
     switch (currentStep) {
       case 1:
@@ -69,14 +71,17 @@ export default function BottomButton({ currentStep, setCurrentStep, handleSubmit
             >
               이전
             </Button>
-            <button
-              type={'button'}
+            <Button
+              buttonType={'button'}
               onClick={() => {
                 handleSubmit()
               }}
+              customClassName={'w-full'}
+              type={recruitData.jobRoles === null && recruitData.jobCategories === null ? 'disabled' : 'active'}
+              size={'lg'}
             >
               완료
-            </button>
+            </Button>
           </div>
         )
     }

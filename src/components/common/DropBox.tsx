@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 
 interface DropBoxProps {
   initValue: string
-  selectedValue: string | undefined
+  selectedValue: string | undefined | null
   isDropBoxOpen: boolean
   setIsDropBoxOpen: () => void
   children: ReactNode
@@ -21,7 +21,7 @@ export default function DropBox({
     <div className={`${customClassName} relative`}>
       <section
         onClick={setIsDropBoxOpen}
-        className={`border-gray2 flex h-[52px] w-full items-center justify-between rounded-[16px] border px-4 py-3`}
+        className={`border-gray2 hover:border-gray3 flex h-[52px] w-full cursor-pointer items-center justify-between rounded-[16px] border px-4 py-3`}
       >
         <p className={`${selectedValue ? 'text-black' : 'text-gray4'} button`}>
           {selectedValue ? selectedValue : initValue}

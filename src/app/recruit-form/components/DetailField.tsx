@@ -63,7 +63,7 @@ export default function DetailField({ setPosterFile }: DetailFieldProps) {
       <div className="flex items-center gap-x-3">
         <p className="subtitle-md text-gray5">채용 포스터 업로드</p>
         <div onClick={() => inputRef.current?.click()} className="relative">
-          <div className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3">
+          <div className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border pr-4 pl-3 transition hover:duration-75">
             <UploadIcon width={20} height={20} />
             <p className="button text-gray5">파일 업로드</p>
           </div>

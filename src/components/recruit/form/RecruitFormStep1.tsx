@@ -7,7 +7,7 @@ import RepresentativeNameField from '@/app/recruit-form/components/Representativ
 import BusinessTypeField from '@/app/recruit-form/components/BusinessTypeField'
 import CompanyTypeField from '@/app/recruit-form/components/CompanyTypeField'
 import CompanyLogoImageField from '@/app/recruit-form/components/CompanyLogoImageField'
-import { Dispatch, RefObject, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 interface RecruitFormStep1Props {
   currentStep: 1 | 2 | 3

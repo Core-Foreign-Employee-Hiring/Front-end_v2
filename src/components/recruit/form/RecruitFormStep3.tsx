@@ -6,7 +6,6 @@ import PreferredQualificationsField from '@/app/recruit-form/components/Preferre
 import AdditionalInformationField from '@/app/recruit-form/components/AdditionalInformationField'
 import ApplicationMethodField from '@/app/recruit-form/components/ApplicationMethodField'
 import { Dispatch, SetStateAction } from 'react'
-import JobRoleField from '@/app/recruit-form/components/JobRoleField'
 import LanguageField from '@/app/recruit-form/components/LanguageField'
 import VisaField from '@/app/recruit-form/components/VisaField'
 

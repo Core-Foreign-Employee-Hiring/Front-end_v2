@@ -54,17 +54,17 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       onClick={() => {
         router.push(`/${recruit.recruitId}`)
       }}
-      className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border bg-white p-4"
+      className="border-gray2 flex cursor-pointer flex-col gap-y-3 rounded-[20px] border bg-white p-4 transition hover:shadow-md hover:duration-75"
     >
       <section className="flex items-center gap-x-3">
         {imageError ? null : (
-          <div className="relative h-[84px] w-[84px]">
+          <div className="relative h-[84px] w-[84px] flex-shrink-0">
             <Image
               onError={() => setImageError(true)}
               src={recruit.companyImageUrl}
               alt={'회사로고'}
               fill
-              className="absolute rounded-[16px]"
+              className="absolute rounded-[16px] object-cover"
             />
           </div>
         )}
@@ -78,7 +78,8 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       <section className="flex justify-between">
         <div className="flex items-center gap-x-1">
           <div className="badge-sm text-gray4 bg-gray2 flex h-[24px] items-center justify-center rounded-[8px] px-2">
-            {getJobCategoryLabel(recruit.jobCategories[0])} 외 {recruit.jobCategories.length}종
+            {getJobCategoryLabel(recruit.jobCategories[0])}
+            {recruit.jobCategories.length !== 0 ? `외 ${recruit.jobCategories.length}종` : null}
           </div>
           <div className="badge-sm bg-main-light text-main flex h-[24px] items-center justify-center rounded-[8px] px-2">
             인턴

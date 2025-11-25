@@ -39,7 +39,12 @@ function Title({ title, onClose }: { title: string; onClose: () => void }) {
   return (
     <div className="flex items-center justify-between">
       <h1 className="title-lg">{title}</h1>
-      <CancelIcon onClick={onClose} width={24} height={24} />
+      <CancelIcon
+        className="cursor-pointer transition hover:opacity-[50%] hover:duration-75"
+        onClick={onClose}
+        width={24}
+        height={24}
+      />
     </div>
   )
 }

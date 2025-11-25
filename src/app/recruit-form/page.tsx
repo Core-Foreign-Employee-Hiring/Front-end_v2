@@ -2,7 +2,7 @@
 
 import Header from '@/components/common/Header'
 import BottomButton from '@/components/recruit/form/BottomButton'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import RecruitFormStep1 from '@/components/recruit/form/RecruitFormStep1'
 import RecruitFormStep2 from '@/components/recruit/form/RecruitFormStep2'
 import RecruitFormStep3 from '@/components/recruit/form/RecruitFormStep3'
@@ -20,6 +20,13 @@ export default function RecruitFormPage() {
   const setModalState = useModalStore((state) => state.setState)
   const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
   const router = useRouter()
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [currentStep])
 
   //이미지
   const [companyLogoFile, setCompanyLogoFile] = useState<File | null>(null)

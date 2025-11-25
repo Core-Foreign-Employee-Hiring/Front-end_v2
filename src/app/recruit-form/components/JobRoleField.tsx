@@ -89,18 +89,19 @@ export default function JobRoleField() {
           {selectedJobRoles && selectedJobRoles.length > 0 ? '직무 수정' : '직무 선택'}
         </Button>
       </section>
-      <section className="flex gap-x-2 overflow-x-scroll">
-        {recruitPostData.jobRoles?.map((selectedJobRole) => (
-          <button
-            type={'button'}
-            key={selectedJobRole}
-            className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
-          >
-            {getJobRoleLabel(selectedJobRole)}
-            <XIcon onClick={() => deleteJobRoles(selectedJobRole)} width={20} height={20} />
-          </button>
-        ))}
-      </section>
+      {recruitPostData.jobRoles && recruitPostData.jobRoles.length !== 0 && (
+        <section className="flex gap-x-2 overflow-x-scroll">
+          {recruitPostData.jobRoles?.map((selectedJobRole) => (
+            <button
+              type={'button'}
+              key={selectedJobRole}
+              className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
+            >
+              {getJobRoleLabel(selectedJobRole)}
+            </button>
+          ))}
+        </section>
+      )}
     </div>
   )
 }

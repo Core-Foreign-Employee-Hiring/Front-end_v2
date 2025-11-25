@@ -20,7 +20,7 @@ export default function CompanyTypeField() {
     { kor: '협동조합', eng: 'COOPERATIVE' },
   ]
 
-  const convertContent = (eng: CompanyType | undefined) => {
+  const convertContent = (eng: CompanyType | undefined | null) => {
     switch (eng) {
       case 'LARGE_CORPORATION':
         return '대기업'
@@ -44,31 +44,34 @@ export default function CompanyTypeField() {
   }
 
   return (
-    <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        기업형태<span className="text-main">*</span>
-      </p>
-      <DropBox
-        selectedValue={convertContent(companyType)}
-        isDropBoxOpen={isDropBoxClicked}
-        setIsDropBoxOpen={() => setIsDropBoxClicked(!isDropBoxClicked)}
-        initValue={'기업형태를 입력해주세요.'}
-      >
-        {companyTypeContents.map((content: { kor: string; eng: CompanyType }) => {
-          return (
-            <div
-              key={content.eng}
-              onClick={() => {
-                setState({ ...recruitPostData, recruitPostData: { ...recruitPostData, companyType: content.eng } })
-                setIsDropBoxClicked(false)
-              }}
-              className="body-sm flex h-[60px] items-center px-4"
-            >
-              {content.kor}
-            </div>
-          )
-        })}
-      </DropBox>
+    <div>
+      <div className="flex flex-col gap-y-3">
+        <p className="subtitle-lg flex gap-x-1">
+          기업형태<span className="text-main">*</span>
+        </p>
+        <DropBox
+          selectedValue={convertContent(companyType)}
+          isDropBoxOpen={isDropBoxClicked}
+          setIsDropBoxOpen={() => setIsDropBoxClicked(!isDropBoxClicked)}
+          initValue={'기업형태를 입력해주세요.'}
+        >
+          {companyTypeContents.map((content: { kor: string; eng: CompanyType }) => {
+            return (
+              <div
+                key={content.eng}
+                onClick={() => {
+                  setState({ ...recruitPostData, recruitPostData: { ...recruitPostData, companyType: content.eng } })
+                  setIsDropBoxClicked(false)
+                }}
+                className="body-sm hover:bg-gray1 flex h-[60px] cursor-pointer items-center px-4"
+              >
+                {content.kor}
+              </div>
+            )
+          })}
+        </DropBox>
+      </div>
+      {isDropBoxClicked && <div className="h-[500px]" />}
     </div>
   )
 }

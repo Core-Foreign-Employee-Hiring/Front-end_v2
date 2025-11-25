@@ -70,9 +70,7 @@ export default function LanguageField() {
         />
       )}
       <section className="flex w-full items-center justify-between">
-        <p className="subtitle-lg">
-          관련 언어 <span className="text-main">*</span>
-        </p>
+        <p className="subtitle-lg">관련 언어</p>
         <Button
           buttonType={'button'}
           type={'outline'}
@@ -84,24 +82,19 @@ export default function LanguageField() {
           언어 선택
         </Button>
       </section>
-      <section className="flex gap-x-2 overflow-x-scroll">
-        {recruitPostData.languageTypes?.map((selectedLanguage) => (
-          <button
-            type="button"
-            key={selectedLanguage}
-            className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
-          >
-            {getLanguageLabel(selectedLanguage)}
-            <XIcon
-              onClick={() => {
-                deleteLanguages(selectedLanguage)
-              }}
-              width={20}
-              height={20}
-            />
-          </button>
-        ))}
-      </section>
+      {recruitPostData.languageTypes && recruitPostData.languageTypes.length !== 0 && (
+        <section className="flex gap-x-2 overflow-x-scroll">
+          {recruitPostData.languageTypes?.map((selectedLanguage) => (
+            <button
+              type="button"
+              key={selectedLanguage}
+              className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
+            >
+              {getLanguageLabel(selectedLanguage)}
+            </button>
+          ))}
+        </section>
+      )}
     </div>
   )
 }

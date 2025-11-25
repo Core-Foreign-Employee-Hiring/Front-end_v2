@@ -69,7 +69,7 @@ export default function CompanyLogoImageField({ setCompanyLogoFile }: CompanyLog
           onClick={() => inputRef.current?.click()}
           className="relative cursor-pointer" // cursor-pointer 추가 추천
         >
-          <div className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3">
+          <div className="border-gray2 hover:border-gray3 flex h-[36px] items-center gap-x-2 rounded-[12px] border pr-4 pl-3 transition hover:duration-75">
             <UploadIcon width={20} height={20} />
             <p className="button text-gray5">파일 업로드</p>
           </div>

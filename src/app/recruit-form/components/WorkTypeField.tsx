@@ -33,7 +33,7 @@ export default function WorkTypeField() {
               }}
               type="button"
               key={type.eng}
-              className={`${workType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] items-center justify-center rounded-[12px] border px-2' : 'border-gray2 button text-gray5 flex h-[40px] items-center justify-center rounded-[12px] border px-2'}`}
+              className={`${workType === type.eng ? 'border-main bg-main-light button text-main flex h-[40px] cursor-pointer items-center justify-center rounded-[12px] border px-2 transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 button text-gray5 flex h-[40px] cursor-pointer items-center justify-center rounded-[12px] border px-2 transition hover:duration-75'}`}
             >
               {type.kor}
             </button>

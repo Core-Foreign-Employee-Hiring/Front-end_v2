@@ -17,7 +17,7 @@ export default function ApplicationMethodField() {
       </p>
       <section className="flex flex-col gap-y-3">
         <div className="flex gap-x-3">
-          <div className="flex items-center gap-x-1">
+          <div className="flex cursor-pointer items-center gap-x-1 transition hover:opacity-[80%] hover:duration-75">
             {applicationMethod === '홈페이지 지원' ? (
               <div
                 onClick={() => {
@@ -29,7 +29,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full"
+                className="bg-main flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full transition hover:opacity-[80%] hover:duration-75"
               >
                 <div className="h-[10px] w-[10px] rounded-full bg-white"></div>
               </div>
@@ -45,7 +45,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="border-gray3 h-[20px] w-[20px] rounded-full border-[1.6px]"
+                className="border-gray3 h-[20px] w-[20px] cursor-pointer rounded-full border-[1.6px] transition hover:opacity-[50%] hover:duration-75"
               />
             )}
             <p className="button text-gray5">홈페이지 지원</p>
@@ -62,7 +62,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full"
+                className="bg-main flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full transition hover:opacity-[80%] hover:duration-75"
               >
                 <div className="h-[10px] w-[10px] rounded-full bg-white"></div>
               </div>
@@ -78,7 +78,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="border-gray3 h-[20px] w-[20px] rounded-full border-[1.6px]"
+                className="border-gray3 h-[20px] w-[20px] cursor-pointer rounded-full border-[1.6px] transition hover:opacity-[50%] hover:duration-75"
               />
             )}
             <p className="button text-gray5">전화/문자 지원</p>
@@ -95,7 +95,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full"
+                className="bg-main flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full transition hover:opacity-[80%] hover:duration-75"
               >
                 <div className="h-[10px] w-[10px] rounded-full bg-white"></div>
               </div>
@@ -111,7 +111,7 @@ export default function ApplicationMethodField() {
                     },
                   })
                 }}
-                className="border-gray3 h-[20px] w-[20px] rounded-full border-[1.6px]"
+                className="border-gray3 h-[20px] w-[20px] cursor-pointer rounded-full border-[1.6px] transition hover:opacity-[50%] hover:duration-75"
               />
             )}
             <p className="button text-gray5">이메일 지원</p>

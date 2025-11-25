@@ -8,9 +8,7 @@ export default function RepresentativeNameField() {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        대표자명<span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg flex gap-x-1">대표자명</p>
       <Input
         value={representativeName ?? ''}
         inputBoxStyle={'default'}

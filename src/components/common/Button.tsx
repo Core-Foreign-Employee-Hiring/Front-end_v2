@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
 const buttonStyleType = {
-  active: 'bg-main text-white',
-  disabled: 'text-gray5 bg-gray2',
-  outline: 'border border-gray2 text-gray5',
+  active: 'bg-main text-white hover:opacity-[80%] transition hover:duration-75 cursor-pointer',
+  disabled: 'text-gray5 bg-gray2 cursor-not-allowed',
+  outline: 'border border-gray2 text-gray5 cursor-pointer hover:border-gray3',
 }
 const buttonSize = {
   lg: 'py-4 px-6',

@@ -11,7 +11,7 @@ export default function MainTaskField() {
         주요 업무 <span className="text-main">*</span>
       </p>
       <textarea
-        value={mainTasks}
+        value={mainTasks ?? ''}
         onChange={(e) => {
           setState({
             recruitPostData: {
@@ -21,7 +21,9 @@ export default function MainTaskField() {
           })
         }}
         placeholder={'직접 입력'}
-        className={'border-gray2 px- h-[240px] w-full rounded-[16px] border px-5 py-3'}
+        className={
+          'border-gray2 hover:border-gray3 h-[240px] w-full cursor-pointer rounded-[16px] border px-5 py-3 outline-1 transition outline-none hover:duration-75'
+        }
       />
     </div>
   )

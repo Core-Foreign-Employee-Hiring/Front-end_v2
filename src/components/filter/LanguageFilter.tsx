@@ -47,7 +47,7 @@ export default function LanguageFilter({
                 key={language.code}
                 type="button"
                 onClick={() => addLanguages(language.code)}
-                className={`${selectedLanguages?.includes(language.code) ? 'border-main bg-main-light text-main' : 'border-gray2 text-gray5'} button rounded-[12px] border px-4 py-3`}
+                className={`${selectedLanguages?.includes(language.code) ? 'border-main bg-main-light text-main cursor-pointer transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 text-gray5 cursor-pointer transition hover:duration-75'} button rounded-[12px] border px-4 py-3`}
               >
                 {language.label}
               </button>
@@ -56,18 +56,15 @@ export default function LanguageFilter({
           <section className="flex gap-x-2 overflow-x-scroll">
             {selectedLanguages?.map((selectedLanguage) => (
               <button
+                onClick={() => {
+                  deleteLanguages(selectedLanguage)
+                }}
                 type="button"
                 key={selectedLanguage}
-                className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
+                className="border-gray3 bg-gray1 badge-sm text-gray5 flex cursor-pointer items-center rounded-full border px-3 py-2 whitespace-nowrap transition hover:opacity-[80%] hover:duration-75"
               >
                 {getLanguageLabel(selectedLanguage)}
-                <XIcon
-                  onClick={() => {
-                    deleteLanguages(selectedLanguage)
-                  }}
-                  width={20}
-                  height={20}
-                />
+                <XIcon width={20} height={20} />
               </button>
             ))}
           </section>

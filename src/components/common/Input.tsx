@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
 const inputBoxStyles = {
-  default: 'border-gray2 placeholder:text-gray4 text-black',
+  default: 'border-gray2 placeholder:text-gray4 text-black hover:border-gray3 transition cursor-pointer',
   error: 'border-error text-black',
   disabled: 'border-gray2 text-gray4 cursor-not-allowed',
 }
@@ -49,7 +49,7 @@ const Input = ({
           onChange={setValue ?? (() => {})}
           type={type}
           disabled={inputBoxStyle === 'disabled'}
-          className={`${inputFieldBase} ${inputBoxStyle === 'disabled' ? 'cursor-not-allowed' : ''}`}
+          className={`${inputFieldBase} ${inputBoxStyle === 'disabled' ? 'cursor-not-allowed' : ''} cursor-pointer`}
           placeholder={placeholder}
         />
         {textCount && totalCount && (

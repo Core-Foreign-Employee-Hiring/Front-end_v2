@@ -8,7 +8,7 @@ export default function AdditionalInformationField() {
     <div className="flex flex-col gap-y-3">
       <p className="subtitle-lg">기타</p>
       <textarea
-        value={others}
+        value={others ?? ''}
         onChange={(e) => {
           setState({
             recruitPostData: {
@@ -18,7 +18,7 @@ export default function AdditionalInformationField() {
           })
         }}
         placeholder={'직접 입력'}
-        className={'border-gray2 px- h-[240px] w-full rounded-[16px] border px-5 py-3'}
+        className="border-gray2 hover:border-gray3 h-[240px] w-full cursor-pointer rounded-[16px] border px-5 py-3 outline-1 transition outline-none hover:duration-75"
       />
     </div>
   )

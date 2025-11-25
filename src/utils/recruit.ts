@@ -4,6 +4,7 @@ import {
   ContractKorType,
   JobCategoryEnumType,
   JobCategoryKorType,
+  JobCategoryType,
   SalaryEnumType,
   SalaryKorType,
   WorkDaysType,
@@ -61,7 +62,7 @@ export const convertKorToEnumJobCategory = (category: JobCategoryKorType): JobCa
   }
 }
 
-export const convertEnumToKorJobCategory = (category: JobCategoryEnumType): JobCategoryKorType => {
+export const convertEnumToKorJobCategory = (category: JobCategoryType): JobCategoryKorType => {
   switch (category) {
     case 'DESIGN':
       return '디자인'

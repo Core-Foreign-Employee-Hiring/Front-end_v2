@@ -93,13 +93,13 @@ export default function JobRoleFilter({
                   onClick={() => setSelectedJobCategory(jobCategory.code)}
                   className={`${
                     jobCategory.code === selectedCategory
-                      ? 'border-main bg-main-light text-main rounded-[12px] border'
+                      ? 'border-main bg-main-light text-main rounded-[12px] border transition hover:opacity-[80%] hover:duration-75'
                       : ''
                   } ${
                     searchQuery && filteredCategories.some((cat) => cat.code === jobCategory.code)
-                      ? 'rounded-[12px] border border-yellow-300 bg-yellow-100'
+                      ? 'rounded-[12px] border border-yellow-300 bg-yellow-100 transition hover:opacity-[80%] hover:duration-75'
                       : ''
-                  } badge-sm text-gray5 flex h-[36px] w-full flex-shrink items-center justify-center py-3 whitespace-nowrap transition-colors`}
+                  } badge-sm text-gray5 flex h-[36px] w-full flex-shrink cursor-pointer items-center justify-center py-3 whitespace-nowrap transition transition-colors hover:opacity-[80%] hover:duration-75`}
                   key={jobCategory.code}
                 >
                   {jobCategory.label}
@@ -119,7 +119,7 @@ export default function JobRoleFilter({
                     onClick={() => {
                       addJobRoles(jobRole.code)
                     }}
-                    className={`badge-sm text-gray5 flex h-[36px] w-full items-center justify-between rounded-[8px] px-2 py-3 text-start whitespace-nowrap transition-colors ${
+                    className={`badge-sm text-gray5 flex h-[36px] w-full cursor-pointer items-center justify-between rounded-[8px] px-2 py-3 text-start whitespace-nowrap transition transition-colors hover:opacity-[80%] hover:duration-75 ${
                       searchQuery && filteredRoles.some((role) => role.code === jobRole.code) ? 'bg-yellow-50' : ''
                     }`}
                     key={jobRole.code}
@@ -140,12 +140,13 @@ export default function JobRoleFilter({
           <section className="flex gap-x-2 overflow-x-scroll">
             {selectedJobRoles?.map((selectedJobRole) => (
               <button
+                onClick={() => deleteJobRoles(selectedJobRole)}
                 type="button"
                 key={selectedJobRole}
-                className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
+                className="border-gray3 bg-gray1 badge-sm text-gray5 flex cursor-pointer items-center rounded-full border px-3 py-2 whitespace-nowrap transition hover:opacity-[80%] hover:duration-75"
               >
                 {getJobRoleLabel(selectedJobRole)}
-                <XIcon onClick={() => deleteJobRoles(selectedJobRole)} width={20} height={20} />
+                <XIcon width={20} height={20} />
               </button>
             ))}
           </section>

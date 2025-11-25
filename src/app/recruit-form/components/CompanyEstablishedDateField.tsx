@@ -8,9 +8,7 @@ export default function CompanyEstablishedDateField() {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="subtitle-lg flex gap-x-1">
-        설립일<span className="text-main">*</span>
-      </p>
+      <p className="subtitle-lg flex gap-x-1">설립일</p>
       <Input
         value={establishedDate ?? ''}
         inputBoxStyle={'default'}
