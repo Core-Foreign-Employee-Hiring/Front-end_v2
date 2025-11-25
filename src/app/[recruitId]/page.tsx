@@ -24,12 +24,19 @@ import { getJobCategoryLabel } from '@/utils/filterList'
 const RecruitDetailPage = () => {
   const pathName = usePathname()
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
-  console.log('recruitData', recruitData)
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
+
   //지원하기 모달창 제어
   const [isApplicationMethodModalOpen, setIsApplicationMethodModalOpen] = useState(false)
   //이미지 모달창 제어
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string>()
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined | null>()
 
   useEffect(() => {
     getRecruitDetailData(pathName).then((response: ApiResponse<RecruitInputDataType>) => {
@@ -119,7 +126,7 @@ const RecruitDetailPage = () => {
                       {recruitData.jobCategories.map((jobCategory) => {
                         return (
                           <div key={jobCategory} className="badge-md text-gray4 bg-gray2 rounded-[8px] px-2 py-1">
-                            {convertEnumToKorJobCategory(jobCategory)}
+                            {getJobCategoryLabel(jobCategory)}
                           </div>
                         )
                       })}

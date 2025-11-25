@@ -265,7 +265,7 @@ export default function FilterButtons() {
       )}
       <button
         onClick={onVisaClose}
-        className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap"
+        className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
           비자
@@ -284,7 +284,7 @@ export default function FilterButtons() {
 
       <button
         onClick={onJobRoleClose}
-        className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap"
+        className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
           직무
@@ -303,7 +303,7 @@ export default function FilterButtons() {
 
       <button
         onClick={onLanguageClose}
-        className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap"
+        className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
           관련 언어
@@ -322,7 +322,7 @@ export default function FilterButtons() {
 
       <button
         onClick={onRegionClose}
-        className="border-gray2 flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap"
+        className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
           근무 지역
@@ -341,7 +341,7 @@ export default function FilterButtons() {
 
       <button
         onClick={onContractClose}
-        className={`${selectedContractFilterContent === undefined ? 'text-gray5 border-gray2' : 'text-main border-gray2'} flex h-[36px] items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap`}
+        className={`${selectedContractFilterContent === undefined ? 'text-gray5 border-gray2' : 'text-main border-gray2'} hover:border-gray3 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75`}
       >
         <p className="button">
           {selectedContractFilterContent === undefined

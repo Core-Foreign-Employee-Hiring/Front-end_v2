@@ -3,6 +3,7 @@ export interface RecruitResponseContentType {
   companyImageUrl: string
   companyName: string
   recruitEndDate: string
+  contractType: ContractEnumType
   title: string
   address1: string
   address2: string

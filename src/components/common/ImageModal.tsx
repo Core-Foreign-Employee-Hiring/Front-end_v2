@@ -3,8 +3,8 @@ import { CancelIcon, WhiteCancelIcon } from '@/assets/svgComponents'
 import { Dispatch, SetStateAction } from 'react'
 
 interface ImageModalProps {
-  ImageUrl: string | undefined
-  setSelectedImageUrl: Dispatch<SetStateAction<string | undefined>>
+  ImageUrl: string | undefined | null
+  setSelectedImageUrl: Dispatch<SetStateAction<string | undefined | null>>
   setIsImageModalOpen: Dispatch<SetStateAction<boolean>>
 }
 

@@ -22,7 +22,7 @@ export default function Banner() {
           }}
           size={'sm'}
           type={'outline'}
-          customClassName={'bg-white rounded-[12px]'}
+          customClassName={'bg-white rounded-[12px] hover:shadow-md hover:duration-75 transition cursor-pointer'}
         >
           What is Korfit? →
         </Button>

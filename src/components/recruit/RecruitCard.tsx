@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { RecruitResponseContentType, SalaryEnumType } from '@/types/recruit'
-import { convertEnumToKorJobCategory } from '@/utils/recruit'
+import { RecruitResponseContentType } from '@/types/recruit'
+import { convertEnumToKorContractType } from '@/utils/recruit'
 import { LocationIcon } from '@/assets/svgComponents'
 import { useState } from 'react'
 import { getJobCategoryLabel } from '@/utils/filterList'
@@ -14,7 +14,6 @@ interface RecruitCardProps {
 
 const RecruitCard = ({ recruit }: RecruitCardProps) => {
   const [imageError, setImageError] = useState(false)
-  console.log('recruit', recruit)
   const router = useRouter()
 
   const formatDate = (dateString: string) => {
@@ -31,7 +30,6 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
 
   /**
    * 주소에서 앞의 두 단어(시/도 + 시/군/구)만 추출하는 함수
-   * 예: "경기 이천시 애련정로 180" -> "경기 이천시"
    */
   const getShortAddress = (address: string | undefined | null): string => {
     if (!address) return '' // 주소가 없을 경우 빈 문자열 반환
@@ -57,7 +55,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       className="border-gray2 flex cursor-pointer flex-col gap-y-3 rounded-[20px] border bg-white p-4 transition hover:shadow-md hover:duration-75"
     >
       <section className="flex items-center gap-x-3">
-        {imageError ? null : (
+        {imageError || recruit.companyImageUrl === '' ? null : (
           <div className="relative h-[84px] w-[84px] flex-shrink-0">
             <Image
               onError={() => setImageError(true)}
@@ -82,7 +80,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
             {recruit.jobCategories.length !== 0 ? `외 ${recruit.jobCategories.length}종` : null}
           </div>
           <div className="badge-sm bg-main-light text-main flex h-[24px] items-center justify-center rounded-[8px] px-2">
-            인턴
+            {convertEnumToKorContractType(recruit.contractType)}
           </div>
         </div>
         <div className="flex items-center gap-x-1">
