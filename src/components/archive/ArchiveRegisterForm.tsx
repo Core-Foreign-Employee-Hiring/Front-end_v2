@@ -107,10 +107,8 @@ export default function ArchiveRegisterForm({ setIsArchiveRegisterFormOpen }: Ar
 
   return (
     <main>
-      <Header setIsHomeMenuOpen={setIsHomeMenuOpen} isHomeMenuOpen={isHomeMenuOpen} />
-      <div className="pt-[80px]">
-        <Header headerType={'dynamic'} title={'합격 아카이브 등록'}></Header>
-      </div>
+      <Header headerType={'dynamic'} title={'합격 아카이브 등록'}></Header>
+
       {isHomeMenuOpen ? (
         <Menu setIsHomeMenuOpen={setIsHomeMenuOpen} />
       ) : (
