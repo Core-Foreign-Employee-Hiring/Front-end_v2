@@ -33,7 +33,8 @@ export default function ChangeAccountForm() {
   useEffect(() => {
     if (type === 'pw') {
       // 정규식을 사용하여 대소문자, 숫자, 기호, 길이 검증
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]{8,15}$/
 
       if (!passwordRegex.test(newPW)) {
         setIsPasswordValid(false)
