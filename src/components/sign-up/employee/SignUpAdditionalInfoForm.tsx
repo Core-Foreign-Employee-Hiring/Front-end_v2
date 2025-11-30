@@ -55,16 +55,17 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
               setCurrentStep(2)
               const result = await postMemberEmployeeRegister(employeeSignUp)
               console.log('result', result)
-              if (result.success && result.data) {
-                Cookies.set('accessToken', result.data.accessToken)
-                Cookies.set('refreshToken', result.data.accessToken)
+              if (result.success) {
+                if (result.data) {
+                  Cookies.set('accessToken', result.data.accessToken)
+                  Cookies.set('refreshToken', result.data.accessToken)
+                }
                 router.push('/')
               }
               console.log('회원가입 response', result)
             }
           }}
           size={'lg'}
-          // type={'active'}
           type={isFormValid ? 'active' : 'disabled'}
           customClassName={'w-full'}
         >
