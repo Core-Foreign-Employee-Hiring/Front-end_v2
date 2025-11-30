@@ -10,7 +10,7 @@ import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useAuthStore } from '@/store/authStore'
 
 const EmployeeSignUp = () => {
-  const [currentStep, setCurrentStep] = useState<1 | 2>(2)
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1)
   const setModalState = useModalStore((state) => state.setState)
   const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
