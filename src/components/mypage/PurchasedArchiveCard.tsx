@@ -48,7 +48,7 @@ export default function PurchasedArchiveCard({
       )}
 
       <section className="flex items-center gap-x-[13px]">
-        <div className="relative h-[84px] w-[80px]">
+        <div className="relative h-[84px] w-[80px] whitespace-nowrap">
           <Image fill src={thumbnailUrl} alt={'섬네일'} className={'rounded-[12px] object-cover'} />
         </div>
         <div className="flex flex-col gap-y-1">

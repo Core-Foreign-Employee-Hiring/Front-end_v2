@@ -9,7 +9,6 @@ import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { postMemberEmployeeRegister } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
 import JobRoleField from '@/components/sign-up/employee/JobRoleField'
 
 interface SignUpAdditionalInfoFormProps {
@@ -56,11 +55,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
               const result = await postMemberEmployeeRegister(employeeSignUp)
               console.log('result', result)
               if (result.success) {
-                if (result.data) {
-                  Cookies.set('accessToken', result.data.accessToken)
-                  Cookies.set('refreshToken', result.data.accessToken)
-                }
-                router.push('/')
+                router.push('/login')
               }
               console.log('회원가입 response', result)
             }

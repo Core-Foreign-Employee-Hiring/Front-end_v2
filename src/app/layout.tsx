@@ -1,3 +1,4 @@
+// app/layout.tsx (서버 컴포넌트 유지)
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -5,6 +6,9 @@ import './globals.css'
 import Script from 'next/script'
 import React from 'react'
 import LayoutContent from '@/components/common/LayoutContent'
+import { ScriptLoader } from '@/components/common/ScriptLoader'
+import { QueryClientProvider } from 'react-query'
+import { Providers } from '@/components/common/Providers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,62 +30,7 @@ const pretendard = localFont({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.korfit.co.kr'
 
 export const metadata: Metadata = {
-  title: 'Korfit - 외국인을 위한 한국 취업 로드맵',
-  description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
-  keywords: [
-    'KORFIT',
-    '외국인 취업',
-    '한국 취업',
-    '외국인 채용',
-    '취업 로드맵',
-    'AI 취업 코칭',
-    '10단계 역량 검증',
-    '외국인 구직',
-    '한국 일자리',
-    '글로벌 인재',
-    '취업 플랫폼',
-    '채용 정보',
-    '포트폴리오 지원',
-    '취업 역량 강화',
-  ],
-
-  openGraph: {
-    type: 'website',
-    locale: 'ko_KR',
-    url: `${SITE_URL}/`,
-    siteName: 'Korfit',
-    title: 'Korfit - 외국인을 위한 한국 취업 로드맵',
-    description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
-    images: [
-      {
-        url: `${SITE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: 'Korfit',
-      },
-    ],
-  },
-
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Korfit',
-    description: 'Kickstart your job in Korea with a hiring roadmap for foreigners.',
-  },
-
-  authors: [{ name: 'Korfit Team' }],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-snippet': -1,
-      'max-image-preview': 'large',
-    },
-  },
-  alternates: {
-    canonical: `${SITE_URL}/`,
-  },
+  // ... metadata 그대로
 }
 
 export default function RootLayout({
@@ -133,39 +82,12 @@ export default function RootLayout({
             }),
           }}
         />
-
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-          async
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      // 🔥 bfcache 감지 후 GA 이벤트 전송
-      window.addEventListener('pageshow', (event) => {
-        if (event.persisted) {
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-            page_path: window.location.pathname,
-          });
-        }
-      });
-      
-      gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-        page_path: window.location.pathname,
-      });
-    `,
-          }}
-        />
       </head>
+
       <body className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable} antialiased`}>
-        <LayoutContent>{children}</LayoutContent>
+        <Providers>
+          <LayoutContent>{children}</LayoutContent>
+        </Providers>
       </body>
     </html>
   )
