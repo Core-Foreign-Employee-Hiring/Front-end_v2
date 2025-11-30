@@ -1,3 +1,5 @@
+import { JobRoleType } from '@/types/recruit'
+
 export interface EmployeeSignUpType {
   userId?: string
   email?: string
@@ -11,6 +13,7 @@ export interface EmployeeSignUpType {
   gender?: 'MALE' | 'FEMALE' | 'NULL'
   nationality?: string
   education?: string
+  jobRoles?: JobRoleType[]
   visa?: string
   termsOfServiceAgreement?: boolean
   personalInfoAgreement?: boolean

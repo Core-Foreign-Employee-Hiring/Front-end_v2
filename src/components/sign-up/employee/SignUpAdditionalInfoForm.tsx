@@ -4,12 +4,13 @@ import NationalityField from '@/components/sign-up/employee/NationalityField'
 import EducationField from '@/components/sign-up/employee/EducationField'
 import VisaField from '@/components/sign-up/employee/VisaField'
 import TermsOfServiceField from '@/components/sign-up/employee/TermsOfServiceField'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { postMemberEmployeeRegister } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import JobRoleField from '@/components/sign-up/employee/JobRoleField'
 
 interface SignUpAdditionalInfoFormProps {
   setCurrentStep: Dispatch<SetStateAction<1 | 2>>
@@ -18,6 +19,10 @@ interface SignUpAdditionalInfoFormProps {
 export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAdditionalInfoFormProps) {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp) ?? {}
   const router = useRouter()
+
+  useEffect(() => {
+    console.log('employeeSignUp', employeeSignUp)
+  }, [employeeSignUp])
 
   const isFormValid =
     !!employeeSignUp.birthDate &&
@@ -35,6 +40,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
         <BirthDateField />
         <NationalityField />
         <VisaField />
+        <JobRoleField />
         <EducationField />
         <GenderField />
         <TermsOfServiceField />
@@ -48,12 +54,13 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
             if (isFormValid) {
               setCurrentStep(2)
               const result = await postMemberEmployeeRegister(employeeSignUp)
-              if (result.data) {
+              console.log('result', result)
+              if (result.success && result.data) {
                 Cookies.set('accessToken', result.data.accessToken)
                 Cookies.set('refreshToken', result.data.accessToken)
+                router.push('/')
               }
               console.log('회원가입 response', result)
-              router.push('/')
             }
           }}
           size={'lg'}
@@ -61,7 +68,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
           type={isFormValid ? 'active' : 'disabled'}
           customClassName={'w-full'}
         >
-          다음
+          완료
         </Button>
       </div>
     </div>

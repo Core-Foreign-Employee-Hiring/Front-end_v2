@@ -1,34 +1,29 @@
 'use client'
 
-import { nationalityInfoData } from '@/lib/common'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'
-import { CountryType } from '@/types/common'
 import { DropboxArrowDownIcon, DropboxArrowUpIcon, SearchIcon } from '@/assets/svgComponents'
 import Input from '@/components/common/Input'
+import { NATIONALITY_LIST } from '@/utils/filterList'
 
 export default function NationalityField() {
-  const [nationalityInfoList, setNationalityInfoList] = useState<CountryType[]>([])
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setAuthStoreState = useAuthStore((state) => state.setState)
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  {
-    /* 국적 데아터 가져오기 */
-  }
-  useEffect(() => {
-    nationalityInfoData().then((r) => {
-      if (r) {
-        console.log('r', r)
-        setNationalityInfoList(r)
-      }
-    })
-  }, [])
 
+  // 검색어에 따라 필터링된 국적 리스트
   const filteredList = useMemo(() => {
-    if (!searchValue) return nationalityInfoList
-    return nationalityInfoList.filter((item) => item.name.common.toLowerCase().includes(searchValue.toLowerCase()))
-  }, [searchValue, nationalityInfoList])
+    if (!searchValue) return NATIONALITY_LIST
+    return NATIONALITY_LIST.filter((item) => item.label.toLowerCase().includes(searchValue.toLowerCase()))
+  }, [searchValue])
+
+  // 현재 선택된 국적의 라벨을 찾는 함수
+  const getSelectedLabel = () => {
+    if (!employeeSignUp?.nationality) return '국적을 선택해주세요.'
+    const found = NATIONALITY_LIST.find((item) => item.code === employeeSignUp.nationality)
+    return found?.label || employeeSignUp.nationality
+  }
 
   return (
     <div className="flex flex-col gap-y-2">
@@ -47,11 +42,11 @@ export default function NationalityField() {
           />
         ) : (
           <section
-            onClick={() => setIsDropBoxOpen(!isDropBoxOpen)}
+            onClick={() => setIsDropBoxOpen(true)}
             className={`border-gray2 flex h-[52px] w-full items-center justify-between rounded-[16px] border px-4 py-3`}
           >
             <p className={`${employeeSignUp?.nationality ? 'text-black' : 'text-gray4'} button`}>
-              {employeeSignUp?.nationality ? employeeSignUp?.nationality : '국적을 선택해주세요.'}
+              {getSelectedLabel()}
             </p>
             {isDropBoxOpen ? (
               <DropboxArrowUpIcon width={20} height={20} />
@@ -60,16 +55,17 @@ export default function NationalityField() {
             )}
           </section>
         )}
+
         {isDropBoxOpen ? (
-          <section className="border-gray2 h absolute top-15 z-10 flex max-h-[420px] w-full flex-col overflow-y-scroll rounded-[16px] border bg-white">
-            {filteredList.map((nationalityInfo) => (
+          <section className="border-gray2 absolute top-15 z-10 flex max-h-[420px] w-full flex-col overflow-y-scroll rounded-[16px] border bg-white">
+            {filteredList.map((nationality) => (
               <div
-                key={nationalityInfo.cca2}
+                key={nationality.code}
                 onClick={() => {
                   setAuthStoreState({
                     employeeSignUp: {
                       ...employeeSignUp,
-                      nationality: nationalityInfo.name.common,
+                      nationality: nationality.code,
                     },
                   })
                   setIsDropBoxOpen(false)
@@ -77,7 +73,7 @@ export default function NationalityField() {
                 }}
                 className="hover:bg-gray1 cursor-pointer px-4 py-2"
               >
-                {nationalityInfo.name.common}
+                {nationality.label}
               </div>
             ))}
           </section>
