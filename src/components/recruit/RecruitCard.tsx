@@ -1,12 +1,13 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { RecruitResponseContentType } from '@/types/recruit'
-import { convertEnumToKorContractType } from '@/utils/recruit'
+import { convertEnumToKorContractType, jobCategoryList } from '@/utils/recruit'
 import { LocationIcon } from '@/assets/svgComponents'
 import { useState } from 'react'
 import { getJobCategoryLabel } from '@/utils/filterList'
+import { useTranslation } from 'react-i18next'
 
 interface RecruitCardProps {
   recruit: RecruitResponseContentType
@@ -15,6 +16,12 @@ interface RecruitCardProps {
 const RecruitCard = ({ recruit }: RecruitCardProps) => {
   const [imageError, setImageError] = useState(false)
   const router = useRouter()
+
+  const { t } = useTranslation()
+
+  const pathName = usePathname()
+
+  const lang = localStorage.getItem('i18nextLng')
 
   const formatDate = (dateString: string) => {
     // "2025-07-16" -> "07/16(수)"
@@ -75,10 +82,18 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       </section>
       <section className="flex justify-between">
         <div className="flex items-center gap-x-1">
-          <div className="badge-sm text-gray4 bg-gray2 flex h-[24px] items-center justify-center rounded-[8px] px-2">
-            {getJobCategoryLabel(recruit.jobCategories[0])}
-            {recruit.jobCategories.length !== 0 ? `외 ${recruit.jobCategories.length}종` : null}
-          </div>
+          {recruit.jobCategories.length !== 0 && (
+            <div className="badge-sm text-gray4 bg-gray2 flex h-[24px] items-center justify-center rounded-[8px] px-2">
+              {lang === 'ko' ? (
+                <>
+                  {t(getJobCategoryLabel(recruit.jobCategories[0]))}
+                  {recruit.jobCategories.length !== 0 ? `외 ${recruit.jobCategories.length}종` : null}
+                </>
+              ) : (
+                <>{`${t(getJobCategoryLabel(recruit.jobCategories[0]))} ${recruit.jobCategories.length !== 0 ? '...' : ''}`}</>
+              )}
+            </div>
+          )}
           <div className="badge-sm bg-main-light text-main flex h-[24px] items-center justify-center rounded-[8px] px-2">
             {convertEnumToKorContractType(recruit.contractType)}
           </div>

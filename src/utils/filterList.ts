@@ -217,45 +217,44 @@ export const NATIONALITY_LIST: { code: CountryType; label: string }[] = [
   { code: 'HONG_KONG', label: 'Hong Kong (홍콩)' },
   { code: 'MACAU', label: 'Macau (마카오)' },
 ]
-
-export const VISA_LIST: { code: VisaType; label: string }[] = [
-  { code: 'A1', label: 'A-1 외교' },
-  { code: 'A2', label: 'A-2 공무' },
-  { code: 'A3', label: 'A-3 협정' },
-  { code: 'B1', label: 'B-1 사증면제' },
-  { code: 'B2', label: 'B-2 관광통과' },
-  { code: 'C1', label: 'C-1 일시취재' },
-  { code: 'C3', label: 'C-3 단기방문' },
-  { code: 'C4', label: 'C-4 문화예술' },
-  { code: 'D2', label: 'D-2 유학' },
-  { code: 'D3', label: 'D-3 기술연수' },
-  { code: 'D4', label: 'D-4 일반연수' },
-  { code: 'D5', label: 'D-5 취재' },
-  { code: 'D6', label: 'D-6 종교' },
-  { code: 'D7', label: 'D-7 주재' },
-  { code: 'D8', label: 'D-8 기업투자' },
-  { code: 'D9', label: 'D-9 무역경영' },
-  { code: 'D10', label: 'D-10 구직' },
-  { code: 'E1', label: 'E-1 교수' },
-  { code: 'E2', label: 'E-2 회화지도' },
-  { code: 'E3', label: 'E-3 연구' },
-  { code: 'E4', label: 'E-4 기술지도' },
-  { code: 'E5', label: 'E-5 전문직업' },
-  { code: 'E6', label: 'E-6 예술흥행' },
-  { code: 'E7', label: 'E-7 특정활동' },
-  { code: 'E8', label: 'E-8 계절근로' },
-  { code: 'E9', label: 'E-9 비전문취업' },
-  { code: 'E10', label: 'E-10 선원취업' },
-  { code: 'F1', label: 'F-1 방문동거' },
-  { code: 'F2', label: 'F-2 거주' },
-  { code: 'F3', label: 'F-3 동반' },
-  { code: 'F4', label: 'F-4 재외동포' },
-  { code: 'F5', label: 'F-5 영주' },
-  { code: 'F6', label: 'F-6 결혼이민' },
-  { code: 'G1', label: 'G-1 기타' },
-  { code: 'H1', label: 'H-1 관광취업' },
-  { code: 'H2', label: 'H-2 방문취업' },
-  { code: 'F27', label: 'F-2-7 점수제 우수인재' },
+export const VISA_LIST: { code: VisaType; i18nKey: string }[] = [
+  { code: 'A1', i18nKey: 'filter.visaFilter.content.A1' },
+  { code: 'A2', i18nKey: 'filter.visaFilter.content.A2' },
+  { code: 'A3', i18nKey: 'filter.visaFilter.content.A3' },
+  { code: 'B1', i18nKey: 'filter.visaFilter.content.B1' },
+  { code: 'B2', i18nKey: 'filter.visaFilter.content.B2' },
+  { code: 'C1', i18nKey: 'filter.visaFilter.content.C1' },
+  { code: 'C3', i18nKey: 'filter.visaFilter.content.C3' },
+  { code: 'C4', i18nKey: 'filter.visaFilter.content.C4' },
+  { code: 'D2', i18nKey: 'filter.visaFilter.content.D2' },
+  { code: 'D3', i18nKey: 'filter.visaFilter.content.D3' },
+  { code: 'D4', i18nKey: 'filter.visaFilter.content.D4' },
+  { code: 'D5', i18nKey: 'filter.visaFilter.content.D5' },
+  { code: 'D6', i18nKey: 'filter.visaFilter.content.D6' },
+  { code: 'D7', i18nKey: 'filter.visaFilter.content.D7' },
+  { code: 'D8', i18nKey: 'filter.visaFilter.content.D8' },
+  { code: 'D9', i18nKey: 'filter.visaFilter.content.D9' },
+  { code: 'D10', i18nKey: 'filter.visaFilter.content.D10' },
+  { code: 'E1', i18nKey: 'filter.visaFilter.content.E1' },
+  { code: 'E2', i18nKey: 'filter.visaFilter.content.E2' },
+  { code: 'E3', i18nKey: 'filter.visaFilter.content.E3' },
+  { code: 'E4', i18nKey: 'filter.visaFilter.content.E4' },
+  { code: 'E5', i18nKey: 'filter.visaFilter.content.E5' },
+  { code: 'E6', i18nKey: 'filter.visaFilter.content.E6' },
+  { code: 'E7', i18nKey: 'filter.visaFilter.content.E7' },
+  { code: 'E8', i18nKey: 'filter.visaFilter.content.E8' },
+  { code: 'E9', i18nKey: 'filter.visaFilter.content.E9' },
+  { code: 'E10', i18nKey: 'filter.visaFilter.content.E10' },
+  { code: 'F1', i18nKey: 'filter.visaFilter.content.F1' },
+  { code: 'F2', i18nKey: 'filter.visaFilter.content.F2' },
+  { code: 'F3', i18nKey: 'filter.visaFilter.content.F3' },
+  { code: 'F4', i18nKey: 'filter.visaFilter.content.F4' },
+  { code: 'F5', i18nKey: 'filter.visaFilter.content.F5' },
+  { code: 'F6', i18nKey: 'filter.visaFilter.content.F6' },
+  { code: 'G1', i18nKey: 'filter.visaFilter.content.G1' },
+  { code: 'H1', i18nKey: 'filter.visaFilter.content.H1' },
+  { code: 'H2', i18nKey: 'filter.visaFilter.content.H2' },
+  { code: 'F27', i18nKey: 'filter.visaFilter.content.F27' },
 ] as const
 
 export const WORK_REGIONS = [
@@ -306,229 +305,249 @@ export const LANGUAGE_LIST = [
 ] as const
 
 export const JOB_CATEGORY_LIST: { code: JobCategoryType; label: string }[] = [
-  { code: 'IT_DEVELOPMENT', label: 'IT/개발' },
-  { code: 'BUSINESS_MANAGEMENT', label: '경영/비즈니스' },
-  { code: 'MARKETING_ADVERTISING', label: '마케팅/광고' },
-  { code: 'DESIGN', label: '디자인' },
-  { code: 'SALES', label: '영업' },
-  { code: 'CUSTOMER_SERVICE_RETAIL', label: '고객서비스/리테일' },
-  { code: 'TRANSLATION_INTERPRETATION', label: '통/번역' },
-  { code: 'MEDIA', label: '미디어' },
-  { code: 'ENGINEERING_DESIGN', label: '엔지니어링/설계' },
-  { code: 'HR', label: 'HR' },
-  { code: 'GAME_PRODUCTION', label: '게임 제작' },
-  { code: 'FINANCE', label: '금융' },
-  { code: 'MANUFACTURING_PRODUCTION', label: '제조/생산' },
-  { code: 'EDUCATION', label: '교육' },
-  { code: 'HEALTHCARE_PHARMA_BIO', label: '의료/제약/바이오' },
-  { code: 'LOGISTICS_TRADE', label: '물류/무역' },
-  { code: 'FOOD_BEVERAGE', label: '식/음료' },
-  { code: 'CONSTRUCTION_FACILITIES', label: '건설/시설' },
-  { code: 'ENTERTAINMENT', label: '엔터테인먼트' },
+  { code: 'IT_DEVELOPMENT', label: 'filter.jobRoleFilter.category.JOB_1.title' },
+  { code: 'BUSINESS_MANAGEMENT', label: 'filter.jobRoleFilter.category.JOB_2.title' },
+  { code: 'MARKETING_ADVERTISING', label: 'filter.jobRoleFilter.category.JOB_3.title' },
+  { code: 'DESIGN', label: 'filter.jobRoleFilter.category.JOB_4.title' },
+  { code: 'SALES', label: 'filter.jobRoleFilter.category.JOB_5.title' },
+  { code: 'CUSTOMER_SERVICE_RETAIL', label: 'filter.jobRoleFilter.category.JOB_6.title' },
+  { code: 'TRANSLATION_INTERPRETATION', label: 'filter.jobRoleFilter.category.JOB_7.title' },
+  { code: 'MEDIA', label: 'filter.jobRoleFilter.category.JOB_8.title' },
+  { code: 'ENGINEERING_DESIGN', label: 'filter.jobRoleFilter.category.JOB_9.title' },
+  { code: 'HR', label: 'filter.jobRoleFilter.category.JOB_10.title' },
+  { code: 'GAME_PRODUCTION', label: 'filter.jobRoleFilter.category.JOB_11.title' },
+  { code: 'FINANCE', label: 'filter.jobRoleFilter.category.JOB_12.title' },
+  { code: 'MANUFACTURING_PRODUCTION', label: 'filter.jobRoleFilter.category.JOB_13.title' },
+  { code: 'EDUCATION', label: 'filter.jobRoleFilter.category.JOB_14.title' },
+  { code: 'HEALTHCARE_PHARMA_BIO', label: 'filter.jobRoleFilter.category.JOB_15.title' },
+  { code: 'LOGISTICS_TRADE', label: 'filter.jobRoleFilter.category.JOB_16.title' },
+  { code: 'FOOD_BEVERAGE', label: 'filter.jobRoleFilter.category.JOB_17.title' },
+  { code: 'CONSTRUCTION_FACILITIES', label: 'filter.jobRoleFilter.category.JOB_18.title' },
+  { code: 'ENTERTAINMENT', label: 'filter.jobRoleFilter.category.JOB_19.title' },
 ]
 
 export const IT_DEVELOPMENT_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'SOFTWARE_ENGINEER', label: '소프트웨어 엔지니어' },
-  { code: 'WEB_DEVELOPER', label: '웹 개발자' },
-  { code: 'BACKEND_DEVELOPER', label: '백엔드 개발자' },
-  { code: 'FRONTEND_DEVELOPER', label: '프론트엔드 개발자' },
-  { code: 'JAVA_DEVELOPER', label: '자바 개발자' },
-  { code: 'C_CPP_DEVELOPER', label: 'C/C++ 개발자' },
-  { code: 'PYTHON_DEVELOPER', label: '파이썬 개발자' },
-  { code: 'MACHINE_LEARNING_ENGINEER', label: '머신러닝 엔지니어' },
-  { code: 'DEVOPS_ENGINEER', label: 'DevOps / 시스템 관리자' },
-  { code: 'DATA_ENGINEER', label: '데이터 엔지니어' },
-  { code: 'NODEJS_DEVELOPER', label: 'Node.js 개발자' },
-  { code: 'SYSTEM_NETWORK_ADMIN', label: '시스템/네트워크 관리자' },
-  { code: 'ANDROID_DEVELOPER', label: '안드로이드 개발자' },
-  { code: 'IOS_DEVELOPER', label: 'iOS 개발자' },
-  { code: 'EMBEDDED_DEVELOPER', label: '임베디드 개발자' },
-  { code: 'TECH_SUPPORT', label: '기술지원' },
-  { code: 'QA_TEST_ENGINEER', label: 'QA / 테스트 엔지니어' },
-  { code: 'DATA_SCIENTIST', label: '데이터 사이언티스트' },
-  { code: 'SECURITY_ENGINEER', label: '보안 엔지니어' },
-  { code: 'BIGDATA_ENGINEER', label: '빅데이터 엔지니어' },
-  { code: 'HARDWARE_ENGINEER', label: '하드웨어 엔지니어' },
-  { code: 'BLOCKCHAIN_ENGINEER', label: '블록체인 엔지니어' },
-  { code: 'CROSS_PLATFORM_APP_DEVELOPER', label: '크로스플랫폼 앱 개발자' },
-  { code: 'DBA', label: 'DBA' },
-  { code: 'PHP_DEVELOPER', label: 'PHP 개발자' },
-  { code: 'DOTNET_DEVELOPER', label: '.NET 개발자' },
-  { code: 'GRAPHICS_ENGINEER', label: '그래픽스 엔지니어' },
-  { code: 'AR_VR_ENGINEER', label: 'AR/VR 엔지니어' },
-  { code: 'RUBY_ON_RAILS_DEVELOPER', label: '루비온레일즈 개발자' },
+  { code: 'SOFTWARE_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.SOFTWARE_ENGINEER' },
+  { code: 'WEB_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.WEB_DEVELOPER' },
+  { code: 'BACKEND_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.BACKEND_DEVELOPER' },
+  { code: 'FRONTEND_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.FRONTEND_DEVELOPER' },
+  { code: 'JAVA_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.JAVA_DEVELOPER' },
+  { code: 'C_CPP_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.C_CPP_DEVELOPER' },
+  { code: 'PYTHON_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.PYTHON_DEVELOPER' },
+  { code: 'MACHINE_LEARNING_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.MACHINE_LEARNING_ENGINEER' },
+  { code: 'DEVOPS_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.DEVOPS_ENGINEER' },
+  { code: 'DATA_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.DATA_ENGINEER' },
+  { code: 'NODEJS_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.NODEJS_DEVELOPER' },
+  { code: 'SYSTEM_NETWORK_ADMIN', label: 'filter.jobRoleFilter.category.JOB_1.SYSTEM_NETWORK_ADMIN' },
+  { code: 'ANDROID_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.ANDROID_DEVELOPER' },
+  { code: 'IOS_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.IOS_DEVELOPER' },
+  { code: 'EMBEDDED_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.EMBEDDED_DEVELOPER' },
+  { code: 'TECH_SUPPORT', label: 'filter.jobRoleFilter.category.JOB_1.TECH_SUPPORT' },
+  { code: 'QA_TEST_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.QA_TEST_ENGINEER' },
+  { code: 'DATA_SCIENTIST', label: 'filter.jobRoleFilter.category.JOB_1.DATA_SCIENTIST' },
+  { code: 'SECURITY_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.SECURITY_ENGINEER' },
+  { code: 'BIGDATA_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.BIGDATA_ENGINEER' },
+  { code: 'HARDWARE_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.HARDWARE_ENGINEER' },
+  { code: 'BLOCKCHAIN_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.BLOCKCHAIN_ENGINEER' },
+  { code: 'CROSS_PLATFORM_APP_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.CROSS_PLATFORM_APP_DEVELOPER' },
+  { code: 'DBA', label: 'filter.jobRoleFilter.category.JOB_1.DBA' },
+  { code: 'PHP_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.PHP_DEVELOPER' },
+  { code: 'DOTNET_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.DOTNET_DEVELOPER' },
+  { code: 'GRAPHICS_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.GRAPHICS_ENGINEER' },
+  { code: 'AR_VR_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_1.AR_VR_ENGINEER' },
+  { code: 'RUBY_ON_RAILS_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_1.RUBY_ON_RAILS_DEVELOPER' },
 ]
 
 export const BUSINESS_MANAGEMENT_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'PM_PO', label: 'PM/PO' },
-  { code: 'PROJECT_MANAGER', label: '프로젝트 매니저' },
-  { code: 'STRATEGY_PLANNER', label: '전략 기획자' },
-  { code: 'OPERATIONS_MANAGER', label: '운영 매니저' },
-  { code: 'DATA_ANALYST', label: '데이터 분석가' },
-  { code: 'BRAND_MANAGER', label: '브랜드 매니저' },
-  { code: 'GLOBAL_BUSINESS_DEVELOPER', label: '해외 사업개발 / 기획자' },
-  { code: 'CONSULTANT', label: '컨설턴트' },
-  { code: 'PURCHASING_MANAGER', label: '구매담당' },
-  { code: 'BUSINESS_INNOVATOR', label: '경영 혁신가' },
-  { code: 'AGILE_COACH', label: '애자일코치' },
+  { code: 'PM_PO', label: 'filter.jobRoleFilter.category.JOB_2.PM_PO' },
+  { code: 'PROJECT_MANAGER', label: 'filter.jobRoleFilter.category.JOB_2.PROJECT_MANAGER' },
+  { code: 'STRATEGY_PLANNER', label: 'filter.jobRoleFilter.category.JOB_2.STRATEGY_PLANNER' },
+  { code: 'OPERATIONS_MANAGER', label: 'filter.jobRoleFilter.category.JOB_2.OPERATIONS_MANAGER' },
+  { code: 'DATA_ANALYST', label: 'filter.jobRoleFilter.category.JOB_2.DATA_ANALYST' },
+  { code: 'BRAND_MANAGER', label: 'filter.jobRoleFilter.category.JOB_2.BRAND_MANAGER' },
+  { code: 'GLOBAL_BUSINESS_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_2.GLOBAL_BUSINESS_DEVELOPER' },
+  { code: 'CONSULTANT', label: 'filter.jobRoleFilter.category.JOB_2.CONSULTANT' },
+  { code: 'PURCHASING_MANAGER', label: 'filter.jobRoleFilter.category.JOB_2.PURCHASING_MANAGER' },
+  { code: 'BUSINESS_INNOVATOR', label: 'filter.jobRoleFilter.category.JOB_2.BUSINESS_INNOVATOR' },
+  { code: 'AGILE_COACH', label: 'filter.jobRoleFilter.category.JOB_2.AGILE_COACH' },
 ]
 
 export const MARKETING_ADVERTISING_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'MARKETING_MANAGER', label: '마케팅 매니저' },
-  { code: 'DIGITAL_MARKETER', label: '디지털 마케터' },
-  { code: 'CONTENT_MARKETER', label: '콘텐츠 마케터' },
-  { code: 'PERFORMANCE_MARKETER', label: '퍼포먼스 마케터' },
-  { code: 'BRAND_MARKETER', label: '브랜드 마케터' },
-  { code: 'GLOBAL_MARKETING_MANAGER', label: '글로벌 마케팅 매니저' },
-  { code: 'SNS_MARKETER', label: 'SNS 마케터' },
-  { code: 'PR_SPECIALIST', label: 'PR 전문가' },
-  { code: 'GROWTH_HACKER', label: '그로스 해커' },
-  { code: 'MARKETING_DIRECTOR', label: '마케팅 디렉터' },
-  { code: 'MARKET_RESEARCHER', label: '마켓 리서치' },
+  { code: 'MARKETING_MANAGER', label: 'filter.jobRoleFilter.category.JOB_3.MARKETING_MANAGER' },
+  { code: 'DIGITAL_MARKETER', label: 'filter.jobRoleFilter.category.JOB_3.DIGITAL_MARKETER' },
+  { code: 'CONTENT_MARKETER', label: 'filter.jobRoleFilter.category.JOB_3.CONTENT_MARKETER' },
+  { code: 'PERFORMANCE_MARKETER', label: 'filter.jobRoleFilter.category.JOB_3.PERFORMANCE_MARKETER' },
+  { code: 'BRAND_MARKETER', label: 'filter.jobRoleFilter.category.JOB_3.BRAND_MARKETER' },
+  { code: 'GLOBAL_MARKETING_MANAGER', label: 'filter.jobRoleFilter.category.JOB_3.GLOBAL_MARKETING_MANAGER' },
+  { code: 'SNS_MARKETER', label: 'filter.jobRoleFilter.category.JOB_3.SNS_MARKETER' },
+  { code: 'PR_SPECIALIST', label: 'filter.jobRoleFilter.category.JOB_3.PR_SPECIALIST' },
+  { code: 'GROWTH_HACKER', label: 'filter.jobRoleFilter.category.JOB_3.GROWTH_HACKER' },
+  { code: 'MARKETING_DIRECTOR', label: 'filter.jobRoleFilter.category.JOB_3.MARKETING_DIRECTOR' },
+  { code: 'MARKET_RESEARCHER', label: 'filter.jobRoleFilter.category.JOB_3.MARKET_RESEARCHER' },
 ]
 
 export const DESIGN_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'UI_UX_DESIGNER', label: 'UI/UX 디자이너' },
-  { code: 'WEB_DESIGNER', label: '웹 디자이너' },
-  { code: 'GRAPHIC_DESIGNER', label: '그래픽 디자이너' },
-  { code: 'SPACE_DESIGNER', label: '공간 디자이너' },
-  { code: 'MOTION_DESIGNER', label: '영상/모션 디자이너' },
-  { code: 'FASHION_DESIGNER', label: '패션 디자이너' },
-  { code: 'ART_DIRECTOR', label: '아트 디렉터' },
-  { code: 'INDUSTRIAL_DESIGNER', label: '산업 디자이너' },
-  { code: 'FURNITURE_DESIGNER', label: '가구 디자이너' },
-  { code: 'LANDSCAPE_DESIGNER', label: '조경 디자이너' },
+  { code: 'UI_UX_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.UI_UX_DESIGNER' },
+  { code: 'WEB_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.WEB_DESIGNER' },
+  { code: 'GRAPHIC_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.GRAPHIC_DESIGNER' },
+  { code: 'SPACE_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.SPACE_DESIGNER' },
+  { code: 'MOTION_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.MOTION_DESIGNER' },
+  { code: 'FASHION_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.FASHION_DESIGNER' },
+  { code: 'ART_DIRECTOR', label: 'filter.jobRoleFilter.category.JOB_4.ART_DIRECTOR' },
+  { code: 'INDUSTRIAL_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.INDUSTRIAL_DESIGNER' },
+  { code: 'FURNITURE_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.FURNITURE_DESIGNER' },
+  { code: 'LANDSCAPE_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_4.LANDSCAPE_DESIGNER' },
 ]
 
 export const SALE_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'INTERNATIONAL_SALES', label: '해외영업' },
-  { code: 'TECHNICAL_SALES', label: '기술영업' },
-  { code: 'SOLUTION_CONSULTANT', label: '솔루션 컨설턴트' },
-  { code: 'MEDIA_SALES', label: '미디어 세일즈' },
-  { code: 'CUSTOMER_SUCCESS_MANAGER', label: '고객성공매니저' },
-  { code: 'SALES_ENGINEER', label: '세일즈 엔지니어' },
+  { code: 'INTERNATIONAL_SALES', label: 'filter.jobRoleFilter.category.JOB_5.INTERNATIONAL_SALES' },
+  { code: 'TECHNICAL_SALES', label: 'filter.jobRoleFilter.category.JOB_5.TECHNICAL_SALES' },
+  { code: 'SOLUTION_CONSULTANT', label: 'filter.jobRoleFilter.category.JOB_5.SOLUTION_CONSULTANT' },
+  { code: 'MEDIA_SALES', label: 'filter.jobRoleFilter.category.JOB_5.MEDIA_SALES' },
+  { code: 'CUSTOMER_SUCCESS_MANAGER', label: 'filter.jobRoleFilter.category.JOB_5.CUSTOMER_SUCCESS_MANAGER' },
+  { code: 'SALES_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_5.SALES_ENGINEER' },
+]
+export const CUSTOMER_SERVICE_RETAIL_LIST: { code: JobRoleType; label: string }[] = [
+  { code: 'GLOBAL_CS_MANAGER', label: 'filter.jobRoleFilter.category.JOB_6.GLOBAL_CS_MANAGER' },
+  { code: 'RETAIL_MD', label: 'filter.jobRoleFilter.category.JOB_6.RETAIL_MD' },
+  { code: 'CUSTOMER_SUPPORT', label: 'filter.jobRoleFilter.category.JOB_6.CUSTOMER_SUPPORT' },
+  { code: 'FASHION_MD', label: 'filter.jobRoleFilter.category.JOB_6.FASHION_MD' },
+  { code: 'CRM_SPECIALIST', label: 'filter.jobRoleFilter.category.JOB_6.CRM_SPECIALIST' },
+  { code: 'RECEPTIONIST', label: 'filter.jobRoleFilter.category.JOB_6.RECEPTIONIST' },
+  { code: 'TRAVEL_AGENT', label: 'filter.jobRoleFilter.category.JOB_6.TRAVEL_AGENT' },
+  { code: 'FLIGHT_ATTENDANT', label: 'filter.jobRoleFilter.category.JOB_6.FLIGHT_ATTENDANT' },
+  { code: 'STORE_CLERK', label: 'filter.jobRoleFilter.category.JOB_6.STORE_CLERK' },
+  { code: 'TOURISM_WORKER', label: 'filter.jobRoleFilter.category.JOB_6.TOURISM_WORKER' },
 ]
 
-export const CUSTOMER_SERVICE_RETAIL_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'GLOBAL_CS_MANAGER', label: '글로벌 CS 매니저' },
-  { code: 'RETAIL_MD', label: '리테일 MD' },
-  { code: 'CUSTOMER_SUPPORT', label: '고객 지원/상담' },
-  { code: 'FASHION_MD', label: '패션 MD' },
-  { code: 'CRM_SPECIALIST', label: 'CRM 전문가' },
-  { code: 'RECEPTIONIST', label: '리셉션' },
-  { code: 'TRAVEL_AGENT', label: '여행 에이전트' },
-  { code: 'FLIGHT_ATTENDANT', label: '승무원' },
-  { code: 'STORE_CLERK', label: '매장점원' },
-  { code: 'TOURISM_WORKER', label: '관광숙박업 종사자' },
-]
 export const TRANSLATION_INTERPRETATION_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'INTERPRETER', label: '통역사' },
-  { code: 'TRANSLATOR', label: '번역가' },
-  { code: 'LOCALIZATION_SPECIALIST', label: '로컬라이제이션 전문가' },
+  { code: 'INTERPRETER', label: 'filter.jobRoleFilter.category.JOB_7.INTERPRETER' },
+  { code: 'TRANSLATOR', label: 'filter.jobRoleFilter.category.JOB_7.TRANSLATOR' },
+  { code: 'LOCALIZATION_SPECIALIST', label: 'filter.jobRoleFilter.category.JOB_7.LOCALIZATION_SPECIALIST' },
 ]
 export const MEDIA_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'CONTENT_CREATOR', label: '콘텐츠 크리에이터' },
-  { code: 'VIDEO_EDITOR', label: '영상 편집가' },
-  { code: 'VIDEO_PRODUCER', label: '비디오 제작' },
-  { code: 'WRITER', label: '작가' },
-  { code: 'PHOTOGRAPHER', label: '사진작가' },
-  { code: 'JOURNALIST', label: '저널리스트' },
-  { code: 'CURATOR', label: '큐레이터' },
+  { code: 'CONTENT_CREATOR', label: 'filter.jobRoleFilter.category.JOB_8.CONTENT_CREATOR' },
+  { code: 'VIDEO_EDITOR', label: 'filter.jobRoleFilter.category.JOB_8.VIDEO_EDITOR' },
+  { code: 'VIDEO_PRODUCER', label: 'filter.jobRoleFilter.category.JOB_8.VIDEO_PRODUCER' },
+  { code: 'WRITER', label: 'filter.jobRoleFilter.category.JOB_8.WRITER' },
+  { code: 'PHOTOGRAPHER', label: 'filter.jobRoleFilter.category.JOB_8.PHOTOGRAPHER' },
+  { code: 'JOURNALIST', label: 'filter.jobRoleFilter.category.JOB_8.JOURNALIST' },
+  { code: 'CURATOR', label: 'filter.jobRoleFilter.category.JOB_8.CURATOR' },
 ]
 export const ENGINEERING_DESIGN_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'ELECTRICAL_ENGINEER', label: '전자 엔지니어' },
-  { code: 'ROBOTICS_AUTOMATION_ENGINEER', label: '로봇/자동화' },
-  { code: 'MECHANICAL_ENGINEER', label: '기계 엔지니어' },
-  { code: 'CAD_3D_DESIGNER', label: 'CAD/3D 설계자' },
-  { code: 'ELECTRIC_ENGINEER', label: '전기 엔지니어' },
-  { code: 'CONTROL_ENGINEER', label: '제어 엔지니어' },
-  { code: 'PRODUCT_ENGINEER', label: '제품 엔지니어' },
-  { code: 'ELECTROMECHANICAL_ENGINEER', label: '전자기계 공학자' },
-  { code: 'EQUIPMENT_ENGINEER', label: '장비 엔지니어' },
-  { code: 'QA_ENGINEER', label: 'QA 엔지니어' },
-  { code: 'INDUSTRIAL_ENGINEER', label: '산업 엔지니어' },
-  { code: 'RF_ENGINEER', label: 'RF 엔지니어' },
-  { code: 'CHEMICAL_ENGINEER', label: '화학공학 엔지니어' },
-  { code: 'AEROSPACE_ENGINEER', label: '항공우주 엔지니어' },
-  { code: 'IC_ENGINEER', label: 'I&C 엔지니어' },
-  { code: 'MATERIAL_ENGINEER', label: '재료공학자' },
-  { code: 'PLANT_ENGINEER', label: '플랜트 엔지니어' },
-  { code: 'PLASTIC_ENGINEER', label: '플라스틱 엔지니어' },
-  { code: 'QC_ENGINEER', label: 'QC 엔지니어' },
-  { code: 'STRUCTURAL_ENGINEER', label: '구조공학 엔지니어' },
-  { code: 'CONSTRUCTION_ENGINEER', label: '건설 엔지니어' },
-  { code: 'CIVIL_ENGINEER', label: '토목 엔지니어' },
-  { code: 'ENVIRONMENTAL_ENGINEER', label: '환경 엔지니어' },
-  { code: 'PRODUCTION_ENGINEER', label: '생산공학 엔지니어' },
-  { code: 'RND_RESEARCHER', label: 'R&D / 연구원' },
+  { code: 'ELECTRICAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.ELECTRICAL_ENGINEER' },
+  { code: 'ROBOTICS_AUTOMATION_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.ROBOTICS_AUTOMATION_ENGINEER' },
+  { code: 'MECHANICAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.MECHANICAL_ENGINEER' },
+  { code: 'CAD_3D_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_9.CAD_3D_DESIGNER' },
+  { code: 'ELECTRIC_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.ELECTRIC_ENGINEER' },
+  { code: 'CONTROL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.CONTROL_ENGINEER' },
+  { code: 'PRODUCT_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.PRODUCT_ENGINEER' },
+  { code: 'ELECTROMECHANICAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.ELECTROMECHANICAL_ENGINEER' },
+  { code: 'EQUIPMENT_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.EQUIPMENT_ENGINEER' },
+  { code: 'QA_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.QA_ENGINEER' },
+  { code: 'INDUSTRIAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.INDUSTRIAL_ENGINEER' },
+  { code: 'RF_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.RF_ENGINEER' },
+  { code: 'CHEMICAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.CHEMICAL_ENGINEER' },
+  { code: 'AEROSPACE_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.AEROSPACE_ENGINEER' },
+  { code: 'IC_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.IC_ENGINEER' },
+  { code: 'MATERIAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.MATERIAL_ENGINEER' },
+  { code: 'PLANT_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.PLANT_ENGINEER' },
+  { code: 'PLASTIC_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.PLASTIC_ENGINEER' },
+  { code: 'QC_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.QC_ENGINEER' },
+  { code: 'STRUCTURAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.STRUCTURAL_ENGINEER' },
+  { code: 'CONSTRUCTION_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.CONSTRUCTION_ENGINEER' },
+  { code: 'CIVIL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.CIVIL_ENGINEER' },
+  { code: 'ENVIRONMENTAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.ENVIRONMENTAL_ENGINEER' },
+  { code: 'PRODUCTION_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_9.PRODUCTION_ENGINEER' },
+  { code: 'RND_RESEARCHER', label: 'filter.jobRoleFilter.category.JOB_9.RND_RESEARCHER' },
+]
+
+export const HR_LIST: { code: JobRoleType; label: string }[] = [
+  { code: 'GLOBAL_HR_MANAGER', label: 'filter.jobRoleFilter.category.JOB_10.GLOBAL_HR_MANAGER' },
+  { code: 'RECRUITER', label: 'filter.jobRoleFilter.category.JOB_10.RECRUITER' },
+  { code: 'HR_CONSULTANT', label: 'filter.jobRoleFilter.category.JOB_10.HR_CONSULTANT' },
+  { code: 'TECH_TRAINER', label: 'filter.jobRoleFilter.category.JOB_10.TECH_TRAINER' },
+  { code: 'INHOUSE_TRAINER', label: 'filter.jobRoleFilter.category.JOB_10.INHOUSE_TRAINER' },
 ]
 
 export const GAME_PRODUCTION_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'GAME_PLANNER', label: '게임 기획자' },
-  { code: 'GAME_ARTIST', label: '게임 아티스트' },
-  { code: 'GAME_CLIENT_DEVELOPER', label: '게임 클라이언트 개발자' },
-  { code: 'UNITY_DEVELOPER', label: '유니티 개발자' },
-  { code: 'GAME_GRAPHIC_DESIGNER', label: '게임 그래픽 디자이너' },
-  { code: 'GAME_SERVER_DEVELOPER', label: '게임 서버 개발자' },
-  { code: 'MOBILE_GAME_DEVELOPER', label: '모바일 게임 개발자' },
-  { code: 'UNREAL_DEVELOPER', label: '언리얼 개발자' },
+  { code: 'GAME_PLANNER', label: 'filter.jobRoleFilter.category.JOB_11.GAME_PLANNER' },
+  { code: 'GAME_ARTIST', label: 'filter.jobRoleFilter.category.JOB_11.GAME_ARTIST' },
+  { code: 'GAME_CLIENT_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_11.GAME_CLIENT_DEVELOPER' },
+  { code: 'UNITY_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_11.UNITY_DEVELOPER' },
+  { code: 'GAME_GRAPHIC_DESIGNER', label: 'filter.jobRoleFilter.category.JOB_11.GAME_GRAPHIC_DESIGNER' },
+  { code: 'GAME_SERVER_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_11.GAME_SERVER_DEVELOPER' },
+  { code: 'MOBILE_GAME_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_11.MOBILE_GAME_DEVELOPER' },
+  { code: 'UNREAL_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_11.UNREAL_DEVELOPER' },
 ]
 
 export const FINANCE_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'INVESTMENT_BANKER', label: '투자은행가' },
-  { code: 'ASSET_MANAGER', label: '자산 운용가' },
-  { code: 'FINANCIAL_ENGINEER', label: '금융공학자' },
+  { code: 'INVESTMENT_BANKER', label: 'filter.jobRoleFilter.category.JOB_12.INVESTMENT_BANKER' },
+  { code: 'ASSET_MANAGER', label: 'filter.jobRoleFilter.category.JOB_12.ASSET_MANAGER' },
+  { code: 'FINANCIAL_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_12.FINANCIAL_ENGINEER' },
 ]
 
 export const MANUFACTURING_PRODUCTION_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'MACHINE_TECHNICIAN', label: '기계제작 기술자' },
-  { code: 'MANUFACTURING_TEST_ENGINEER', label: '제조 테스트 엔지니어' },
-  { code: 'MANUFACTURING_ENGINEER', label: '제조 엔지니어' },
-  { code: 'MANUFACTURING_CHEMIST', label: '제조 화학자' },
-  { code: 'SEMICONDUCTOR_DISPLAY_ENGINEER', label: '반도체/디스플레이 엔지니어' },
-  { code: 'PRODUCTION_WORKER', label: '생산직 종사자' },
+  { code: 'MACHINE_TECHNICIAN', label: 'filter.jobRoleFilter.category.JOB_13.MACHINE_TECHNICIAN' },
+  { code: 'MANUFACTURING_TEST_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_TEST_ENGINEER' },
+  { code: 'MANUFACTURING_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_ENGINEER' },
+  { code: 'MANUFACTURING_CHEMIST', label: 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_CHEMIST' },
+  {
+    code: 'SEMICONDUCTOR_DISPLAY_ENGINEER',
+    label: 'filter.jobRoleFilter.category.JOB_13.SEMICONDUCTOR_DISPLAY_ENGINEER',
+  },
+  { code: 'PRODUCTION_WORKER', label: 'filter.jobRoleFilter.category.JOB_13.PRODUCTION_WORKER' },
 ]
 
 export const EDUCATION_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'INSTRUCTOR', label: '강사' },
-  { code: 'LANGUAGE_EDUCATOR', label: '외국어교육' },
+  { code: 'INSTRUCTOR', label: 'filter.jobRoleFilter.category.JOB_14.INSTRUCTOR' },
+  { code: 'LANGUAGE_EDUCATOR', label: 'filter.jobRoleFilter.category.JOB_14.LANGUAGE_EDUCATOR' },
 ]
 
 export const HEALTHCARE_PHARMA_BIO_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'BIOTECH_RESEARCHER', label: '생명공학 연구원' },
-  { code: 'CLINICAL_RESEARCHER', label: '임상시험 연구원' },
-  { code: 'MICROBIOLOGIST', label: '미생물학자' },
-  { code: 'HOSPITAL_COORDINATOR', label: '병원 코디네이터' },
-  { code: 'PHARMACEUTICAL_CHEMIST', label: '약학 분석 화학자' },
-  { code: 'GENETIC_ENGINEER', label: '유전공학자' },
-  { code: 'CAREGIVER', label: '요양보호사' },
+  { code: 'BIOTECH_RESEARCHER', label: 'filter.jobRoleFilter.category.JOB_15.BIOTECH_RESEARCHER' },
+  { code: 'CLINICAL_RESEARCHER', label: 'filter.jobRoleFilter.category.JOB_15.CLINICAL_RESEARCHER' },
+  { code: 'MICROBIOLOGIST', label: 'filter.jobRoleFilter.category.JOB_15.MICROBIOLOGIST' },
+  { code: 'HOSPITAL_COORDINATOR', label: 'filter.jobRoleFilter.category.JOB_15.HOSPITAL_COORDINATOR' },
+  { code: 'PHARMACEUTICAL_CHEMIST', label: 'filter.jobRoleFilter.category.JOB_15.PHARMACEUTICAL_CHEMIST' },
+  { code: 'GENETIC_ENGINEER', label: 'filter.jobRoleFilter.category.JOB_15.GENETIC_ENGINEER' },
+  { code: 'CAREGIVER', label: 'filter.jobRoleFilter.category.JOB_15.CAREGIVER' },
 ]
 
 export const LOGISTICS_TRADE_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'LOGISTICS_MANAGER', label: '물류담당' },
-  { code: 'LOGISTICS_ANALYST', label: '물류 분석가' },
-  { code: 'EXPORT_IMPORT_OFFICER', label: '수출입사무' },
-  { code: 'TRADE_OFFICER', label: '무역사무' },
-  { code: 'BUYER_MANAGER', label: '바이어관리/상담/개발' },
-  { code: 'AIR_TRANSPORT_AGENT', label: '항공 운송' },
-  { code: 'MARINE_TRANSPORT_AGENT', label: '해운/해양 운송' },
-  { code: 'LOGISTICS_FIELD_WORKER', label: '물류 현장직 종사자' },
+  { code: 'LOGISTICS_MANAGER', label: 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_MANAGER' },
+  { code: 'LOGISTICS_ANALYST', label: 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_ANALYST' },
+  { code: 'EXPORT_IMPORT_OFFICER', label: 'filter.jobRoleFilter.category.JOB_16.EXPORT_IMPORT_OFFICER' },
+  { code: 'TRADE_OFFICER', label: 'filter.jobRoleFilter.category.JOB_16.TRADE_OFFICER' },
+  { code: 'BUYER_MANAGER', label: 'filter.jobRoleFilter.category.JOB_16.BUYER_MANAGER' },
+  { code: 'AIR_TRANSPORT_AGENT', label: 'filter.jobRoleFilter.category.JOB_16.AIR_TRANSPORT_AGENT' },
+  { code: 'MARINE_TRANSPORT_AGENT', label: 'filter.jobRoleFilter.category.JOB_16.MARINE_TRANSPORT_AGENT' },
+  { code: 'LOGISTICS_FIELD_WORKER', label: 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_FIELD_WORKER' },
+]
+
+export const FOOD_SERVICE_LIST: { code: JobRoleType; label: string }[] = [
+  { code: 'FOOD_SERVICE_WORKER', label: 'filter.jobRoleFilter.category.JOB_17.FOOD_SERVICE_WORKER' },
+  { code: 'CHEF', label: 'filter.jobRoleFilter.category.JOB_17.CHEF' },
+  { code: 'MENU_DEVELOPER', label: 'filter.jobRoleFilter.category.JOB_17.MENU_DEVELOPER' },
+  { code: 'BARTENDER', label: 'filter.jobRoleFilter.category.JOB_17.BARTENDER' },
+  { code: 'SOMMELIER', label: 'filter.jobRoleFilter.category.JOB_17.SOMMELIER' },
+  { code: 'FOOD_STYLIST', label: 'filter.jobRoleFilter.category.JOB_17.FOOD_STYLIST' },
 ]
 
 export const CONSTRUCTION_FACILITIES_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'ARCHITECT', label: '건축가' },
-  { code: 'CONSTRUCTION_SUPERVISOR', label: '건축 감리자' },
-  { code: 'MAINTENANCE_MANAGER', label: '유지보수 관리자' },
-  { code: 'CONSTRUCTION_WORKER', label: '건설 현장직 종사자' },
-  { code: 'WELDER', label: '용접공' },
-  { code: 'CARPENTER', label: '목수' },
-  { code: 'HEAVY_EQUIPMENT_TECHNICIAN', label: '중장비 기술자' },
+  { code: 'ARCHITECT', label: 'filter.jobRoleFilter.category.JOB_18.ARCHITECT' },
+  { code: 'CONSTRUCTION_SUPERVISOR', label: 'filter.jobRoleFilter.category.JOB_18.CONSTRUCTION_SUPERVISOR' },
+  { code: 'MAINTENANCE_MANAGER', label: 'filter.jobRoleFilter.category.JOB_18.MAINTENANCE_MANAGER' },
+  { code: 'CONSTRUCTION_WORKER', label: 'filter.jobRoleFilter.category.JOB_18.CONSTRUCTION_WORKER' },
+  { code: 'WELDER', label: 'filter.jobRoleFilter.category.JOB_18.WELDER' },
+  { code: 'CARPENTER', label: 'filter.jobRoleFilter.category.JOB_18.CARPENTER' },
+  { code: 'HEAVY_EQUIPMENT_TECHNICIAN', label: 'filter.jobRoleFilter.category.JOB_18.HEAVY_EQUIPMENT_TECHNICIAN' },
 ]
 
 export const ENTERTAINMENT_LIST: { code: JobRoleType; label: string }[] = [
-  { code: 'MODEL', label: '모델' },
-  { code: 'ACTOR', label: '배우' },
-  { code: 'SHOW_HOST', label: '방송 진행자' },
+  { code: 'MODEL', label: 'filter.jobRoleFilter.category.JOB_19.MODEL' },
+  { code: 'ACTOR', label: 'filter.jobRoleFilter.category.JOB_19.ACTOR' },
+  { code: 'SHOW_HOST', label: 'filter.jobRoleFilter.category.JOB_19.SHOW_HOST' },
 ]
 
 type SubCategoryMap = {
@@ -545,14 +564,14 @@ export const SUB_CATEGORY_MAP: SubCategoryMap = {
   TRANSLATION_INTERPRETATION: TRANSLATION_INTERPRETATION_LIST,
   MEDIA: MEDIA_LIST,
   ENGINEERING_DESIGN: ENGINEERING_DESIGN_LIST,
-  HR: [],
+  HR: HR_LIST,
   GAME_PRODUCTION: GAME_PRODUCTION_LIST,
   FINANCE: FINANCE_LIST,
   MANUFACTURING_PRODUCTION: MANUFACTURING_PRODUCTION_LIST,
   EDUCATION: EDUCATION_LIST,
   HEALTHCARE_PHARMA_BIO: HEALTHCARE_PHARMA_BIO_LIST,
   LOGISTICS_TRADE: LOGISTICS_TRADE_LIST,
-  FOOD_BEVERAGE: [],
+  FOOD_BEVERAGE: FOOD_SERVICE_LIST,
   CONSTRUCTION_FACILITIES: CONSTRUCTION_FACILITIES_LIST,
   ENTERTAINMENT: ENTERTAINMENT_LIST,
 }
@@ -566,375 +585,377 @@ export const getJobRoleLabel = (jobRole: JobRoleType) => {
   switch (jobRole) {
     // IT / 개발
     case 'SOFTWARE_ENGINEER':
-      return '소프트웨어 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.SOFTWARE_ENGINEER'
     case 'WEB_DEVELOPER':
-      return '웹 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.WEB_DEVELOPER'
     case 'BACKEND_DEVELOPER':
-      return '백엔드 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.BACKEND_DEVELOPER'
     case 'FRONTEND_DEVELOPER':
-      return '프론트엔드 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.FRONTEND_DEVELOPER'
     case 'JAVA_DEVELOPER':
-      return '자바 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.JAVA_DEVELOPER'
     case 'C_CPP_DEVELOPER':
-      return 'C/C++ 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.C_CPP_DEVELOPER'
     case 'PYTHON_DEVELOPER':
-      return '파이썬 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.PYTHON_DEVELOPER'
     case 'MACHINE_LEARNING_ENGINEER':
-      return '머신러닝 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.MACHINE_LEARNING_ENGINEER'
     case 'DEVOPS_ENGINEER':
-      return 'DevOps / 시스템 관리자'
+      return 'filter.jobRoleFilter.category.JOB_1.DEVOPS_ENGINEER'
     case 'DATA_ENGINEER':
-      return '데이터 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.DATA_ENGINEER'
     case 'NODEJS_DEVELOPER':
-      return 'Node.js 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.NODEJS_DEVELOPER'
     case 'SYSTEM_NETWORK_ADMIN':
-      return '시스템/네트워크 관리자'
+      return 'filter.jobRoleFilter.category.JOB_1.SYSTEM_NETWORK_ADMIN'
     case 'ANDROID_DEVELOPER':
-      return '안드로이드 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.ANDROID_DEVELOPER'
     case 'IOS_DEVELOPER':
-      return 'iOS 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.IOS_DEVELOPER'
     case 'EMBEDDED_DEVELOPER':
-      return '임베디드 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.EMBEDDED_DEVELOPER'
     case 'TECH_SUPPORT':
-      return '기술지원'
+      return 'filter.jobRoleFilter.category.JOB_1.TECH_SUPPORT'
     case 'QA_TEST_ENGINEER':
-      return 'QA / 테스트 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.QA_TEST_ENGINEER'
     case 'DATA_SCIENTIST':
-      return '데이터 사이언티스트'
+      return 'filter.jobRoleFilter.category.JOB_1.DATA_SCIENTIST'
     case 'SECURITY_ENGINEER':
-      return '보안 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.SECURITY_ENGINEER'
     case 'BIGDATA_ENGINEER':
-      return '빅데이터 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.BIGDATA_ENGINEER'
     case 'HARDWARE_ENGINEER':
-      return '하드웨어 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.HARDWARE_ENGINEER'
     case 'BLOCKCHAIN_ENGINEER':
-      return '블록체인 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.BLOCKCHAIN_ENGINEER'
     case 'CROSS_PLATFORM_APP_DEVELOPER':
-      return '크로스플랫폼 앱 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.CROSS_PLATFORM_APP_DEVELOPER'
     case 'DBA':
-      return 'DBA'
+      return 'filter.jobRoleFilter.category.JOB_1.DBA'
     case 'PHP_DEVELOPER':
-      return 'PHP 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.PHP_DEVELOPER'
     case 'DOTNET_DEVELOPER':
-      return '.NET 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.DOTNET_DEVELOPER'
     case 'GRAPHICS_ENGINEER':
-      return '그래픽스 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.GRAPHICS_ENGINEER'
     case 'AR_VR_ENGINEER':
-      return 'AR/VR 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_1.AR_VR_ENGINEER'
     case 'RUBY_ON_RAILS_DEVELOPER':
-      return '루비온레일즈 개발자'
+      return 'filter.jobRoleFilter.category.JOB_1.RUBY_ON_RAILS_DEVELOPER'
 
     // 기획 / PM / 비즈니스
     case 'PM_PO':
-      return 'PM/PO'
+      return 'filter.jobRoleFilter.category.JOB_2.PM_PO'
     case 'PROJECT_MANAGER':
-      return '프로젝트 매니저'
+      return 'filter.jobRoleFilter.category.JOB_2.PROJECT_MANAGER'
     case 'STRATEGY_PLANNER':
-      return '전략 기획자'
+      return 'filter.jobRoleFilter.category.JOB_2.STRATEGY_PLANNER'
     case 'OPERATIONS_MANAGER':
-      return '운영 매니저'
+      return 'filter.jobRoleFilter.category.JOB_2.OPERATIONS_MANAGER'
     case 'DATA_ANALYST':
-      return '데이터 분석가'
+      return 'filter.jobRoleFilter.category.JOB_2.DATA_ANALYST'
     case 'BRAND_MANAGER':
-      return '브랜드 매니저'
+      return 'filter.jobRoleFilter.category.JOB_2.BRAND_MANAGER'
     case 'GLOBAL_BUSINESS_DEVELOPER':
-      return '해외 사업개발 / 기획자'
+      return 'filter.jobRoleFilter.category.JOB_2.GLOBAL_BUSINESS_DEVELOPER'
     case 'CONSULTANT':
-      return '컨설턴트'
+      return 'filter.jobRoleFilter.category.JOB_2.CONSULTANT'
     case 'PURCHASING_MANAGER':
-      return '구매담당'
+      return 'filter.jobRoleFilter.category.JOB_2.PURCHASING_MANAGER'
     case 'BUSINESS_INNOVATOR':
-      return '경영 혁신가'
+      return 'filter.jobRoleFilter.category.JOB_2.BUSINESS_INNOVATOR'
     case 'AGILE_COACH':
-      return '애자일코치'
+      return 'filter.jobRoleFilter.category.JOB_2.AGILE_COACH'
 
     // 마케팅
     case 'MARKETING_MANAGER':
-      return '마케팅 매니저'
+      return 'filter.jobRoleFilter.category.JOB_3.MARKETING_MANAGER'
     case 'DIGITAL_MARKETER':
-      return '디지털 마케터'
+      return 'filter.jobRoleFilter.category.JOB_3.DIGITAL_MARKETER'
     case 'CONTENT_MARKETER':
-      return '콘텐츠 마케터'
+      return 'filter.jobRoleFilter.category.JOB_3.CONTENT_MARKETER'
     case 'PERFORMANCE_MARKETER':
-      return '퍼포먼스 마케터'
+      return 'filter.jobRoleFilter.category.JOB_3.PERFORMANCE_MARKETER'
     case 'BRAND_MARKETER':
-      return '브랜드 마케터'
+      return 'filter.jobRoleFilter.category.JOB_3.BRAND_MARKETER'
     case 'GLOBAL_MARKETING_MANAGER':
-      return '글로벌 마케팅 매니저'
+      return 'filter.jobRoleFilter.category.JOB_3.GLOBAL_MARKETING_MANAGER'
     case 'SNS_MARKETER':
-      return 'SNS 마케터'
+      return 'filter.jobRoleFilter.category.JOB_3.SNS_MARKETER'
     case 'PR_SPECIALIST':
-      return 'PR 전문가'
+      return 'filter.jobRoleFilter.category.JOB_3.PR_SPECIALIST'
     case 'GROWTH_HACKER':
-      return '그로스 해커'
+      return 'filter.jobRoleFilter.category.JOB_3.GROWTH_HACKER'
     case 'MARKETING_DIRECTOR':
-      return '마케팅 디렉터'
+      return 'filter.jobRoleFilter.category.JOB_3.MARKETING_DIRECTOR'
     case 'MARKET_RESEARCHER':
-      return '마켓 리서치'
+      return 'filter.jobRoleFilter.category.JOB_3.MARKET_RESEARCHER'
 
     // 디자인
     case 'UI_UX_DESIGNER':
-      return 'UI/UX 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.UI_UX_DESIGNER'
     case 'WEB_DESIGNER':
-      return '웹 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.WEB_DESIGNER'
     case 'GRAPHIC_DESIGNER':
-      return '그래픽 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.GRAPHIC_DESIGNER'
     case 'SPACE_DESIGNER':
-      return '공간 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.SPACE_DESIGNER'
     case 'MOTION_DESIGNER':
-      return '영상/모션 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.MOTION_DESIGNER'
     case 'FASHION_DESIGNER':
-      return '패션 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.FASHION_DESIGNER'
     case 'ART_DIRECTOR':
-      return '아트 디렉터'
+      return 'filter.jobRoleFilter.category.JOB_4.ART_DIRECTOR'
     case 'INDUSTRIAL_DESIGNER':
-      return '산업 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.INDUSTRIAL_DESIGNER'
     case 'FURNITURE_DESIGNER':
-      return '가구 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.FURNITURE_DESIGNER'
     case 'LANDSCAPE_DESIGNER':
-      return '조경 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_4.LANDSCAPE_DESIGNER'
 
     // 영업 / CS / 유통
     case 'INTERNATIONAL_SALES':
-      return '해외영업'
+      return 'filter.jobRoleFilter.category.JOB_5.INTERNATIONAL_SALES'
     case 'TECHNICAL_SALES':
-      return '기술영업'
+      return 'filter.jobRoleFilter.category.JOB_5.TECHNICAL_SALES'
     case 'SOLUTION_CONSULTANT':
-      return '솔루션 컨설턴트'
+      return 'filter.jobRoleFilter.category.JOB_5.SOLUTION_CONSULTANT'
     case 'MEDIA_SALES':
-      return '미디어 세일즈'
+      return 'filter.jobRoleFilter.category.JOB_5.MEDIA_SALES'
     case 'CUSTOMER_SUCCESS_MANAGER':
-      return '고객성공매니저'
+      return 'filter.jobRoleFilter.category.JOB_5.CUSTOMER_SUCCESS_MANAGER'
     case 'SALES_ENGINEER':
-      return '세일즈 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_5.SALES_ENGINEER'
 
     case 'GLOBAL_CS_MANAGER':
-      return '글로벌 CS 매니저'
+      return 'filter.jobRoleFilter.category.JOB_6.GLOBAL_CS_MANAGER'
     case 'RETAIL_MD':
-      return '리테일 MD'
+      return 'filter.jobRoleFilter.category.JOB_6.RETAIL_MD'
     case 'CUSTOMER_SUPPORT':
-      return '고객 지원/상담'
+      return 'filter.jobRoleFilter.category.JOB_6.CUSTOMER_SUPPORT'
     case 'FASHION_MD':
-      return '패션 MD'
+      return 'filter.jobRoleFilter.category.JOB_6.FASHION_MD'
     case 'CRM_SPECIALIST':
-      return 'CRM 전문가'
+      return 'filter.jobRoleFilter.category.JOB_6.CRM_SPECIALIST'
     case 'RECEPTIONIST':
-      return '리셉션'
+      return 'filter.jobRoleFilter.category.JOB_6.RECEPTIONIST'
     case 'TRAVEL_AGENT':
-      return '여행 에이전트'
+      return 'filter.jobRoleFilter.category.JOB_6.TRAVEL_AGENT'
     case 'FLIGHT_ATTENDANT':
-      return '승무원'
+      return 'filter.jobRoleFilter.category.JOB_6.FLIGHT_ATTENDANT'
     case 'STORE_CLERK':
-      return '매장점원'
+      return 'filter.jobRoleFilter.category.JOB_6.STORE_CLERK'
     case 'TOURISM_WORKER':
-      return '관광숙박업 종사자'
+      return 'filter.jobRoleFilter.category.JOB_6.TOURISM_WORKER'
 
-    // 콘텐츠 / 창작
+    // 7. 통/번역
     case 'INTERPRETER':
-      return '통역사'
+      return 'filter.jobRoleFilter.category.JOB_7.INTERPRETER'
     case 'TRANSLATOR':
-      return '번역가'
+      return 'filter.jobRoleFilter.category.JOB_7.TRANSLATOR'
     case 'LOCALIZATION_SPECIALIST':
-      return '로컬라이제이션 전문가'
+      return 'filter.jobRoleFilter.category.JOB_7.LOCALIZATION_SPECIALIST'
+
+    // 8. 미디어
     case 'CONTENT_CREATOR':
-      return '콘텐츠 크리에이터'
+      return 'filter.jobRoleFilter.category.JOB_8.CONTENT_CREATOR'
     case 'VIDEO_EDITOR':
-      return '영상 편집가'
+      return 'filter.jobRoleFilter.category.JOB_8.VIDEO_EDITOR'
     case 'VIDEO_PRODUCER':
-      return '비디오 제작'
+      return 'filter.jobRoleFilter.category.JOB_8.VIDEO_PRODUCER'
     case 'WRITER':
-      return '작가'
+      return 'filter.jobRoleFilter.category.JOB_8.WRITER'
     case 'PHOTOGRAPHER':
-      return '사진작가'
+      return 'filter.jobRoleFilter.category.JOB_8.PHOTOGRAPHER'
     case 'JOURNALIST':
-      return '저널리스트'
+      return 'filter.jobRoleFilter.category.JOB_8.JOURNALIST'
     case 'CURATOR':
-      return '큐레이터'
+      return 'filter.jobRoleFilter.category.JOB_8.CURATOR'
 
-    // 엔지니어링 / 제조
+    // 9. 엔지니어링 / 설계
     case 'ELECTRICAL_ENGINEER':
-      return '전자 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.ELECTRICAL_ENGINEER'
     case 'ROBOTICS_AUTOMATION_ENGINEER':
-      return '로봇/자동화'
+      return 'filter.jobRoleFilter.category.JOB_9.ROBOTICS_AUTOMATION_ENGINEER'
     case 'MECHANICAL_ENGINEER':
-      return '기계 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.MECHANICAL_ENGINEER'
     case 'CAD_3D_DESIGNER':
-      return 'CAD/3D 설계자'
+      return 'filter.jobRoleFilter.category.JOB_9.CAD_3D_DESIGNER'
     case 'ELECTRIC_ENGINEER':
-      return '전기 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.ELECTRIC_ENGINEER'
     case 'CONTROL_ENGINEER':
-      return '제어 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.CONTROL_ENGINEER'
     case 'PRODUCT_ENGINEER':
-      return '제품 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.PRODUCT_ENGINEER'
     case 'ELECTROMECHANICAL_ENGINEER':
-      return '전자기계 공학자'
+      return 'filter.jobRoleFilter.category.JOB_9.ELECTROMECHANICAL_ENGINEER'
     case 'EQUIPMENT_ENGINEER':
-      return '장비 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.EQUIPMENT_ENGINEER'
     case 'QA_ENGINEER':
-      return 'QA 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.QA_ENGINEER'
     case 'INDUSTRIAL_ENGINEER':
-      return '산업 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.INDUSTRIAL_ENGINEER'
     case 'RF_ENGINEER':
-      return 'RF 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.RF_ENGINEER'
     case 'CHEMICAL_ENGINEER':
-      return '화학공학 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.CHEMICAL_ENGINEER'
     case 'AEROSPACE_ENGINEER':
-      return '항공우주 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.AEROSPACE_ENGINEER'
     case 'IC_ENGINEER':
-      return 'I&C 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.IC_ENGINEER'
     case 'MATERIAL_ENGINEER':
-      return '재료공학자'
+      return 'filter.jobRoleFilter.category.JOB_9.MATERIAL_ENGINEER'
     case 'PLANT_ENGINEER':
-      return '플랜트 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.PLANT_ENGINEER'
     case 'PLASTIC_ENGINEER':
-      return '플라스틱 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.PLASTIC_ENGINEER'
     case 'QC_ENGINEER':
-      return 'QC 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.QC_ENGINEER'
     case 'STRUCTURAL_ENGINEER':
-      return '구조공학 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.STRUCTURAL_ENGINEER'
     case 'CONSTRUCTION_ENGINEER':
-      return '건설 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.CONSTRUCTION_ENGINEER'
     case 'CIVIL_ENGINEER':
-      return '토목 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.CIVIL_ENGINEER'
     case 'ENVIRONMENTAL_ENGINEER':
-      return '환경 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.ENVIRONMENTAL_ENGINEER'
     case 'PRODUCTION_ENGINEER':
-      return '생산공학 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_9.PRODUCTION_ENGINEER'
     case 'RND_RESEARCHER':
-      return 'R&D / 연구원'
+      return 'filter.jobRoleFilter.category.JOB_9.RND_RESEARCHER'
 
-    // HR / 교육
+    // 10. HR / 교육
     case 'GLOBAL_HR_MANAGER':
-      return '글로벌 HR 매니저'
+      return 'filter.jobRoleFilter.category.JOB_10.GLOBAL_HR_MANAGER'
     case 'RECRUITER':
-      return '리크루터'
+      return 'filter.jobRoleFilter.category.JOB_10.RECRUITER'
     case 'HR_CONSULTANT':
-      return 'HR 컨설턴트'
+      return 'filter.jobRoleFilter.category.JOB_10.HR_CONSULTANT'
     case 'TECH_TRAINER':
-      return '기술 교육'
+      return 'filter.jobRoleFilter.category.JOB_10.TECH_TRAINER'
     case 'INHOUSE_TRAINER':
-      return '사내 강사'
+      return 'filter.jobRoleFilter.category.JOB_10.INHOUSE_TRAINER'
 
-    // 게임
+    // 11. 게임 제작
     case 'GAME_PLANNER':
-      return '게임 기획자'
+      return 'filter.jobRoleFilter.category.JOB_11.GAME_PLANNER'
     case 'GAME_ARTIST':
-      return '게임 아티스트'
+      return 'filter.jobRoleFilter.category.JOB_11.GAME_ARTIST'
     case 'GAME_CLIENT_DEVELOPER':
-      return '게임 클라이언트 개발자'
+      return 'filter.jobRoleFilter.category.JOB_11.GAME_CLIENT_DEVELOPER'
     case 'UNITY_DEVELOPER':
-      return '유니티 개발자'
+      return 'filter.jobRoleFilter.category.JOB_11.UNITY_DEVELOPER'
     case 'GAME_GRAPHIC_DESIGNER':
-      return '게임 그래픽 디자이너'
+      return 'filter.jobRoleFilter.category.JOB_11.GAME_GRAPHIC_DESIGNER'
     case 'GAME_SERVER_DEVELOPER':
-      return '게임 서버 개발자'
+      return 'filter.jobRoleFilter.category.JOB_11.GAME_SERVER_DEVELOPER'
     case 'MOBILE_GAME_DEVELOPER':
-      return '모바일 게임 개발자'
+      return 'filter.jobRoleFilter.category.JOB_11.MOBILE_GAME_DEVELOPER'
     case 'UNREAL_DEVELOPER':
-      return '언리얼 개발자'
+      return 'filter.jobRoleFilter.category.JOB_11.UNREAL_DEVELOPER'
 
-    // 금융
+    // 12. 금융
     case 'INVESTMENT_BANKER':
-      return '투자은행가'
+      return 'filter.jobRoleFilter.category.JOB_12.INVESTMENT_BANKER'
     case 'ASSET_MANAGER':
-      return '자산 운용가'
+      return 'filter.jobRoleFilter.category.JOB_12.ASSET_MANAGER'
     case 'FINANCIAL_ENGINEER':
-      return '금융공학자'
+      return 'filter.jobRoleFilter.category.JOB_12.FINANCIAL_ENGINEER'
 
-    // 제조/생산 기술직
+    // 13. 제조/생산
     case 'MACHINE_TECHNICIAN':
-      return '기계제작 기술자'
+      return 'filter.jobRoleFilter.category.JOB_13.MACHINE_TECHNICIAN'
     case 'MANUFACTURING_TEST_ENGINEER':
-      return '제조 테스트 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_TEST_ENGINEER'
     case 'MANUFACTURING_ENGINEER':
-      return '제조 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_ENGINEER'
     case 'MANUFACTURING_CHEMIST':
-      return '제조 화학자'
+      return 'filter.jobRoleFilter.category.JOB_13.MANUFACTURING_CHEMIST'
     case 'SEMICONDUCTOR_DISPLAY_ENGINEER':
-      return '반도체/디스플레이 엔지니어'
+      return 'filter.jobRoleFilter.category.JOB_13.SEMICONDUCTOR_DISPLAY_ENGINEER'
     case 'PRODUCTION_WORKER':
-      return '생산직 종사자'
+      return 'filter.jobRoleFilter.category.JOB_13.PRODUCTION_WORKER'
 
-    // 교육
+    // 14. 교육
     case 'INSTRUCTOR':
-      return '강사'
+      return 'filter.jobRoleFilter.category.JOB_14.INSTRUCTOR'
     case 'LANGUAGE_EDUCATOR':
-      return '외국어교육'
+      return 'filter.jobRoleFilter.category.JOB_14.LANGUAGE_EDUCATOR'
 
-    // 헬스케어 / 바이오
+    // 15. 의료/제약/바이오
     case 'BIOTECH_RESEARCHER':
-      return '생명공학 연구원'
+      return 'filter.jobRoleFilter.category.JOB_15.BIOTECH_RESEARCHER'
     case 'CLINICAL_RESEARCHER':
-      return '임상시험 연구원'
+      return 'filter.jobRoleFilter.category.JOB_15.CLINICAL_RESEARCHER'
     case 'MICROBIOLOGIST':
-      return '미생물학자'
+      return 'filter.jobRoleFilter.category.JOB_15.MICROBIOLOGIST'
     case 'HOSPITAL_COORDINATOR':
-      return '병원 코디네이터'
+      return 'filter.jobRoleFilter.category.JOB_15.HOSPITAL_COORDINATOR'
     case 'PHARMACEUTICAL_CHEMIST':
-      return '약학 분석 화학자'
+      return 'filter.jobRoleFilter.category.JOB_15.PHARMACEUTICAL_CHEMIST'
     case 'GENETIC_ENGINEER':
-      return '유전공학자'
+      return 'filter.jobRoleFilter.category.JOB_15.GENETIC_ENGINEER'
     case 'CAREGIVER':
-      return '요양보호사'
+      return 'filter.jobRoleFilter.category.JOB_15.CAREGIVER'
 
-    // 물류 / 무역
+    // 16. 물류 / 무역
     case 'LOGISTICS_MANAGER':
-      return '물류담당'
+      return 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_MANAGER'
     case 'LOGISTICS_ANALYST':
-      return '물류 분석가'
+      return 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_ANALYST'
     case 'EXPORT_IMPORT_OFFICER':
-      return '수출입사무'
+      return 'filter.jobRoleFilter.category.JOB_16.EXPORT_IMPORT_OFFICER'
     case 'TRADE_OFFICER':
-      return '무역사무'
+      return 'filter.jobRoleFilter.category.JOB_16.TRADE_OFFICER'
     case 'BUYER_MANAGER':
-      return '바이어관리/상담/개발'
+      return 'filter.jobRoleFilter.category.JOB_16.BUYER_MANAGER'
     case 'AIR_TRANSPORT_AGENT':
-      return '항공 운송'
+      return 'filter.jobRoleFilter.category.JOB_16.AIR_TRANSPORT_AGENT'
     case 'MARINE_TRANSPORT_AGENT':
-      return '해운/해양 운송'
+      return 'filter.jobRoleFilter.category.JOB_16.MARINE_TRANSPORT_AGENT'
     case 'LOGISTICS_FIELD_WORKER':
-      return '물류 현장직 종사자'
+      return 'filter.jobRoleFilter.category.JOB_16.LOGISTICS_FIELD_WORKER'
 
-    // 식음료
+    // 17. 외식/푸드 서비스
     case 'FOOD_SERVICE_WORKER':
-      return '외식업 종사자'
+      return 'filter.jobRoleFilter.category.JOB_17.FOOD_SERVICE_WORKER'
     case 'CHEF':
-      return '요리사'
+      return 'filter.jobRoleFilter.category.JOB_17.CHEF'
     case 'MENU_DEVELOPER':
-      return '메뉴개발'
+      return 'filter.jobRoleFilter.category.JOB_17.MENU_DEVELOPER'
     case 'BARTENDER':
-      return '바텐더'
+      return 'filter.jobRoleFilter.category.JOB_17.BARTENDER'
     case 'SOMMELIER':
-      return '소믈리에'
+      return 'filter.jobRoleFilter.category.JOB_17.SOMMELIER'
     case 'FOOD_STYLIST':
-      return '푸드스타일리스트'
+      return 'filter.jobRoleFilter.category.JOB_17.FOOD_STYLIST'
 
-    // 건설/시설
+    // 18. 건설/시설
     case 'ARCHITECT':
-      return '건축가'
+      return 'filter.jobRoleFilter.category.JOB_18.ARCHITECT'
     case 'CONSTRUCTION_SUPERVISOR':
-      return '건축 감리자'
+      return 'filter.jobRoleFilter.category.JOB_18.CONSTRUCTION_SUPERVISOR'
     case 'MAINTENANCE_MANAGER':
-      return '유지보수 관리자'
+      return 'filter.jobRoleFilter.category.JOB_18.MAINTENANCE_MANAGER'
     case 'CONSTRUCTION_WORKER':
-      return '건설 현장직 종사자'
+      return 'filter.jobRoleFilter.category.JOB_18.CONSTRUCTION_WORKER'
     case 'WELDER':
-      return '용접공'
+      return 'filter.jobRoleFilter.category.JOB_18.WELDER'
     case 'CARPENTER':
-      return '목수'
+      return 'filter.jobRoleFilter.category.JOB_18.CARPENTER'
     case 'HEAVY_EQUIPMENT_TECHNICIAN':
-      return '중장비 기술자'
+      return 'filter.jobRoleFilter.category.JOB_18.HEAVY_EQUIPMENT_TECHNICIAN'
 
-    // 엔터테인먼트
+    // 19. 엔터테인먼트
     case 'MODEL':
-      return '모델'
+      return 'filter.jobRoleFilter.category.JOB_19.MODEL'
     case 'ACTOR':
-      return '배우'
+      return 'filter.jobRoleFilter.category.JOB_19.ACTOR'
     case 'SHOW_HOST':
-      return '방송 진행자'
+      return 'filter.jobRoleFilter.category.JOB_19.SHOW_HOST'
 
     default:
-      return ''
+      return 'filter.jobRoleFilter.category.JOB_19.unknown'
   }
 }
 export function getLanguageLabel(lang: LanguageType): string {
@@ -994,12 +1015,12 @@ export function getLanguageLabel(lang: LanguageType): string {
 
 export const getJobCategoryLabel = (code: string): string => {
   const category = JOB_CATEGORY_LIST.find((cat) => cat.code === code)
-  return category?.label || '알 수 없음'
+  return category?.label || 'filter.unknown'
 }
 
 export const getVisaLabel = (code: string): string => {
   const visa = VISA_LIST.find((v) => v.code === code)
-  return visa?.label || '알 수 없음'
+  return visa?.i18nKey || 'filter.unknown'
 }
 
 export const getRegionLabel = (code: string): string => {

@@ -20,10 +20,13 @@ import { FaceIcon, TripIcon } from '@/assets/svgComponents'
 import ApplicationModal from '@/components/modal/ApplicationModal'
 import ImageModal from '@/components/common/ImageModal'
 import { getJobCategoryLabel } from '@/utils/filterList'
+import { useTranslation } from 'react-i18next'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     window.scrollTo({
@@ -126,7 +129,7 @@ const RecruitDetailPage = () => {
                       {recruitData.jobCategories.map((jobCategory) => {
                         return (
                           <div key={jobCategory} className="badge-md text-gray4 bg-gray2 rounded-[8px] px-2 py-1">
-                            {getJobCategoryLabel(jobCategory)}
+                            {t(getJobCategoryLabel(jobCategory))}
                           </div>
                         )
                       })}

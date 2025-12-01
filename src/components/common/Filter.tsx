@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { CancelIcon } from '@/assets/svgComponents'
 import Button from '@/components/common/Button'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 interface FilterProps {
   children: ReactNode
@@ -54,13 +55,14 @@ function Content({ children }: { children: ReactNode }) {
 }
 
 function BottomButton({ onApply, onReset }: { onApply: () => void; onReset: () => void }) {
+  const { t } = useTranslation()
   return (
     <div className="flex gap-x-2">
       <Button onClick={onReset} size={'lg'} buttonType={'button'} type={'outline'} customClassName={'w-full'}>
-        초기화
+        {t('filter.button.reset')}
       </Button>
       <Button type={'active'} size={'lg'} buttonType={'button'} onClick={onApply} customClassName={'w-full'}>
-        적용
+        {t('filter.button.apply')}
       </Button>
     </div>
   )

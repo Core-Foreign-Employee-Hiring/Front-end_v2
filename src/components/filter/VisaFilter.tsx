@@ -4,6 +4,7 @@ import Filter from '@/components/common/Filter'
 import { getVisaLabel, VISA_LIST } from '@/utils/filterList'
 import { VisaType } from '@/types/recruit'
 import { XIcon } from '@/assets/svgComponents'
+import { useTranslation } from 'react-i18next'
 
 interface VisaFilterProps {
   addVisas: (selectedVisa: VisaType) => void
@@ -22,9 +23,10 @@ export default function VisaFilter({
   onReset,
   onApply,
 }: VisaFilterProps) {
+  const { t } = useTranslation()
   return (
     <Filter onClose={onClose}>
-      <Filter.Title onClose={onClose} title={'비자선택'} />
+      <Filter.Title onClose={onClose} title={t('filter.visaFilter.title')} />
       <Filter.Content>
         <div className="flex flex-col gap-y-4">
           <section className="flex h-[400px] flex-wrap gap-2 overflow-y-scroll">
@@ -35,7 +37,7 @@ export default function VisaFilter({
                 onClick={() => addVisas(visa.code)}
                 className={`${selectedVisas?.includes(visa.code) ? 'border-main bg-main-light text-main cursor-pointer transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 text-gray5 cursor-pointer transition hover:duration-75'} button rounded-[12px] border px-4 py-3`}
               >
-                {visa.label}
+                {t(visa.i18nKey)}
               </button>
             ))}
           </section>
@@ -49,7 +51,7 @@ export default function VisaFilter({
                 key={selectedVisa}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex cursor-pointer items-center rounded-full border px-3 py-2 whitespace-nowrap transition hover:opacity-[80%] hover:duration-75"
               >
-                {getVisaLabel(selectedVisa)}
+                {t(getVisaLabel(selectedVisa))}
                 <XIcon width={20} height={20} />
               </button>
             ))}
