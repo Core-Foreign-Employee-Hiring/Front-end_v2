@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "home": "Home",
+    "archive": "Acceptance Archive",
+    "study": "Study",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "loginRequiredMessage": "Login is required",
+    "logout": "Log Out",
+    "nameSuffix": ""
+  }
+}

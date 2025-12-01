@@ -1,106 +1,41 @@
-'use client'
 import Image from 'next/image'
-import { AlarmIcon, BackIcon, GlobalIcon, MenuCancelIcon, MenuIcon } from '@/assets/svgComponents'
-import { usePathname, useRouter } from 'next/navigation'
-import { useModalStore } from '@/store/modalStore'
+import Link from 'next/link'
+import { I18nParams } from '@/lib/i18n.types'
+import HeaderClient from '@/components/common/HeaderClient'
 
 interface HeaderProps {
   title?: string
   headerType?: 'default' | 'navbar' | 'dynamic'
   onBack?: () => void
+  params: Promise<I18nParams>
 }
 
-const Header = ({ title, headerType = 'default', onBack }: HeaderProps) => {
-  const pathname = usePathname()
-  const router = useRouter()
-  const isLanguageSelectModalOpen = useModalStore((state) => state.isLanguageSelectModalOpen)
-  const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
-
-  const setModalState = useModalStore((state) => state.setState)
-
-  const navContents = [
-    { title: '홈', router: '/' },
-    { title: '합격 아카이브', router: '/archive' },
-    { title: '스터디', router: '/study' },
-  ]
+const Header = async ({ title, headerType = 'default', onBack, params }: HeaderProps) => {
+  const { lang } = await params
 
   const renderHeaderType = (headerType: 'default' | 'navbar' | 'dynamic') => {
     switch (headerType) {
       case 'default':
         return (
           <div className="border-gray2 flex h-[80px] items-center justify-between border-b bg-white px-[32px]">
-            <div className="flex items-center gap-x-[55px]">
-              <Image
-                className=""
-                onClick={() => {
-                  router.push('/')
-                }}
-                src={'/logo.svg'}
-                width={102}
-                height={32}
-                alt="로고"
-              />
-            </div>
-
-            <section className="flex items-center">
-              <div className="flex gap-x-2">
-                <GlobalIcon
-                  onClick={() => {
-                    setModalState({ isLanguageSelectModalOpen: !isLanguageSelectModalOpen })
-                  }}
-                  width={32}
-                  height={32}
-                />
-                {isHomeMenuOpen ? (
-                  <MenuCancelIcon
-                    onClick={() => {
-                      setModalState({ isHomeMenuOpen: false })
-                    }}
-                    width={32}
-                    height={32}
-                  />
-                ) : (
-                  <MenuIcon
-                    onClick={() => {
-                      setModalState({ isHomeMenuOpen: true })
-                    }}
-                    width={32}
-                    height={32}
-                  />
-                )}
+            <Link href={`/${lang}`} className="text-gray-30 hover:text-conic-red-30">
+              <div className="flex items-center gap-x-[55px]">
+                <Image src={'/logo.svg'} width={102} height={32} alt="로고" />
               </div>
-            </section>
+            </Link>
+            <HeaderClient currentLng={lang} onBack={onBack} title={title} headerType={headerType} />
           </div>
         )
       case 'navbar':
         return (
           <div className="border-gray2 flex w-full gap-x-[52px] border-b bg-white py-[18px] md:px-5 lg:px-[200px] xl:px-[200px] 2xl:px-[200px]">
-            {navContents.map((nav) => {
-              return (
-                <button
-                  key={nav.title}
-                  onClick={() => {
-                    router.push(nav.router)
-                  }}
-                  className={`${pathname === nav.router ? 'text-main' : ''} title-sm`}
-                >
-                  {nav.title}
-                </button>
-              )
-            })}
+            <HeaderClient currentLng={lang} onBack={onBack} title={title} headerType={headerType} />
           </div>
         )
       case 'dynamic':
         return (
           <div className="relative flex w-full items-center bg-white px-5 py-[14px]">
-            <BackIcon
-              onClick={() => {
-                onBack ? onBack() : router.back()
-              }}
-              width={14}
-              height={14}
-            />
-            <h1 className="subtitle-md absolute left-1/2 -translate-x-1/2 whitespace-nowrap">{title}</h1>
+            <HeaderClient currentLng={lang} onBack={onBack} title={title} headerType={headerType} />
           </div>
         )
     }

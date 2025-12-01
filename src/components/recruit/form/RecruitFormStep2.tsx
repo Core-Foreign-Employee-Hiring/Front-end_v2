@@ -1,12 +1,12 @@
 import ProcessBar from '@/components/common/ProcessBar'
-import RecruitPeriodField from '@/app/recruit-form/components/RecruitPeriodField'
-import RecruitContractTypeField from '@/app/recruit-form/components/RecruitContractTypeField'
-import WorkTypeField from '@/app/recruit-form/components/WorkTypeField'
-import WorkDaysField from '@/app/recruit-form/components/WorkDaysField'
-import WorkTime from '@/app/recruit-form/components/WorkTime'
-import SalaryField from '@/app/recruit-form/components/SalaryField'
-import JobCategoryField from '@/app/recruit-form/components/JobCategoryField'
-import JobRoleField from '@/app/recruit-form/components/JobRoleField'
+import RecruitPeriodField from '@/app/[lang]/recruit-form/components/RecruitPeriodField'
+import RecruitContractTypeField from '@/app/[lang]/recruit-form/components/RecruitContractTypeField'
+import WorkTypeField from '@/app/[lang]/recruit-form/components/WorkTypeField'
+import WorkDaysField from '@/app/[lang]/recruit-form/components/WorkDaysField'
+import WorkTime from '@/app/[lang]/recruit-form/components/WorkTime'
+import SalaryField from '@/app/[lang]/recruit-form/components/SalaryField'
+import JobCategoryField from '@/app/[lang]/recruit-form/components/JobCategoryField'
+import JobRoleField from '@/app/[lang]/recruit-form/components/JobRoleField'
 
 interface RecruitFormStep2Props {
   currentStep: 1 | 2 | 3

@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "home": "홈",
+    "archive": "합격 아카이브",
+    "study": "스터디",
+    "login": "로그인",
+    "signup": "회원가입",
+    "loginRequiredMessage": "로그인이 필요해요",
+    "logout": "로그아웃",
+    "nameSuffix": "님"
+  }
+}
