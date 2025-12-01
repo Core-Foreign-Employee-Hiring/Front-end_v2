@@ -8,5 +8,21 @@
     "loginRequiredMessage": "Login is required",
     "logout": "Log Out",
     "nameSuffix": ""
+  },
+  "recruitHome": {
+    "h1": "All Job Posts",
+    "searchPlaceholder": "Search job postings",
+    "countSuffix": " posts",
+    "filters": {
+      "visa": "Visa",
+      "jobRoles": "Job Role",
+      "language": "Required Language",
+      "region": "Work Location",
+      "contractType": "Contract Type"
+    },
+    "loadingMorePostsMessage": "Loading more posts...",
+    "noMorePostsMessage": "You've reached the end of the list.",
+    "noSearchResultsMessage": "No search results found."
   }
+
 }

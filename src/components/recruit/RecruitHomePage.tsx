@@ -8,6 +8,7 @@ import { useRecruitStore } from '@/store/recruitStore'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import Banner from '@/components/common/Banner'
 import FilterButtons from '@/components/recruit/FilterButtons'
+import { useTranslation } from 'react-i18next'
 
 export default function RecruitHomePage() {
   const [searchValue, setSearchValue] = useState('')
@@ -16,6 +17,8 @@ export default function RecruitHomePage() {
   const selectedLanguageFilterContentList = useRecruitStore((state) => state.selectedLanguageFilterContentList)
   const selectedRegionFilterContentList = useRecruitStore((state) => state.selectedRegionFilterContentList)
   const selectedContractFilter = useRecruitStore((state) => state.selectedContractFilter)
+
+  const { t } = useTranslation()
 
   // 무한스크롤 훅 사용
   const {
@@ -42,14 +45,14 @@ export default function RecruitHomePage() {
         value={searchValue}
         setValue={(e) => setSearchValue(e.target.value)}
         inputBoxStyle={'default'}
-        placeholder={'채용 공고를 검색해보세요.'}
+        placeholder={t('recruitHome.searchPlaceholder')}
       />
       {searchValue ? null : <Banner />}
       <section>
         <div className="flex flex-col gap-y-3">
-          <div className="title-lg">공고 전체</div>
+          <h1 className="title-lg">{t('recruitHome.h1')}</h1>
           <p className="subtitle-lg text-main">
-            {totalElements} <span className="text-black">건</span>
+            {totalElements} <span className="text-black">{t('recruitHome.countSuffix')}</span>
           </p>
           <FilterButtons />
         </div>
@@ -74,18 +77,18 @@ export default function RecruitHomePage() {
         {/* 무한스크롤 트리거 엘리먼트 */}
         {hasMore && (
           <div ref={loadingRef} className="flex h-10 items-center justify-center">
-            <span className="text-sm text-gray-400">더 많은 공고를 불러오는 중...</span>
+            <span className="text-sm text-gray-400">{t('recruitHome.loadingMorePostsMessage')}</span>
           </div>
         )}
 
         {/* 더 이상 데이터가 없을 때 */}
         {!hasMore && recruits.length > 0 && (
-          <div className="py-8 text-center text-gray-500">모든 공고를 확인했습니다.</div>
+          <div className="py-8 text-center text-gray-500">{t('recruitHome.noMorePostsMessage')}</div>
         )}
 
         {/* 데이터가 없을 때 */}
         {!loading && recruits.length === 0 && (
-          <div className="py-16 text-center text-gray-500">검색 결과가 없습니다.</div>
+          <div className="py-16 text-center text-gray-500">{t('recruitHome.noSearchResultsMessage')}</div>
         )}
       </section>
     </div>
