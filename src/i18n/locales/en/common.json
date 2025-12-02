@@ -35,6 +35,72 @@
       "reset": "Reset",
       "apply": "Apply"
     },
+
+    "contractTypeFilter": {
+      "title": "Select Contract Type",
+      "content": {
+        "INTERN": "Intern",
+        "NEWCOMER": "Entry-level",
+        "EXPERIENCED": "Experienced",
+        "CONTRACT": "Contract",
+        "REGULAR": "Full-time"
+      }
+    },
+
+    "regionFilter": {
+      "title": "Select Region",
+      "content": {
+        "SEOUL": "Seoul",
+        "GYEONGGI": "Gyeonggi",
+        "INCHEON": "Incheon",
+        "BUSAN": "Busan",
+        "DAEJEON": "Daejeon",
+        "DAEGU": "Daegu",
+        "ULSAN": "Ulsan",
+        "GWANGJU": "Gwangju",
+        "GANGWON": "Gangwon",
+        "SEJONG": "Sejong",
+        "CHUNGBUK": "Chungbuk",
+        "CHUNGNAM": "Chungnam",
+        "GYEONGBUK": "Gyeongbuk",
+        "GYEONGNAM": "Gyeongnam",
+        "JEJU": "Jeju",
+        "JEONBUK": "Jeonbuk",
+        "JEONNAM": "Jeonnam"
+      }
+    },
+
+    "requiredLanguageFilter": {
+      "title": "Select Language",
+      "placeHolder": "Search related languages.",
+      "content": {
+        "ENGLISH": "English",
+        "CHINESE": "Chinese",
+        "HINDI": "Hindi",
+        "SPANISH": "Spanish",
+        "FRENCH": "French",
+        "ARABIC": "Arabic",
+        "BENGALI": "Bengali",
+        "PORTUGUESE": "Portuguese",
+        "RUSSIAN": "Russian",
+        "URDU": "Urdu",
+        "INDONESIAN": "Indonesian",
+        "GERMAN": "German",
+        "JAPANESE": "Japanese",
+        "SWAHILI": "Swahili",
+        "MARATHI": "Marathi",
+        "TELUGU": "Telugu",
+        "TURKISH": "Turkish",
+        "TAMIL": "Tamil",
+        "VIETNAMESE": "Vietnamese",
+        "KOREAN": "Korean",
+        "ITALIAN": "Italian",
+        "PERSIAN": "Persian",
+        "POLISH": "Polish",
+        "UKRAINIAN": "Ukrainian"
+      }
+    },
+
     "jobRoleFilter": {
       "title": "Select Job Role",
       "jobRoleSearchPlaceHolder": "Search by job category or role.",

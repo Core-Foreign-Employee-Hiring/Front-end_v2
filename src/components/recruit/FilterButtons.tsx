@@ -9,7 +9,7 @@ import JobRoleFilter from '@/components/filter/JobRoleFilter'
 import LanguageFilter from '@/components/filter/LanguageFilter'
 import RegionFilter from '@/components/filter/RegionFilter'
 import ContractFilter from '@/components/filter/ContractFilter'
-import { convertEnumToKorContractType } from '@/utils/recruit'
+import { convertEnumToKorContractType, convertEnumToKorContractTypeLabel } from '@/utils/recruit'
 import { useTranslation } from 'react-i18next'
 
 export default function FilterButtons() {
@@ -350,7 +350,7 @@ export default function FilterButtons() {
         <p className="button">
           {selectedContractFilterContent === undefined
             ? t('recruitHome.filters.contractType')
-            : convertEnumToKorContractType(selectedContractFilterContent)}
+            : t(convertEnumToKorContractTypeLabel(selectedContractFilterContent))}
         </p>
         {isContractFilterOpen ? (
           <DropboxArrowUpIcon width={20} height={20} />

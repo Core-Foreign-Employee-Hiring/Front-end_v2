@@ -3,6 +3,7 @@
 import Filter from '@/components/common/Filter'
 import { CONTRACT_LIST } from '@/utils/filterList'
 import { ContractEnumType } from '@/types/recruit'
+import { useTranslation } from 'react-i18next'
 
 interface ContractFilterProps {
   addContract: (contract: ContractEnumType) => void
@@ -20,9 +21,10 @@ export default function ContractFilter({
   onReset,
   onApply,
 }: ContractFilterProps) {
+  const { t } = useTranslation()
   return (
     <Filter onClose={onClose}>
-      <Filter.Title onClose={onClose} title={'계약 형태 선택'} />
+      <Filter.Title onClose={onClose} title={t('filter.contractTypeFilter.title')} />
       <Filter.Content>
         <div className="flex flex-col gap-y-4">
           <section className="h-[400px] overflow-y-scroll">
@@ -34,7 +36,7 @@ export default function ContractFilter({
                   onClick={() => addContract(contract.code)}
                   className={`${selectedContract === contract.code ? 'border-main bg-main-light text-main' : 'border-gray2 text-gray5'} button flex h-[36px] items-center rounded-[12px] border px-4 py-3`}
                 >
-                  {contract.label}
+                  {t(contract.label)}
                 </button>
               ))}
             </div>

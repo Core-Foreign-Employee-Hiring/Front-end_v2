@@ -2,11 +2,11 @@ import { ContractEnumType, JobCategoryType, JobRoleType, LanguageType, VisaType 
 import { CountryType } from '@/types/filter'
 
 export const CONTRACT_LIST: { code: ContractEnumType; label: string }[] = [
-  { code: 'INTERN', label: '인턴' },
-  { code: 'NEWCOMER', label: '신입' },
-  { code: 'EXPERIENCED', label: '경력' },
-  { code: 'CONTRACT', label: '계약직' },
-  { code: 'REGULAR', label: '정규직' },
+  { code: 'INTERN', label: 'filter.contractTypeFilter.content.INTERN' },
+  { code: 'NEWCOMER', label: 'filter.contractTypeFilter.content.NEWCOMER' },
+  { code: 'EXPERIENCED', label: 'filter.contractTypeFilter.content.EXPERIENCED' },
+  { code: 'CONTRACT', label: 'filter.contractTypeFilter.content.CONTRACT' },
+  { code: 'REGULAR', label: 'filter.contractTypeFilter.content.REGULAR' },
 ]
 
 export const NATIONALITY_LIST: { code: CountryType; label: string }[] = [
@@ -258,50 +258,50 @@ export const VISA_LIST: { code: VisaType; i18nKey: string }[] = [
 ] as const
 
 export const WORK_REGIONS = [
-  { code: 'SEOUL', label: '서울특별시', short: '서울' },
-  { code: 'GYEONGGI', label: '경기도', short: '경기' },
-  { code: 'INCHEON', label: '인천광역시', short: '인천' },
-  { code: 'BUSAN', label: '부산광역시', short: '부산' },
-  { code: 'DAEJEON', label: '대전광역시', short: '대전' },
-  { code: 'DAEGU', label: '대구광역시', short: '대꾸' },
-  { code: 'ULSAN', label: '울산광역시', short: '울산' },
-  { code: 'GWANGJU', label: '광주광역시', short: '광주' },
-  { code: 'GANGWON', label: '강원특별자치도', short: '강원특별자치도' },
-  { code: 'SEJONG', label: '세종특별자치도', short: '세종특별자치도' },
-  { code: 'CHUNGBUK', label: '충청북도', short: '충북' },
-  { code: 'CHUNGNAM', label: '충청남도', short: '충남' },
-  { code: 'GYEONGBUK', label: '경상북도', short: '경북' },
-  { code: 'GYEONGNAM', label: '경상남도', short: '경남' },
-  { code: 'JEJU', label: '제주특별자치도', short: '제주특별자치도' },
-  { code: 'JEONBUK', label: '전라북도', short: '전북특별자치도' },
-  { code: 'JEONNAM', label: '전라남도', short: '전남' },
+  { code: 'SEOUL', label: 'filter.regionFilter.content.SEOUL', short: '서울' },
+  { code: 'GYEONGGI', label: 'filter.regionFilter.content.GYEONGGI', short: '경기' },
+  { code: 'INCHEON', label: 'filter.regionFilter.content.INCHEON', short: '인천' },
+  { code: 'BUSAN', label: 'filter.regionFilter.content.BUSAN', short: '부산' },
+  { code: 'DAEJEON', label: 'filter.regionFilter.content.DAEJEON', short: '대전' },
+  { code: 'DAEGU', label: 'filter.regionFilter.content.DAEGU', short: '대꾸' },
+  { code: 'ULSAN', label: 'filter.regionFilter.content.ULSAN', short: '울산' },
+  { code: 'GWANGJU', label: 'filter.regionFilter.content.GWANGJU', short: '광주' },
+  { code: 'GANGWON', label: 'filter.regionFilter.content.GANGWON', short: '강원특별자치도' },
+  { code: 'SEJONG', label: 'filter.regionFilter.content.SEJONG', short: '세종특별자치도' },
+  { code: 'CHUNGBUK', label: 'filter.regionFilter.content.CHUNGBUK', short: '충북' },
+  { code: 'CHUNGNAM', label: 'filter.regionFilter.content.CHUNGNAM', short: '충남' },
+  { code: 'GYEONGBUK', label: 'filter.regionFilter.content.GYEONGBUK', short: '경북' },
+  { code: 'GYEONGNAM', label: 'filter.regionFilter.content.GYEONGNAM', short: '경남' },
+  { code: 'JEJU', label: 'filter.regionFilter.content.JEJU', short: '제주특별자치도' },
+  { code: 'JEONBUK', label: 'filter.regionFilter.content.JEONBUK', short: '전북특별자치도' },
+  { code: 'JEONNAM', label: 'filter.regionFilter.content.JEONNAM', short: '전남' },
 ] as const
 
 export const LANGUAGE_LIST = [
-  { code: 'ENGLISH', label: '영어' },
-  { code: 'CHINESE', label: '중국어' },
-  { code: 'HINDI', label: '힌디어' },
-  { code: 'SPANISH', label: '스페인어' },
-  { code: 'FRENCH', label: '프랑스어' },
-  { code: 'ARABIC', label: '아랍어' },
-  { code: 'BENGALI', label: '벵골어' },
-  { code: 'PORTUGUESE', label: '포르투갈어' },
-  { code: 'RUSSIAN', label: '러시아어' },
-  { code: 'URDU', label: '우르두어' },
-  { code: 'INDONESIAN', label: '인도네시아어' },
-  { code: 'GERMAN', label: '독일어' },
-  { code: 'JAPANESE', label: '일본어' },
-  { code: 'SWAHILI', label: '스와힐리어' },
-  { code: 'MARATHI', label: '마라티어' },
-  { code: 'TELUGU', label: '텔루구어' },
-  { code: 'TURKISH', label: '튀르키예어' },
-  { code: 'TAMIL', label: '타밀어' },
-  { code: 'VIETNAMESE', label: '베트남어' },
-  { code: 'KOREAN', label: '한국어' },
-  { code: 'ITALIAN', label: '이탈리아어' },
-  { code: 'PERSIAN', label: '페르시아어' },
-  { code: 'POLISH', label: '폴란드어' },
-  { code: 'UKRAINIAN', label: '우크라이나어' },
+  { code: 'ENGLISH', label: 'filter.requiredLanguageFilter.content.ENGLISH' },
+  { code: 'CHINESE', label: 'filter.requiredLanguageFilter.content.CHINESE' },
+  { code: 'HINDI', label: 'filter.requiredLanguageFilter.content.HINDI' },
+  { code: 'SPANISH', label: 'filter.requiredLanguageFilter.content.SPANISH' },
+  { code: 'FRENCH', label: 'filter.requiredLanguageFilter.content.FRENCH' },
+  { code: 'ARABIC', label: 'filter.requiredLanguageFilter.content.ARABIC' },
+  { code: 'BENGALI', label: 'filter.requiredLanguageFilter.content.BENGALI' },
+  { code: 'PORTUGUESE', label: 'filter.requiredLanguageFilter.content.PORTUGUESE' },
+  { code: 'RUSSIAN', label: 'filter.requiredLanguageFilter.content.RUSSIAN' },
+  { code: 'URDU', label: 'filter.requiredLanguageFilter.content.URDU' },
+  { code: 'INDONESIAN', label: 'filter.requiredLanguageFilter.content.INDONESIAN' },
+  { code: 'GERMAN', label: 'filter.requiredLanguageFilter.content.GERMAN' },
+  { code: 'JAPANESE', label: 'filter.requiredLanguageFilter.content.JAPANESE' },
+  { code: 'SWAHILI', label: 'filter.requiredLanguageFilter.content.SWAHILI' },
+  { code: 'MARATHI', label: 'filter.requiredLanguageFilter.content.MARATHI' },
+  { code: 'TELUGU', label: 'filter.requiredLanguageFilter.content.TELUGU' },
+  { code: 'TURKISH', label: 'filter.requiredLanguageFilter.content.TURKISH' },
+  { code: 'TAMIL', label: 'filter.requiredLanguageFilter.content.TAMIL' },
+  { code: 'VIETNAMESE', label: 'filter.requiredLanguageFilter.content.VIETNAMESE' },
+  { code: 'KOREAN', label: 'filter.requiredLanguageFilter.content.KOREAN' },
+  { code: 'ITALIAN', label: 'filter.requiredLanguageFilter.content.ITALIAN' },
+  { code: 'PERSIAN', label: 'filter.requiredLanguageFilter.content.PERSIAN' },
+  { code: 'POLISH', label: 'filter.requiredLanguageFilter.content.POLISH' },
+  { code: 'UKRAINIAN', label: 'filter.requiredLanguageFilter.content.UKRAINIAN' },
 ] as const
 
 export const JOB_CATEGORY_LIST: { code: JobCategoryType; label: string }[] = [
@@ -961,53 +961,53 @@ export const getJobRoleLabel = (jobRole: JobRoleType) => {
 export function getLanguageLabel(lang: LanguageType): string {
   switch (lang) {
     case 'ENGLISH':
-      return '영어'
+      return 'filter.requiredLanguageFilter.content.ENGLISH'
     case 'CHINESE':
-      return '중국어'
+      return 'filter.requiredLanguageFilter.content.CHINESE'
     case 'HINDI':
-      return '힌디어'
+      return 'filter.requiredLanguageFilter.content.HINDI'
     case 'SPANISH':
-      return '스페인어'
+      return 'filter.requiredLanguageFilter.content.SPANISH'
     case 'FRENCH':
-      return '프랑스어'
+      return 'filter.requiredLanguageFilter.content.FRENCH'
     case 'ARABIC':
-      return '아랍어'
+      return 'filter.requiredLanguageFilter.content.ARABIC'
     case 'BENGALI':
-      return '벵골어'
+      return 'filter.requiredLanguageFilter.content.BENGALI'
     case 'PORTUGUESE':
-      return '포르투갈어'
+      return 'filter.requiredLanguageFilter.content.PORTUGUESE'
     case 'RUSSIAN':
-      return '러시아어'
+      return 'filter.requiredLanguageFilter.content.RUSSIAN'
     case 'URDU':
-      return '우르두어'
+      return 'filter.requiredLanguageFilter.content.URDU'
     case 'INDONESIAN':
-      return '인도네시아어'
+      return 'filter.requiredLanguageFilter.content.INDONESIAN'
     case 'GERMAN':
-      return '독일어'
+      return 'filter.requiredLanguageFilter.content.GERMAN'
     case 'JAPANESE':
-      return '일본어'
+      return 'filter.requiredLanguageFilter.content.JAPANESE'
     case 'SWAHILI':
-      return '스와힐리어'
+      return 'filter.requiredLanguageFilter.content.SWAHILI'
     case 'MARATHI':
-      return '마라티어'
+      return 'filter.requiredLanguageFilter.content.MARATHI'
     case 'TELUGU':
-      return '텔루구어'
+      return 'filter.requiredLanguageFilter.content.TELUGU'
     case 'TURKISH':
-      return '튀르키예어'
+      return 'filter.requiredLanguageFilter.content.TURKISH'
     case 'TAMIL':
-      return '타밀어'
+      return 'filter.requiredLanguageFilter.content.TAMIL'
     case 'VIETNAMESE':
-      return '베트남어'
+      return 'filter.requiredLanguageFilter.content.VIETNAMESE'
     case 'KOREAN':
-      return '한국어'
+      return 'filter.requiredLanguageFilter.content.KOREAN'
     case 'ITALIAN':
-      return '이탈리아어'
+      return 'filter.requiredLanguageFilter.content.ITALIAN'
     case 'PERSIAN':
-      return '페르시아어'
+      return 'filter.requiredLanguageFilter.content.PERSIAN'
     case 'POLISH':
-      return '폴란드어'
+      return 'filter.requiredLanguageFilter.content.POLISH'
     case 'UKRAINIAN':
-      return '우크라이나어'
+      return 'filter.requiredLanguageFilter.content.UKRAINIAN'
     default:
       return ''
   }

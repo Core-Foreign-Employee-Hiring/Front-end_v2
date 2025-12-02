@@ -4,6 +4,7 @@ import Filter from '@/components/common/Filter'
 import { getRegionLabel, WORK_REGIONS } from '@/utils/filterList'
 import { RegionType } from '@/types/recruit'
 import { XIcon } from '@/assets/svgComponents'
+import { useTranslation } from 'react-i18next'
 
 interface RegionFilterProps {
   addRegions: (selectedRegion: RegionType) => void
@@ -22,9 +23,10 @@ export default function RegionFilter({
   onReset,
   onApply,
 }: RegionFilterProps) {
+  const { t } = useTranslation()
   return (
     <Filter onClose={onClose}>
-      <Filter.Title onClose={onClose} title={'비자선택'} />
+      <Filter.Title onClose={onClose} title={t('filter.regionFilter.title')} />
       <Filter.Content>
         <div className="flex flex-col gap-y-4">
           <section className="h-[300px] overflow-y-scroll">
@@ -36,7 +38,7 @@ export default function RegionFilter({
                   onClick={() => addRegions(region.code)}
                   className={`${selectedRegions?.includes(region.code) ? 'border-main bg-main-light text-main' : 'border-gray2 text-gray5'} button flex h-[32px] items-center justify-center rounded-[12px] border px-4 py-3`}
                 >
-                  {region.label}
+                  {t(region.label)}
                 </button>
               ))}
             </div>
@@ -48,7 +50,7 @@ export default function RegionFilter({
                 key={selectedRegion}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
               >
-                {getRegionLabel(selectedRegion)}
+                {t(getRegionLabel(selectedRegion))}
                 <XIcon
                   onClick={() => {
                     deleteRegions(selectedRegion)

@@ -34,6 +34,68 @@
       "reset": "초기화",
       "apply": "적용"
     },
+    "contractTypeFilter": {
+      "title": "계약 형태 선택",
+      "content": {
+        "INTERN": "인턴",
+        "NEWCOMER": "신입",
+        "EXPERIENCED": "경력",
+        "CONTRACT": "계약직",
+        "REGULAR": "정규직"
+      }
+    },
+    "regionFilter": {
+      "title": "지역 선택",
+      "content": {
+        "SEOUL": "서울특별시",
+        "GYEONGGI": "경기도",
+        "INCHEON": "인천광역시",
+        "BUSAN": "부산광역시",
+        "DAEJEON": "대전광역시",
+        "DAEGU": "대구광역시",
+        "ULSAN": "울산광역시",
+        "GWANGJU": "광주광역시",
+        "GANGWON": "강원특별자치도",
+        "SEJONG": "세종특별자치도",
+        "CHUNGBUK": "충청북도",
+        "CHUNGNAM": "충청남도",
+        "GYEONGBUK": "경상북도",
+        "GYEONGNAM": "경상남도",
+        "JEJU": "제주특별자치도",
+        "JEONBUK": "전라북도",
+        "JEONNAM": "전라남도"
+      }
+    },
+    "requiredLanguageFilter": {
+      "title": "언어 선택",
+      "placeHolder": "관련 언어를 검색하세요.",
+      "content": {
+        "ENGLISH": "영어",
+        "CHINESE": "중국어",
+        "HINDI": "힌디어",
+        "SPANISH": "스페인어",
+        "FRENCH": "프랑스어",
+        "ARABIC": "아랍어",
+        "BENGALI": "벵골어",
+        "PORTUGUESE": "포르투갈어",
+        "RUSSIAN": "러시아어",
+        "URDU": "우르두어",
+        "INDONESIAN": "인도네시아어",
+        "GERMAN": "독일어",
+        "JAPANESE": "일본어",
+        "SWAHILI": "스와힐리어",
+        "MARATHI": "마라티어",
+        "TELUGU": "텔루구어",
+        "TURKISH": "튀르키예어",
+        "TAMIL": "타밀어",
+        "VIETNAMESE": "베트남어",
+        "KOREAN": "한국어",
+        "ITALIAN": "이탈리아어",
+        "PERSIAN": "페르시아어",
+        "POLISH": "폴란드어",
+        "UKRAINIAN": "우크라이나어"
+      }
+    },
     "visaFilter": {
       "title": "비자 선택",
       "content": {

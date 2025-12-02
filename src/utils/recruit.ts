@@ -125,6 +125,21 @@ export const convertEnumToKorContractType = (category: ContractEnumType): Contra
   }
 }
 
+export const convertEnumToKorContractTypeLabel = (category: ContractEnumType): string => {
+  switch (category) {
+    case 'INTERN':
+      return 'filter.contractTypeFilter.content.INTERN'
+    case 'EXPERIENCED':
+      return 'filter.contractTypeFilter.content.EXPERIENCED'
+    case 'CONTRACT':
+      return 'filter.contractTypeFilter.content.CONTRACT'
+    case 'NEWCOMER':
+      return 'filter.contractTypeFilter.content.NEWCOMER'
+    case 'REGULAR':
+      return 'filter.contractTypeFilter.content.REGULAR'
+  }
+}
+
 export const convertEnumToKorSalaryType = (category: SalaryEnumType): SalaryKorType => {
   switch (category) {
     case 'ANNUAL':
