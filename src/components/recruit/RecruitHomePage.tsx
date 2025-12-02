@@ -9,6 +9,7 @@ import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import Banner from '@/components/common/Banner'
 import FilterButtons from '@/components/recruit/FilterButtons'
 import { useTranslation } from 'react-i18next'
+import { usePathname } from 'next/navigation'
 
 export default function RecruitHomePage() {
   const [searchValue, setSearchValue] = useState('')

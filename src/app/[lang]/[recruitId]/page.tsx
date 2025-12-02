@@ -1,5 +1,4 @@
 'use client'
-import Header from '@/components/common/Header'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Button from '@/components/common/Button'
@@ -10,10 +9,13 @@ import { RecruitInputDataType } from '@/types/recruit'
 import {
   changeCompanyTypeEnumToKor,
   changeEnumToKorWorkDaysType,
+  changeEnumToKorWorkDaysTypeLabel,
   changeEnumToKorWorkType,
+  changeEnumToKorWorkTypeLabel,
   convertEnumToKorContractType,
-  convertEnumToKorJobCategory,
+  convertEnumToKorContractTypeLabel,
   convertEnumToKorSalaryType,
+  convertEnumToKorSalaryTypeLabel,
   SalaryTypeClassName,
 } from '@/utils/recruit'
 import { FaceIcon, TripIcon } from '@/assets/svgComponents'
@@ -24,6 +26,9 @@ import { useTranslation } from 'react-i18next'
 
 const RecruitDetailPage = () => {
   const pathName = usePathname()
+  const recruitId = pathName.split('/')[2]
+  console.log('recruitId', recruitId)
+
   const [recruitData, setRecruitData] = useState<RecruitInputDataType>()
 
   const { t } = useTranslation()
@@ -42,15 +47,11 @@ const RecruitDetailPage = () => {
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined | null>()
 
   useEffect(() => {
-    getRecruitDetailData(pathName).then((response: ApiResponse<RecruitInputDataType>) => {
+    getRecruitDetailData(recruitId).then((response: ApiResponse<RecruitInputDataType>) => {
       setRecruitData(response.data)
       console.log(response.data)
     })
-  }, [])
-
-  const formatJobCategory = () => {
-    return recruitData?.jobCategories?.map((category) => getJobCategoryLabel(category)).join('/')
-  }
+  }, [pathName])
 
   const formatDate = (dateString: string | undefined | null) => {
     if (dateString) {
@@ -60,14 +61,8 @@ const RecruitDetailPage = () => {
     }
   }
 
-  const formatNumberWithComma = (number: number | null) => {
-    if (number) return number.toLocaleString('ko-KR')
-  }
-
   return (
     <main>
-      <Header headerType="dynamic" title="공고" />
-
       {isImageModalOpen ? (
         <ImageModal
           ImageUrl={selectedImageUrl}
@@ -104,7 +99,9 @@ const RecruitDetailPage = () => {
                       <FaceIcon width={19} height={19} />
                     </div>
                     <div className="flex flex-col items-center">
-                      <p className="body-md text-main">{convertEnumToKorContractType(recruitData.contractType)}</p>
+                      <p className="body-md text-main">
+                        {t(convertEnumToKorContractTypeLabel(recruitData.contractType))}
+                      </p>
                       <p className="body-md text-gray4">{recruitData.directInputContractType}</p>
                     </div>
                   </section>
@@ -114,7 +111,7 @@ const RecruitDetailPage = () => {
                     <TripIcon width={19} height={19} />
                   </div>
                   <div className="flex flex-col items-center">
-                    <p className="body-md text-main">{changeEnumToKorWorkType(recruitData.workType)}</p>
+                    <p className="body-md text-main">{t(changeEnumToKorWorkTypeLabel(recruitData.workType))}</p>
                     <p className="body-md text-gray4">{recruitData.directInputWorkType}</p>
                   </div>
                 </section>
@@ -124,7 +121,9 @@ const RecruitDetailPage = () => {
                 <div className="border-gray2 border-b"></div>
                 {recruitData.jobCategories ? (
                   <div className="flex items-center">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">직종</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.recruitInfo.jobCategories')}
+                    </div>
                     <div className="flex w-[80%] flex-wrap gap-1">
                       {recruitData.jobCategories.map((jobCategory) => {
                         return (
@@ -138,9 +137,11 @@ const RecruitDetailPage = () => {
                 ) : null}
                 {recruitData.workDayType ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무요일</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.recruitInfo.workDayType')}
+                    </div>
                     <div className="flex w-[80%] flex-col">
-                      <p className="body-md">{changeEnumToKorWorkDaysType(recruitData.workDayType)}</p>
+                      <p className="body-md">{t(changeEnumToKorWorkDaysTypeLabel(recruitData.workDayType))}</p>
                       {recruitData.directInputWorkDayType ? (
                         <p className="body-md text-gray5">{recruitData.directInputWorkDayType}</p>
                       ) : null}
@@ -150,7 +151,9 @@ const RecruitDetailPage = () => {
 
                 {recruitData.workStartTime || recruitData.workEndTime ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무시간</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.recruitInfo.workTime')}
+                    </div>
                     <div className="flex w-[80%] flex-col">
                       <p className="body-md">
                         {recruitData.workStartTime} ~ {recruitData.workEndTime}
@@ -164,15 +167,20 @@ const RecruitDetailPage = () => {
 
                 {recruitData.salary ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">급여</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.recruitInfo.salary')}
+                    </div>
                     <div className="flex w-[80%] flex-col">
                       <div className="flex items-center gap-x-2">
                         {recruitData.salaryType ? (
                           <div className={SalaryTypeClassName(recruitData.salaryType)}>
-                            <p className="badge-sm">{convertEnumToKorSalaryType(recruitData.salaryType)}</p>
+                            <p className="badge-sm">{t(convertEnumToKorSalaryTypeLabel(recruitData.salaryType))}</p>
                           </div>
                         ) : null}
-                        <p className="body-md">{recruitData.salary?.toLocaleString()}원</p>
+                        <p className="body-md">
+                          {recruitData.salary?.toLocaleString()}
+                          {t('recruitDetail.recruitInfo.salarySymbol')}
+                        </p>
                       </div>
                       {recruitData.directInputSalaryType ? (
                         <p className="body-md text-gray5">{recruitData.directInputSalaryType}</p>
@@ -183,7 +191,9 @@ const RecruitDetailPage = () => {
 
                 {(recruitData.address1 || recruitData.address2) && (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">근무지</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.recruitInfo.address')}
+                    </div>
                     <p className="body-md w-[80%]">
                       {recruitData.address1} {recruitData.address2}
                     </p>
@@ -194,7 +204,7 @@ const RecruitDetailPage = () => {
 
             {/* 상세 정보 */}
             <section className="flex flex-col gap-y-[12px]">
-              <h2 className="title-lg">상세 정보 (모집 포스터)</h2>
+              <h2 className="title-lg">{t('recruitDetail.detailInfo.title')}</h2>
               {recruitData.posterImageUrl ? (
                 <div className="relative h-[500px] w-[335px] rounded-[32px]">
                   <Image
@@ -216,7 +226,9 @@ const RecruitDetailPage = () => {
                 <div className="border-gray2 flex flex-col gap-y-3 rounded-[20px] border p-5">
                   {recruitData.mainTasks ? (
                     <div className="flex">
-                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">주요업무</div>
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                        {t('recruitDetail.detailInfo.mainTasks')}
+                      </div>
                       <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
                         {recruitData.mainTasks}
                       </p>
@@ -224,7 +236,9 @@ const RecruitDetailPage = () => {
                   ) : null}
                   {recruitData.qualifications ? (
                     <div className="flex">
-                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">자격요건</div>
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                        {t('recruitDetail.detailInfo.qualifications')}
+                      </div>
                       <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
                         {recruitData.qualifications}
                       </p>
@@ -232,7 +246,9 @@ const RecruitDetailPage = () => {
                   ) : null}
                   {recruitData.preferences ? (
                     <div className="flex">
-                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">우대사항</div>
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                        {t('recruitDetail.detailInfo.preferences')}
+                      </div>
                       <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
                         {recruitData.preferences}
                       </p>
@@ -240,7 +256,9 @@ const RecruitDetailPage = () => {
                   ) : null}
                   {recruitData.others ? (
                     <div className="flex">
-                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">기타</div>
+                      <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                        {t('recruitDetail.detailInfo.others')}
+                      </div>
                       <p className="body-md text-gray5 w-[215px]" style={{ whiteSpace: 'pre-wrap' }}>
                         {recruitData.others}
                       </p>
@@ -249,28 +267,6 @@ const RecruitDetailPage = () => {
                 </div>
               )}
             </section>
-
-            {/* 근무지 정보 */}
-            {/*<section className="border-gray2 flex flex-col gap-y-[12px]">*/}
-            {/*  <h2 className="title-lg">근무지 정보</h2>*/}
-            {/*  <section className="border-gray2 flex flex-col gap-y-[16px] rounded-[32px] border p-5">*/}
-            {/*    <div className="bg-gray1 h-[240px] w-full"></div>*/}
-            {/*    <div className="flex flex-col gap-y-[12px]">*/}
-            {/*      <div className="flex">*/}
-            {/*        <div className="subtitle-md text-gray4 w-[80px]">우편번호</div>*/}
-            {/*        <p className="body-md w-[80%]">{recruitData.zipcode}</p>*/}
-            {/*      </div>*/}
-            {/*      <div className="flex">*/}
-            {/*        <div className="subtitle-md text-gray4 w-[80px]">주소</div>*/}
-            {/*        <p className="body-md w-[80%]">{recruitData.address1}</p>*/}
-            {/*      </div>*/}
-            {/*      <div className="flex">*/}
-            {/*        <div className="subtitle-md text-gray4 w-[80px]">상세 주소</div>*/}
-            {/*        <p className="body-md w-[80%]">{recruitData.address2}</p>*/}
-            {/*      </div>*/}
-            {/*    </div>*/}
-            {/*  </section>*/}
-            {/*</section>*/}
 
             {/* 회사 정보 */}
             <section className="flex flex-col gap-y-[24px] rounded-[32px]">
@@ -294,7 +290,9 @@ const RecruitDetailPage = () => {
               <section className="flex flex-col gap-y-[20px]">
                 {recruitData.address1 || recruitData.address2 ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">회사주소</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.companyInfo.companyAddress')}
+                    </div>
                     <p className="body-md w-[80%]">
                       {recruitData.address1} {recruitData.address2}
                     </p>
@@ -302,26 +300,35 @@ const RecruitDetailPage = () => {
                 ) : null}
                 {recruitData.representativeName ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">대표자명</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.companyInfo.companyAddress')}
+                      {t('recruitDetail.companyInfo.representativeName')}
+                    </div>
                     <p className="body-md w-[80%]">{recruitData.representativeName}</p>
                   </div>
                 ) : null}
                 {recruitData.businessType ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">업종</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.companyInfo.businessType')}
+                    </div>
                     <p className="body-md w-[80%]">{recruitData.businessType}</p>
                   </div>
                 ) : null}
 
                 {recruitData.companyType ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">기업형태</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.companyInfo.companyType')}
+                    </div>
                     <p className="body-md w-[80%]">{changeCompanyTypeEnumToKor(recruitData.companyType)}</p>
                   </div>
                 ) : null}
                 {recruitData.establishedDate ? (
                   <div className="flex">
-                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">설립일</div>
+                    <div className="subtitle-md text-gray4 w-[80px] whitespace-nowrap">
+                      {t('recruitDetail.companyInfo.establishedDate')}
+                    </div>
                     <p className="body-md w-[80%]">{recruitData.establishedDate}</p>
                   </div>
                 ) : null}
@@ -339,7 +346,7 @@ const RecruitDetailPage = () => {
             size={'lg'}
             type={'active'}
           >
-            지원하기
+            {t('recruitDetail.apply.title')}
           </Button>
         </div>
       </div>

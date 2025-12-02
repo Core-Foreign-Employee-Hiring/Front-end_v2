@@ -9,6 +9,76 @@
     "logout": "로그아웃",
     "nameSuffix": "님"
   },
+
+  "recruitDetail": {
+    "apply": {
+      "title": "지원하기",
+      "close": "닫기",
+      "InputApplicationMethodButton": {
+        "copy": "복사 중...",
+        "EMAIL": "이메일 복사",
+        "PHONE_SMS": "전화번호 복사",
+        "WEBSITE": "웹페이지 이동"
+      },
+      "applicationMethod": {
+        "EMAIL": "‘이메일 지원’",
+        "PHONE_SMS": "‘전화 / 문자 지원’",
+        "WEBSITE": "‘웹사이트 지원‘"
+      }
+    },
+    "headerTitle": "공고",
+    "recruitInfo": {
+      "jobCategories": "직종",
+      "workDayType": "근무요일",
+      "workTime": "근무시간",
+      "address": "근무지",
+      "salary": "급여",
+      "salarySymbol": "원",
+      "workType": {
+        "ONSITE": "대면",
+        "HYBRID": "혼합근무",
+        "REMOTE": "비대면",
+        "ETC": "기타"
+      },
+      "salaryType": {
+        "ANNUAL": "연봉",
+        "DAILY": "일급",
+        "WEEKLY": "주급",
+        "HOURLY": "시급",
+        "MONTHLY": "월급",
+        "ETC": "기타"
+      },
+      "workDaysType": {
+        "WEEKDAYS": "평일(월, 화, 수, 목, 금)",
+        "WEEKENDS": "주말(토, 일)",
+        "FULL_WEEK": "주 7일(월~일)",
+        "SIX_DAYS": "주 6일",
+        "MONDAY": "월요일",
+        "TUESDAY": "화요일",
+        "WEDNESDAY": "수요일",
+        "THURSDAY": "목요일",
+        "FRIDAY": "금요일",
+        "SATURDAY": "토요일",
+        "SUNDAY": "일요일",
+        "ETC": "기타"
+      }
+    },
+    "detailInfo":{
+      "title": "상세 정보 (모집 포스터)",
+      "mainTasks": "주요업무",
+      "qualifications": "자격요건",
+      "preferences": "우대사항",
+      "others":"기타"
+    },
+    "companyInfo": {
+      "companyAddress": "회사주소",
+      "representativeName": "대표자명",
+      "businessType": "업종",
+      "companyType": "기업형태",
+      "establishedDate": "설립일"
+    }
+  },
+
   "recruitHome": {
     "h1": "공고 전체",
     "searchPlaceholder": "채용 공고를 검색해보세요.",

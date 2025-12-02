@@ -77,7 +77,7 @@ export const getTotalRecruit = async (params: {
  * 공고 상세보기
  */
 export const getRecruitDetailData = async (recruitId: string) => {
-  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/recruit${recruitId}`, {
+  const response = await authorizedFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v2/recruit/${recruitId}`, {
     method: 'GET',
   })
 

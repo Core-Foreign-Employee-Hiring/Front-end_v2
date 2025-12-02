@@ -19,8 +19,6 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
 
   const { t } = useTranslation()
 
-  const pathName = usePathname()
-
   const lang = localStorage.getItem('i18nextLng')
 
   const formatDate = (dateString: string) => {
@@ -29,10 +27,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
     const month = String(date.getMonth() + 1).padStart(2, '0')
     const day = String(date.getDate()).padStart(2, '0')
 
-    const dayOfWeek = ['일', '월', '화', '수', '목', '금', '토']
-    const dayName = dayOfWeek[date.getDay()]
-
-    return `${month}/${day}(${dayName})`
+    return `${month}/${day}`
   }
 
   /**
@@ -57,7 +52,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
   return (
     <div
       onClick={() => {
-        router.push(`/${recruit.recruitId}`)
+        router.push(`/${lang}/${recruit.recruitId}`)
       }}
       className="border-gray2 flex cursor-pointer flex-col gap-y-3 rounded-[20px] border bg-white p-4 transition hover:shadow-md hover:duration-75"
     >

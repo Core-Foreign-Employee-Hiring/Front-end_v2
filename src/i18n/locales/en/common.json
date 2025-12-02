@@ -9,6 +9,77 @@
     "logout": "Log Out",
     "nameSuffix": ""
   },
+
+  "recruitDetail": {
+    "apply": {
+      "title": "Apply",
+      "close": "Close",
+      "InputApplicationMethodButton": {
+        "copy": "Copying...",
+        "EMAIL": "Copy Email",
+        "PHONE_SMS": "Copy Phone Number",
+        "WEBSITE": "Go to Website"
+      },
+      "applicationMethod": {
+        "EMAIL": "'Email Application'",
+        "PHONE_SMS": "'Phone / SMS Application'",
+        "WEBSITE": "'Website Application'"
+      }
+    },
+    "headerTitle": "Job Posting",
+    "recruitInfo": {
+      "jobCategories": "Job Category",
+      "workDayType": "Work Days",
+      "workTime": "Work Hours",
+      "address": "Work Location",
+      "salary": "Salary",
+      "salarySymbol": "₩",
+      "workType": {
+        "ONSITE": "On-site",
+        "HYBRID": "Hybrid",
+        "REMOTE": "Remote",
+        "ETC": "Other"
+      },
+      "salaryType": {
+        "ANNUAL": "Yearly",
+        "DAILY": "Daily",
+        "WEEKLY": "Weekly",
+        "HOURLY": "Hourly",
+        "MONTHLY": "Monthly",
+        "ETC": "Other"
+      },
+      "workDaysType": {
+        "WEEKDAYS": "Weekdays",
+        "WEEKENDS": "Weekends",
+        "FULL_WEEK": "7 Days",
+        "SIX_DAYS": "6 Days",
+        "MONDAY": "Mon",
+        "TUESDAY": "Tue",
+        "WEDNESDAY": "Wed",
+        "THURSDAY": "Thu",
+        "FRIDAY": "Fri",
+        "SATURDAY": "Sat",
+        "SUNDAY": "Sun",
+        "ETC": "Other"
+      }
+    },
+    "detailInfo": {
+      "title": "Details",
+      "mainTasks": "Tasks",
+      "qualifications": "Requirements",
+      "preferences": "Preferred",
+      "others": "Other"
+    },
+    "companyInfo": {
+      "companyAddress": "Address",
+      "representativeName": "CEO",
+      "businessType": "Industry",
+      "companyType": "Company Type",
+      "establishedDate": "Founded"
+    }
+  },
+
+
   "recruitHome": {
     "h1": "All Job Posts",
     "searchPlaceholder": "Search job postings",

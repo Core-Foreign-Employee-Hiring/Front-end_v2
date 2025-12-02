@@ -4,6 +4,7 @@ import { ApplicationMethodType } from '@/types/recruit'
 import Button from '@/components/common/Button'
 import Link from 'next/link'
 import useClipboard from '@/hooks/useClipboard'
+import { useTranslation } from 'react-i18next'
 
 interface ApplicationModalProps {
   isApplicationMethodModalOpen: true
@@ -20,14 +21,18 @@ export default function ApplicationModal({
 }: ApplicationModalProps) {
   const { copyToClipboard, isLoading } = useClipboard()
 
+  const lang = localStorage.getItem('i18nextLng')
+
+  const { t } = useTranslation()
+
   const renderApplicationMethod = (applicationMethod: ApplicationMethodType | undefined | null) => {
     switch (applicationMethod) {
       case 'EMAIL':
-        return '‘이메일 지원’'
+        return 'recruitDetail.apply.applicationMethod.EMAIL'
       case 'PHONE_SMS':
-        return '‘전화 / 문자 지원’'
+        return 'recruitDetail.apply.applicationMethod.PHONE_SMS'
       default:
-        return '‘웹사이트 지원‘'
+        return 'recruitDetail.apply.applicationMethod.WEBSITE'
     }
   }
 
@@ -44,7 +49,9 @@ export default function ApplicationModal({
             disabled={isLoading}
             customClassName={'w-full'}
           >
-            {isLoading ? '복사 중...' : '이메일 복사'}
+            {isLoading
+              ? t('recruitDetail.apply.InputApplicationMethodButton.copy')
+              : t('recruitDetail.apply.InputApplicationMethodButton.EMAIL')}
           </Button>
         )
       case 'PHONE_SMS':
@@ -56,7 +63,9 @@ export default function ApplicationModal({
             disabled={isLoading}
             customClassName={'w-full'}
           >
-            {isLoading ? '복사 중...' : '전화번호 복사'}
+            {isLoading
+              ? t('recruitDetail.apply.InputApplicationMethodButton.copy')
+              : t('recruitDetail.apply.InputApplicationMethodButton.PHONE_SMS')}
           </Button>
         )
       default:
@@ -67,7 +76,7 @@ export default function ApplicationModal({
               'bg-main button flex w-full items-center justify-center gap-x-1 rounded-[16px] px-6 py-4 text-white'
             }
           >
-            웹페이지 이동
+            {t('recruitDetail.apply.InputApplicationMethodButton.WEBSITE')}
           </Link>
         )
     }
@@ -81,10 +90,17 @@ export default function ApplicationModal({
     <MiddleModal modalType={'GENERAL'} isModalOpen={isApplicationMethodModalOpen} onClose={onClose}>
       <div className="flex flex-col gap-y-[40px]">
         <section className="flex flex-col items-center justify-center gap-y-4">
-          <p className="subtitle-lg">
-            해당 공고는 <span className="text-main">{renderApplicationMethod(applicationMethod)} </span>
-            입니다.
-          </p>
+          {lang === 'ko' ? (
+            <p className="subtitle-lg">
+              해당 공고는 <span className="text-main">{t(renderApplicationMethod(applicationMethod))} </span>
+              입니다.
+            </p>
+          ) : (
+            <p className="subtitle-lg">
+              This job posting is <span className="text-main">{t(renderApplicationMethod(applicationMethod))}</span>.
+            </p>
+          )}
+
           <div className="flex w-full flex-col items-center justify-center py-3">
             <p className="body-md text-gray5">{directInputApplicationMethod}</p>
           </div>
@@ -98,7 +114,7 @@ export default function ApplicationModal({
             type={'outline'}
             customClassName={'w-full bg-white'}
           >
-            닫기
+            {t('recruitDetail.apply.close')}
           </Button>
           {renderDirectInputApplicationMethodButton(applicationMethod)}
         </section>
