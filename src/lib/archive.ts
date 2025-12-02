@@ -401,3 +401,30 @@ export const getPassArchivesPassArchiveIdInquiryUrl = async (
   const data = await response.json()
   return data
 }
+
+/**
+ * 아카이브 다운로드
+ */
+export const getPassArchivesPassArchiveIdDownLoad = async (
+  passArchiveId: number
+): Promise<
+  ApiResponse<
+    {
+      fileUrl: string
+      originalFileName: string
+    }[]
+  >
+> => {
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/pass-archives/${passArchiveId}/download`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  const data = await response.json()
+  return data
+}

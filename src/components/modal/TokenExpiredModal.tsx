@@ -11,7 +11,7 @@ export default function TokenExpiredModal({ isModalOpen }: TokenExpiredModalProp
   const setState = useModalStore((state) => state.setState)
   return (
     <MiddleModal isModalOpen={isModalOpen} modalType={'GENERAL'}>
-      <p>로그인을 다시 진행해주세요.</p>
+      <p className="title-lg">로그인을 다시 진행해주세요.</p>
       <Link
         href={'/login'}
         onClick={() => {

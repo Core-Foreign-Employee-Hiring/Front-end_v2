@@ -24,6 +24,8 @@ interface SetModalStoreType {
   isAlarmModalOpen?: boolean
   //홈메뉴
   isHomeMenuOpen?: boolean
+  //로그인 필요
+  isLoginRequiredModalOpen?: boolean
 }
 
 interface ModalStoreType {
@@ -49,7 +51,8 @@ interface ModalStoreType {
   isAlarmModalOpen: boolean
   //홈메뉴
   isHomeMenuOpen: boolean
-
+  //로그인 필요
+  isLoginRequiredModalOpen: boolean
   setState: (params: SetModalStoreType) => void
 }
 
@@ -74,6 +77,8 @@ export const useModalStore = create<ModalStoreType>((set) => ({
   isAlarmModalOpen: false,
   //홈메뉴
   isHomeMenuOpen: false,
+  //로그인 필요
+  isLoginRequiredModalOpen: false,
   setState: (params: SetModalStoreType) => {
     set((state) => ({
       ...state,

@@ -14,8 +14,12 @@ import BottomModal from '@/components/common/BottomModal'
 import { postPaymentTestConfirm } from '@/lib/payment'
 import Link from 'next/link'
 import PurchaseModal from '@/components/modal/PurchaseModal'
+import { useModalStore } from '@/store/modalStore'
+import Cookies from 'js-cookie'
 
 export default function ReviewDetailPage() {
+  const setModalState = useModalStore((state) => state.setState)
+  const accessToken = Cookies.get('accessToken')
   const params = useParams()
   const [archiveDetailData, setArchiveDetailData] = useState<PassArchiveDetailDataType>()
   const [reviewData, setReviewData] = useState<PassArchiveReviewDataType[]>()
@@ -23,7 +27,7 @@ export default function ReviewDetailPage() {
 
   //이미지 클릭시
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string>()
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined | null>()
 
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(0)
@@ -239,9 +243,13 @@ export default function ReviewDetailPage() {
             </Button>
             <Button
               onClick={async () => {
-                const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
-                if (result.success) {
-                  setIsPurchaseModalOpen(true)
+                if (!accessToken) {
+                  setModalState({ isLoginRequiredModalOpen: true })
+                } else {
+                  const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
+                  if (result.success) {
+                    setIsPurchaseModalOpen(true)
+                  }
                 }
               }}
               type={'active'}
