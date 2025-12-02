@@ -31,7 +31,7 @@ export default function ArchiveCard({
         )}
       </div>
       <section className="flex flex-col gap-y-1">
-        <div className="subtitle-md">{title}</div>
+        <div className="subtitle-md line-clamp-2 h-[50px]">{title}</div>
         <p className="body-sm text-gray5 truncate">{oneLineReview}</p>
         <p className="subtitle-md">{price}원</p>
         <div className="flex items-center gap-x-1">
