@@ -5,12 +5,15 @@ import { useAuthStore } from '@/store/authStore'
 import { DropboxArrowDownIcon, DropboxArrowUpIcon, SearchIcon } from '@/assets/svgComponents'
 import Input from '@/components/common/Input'
 import { NATIONALITY_LIST } from '@/utils/filterList'
+import { useTranslation } from 'react-i18next'
 
 export default function NationalityField() {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setAuthStoreState = useAuthStore((state) => state.setState)
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+
+  const { t } = useTranslation()
 
   // 검색어에 따라 필터링된 국적 리스트
   const filteredList = useMemo(() => {
@@ -20,7 +23,7 @@ export default function NationalityField() {
 
   // 현재 선택된 국적의 라벨을 찾는 함수
   const getSelectedLabel = () => {
-    if (!employeeSignUp?.nationality) return '국적을 선택해주세요.'
+    if (!employeeSignUp?.nationality) return t('signUp.nationality.placeholder')
     const found = NATIONALITY_LIST.find((item) => item.code === employeeSignUp.nationality)
     return found?.label || employeeSignUp.nationality
   }
@@ -46,7 +49,7 @@ export default function NationalityField() {
             className={`border-gray2 flex h-[52px] w-full items-center justify-between rounded-[16px] border px-4 py-3`}
           >
             <p className={`${employeeSignUp?.nationality ? 'text-black' : 'text-gray4'} button`}>
-              {getSelectedLabel()}
+              {t(getSelectedLabel())}
             </p>
             {isDropBoxOpen ? (
               <DropboxArrowUpIcon width={20} height={20} />
@@ -73,7 +76,7 @@ export default function NationalityField() {
                 }}
                 className="hover:bg-gray1 cursor-pointer px-4 py-2"
               >
-                {nationality.label}
+                {t(nationality.label)}
               </div>
             ))}
           </section>

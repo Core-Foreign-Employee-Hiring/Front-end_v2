@@ -1,13 +1,18 @@
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
+import { useTranslation } from 'react-i18next'
 
 export default function GenderField() {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setAuthStoreState = useAuthStore((state) => state.setState)
+
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        성별<span className="text-main">*</span>
+        {t('signUp.gender.label')}
+        <span className="text-main">*</span>
       </p>
       <div className="flex gap-x-2">
         <Button
@@ -23,7 +28,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={employeeSignUp?.gender === 'MALE' ? 'active' : 'outline'}
         >
-          남자
+          {t('signUp.gender.MALE')}
         </Button>
         <Button
           onClick={() => {
@@ -38,7 +43,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={employeeSignUp?.gender === 'FEMALE' ? 'active' : 'outline'}
         >
-          여자
+          {t('signUp.gender.FEMALE')}
         </Button>
         <Button
           onClick={() => {
@@ -53,7 +58,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={employeeSignUp?.gender === 'NULL' ? 'active' : 'outline'}
         >
-          선택 안함
+          {t('signUp.gender.NOGENDER')}
         </Button>
       </div>
     </div>

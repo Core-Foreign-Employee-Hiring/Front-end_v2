@@ -3,6 +3,7 @@ import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { ChangeEvent, useState } from 'react'
 import { postMemberVerificationPhoneCode, postMemberVerifyPhone } from '@/lib/auth'
+import { useTranslation } from 'react-i18next'
 
 const PhoneNumberField = () => {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
@@ -16,10 +17,13 @@ const PhoneNumberField = () => {
   // 로딩 상태 추가
   const [isPhoneNumberVerificationLoading, setIsPhoneNumberVerificationLoading] = useState<boolean>(false)
 
+  const { t } = useTranslation()
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        전화번호<span className="text-main">*</span>
+        {t('signUp.phoneNumber.label')}
+        <span className="text-main">*</span>
       </p>
       <div className="flex items-center gap-x-2">
         <Input
@@ -34,7 +38,7 @@ const PhoneNumberField = () => {
           }}
           inputBoxStyle={'default'}
           type={'text'}
-          placeholder={'‘-’ 제외하고 번호 입력'}
+          placeholder={t('signUp.phoneNumber.placeholder')}
           customClassName={'w-full'}
         />
         <Button
@@ -66,16 +70,16 @@ const PhoneNumberField = () => {
           {isPhoneNumberVerificationLoading ? (
             <div className="flex items-center gap-x-2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-              <span>전송 중...</span>
+              <span>{t('signUp.phoneNumber.sendingMessage')}</span>
             </div>
           ) : (
-            '인증번호'
+            t('signUp.phoneNumber.verifyCode')
           )}
         </Button>
       </div>
 
       {isPhoneRegisteredError === undefined ? null : isPhoneRegisteredError ? (
-        <p className="badge-md text-error">이미 등록된 전화번호입니다.</p>
+        <p className="badge-md text-error">{t('signUp.phoneNumber.phoneRegisteredError')}</p>
       ) : null}
 
       {isVerifyCodeFieldOpen ? (
@@ -89,7 +93,7 @@ const PhoneNumberField = () => {
               }}
               inputBoxStyle={'default'}
               type={'text'}
-              placeholder={'인증번호 입력'}
+              placeholder={t('signUp.phoneNumber.verifyCodePlaceholder')}
               customClassName={'w-full'}
             />
             <Button
@@ -106,13 +110,13 @@ const PhoneNumberField = () => {
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >
-              인증하기
+              {t('signUp.phoneNumber.verifiedButton')}
             </Button>
           </div>
           {isPhoneVerified === undefined ? null : isPhoneVerified ? (
-            <p className="badge-md text-main">인증되었습니다.</p>
+            <p className="badge-md text-main">{t('signUp.phoneNumber.verifiedSuccess')}</p>
           ) : (
-            <p className="badge-md text-error">인증코드를 다시 확인해주세요</p>
+            <p className="badge-md text-error">{t('signUp.phoneNumber.verifiedError')}</p>
           )}
         </div>
       ) : null}

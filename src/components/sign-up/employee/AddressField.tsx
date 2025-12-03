@@ -2,16 +2,20 @@ import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { useModalStore } from '@/store/modalStore'
+import { useTranslation } from 'react-i18next'
 
 export default function AddressField() {
   const setModalState = useModalStore((state) => state.setState)
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setAuthStoreState = useAuthStore((state) => state.setState)
 
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        주소<span className="text-main">*</span>
+        {t('signUp.address.label')}
+        <span className="text-main">*</span>
       </p>
       <div className="flex items-center justify-center gap-x-2">
         <Input
@@ -21,7 +25,7 @@ export default function AddressField() {
           value={employeeSignUp?.zipcode ?? ''}
           inputBoxStyle={'default'}
           type={'text'}
-          placeholder={'우편번호'}
+          placeholder={t('signUp.address.zipcodePlaceholder')}
           customClassName={'w-full'}
         />
         <Button
@@ -32,7 +36,7 @@ export default function AddressField() {
           type={'active'}
           customClassName={'whitespace-nowrap'}
         >
-          주소찾기
+          {t('signUp.address.searchAddressButton')}
         </Button>
       </div>
       <Input
@@ -40,7 +44,7 @@ export default function AddressField() {
         onClick={() => {
           setModalState({ isSearchAddressModalOpen: true })
         }}
-        placeholder={'주소를 입력해주세요.'}
+        placeholder={t('signUp.address.address1Placeholder')}
         inputBoxStyle={'default'}
       />
       <Input
@@ -48,7 +52,7 @@ export default function AddressField() {
         setValue={(e) => {
           setAuthStoreState({ ...employeeSignUp, employeeSignUp: { ...employeeSignUp, address2: e.target.value } })
         }}
-        placeholder={'상세주소를 입력해주세요.'}
+        placeholder={t('signUp.address.address2Placeholder')}
         inputBoxStyle={'default'}
       />
     </div>

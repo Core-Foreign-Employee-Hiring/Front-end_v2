@@ -3,6 +3,7 @@ import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { postMemberVerificationEmail, postMemberVerifyEmail } from '@/lib/auth'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const EmailField = () => {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
@@ -26,10 +27,13 @@ const EmailField = () => {
   // 로딩 상태 추가
   const [isEmailVerificationLoading, setIsEmailVerificationLoading] = useState<boolean>(false)
 
+  const { t } = useTranslation()
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        이메일<span className="text-main">*</span>
+        {t('signUp.email.label')}
+        <span className="text-main">*</span>
       </p>
       <div className="flex items-center justify-center gap-x-2">
         <Input
@@ -43,7 +47,7 @@ const EmailField = () => {
           }}
           inputBoxStyle={'default'}
           type={'email'}
-          placeholder={'이메일을 입력해주세요.'}
+          placeholder={t('signUp.email.placeholder')}
           customClassName={'w-full'}
         />
         <Button
@@ -74,10 +78,10 @@ const EmailField = () => {
           {isEmailVerificationLoading ? (
             <div className="flex items-center gap-x-2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-              <span>전송 중...</span>
+              <span>{t('signUp.email.sendingMessage')}</span>
             </div>
           ) : (
-            '인증번호'
+            t('signUp.email.verifyCode')
           )}
         </Button>
       </div>
@@ -97,7 +101,7 @@ const EmailField = () => {
               }}
               inputBoxStyle={'default'}
               type={'text'}
-              placeholder={'인증번호 입력'}
+              placeholder={t('signUp.email.verifyCodePlaceholder')}
               customClassName={'w-full'}
             />
             <Button
@@ -114,13 +118,13 @@ const EmailField = () => {
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >
-              인증하기
+              {t('signUp.email.verifiedButton')}
             </Button>
           </div>
           {isEmailCodeVerified === undefined ? null : isEmailCodeVerified ? (
-            <p className="badge-md text-main">인증되었습니다.</p>
+            <p className="badge-md text-main">{t('signUp.email.verifiedSuccess')}</p>
           ) : (
-            <p className="badge-md text-error">인증코드를 다시 확인해주세요</p>
+            <p className="badge-md text-error">{t('signUp.email.verifiedError')}</p>
           )}
         </div>
       ) : null}

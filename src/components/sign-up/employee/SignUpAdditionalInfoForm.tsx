@@ -10,6 +10,7 @@ import { useAuthStore } from '@/store/authStore'
 import { postMemberEmployeeRegister } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 import JobRoleField from '@/components/sign-up/employee/JobRoleField'
+import { useTranslation } from 'react-i18next'
 
 interface SignUpAdditionalInfoFormProps {
   setCurrentStep: Dispatch<SetStateAction<1 | 2>>
@@ -19,9 +20,13 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp) ?? {}
   const router = useRouter()
 
+  const lang = localStorage.getItem('i18nextLng')
+
   useEffect(() => {
     console.log('employeeSignUp', employeeSignUp)
   }, [employeeSignUp])
+
+  const { t } = useTranslation()
 
   const isFormValid =
     !!employeeSignUp.birthDate &&
@@ -46,7 +51,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
       </section>
       <div className="flex gap-x-2">
         <Button customClassName={'w-full'} onClick={() => setCurrentStep(1)} size={'lg'} type={'outline'}>
-          이전
+          {t('signUp.beforeButton')}
         </Button>
         <Button
           onClick={async () => {
@@ -55,7 +60,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
               const result = await postMemberEmployeeRegister(employeeSignUp)
               console.log('result', result)
               if (result.success) {
-                router.push('/login')
+                router.push(`/${lang}/login`)
               }
               console.log('회원가입 response', result)
             }
@@ -64,7 +69,7 @@ export default function SignUpAdditionalInfoForm({ setCurrentStep }: SignUpAddit
           type={isFormValid ? 'active' : 'disabled'}
           customClassName={'w-full'}
         >
-          완료
+          {t('signUp.completeButton')}
         </Button>
       </div>
     </div>

@@ -4,6 +4,7 @@ import JobRoleFilter from '@/components/filter/JobRoleFilter'
 import { JobCategoryType, JobRoleType } from '@/types/recruit'
 import { getJobRoleLabel } from '@/utils/filterList'
 import { useAuthStore } from '@/store/authStore'
+import { useTranslation } from 'react-i18next'
 
 export default function JobRoleField() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -11,6 +12,8 @@ export default function JobRoleField() {
   const setState = useAuthStore((state) => state.setState)
   const [selectedJobCategory, setSelectedJobCategory] = useState<JobCategoryType | undefined>(undefined)
   const [selectedJobRoles, setSelectedJobRoles] = useState<JobRoleType[]>()
+
+  const { t } = useTranslation()
 
   const deleteJobRoles = (selectedJobRole: JobRoleType) => {
     setSelectedJobRoles((prev) => prev?.filter((role) => role !== selectedJobRole))
@@ -74,7 +77,7 @@ export default function JobRoleField() {
       )}
       <section className="flex w-full items-center justify-between">
         <p className="subtitle-lg">
-          직무 <span className="text-main">*</span>
+          {t('signUp.jobRole.label')} <span className="text-main">*</span>
         </p>
         <Button
           buttonType="button"
@@ -84,7 +87,9 @@ export default function JobRoleField() {
           }}
           size={'sm'}
         >
-          {selectedJobRoles && selectedJobRoles.length > 0 ? '직무 수정' : '직무 선택'}
+          {selectedJobRoles && selectedJobRoles.length > 0
+            ? t('signUp.jobRole.modifyButton')
+            : t('signUp.jobRole.selectButton')}
         </Button>
       </section>
       {employeeSignUp?.jobRoles && employeeSignUp?.jobRoles.length !== 0 && (
@@ -95,7 +100,7 @@ export default function JobRoleField() {
               key={selectedJobRole}
               className="border-gray3 bg-gray1 badge-sm text-gray5 flex items-center rounded-full border px-3 py-2 whitespace-nowrap"
             >
-              {getJobRoleLabel(selectedJobRole)}
+              {t(getJobRoleLabel(selectedJobRole))}
             </button>
           ))}
         </section>

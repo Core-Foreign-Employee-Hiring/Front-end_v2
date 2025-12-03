@@ -2,16 +2,16 @@
 
 import RecruitCard from '@/components/recruit/RecruitCard'
 import Input from '@/components/common/Input'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GraySearchIcon } from '@/assets/svgComponents'
 import { useRecruitStore } from '@/store/recruitStore'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import Banner from '@/components/common/Banner'
 import FilterButtons from '@/components/recruit/FilterButtons'
 import { useTranslation } from 'react-i18next'
-import { usePathname } from 'next/navigation'
 
 export default function RecruitHomePage() {
+  const [isReady, setIsReady] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const selectedJobRoleFilterContentList = useRecruitStore((state) => state.selectedJobRoleFilterContentList)
   const selectedVisaFilterContentList = useRecruitStore((state) => state.selectedVisaFilterContentList)
@@ -20,6 +20,11 @@ export default function RecruitHomePage() {
   const selectedContractFilter = useRecruitStore((state) => state.selectedContractFilter)
 
   const { t } = useTranslation()
+
+  // 🔥 클라이언트 마운트 후 렌더링
+  useEffect(() => {
+    setIsReady(true)
+  }, [])
 
   // 무한스크롤 훅 사용
   const {
@@ -38,6 +43,15 @@ export default function RecruitHomePage() {
     contract: selectedContractFilter,
     size: 20,
   })
+
+  // 🔥 클라이언트 준비 전까지 로딩 상태 표시
+  if (!isReady) {
+    return (
+      <div className="desktop:mt-[30px] mt-5 flex flex-col gap-y-6 px-5">
+        <div className="h-10 animate-pulse rounded bg-gray-200" />
+      </div>
+    )
+  }
 
   return (
     <div className="desktop:mt-[30px] mt-5 flex flex-col gap-y-6 px-5">

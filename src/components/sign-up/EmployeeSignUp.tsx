@@ -8,6 +8,7 @@ import SignUpRequiredForm from '@/components/sign-up/employee/SignUpRequiredForm
 import SignUpAdditionalInfoForm from '@/components/sign-up/employee/SignUpAdditionalInfoForm'
 import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useAuthStore } from '@/store/authStore'
+import { useTranslation } from 'react-i18next'
 
 const EmployeeSignUp = () => {
   const [currentStep, setCurrentStep] = useState<1 | 2>(1)
@@ -15,10 +16,14 @@ const EmployeeSignUp = () => {
   const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setEmployeeSignUpState = useAuthStore((state) => state.setState)
+  const [lang, setLang] = useState<string | null>()
+
+  const { t } = useTranslation()
 
   useEffect(() => {
-    console.log('employeeSignUp', employeeSignUp)
-  }, [employeeSignUp])
+    const language = localStorage.getItem('i18nextLng')
+    setLang(language)
+  }, [lang])
 
   const handleComplete = async (data: any) => {
     let fullAddress = data.address
@@ -48,8 +53,13 @@ const EmployeeSignUp = () => {
     <div className="flex w-full flex-col items-center justify-center gap-y-[40px]">
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       <div className="flex flex-col items-center justify-center gap-y-[20px]">
-        <div className="desktop:block title-lg hidden">회원가입(피고용인)</div>
-        <ProcessBar totalStep={2} currentStep={currentStep} step1Content={'필수 정보'} step2Content={'추가 정보'} />
+        <div className="desktop:block title-lg hidden">{t('signUp.title')}</div>
+        <ProcessBar
+          totalStep={2}
+          currentStep={currentStep}
+          step1Content={t('signUp.step1Content')}
+          step2Content={t('signUp.step2Content')}
+        />
       </div>
       {currentStep === 1 && <SignUpRequiredForm setCurrentStep={setCurrentStep} />}
       {currentStep === 2 && <SignUpAdditionalInfoForm setCurrentStep={setCurrentStep} />}

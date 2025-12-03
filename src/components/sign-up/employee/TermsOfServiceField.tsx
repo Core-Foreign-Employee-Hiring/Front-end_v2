@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useAuthStore } from '@/store/authStore'
 import { CheckIcon, UnCheckIcon } from '@/assets/svgComponents'
+import { useTranslation } from 'react-i18next'
 
 export default function TermsOfServiceField() {
   const allOptions = useAuthStore((state) => state.allOptions)
@@ -15,33 +16,35 @@ export default function TermsOfServiceField() {
   const adInfoAgreementSmsMms = useAuthStore((state) => state.employeeSignUp?.adInfoAgreementSmsMms)
   const adInfoAgreementEmail = useAuthStore((state) => state.employeeSignUp?.adInfoAgreementEmail)
 
+  const { t } = useTranslation()
+
   const termsOfUseContents = [
     {
-      content: '(필수) 서비스 이용약관 동의',
+      content: t('signUp.terms.termsOfServiceAgreement'),
       // component: TermsOfService,
       state: termsOfServiceAgreement,
       key: 'termsOfServiceAgreement',
     },
     {
-      content: '(필수) 개인정보 수집 및 이용 동의',
+      content: t('signUp.terms.personalInfoAgreement'),
       // component: PersonalInformation,
       state: personalInfoAgreement,
       key: 'personalInfoAgreement',
     },
     {
-      content: '(필수)만 15세 이상 동의',
+      content: t('signUp.terms.over15'),
       // component: MarketingInformation,
       state: over15,
       key: 'over15',
     },
     {
-      content: '(선택) 광고성 정보 수신 동의 (SNS/MMS)',
+      content: t('signUp.terms.adInfoAgreementSmsMms'),
       // component: MarketingInformation,
       state: adInfoAgreementSmsMms,
       key: 'adInfoAgreementSmsMms',
     },
     {
-      content: '광고성 정보 수신 동의 (이메일)',
+      content: t('signUp.terms.adInfoAgreementEmail'),
       // component: MarketingInformation,
       state: adInfoAgreementEmail,
       key: 'adInfoAgreementEmail',
@@ -91,7 +94,7 @@ export default function TermsOfServiceField() {
         className={'subtitle-md text-gray5 flex items-center gap-x-2'}
       >
         {allOptions ? <CheckIcon width={24} height={24} /> : <UnCheckIcon width={24} height={24} />}
-        전체동의
+        {t('signUp.terms.allOptions')}
       </div>
       <div className="border-gray2 w-full border-b" />
       {termsOfUseContents.map((termsOfUseContent) => {
