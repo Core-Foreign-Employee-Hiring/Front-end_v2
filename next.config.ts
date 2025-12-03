@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     // WebP와 AVIF 우선 사용
     formats: ['image/avif', 'image/webp'],
 
+    domains: ['imgs.jobkorea.co.kr'],
+
     // 🔥 디바이스 크기 - 실제 사용되는 크기에 맞게
     deviceSizes: [375, 425, 768, 1024],
 
