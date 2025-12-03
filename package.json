@@ -11,6 +11,7 @@
     "svgr": "svgr --icon --typescript --no-prettier --out-dir src/assets/svgComponents public/common --ignore-existing"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.11",
     "@tosspayments/payment-widget-sdk": "^0.12.0",
     "@tosspayments/tosspayments-sdk": "^2.3.6",
     "framer-motion": "^12.23.6",
