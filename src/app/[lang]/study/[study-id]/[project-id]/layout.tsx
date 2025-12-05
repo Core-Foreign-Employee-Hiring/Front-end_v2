@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import Header from '@/components/common/Header'
+import { I18nParams } from '@/lib/i18n.types'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.korfit.co.kr'
 
@@ -55,14 +57,14 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/`,
   },
 }
-
-export default async function RecruitLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: ReactNode
-}>) {
+  params: Promise<I18nParams>
+}
+export default async function RecruitLayout({ children, params }: RootLayoutProps) {
   return (
     <div className="">
+      <Header headerType={'dynamic'} params={params} />
       <main className="">{children}</main>
     </div>
   )

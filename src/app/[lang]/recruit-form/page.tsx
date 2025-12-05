@@ -134,10 +134,6 @@ export default function RecruitFormPage() {
 
   return (
     <form onSubmit={handleSubmit} className="relative mx-auto min-h-screen w-[375px] bg-white">
-      <div className="">
-        <Header headerType={'dynamic'} />
-      </div>
-
       {isSearchAddressModalOpen && <SearchAddressModal handleComplete={handleComplete} />}
       <div className="h-[20px]" />
       {currentStep === 1 && <RecruitFormStep1 currentStep={currentStep} setCompanyLogoFile={setCompanyLogoFile} />}

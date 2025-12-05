@@ -20,10 +20,12 @@ export default function PostArchiveCard({
 
   const { t } = useTranslation()
 
+  const lang = localStorage.getItem('i18nextLng')
+
   return (
     <div
       onClick={() => {
-        router.push(`/archive/${archiveId}`)
+        router.push(`/${lang}/archive/${archiveId}`)
       }}
       className="border-gray2 flex flex-col gap-y-3 rounded-[32px] border p-5"
     >

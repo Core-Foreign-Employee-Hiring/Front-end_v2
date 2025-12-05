@@ -3,8 +3,6 @@ import Pagination from '@/components/common/Pagination'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { getPurchasedArchives } from '@/lib/archive'
 import { PurchasedArchiveType } from '@/types/archive'
-import Header from '@/components/common/Header'
-import { usePathname } from 'next/navigation'
 
 interface PurchasedArchivePageProps {
   setIsPurchasedArchivePageOpen: Dispatch<SetStateAction<boolean>>

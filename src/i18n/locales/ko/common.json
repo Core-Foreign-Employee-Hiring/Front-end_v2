@@ -10,6 +10,15 @@
     "nameSuffix": "님"
   },
 
+  "modal": {
+    "language": {
+      "title": "언어 선택",
+      "korea": "한국어",
+      "english": "영어",
+      "done": "완료"
+    }
+  },
+
   "mypage": {
     "h1": "마이페이지",
     "button": {
@@ -25,6 +34,21 @@
 
     "archive": {
       "priceSymbol": "원",
+      "review": {
+        "view": {
+          "title": "리뷰",
+          "write": "작성"
+        },
+        "write": {
+          "title": "리뷰 작성",
+          "placeholder": "리뷰를 남겨보세요!",
+          "paymentCompleted": "결제완료",
+          "rating": "평점",
+          "review": "리뷰",
+          "bottomButton": "작성하기"
+        }
+
+      },
       "sold": {
         "title": "판매한 아카이브",
         "moreButton": "더보기",

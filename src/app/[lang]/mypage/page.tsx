@@ -94,7 +94,10 @@ export default function Mypage() {
 
       {/* 리뷰 보기 모달창 */}
       {isViewReviewModalOpen ? (
-        <BottomModal title={'리뷰'} onClose={() => setState({ isViewReviewModalOpen: false })}>
+        <BottomModal
+          title={t('mypage.archive.review.view.title')}
+          onClose={() => setState({ isViewReviewModalOpen: false })}
+        >
           <div className="flex flex-col gap-y-6">
             <div className="flex justify-between">
               <div className="flex items-center gap-x-1">
@@ -102,7 +105,8 @@ export default function Mypage() {
                 <div className="badge-md">{reviewDetailData?.star}</div>
               </div>
               <p className="small text-gray4">
-                {reviewDetailData ? formatRelativeTime(reviewDetailData?.createAt) : ''} 작성
+                {reviewDetailData ? formatRelativeTime(reviewDetailData?.createAt) : ''}{' '}
+                {t('mypage.archive.review.view.write')}
               </p>
             </div>
             <p className="body-md">{reviewDetailData?.content}</p>
@@ -113,7 +117,7 @@ export default function Mypage() {
       {/* 리뷰 작성 모달창 */}
       {isWriteReviewModalOpen ? (
         <BottomModal
-          buttonContent={'작성하기'}
+          buttonContent={t('mypage.archive.write.bottomButton')}
           onClick={async () => {
             const res = await postReview(selectedPassArchiveData?.passArchiveId, rating, content)
             console.log(res)
@@ -123,12 +127,12 @@ export default function Mypage() {
             }
           }}
           onClose={() => setState({ isWriteReviewModalOpen: false })}
-          title={'리뷰 작성'}
+          title={t('mypage.archive.write.title')}
           buttonType={'active'}
         >
           <div className="flex flex-col gap-y-4">
             <section className="bg-gray1 flex w-full gap-x-[13px] rounded-[20px] p-5">
-              <div className="relative h-[92px] w-[92px]">
+              <div className="relative h-[92px] w-[92px] flex-shrink-0 whitespace-nowrap">
                 <Image
                   src={selectedPassArchiveData?.thumbnailUrl ?? '/pizza.png'}
                   alt={'썸네일'}
@@ -139,21 +143,26 @@ export default function Mypage() {
               <div className="flex flex-col gap-y-1">
                 <p className="subtitle-md">{selectedPassArchiveData?.title}</p>
                 <p className="body-sm text-gray5">{selectedPassArchiveData?.oneLineReview}</p>
-                <p className="body-sm">{selectedPassArchiveData?.price.toLocaleString()}원</p>
-                <p className="small text-gray4">{selectedPassArchiveData?.approvedAt} 결제완료</p>
+                <p className="body-sm">
+                  {selectedPassArchiveData?.price.toLocaleString()}
+                  {t('mypage.archive.priceSymbol')}
+                </p>
+                <p className="small text-gray4">
+                  {selectedPassArchiveData?.approvedAt} {t('mypage.archive.review.white.paymentCompleted')}
+                </p>
               </div>
             </section>
             <section className="flex flex-col gap-y-2">
-              <p className="subtitle-md">평점</p>
+              <p className="subtitle-md">{t('mypage.archive.review.white.rating')}</p>
               <StarRating initialRating={0} maxRating={5} rating={rating} setRating={setRating} />
             </section>
             <section className="flex flex-col gap-y-2">
-              <p className="subtitle-md">리뷰</p>
+              <p className="subtitle-md">{t('mypage.archive.review.white.review')}</p>
               <textarea
                 onChange={(e) => {
                   setContent(e.target.value)
                 }}
-                placeholder={'리뷰를 남겨보세요!'}
+                placeholder={t('mypage.archive.review.white.placeholder')}
                 className="border-gray2 placeholder:text-gray4 h-[148px] w-full rounded-[20px] border p-5 outline-none"
               />
             </section>

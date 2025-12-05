@@ -1,4 +1,3 @@
-import Header from '@/components/common/Header'
 import Image from 'next/image'
 import ProjectCard from '@/components/study/ProjectCard'
 import Link from 'next/link'
@@ -6,7 +5,6 @@ import Link from 'next/link'
 export default async function StudyDetailPage() {
   return (
     <main>
-      <Header headerType={'dynamic'} title={'GIT 해커톤'} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white">
         <div className="h-[60px]" />
         <div className="flex flex-col gap-y-5 px-5 pb-[60px]">

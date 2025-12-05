@@ -41,6 +41,21 @@
     },
     "archive": {
       "priceSymbol": "KRW",
+      "review": {
+        "view": {
+          "title": "Review",
+          "write": "Write"
+        },
+        "write": {
+          "title": "Write a Review",
+          "placeholder": "Leave your review!",
+          "paymentCompleted": "Payment Completed",
+          "rating": "Rating",
+          "review": "Review",
+          "bottomButton": "Submit"
+        }
+      },
+
       "sold": {
         "title": "Sold Archives",
         "moreButton": "View More",

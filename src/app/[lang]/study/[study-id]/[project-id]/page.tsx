@@ -11,17 +11,23 @@ const PROJECT_DATA_MAP: Record<string, StudyDataType> = {
   default: KODICData,
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+
   return [
-    { 'study-id': '1', 'project-id': '1' },
-    { 'study-id': '1', 'project-id': '2' },
-    { 'study-id': '1', 'project-id': '3' },
-    { 'study-id': '1', 'project-id': '4' },
+    { lang, 'study-id': '1', 'project-id': '1' },
+    { lang, 'study-id': '1', 'project-id': '2' },
+    { lang, 'study-id': '1', 'project-id': '3' },
+    { lang, 'study-id': '1', 'project-id': '4' },
   ]
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ 'study-id': string; 'project-id': string }> }) {
-  const { 'study-id': studyId, 'project-id': projectId } = await params
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; 'study-id': string; 'project-id': string }>
+}) {
+  const { 'project-id': projectId } = await params
 
   const data = PROJECT_DATA_MAP[projectId] || PROJECT_DATA_MAP['default']
   return {
@@ -33,16 +39,15 @@ export async function generateMetadata({ params }: { params: Promise<{ 'study-id
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: Promise<{ 'study-id': string; 'project-id': string }>
+  params: Promise<{ lang: string; 'study-id': string; 'project-id': string }>
 }) {
-  const { 'study-id': studyId, 'project-id': projectId } = await params
+  const { lang, 'study-id': studyId, 'project-id': projectId } = await params
 
   const data = PROJECT_DATA_MAP[projectId] || PROJECT_DATA_MAP['default']
 
   return (
     <main className="relative mx-auto min-h-screen w-[375px] bg-white">
       <div>
-        <Header headerType={'dynamic'} title={data.projectTitle} />
         <div className="h-[40px]" />
         <div className="mt-[32px] flex flex-col gap-y-[20px] px-5">
           <section className="flex justify-between">

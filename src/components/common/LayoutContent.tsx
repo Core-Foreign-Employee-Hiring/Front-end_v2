@@ -9,7 +9,6 @@ import { usePathname, useRouter } from 'next/navigation'
 
 export default function LayoutContent({ children }: { children: React.ReactNode }) {
   const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
-  const router = useRouter()
   const pathname = usePathname()
   const locale = pathname.split('/')[1]
 
@@ -19,7 +18,7 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
 
       {isHomeMenuOpen ? <Menu currentLng={locale} /> : children}
 
-      <GlobalModals />
+      <GlobalModals currentLng={locale} />
     </main>
   )
 }
