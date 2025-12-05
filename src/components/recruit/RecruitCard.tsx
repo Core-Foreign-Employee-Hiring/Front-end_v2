@@ -34,19 +34,15 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
    * 주소에서 앞의 두 단어(시/도 + 시/군/구)만 추출하는 함수
    */
   const getShortAddress = (address: string | undefined | null): string => {
-    if (!address) return '' // 주소가 없을 경우 빈 문자열 반환
+    if (!address) return ''
 
-    // 1. 공백을 기준으로 문자열을 쪼갭니다.
     const parts = address.split(' ')
 
-    // 2. 앞의 두 덩어리만 가져옵니다. (길이가 2보다 작으면 전체 반환)
     if (parts.length < 2) {
       return address
     }
 
-    // 3. 다시 공백을 넣어 합칩니다.
     return `${parts[0]} ${parts[1]}`
-    // 또는 return parts.slice(0, 2).join(' ');
   }
 
   return (
@@ -56,7 +52,7 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
       }}
       className="border-gray2 flex cursor-pointer flex-col gap-y-3 rounded-[20px] border bg-white p-4 transition hover:shadow-md hover:duration-75"
     >
-      <section className="flex items-center gap-x-3">
+      <section className="flex min-w-0 items-start gap-x-3">
         {imageError || recruit.companyImageUrl === '' ? null : (
           <div className="relative h-[84px] w-[84px] flex-shrink-0">
             <Image
@@ -69,12 +65,24 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
           </div>
         )}
 
-        <div className="flex flex-col gap-y-1">
+        <div className="flex min-w-0 flex-1 flex-col gap-y-1">
           <p className="button text-gray4">~{formatDate(recruit.recruitEndDate)}</p>
-          <p className="subtitle-md">{recruit.title}</p>
-          <p className="small text-gray5">{recruit.companyName}</p>
+          <p
+            className="subtitle-md"
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {recruit.title}
+          </p>
+          <p className="small text-gray5 truncate">{recruit.companyName}</p>
         </div>
       </section>
+
       <section className="flex justify-between">
         <div className="flex items-center gap-x-1">
           {recruit.jobCategories.length !== 0 && (
@@ -101,4 +109,5 @@ const RecruitCard = ({ recruit }: RecruitCardProps) => {
     </div>
   )
 }
+
 export default RecruitCard

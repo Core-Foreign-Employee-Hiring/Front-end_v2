@@ -26,14 +26,18 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
   const [page, setPage] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [totalElements, setTotalElements] = useState(0)
-  const observerRef = useRef<IntersectionObserver | null>(null)
-  const loadingRef = useRef<HTMLDivElement | null>(null)
 
-  // 데이터 로드 함수
+  const loadingRef = useRef<HTMLDivElement | null>(null)
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const loadingRef2 = useRef(false) // 로딩 중복 요청 방지
+
+  // 데이터 로드 함수 - 페이지와 필터 파라미터를 직접 받음
   const loadData = useCallback(
     async (pageNumber: number, isReset = false) => {
-      if (loading) return
+      // 이미 로딩 중이면 중복 요청 방지
+      if (loadingRef2.current) return
 
+      loadingRef2.current = true
       setLoading(true)
       setError(null)
 
@@ -52,53 +56,37 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
         if (response.success && response.data) {
           const newData = response.data.content
 
+          // isReset이 true면 데이터 교체, false면 기존 데이터에 추가
           setData((prevData) => (isReset ? newData : [...prevData, ...newData]))
+
+          // 다음 페이지가 있는지 확인 (현재 페이지가 마지막 페이지 미만이면 더 있음)
           setHasMore(pageNumber < response.data.totalPages - 1)
+
           setPage(pageNumber)
-          setTotalElements(response.data.totalPages)
+          setTotalElements(response.data.totalElements || response.data.totalPages)
         } else {
           setError(response.message || '데이터를 불러오는데 실패했습니다.')
+          setHasMore(false)
         }
       } catch (err) {
         setError('네트워크 오류가 발생했습니다.')
         console.error('Infinite scroll error:', err)
+        setHasMore(false)
       } finally {
         setLoading(false)
+        loadingRef2.current = false
       }
     },
-    [
-      params.searchValue,
-      params.contract,
-      params.jobRoles,
-      params.languages,
-      params.regions,
-      params.visas,
-      params.size,
-      loading,
-    ]
+    [params.searchValue, params.contract, params.jobRoles, params.languages, params.regions, params.visas, params.size]
   )
 
-  // 다음 페이지 로드
-  const loadMore = useCallback(() => {
-    if (hasMore && !loading) {
-      loadData(page + 1, false)
-    }
-  }, [hasMore, loading, page, loadData])
-
-  // 필터 변경시 데이터 리셋
-  const resetData = useCallback(() => {
-    setData([])
-    setPage(0)
-    setHasMore(true)
-    loadData(0, true)
-  }, [loadData])
-
-  // Intersection Observer 설정
+  // Intersection Observer 설정 - 한 번만 실행
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          loadMore()
+        // loadingRef가 화면에 보이면 다음 데이터 로드
+        if (entries[0]?.isIntersecting && hasMore && !loading && !loadingRef2.current) {
+          setPage((prevPage) => prevPage + 1)
         }
       },
       { threshold: 0.1 }
@@ -106,32 +94,32 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
 
     observerRef.current = observer
 
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
-    }
-  }, [hasMore, loading, loadMore])
-
-  // 로딩 엘리먼트 관찰
-  useEffect(() => {
-    const currentLoadingRef = loadingRef.current
-    const currentObserver = observerRef.current
-
-    if (currentLoadingRef && currentObserver) {
-      currentObserver.observe(currentLoadingRef)
+    if (loadingRef.current) {
+      observer.observe(loadingRef.current)
     }
 
     return () => {
-      if (currentLoadingRef && currentObserver) {
-        currentObserver.unobserve(currentLoadingRef)
-      }
+      observer.disconnect()
     }
-  }, [])
+  }, [hasMore, loading]) // hasMore, loading만 dependency로 포함
 
-  // 초기 데이터 로드 및 필터 변경 감지
+  // page가 변경될 때만 데이터 로드
   useEffect(() => {
-    resetData()
+    if (page > 0 || data.length === 0) {
+      loadData(page, false)
+    }
+  }, [page, loadData])
+
+  // 필터 변경 시 데이터 리셋
+  useEffect(() => {
+    setData([])
+    setPage(0)
+    setHasMore(true)
+  }, [params.searchValue, params.contract, params.jobRoles, params.languages, params.regions, params.visas])
+
+  // 필터 리셋 후 초기 데이터 로드
+  useEffect(() => {
+    loadData(0, true)
   }, [
     params.searchValue,
     params.contract,
@@ -148,7 +136,6 @@ export const useInfiniteScroll = (params: UseInfiniteScrollParams) => {
     hasMore,
     error,
     loadingRef,
-    resetData,
     totalElements,
   }
 }
