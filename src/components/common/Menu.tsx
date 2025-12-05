@@ -11,67 +11,23 @@ import {
 import Button from '@/components/common/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { UserDataType } from '@/types/common'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useModalStore } from '@/store/modalStore'
+import { useTranslation } from 'react-i18next'
 
-export default function Menu() {
+interface MenuProps {
+  currentLng: string
+}
+
+export default function Menu({ currentLng }: MenuProps) {
   const pathname = usePathname()
   const router = useRouter()
   const [userData, setUserData] = useState<UserDataType | null>(null)
   const setModalState = useModalStore((state) => state.setState)
   const isHomeMenuOpen = useModalStore((state) => state.isHomeMenuOpen)
-  const abortControllerRef = useRef<AbortController | null>(null)
-  // 🔥 bfcache 진입/복원 처리
-  useEffect(() => {
-    const handlePagehide = () => {
-      // 진행 중인 작업 취소
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort()
-      }
-    }
 
-    const handlePageshow = (event: Event) => {
-      const e = event as any
-      if (e.persisted) {
-        // bfcache에서 복원되었을 때
-        // 필요한 상태 재설정
-        console.log('Menu: bfcache에서 복원됨')
-      }
-    }
-
-    window.addEventListener('pagehide', handlePagehide)
-    window.addEventListener('pageshow', handlePageshow)
-
-    return () => {
-      window.removeEventListener('pagehide', handlePagehide)
-      window.removeEventListener('pageshow', handlePageshow)
-    }
-  }, [])
-
-  // 🔥 클라이언트 사이드 데이터 로드 - 더 효율적으로
-  useEffect(() => {
-    // 첫 마운트 시에만 실행
-    const controller = new AbortController()
-    abortControllerRef.current = controller
-
-    if (typeof window !== 'undefined') {
-      try {
-        const storedUserData = localStorage.getItem('userData')
-        if (storedUserData && !controller.signal.aborted) {
-          const parsedUserData: UserDataType = JSON.parse(storedUserData)
-          setUserData(parsedUserData)
-        }
-      } catch (error) {
-        console.error('Failed to parse user data from localStorage:', error)
-        setUserData(null)
-      }
-    }
-
-    return () => {
-      controller.abort()
-    }
-  }, [])
+  const { t } = useTranslation()
 
   const handleNavigate = useCallback(
     (path: string) => {
@@ -93,20 +49,20 @@ export default function Menu() {
 
   const navContents = [
     {
-      title: '홈',
-      router: '/',
+      title: t('navigation.home'),
+      router: `/${currentLng}/`,
       unSelectedIcon: <MobileHomeIcon width={23} height={24} />,
       selectedIcon: <SelectedMobileHomeIcon width={23} height={24} />,
     },
     {
-      title: '합격 아카이브',
-      router: '/archive',
+      title: t('navigation.archive'),
+      router: `/${currentLng}/archive`,
       unSelectedIcon: <MobileArchiveIcon width={24} height={17} />,
       selectedIcon: <SelectedMobileArchiveIcon width={23} height={24} />,
     },
     {
-      title: '스터디',
-      router: '/study',
+      title: t('navigation.study'),
+      router: `/${currentLng}/study`,
       unSelectedIcon: <MobileStudyIcon width={21} height={24} />,
       selectedIcon: <SelectedMobileStudyIcon width={23} height={24} />,
     },
@@ -136,19 +92,24 @@ export default function Menu() {
           ) : (
             <section className="border-gray2 bg-gray1 flex flex-col gap-y-4 rounded-[20px] border p-5">
               <div className="flex items-center gap-x-4">
-                <p className="subtitle-md">로그인이 필요해요</p>
+                <p className="subtitle-md">{t('navigation.loginRequiredMessage')}</p>
               </div>
               <div className="flex gap-x-3">
                 <Button
-                  onClick={() => handleNavigate('/sign-up')}
+                  onClick={() => handleNavigate(`/${currentLng}/sign-up`)}
                   type={'outline'}
                   customClassName={'w-full bg-white'}
                   size={'lg'}
                 >
-                  회원가입
+                  {t('navigation.signup')}
                 </Button>
-                <Button onClick={() => handleNavigate('/login')} type={'active'} customClassName={'w-full'} size={'lg'}>
-                  로그인
+                <Button
+                  onClick={() => handleNavigate(`/${currentLng}/login`)}
+                  type={'active'}
+                  customClassName={'w-full'}
+                  size={'lg'}
+                >
+                  {t('navigation.login')}
                 </Button>
               </div>
             </section>
@@ -173,7 +134,7 @@ export default function Menu() {
         {userData && (
           <div className="w-full px-5">
             <Button type={'outline'} size={'lg'} onClick={handleLogout} customClassName={'w-full'}>
-              로그아웃
+              {t('navigation.logout')}
             </Button>
           </div>
         )}

@@ -1,13 +1,13 @@
 import ProcessBar from '@/components/common/ProcessBar'
-import DetailField from '@/app/recruit-form/components/DetailField'
-import MainTaskField from '@/app/recruit-form/components/MainTaskField'
-import QualificationField from '@/app/recruit-form/components/QualificationField'
-import PreferredQualificationsField from '@/app/recruit-form/components/PreferredQualificationsField'
-import AdditionalInformationField from '@/app/recruit-form/components/AdditionalInformationField'
-import ApplicationMethodField from '@/app/recruit-form/components/ApplicationMethodField'
+import DetailField from '@/app/[lang]/recruit-form/components/DetailField'
+import MainTaskField from '@/app/[lang]/recruit-form/components/MainTaskField'
+import QualificationField from '@/app/[lang]/recruit-form/components/QualificationField'
+import PreferredQualificationsField from '@/app/[lang]/recruit-form/components/PreferredQualificationsField'
+import AdditionalInformationField from '@/app/[lang]/recruit-form/components/AdditionalInformationField'
+import ApplicationMethodField from '@/app/[lang]/recruit-form/components/ApplicationMethodField'
 import { Dispatch, SetStateAction } from 'react'
-import LanguageField from '@/app/recruit-form/components/LanguageField'
-import VisaField from '@/app/recruit-form/components/VisaField'
+import LanguageField from '@/app/[lang]/recruit-form/components/LanguageField'
+import VisaField from '@/app/[lang]/recruit-form/components/VisaField'
 
 interface RecruitFormStep3Props {
   currentStep: 1 | 2 | 3

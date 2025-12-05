@@ -3,6 +3,7 @@ import Button from '@/components/common/Button'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'
 import { EyeIcon, NonEyeIcon } from '@/assets/svgComponents'
+import { useTranslation } from 'react-i18next'
 
 const PWField = () => {
   const setAuthStoreState = useAuthStore((state) => state.setState)
@@ -12,6 +13,8 @@ const PWField = () => {
   const checkPassWord = useAuthStore((state) => state.checkPassWord)
   const [showPassword, setShowPassword] = useState(false)
   const [showCheckPassword, setShowCheckPassword] = useState(false)
+
+  const { t } = useTranslation()
 
   //비밀번호 문구
   useEffect(() => {
@@ -49,7 +52,8 @@ const PWField = () => {
     <>
       <section className="flex flex-col gap-y-2">
         <p className="subtitle-lg">
-          비밀번호<span className="text-main">*</span>
+          {t('signUp.pw.label')}
+          <span className="text-main">*</span>
         </p>
         <Input
           rightIcon={
@@ -69,21 +73,20 @@ const PWField = () => {
             isEmployeePasswordValid !== undefined ? (isEmployeePasswordValid ? 'default' : 'error') : 'default'
           }
           type={showPassword ? 'text' : 'password'}
-          placeholder={'대소문자, 숫자, 기호 포함 8~15자'}
+          placeholder={t('signUp.pw.placeholder')}
           customClassName={'w-full'}
         />
         {isEmployeePasswordValid !== undefined ? (
           <div className="badge-md">
-            {isEmployeePasswordValid ? null : (
-              <p className="text-error">비밀번호는 대소문자, 숫자, 기호 포함 8~15자를 만족해야 합니다.</p>
-            )}
+            {isEmployeePasswordValid ? null : <p className="text-error">{t('signUp.pw.pwError')}</p>}
           </div>
         ) : null}
       </section>
       {isEmployeePasswordValid ? (
         <section className="flex flex-col gap-y-2">
           <p className="subtitle-lg">
-            비밀번호 중복확인<span className="text-main">*</span>
+            {t('signUp.pw.duplicationPWLabel')}
+            <span className="text-main">*</span>
           </p>
           <Input
             rightIcon={
@@ -103,12 +106,12 @@ const PWField = () => {
               isEmployeePasswordMatch !== undefined ? (isEmployeePasswordMatch ? 'default' : 'error') : 'default'
             }
             type={showCheckPassword ? 'text' : 'password'}
-            placeholder={'대소문자, 숫자, 기호 포함 8~15자'}
+            placeholder={t('signUp.pw.duplicationPWPlaceholder')}
             customClassName={'w-full'}
           />
           {isEmployeePasswordMatch !== undefined ? (
             <div className="badge-md">
-              {isEmployeePasswordMatch ? null : <p className="text-error">비밀번호가 일치하지 않습니다.</p>}
+              {isEmployeePasswordMatch ? null : <p className="text-error">{t('signUp.pw.duplicationPWError')}</p>}
             </div>
           ) : null}
         </section>

@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface MypageMenuProps {
   setMypageType: Dispatch<SetStateAction<'회원정보' | '내 아카이브' | '문의하기'>>
   mypageType: '회원정보' | '내 아카이브' | '문의하기'
 }
 export default function MypageMenu({ setMypageType, mypageType }: MypageMenuProps) {
+  const { t } = useTranslation()
   return (
     <div className="flex">
       <button
@@ -17,7 +19,7 @@ export default function MypageMenu({ setMypageType, mypageType }: MypageMenuProp
             : 'body-md border-gray2 w-full border-x p-2'
         }
       >
-        회원정보
+        {t('mypage.menu.userInfo')}
       </button>
       <button
         onClick={() => {
@@ -29,7 +31,7 @@ export default function MypageMenu({ setMypageType, mypageType }: MypageMenuProp
             : 'body-md border-gray2 w-full border-x p-2'
         }
       >
-        내 아카이브
+        {t('mypage.menu.myArchive')}
       </button>
       {/*<button*/}
       {/*  onClick={() => {*/}

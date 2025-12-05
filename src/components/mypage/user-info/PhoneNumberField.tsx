@@ -3,6 +3,7 @@ import Button from '@/components/common/Button'
 import { ChangeEvent, useState } from 'react'
 import { postMemberVerificationPhoneCode, postMemberVerifyPhone } from '@/lib/auth'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function PhoneNumberField() {
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
@@ -18,11 +19,11 @@ export default function PhoneNumberField() {
   // 로딩 상태 추가
   const [isPhoneNumberVerificationLoading, setIsPhoneNumberVerificationLoading] = useState<boolean>(false)
 
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-3">
-      <h3 className="subtitle-md">
-        연락처 <span className="text-gray5">('-'제외)</span>
-      </h3>
+      <h3 className="subtitle-md">{t('mypage.userInfo.phoneNumber.label')}</h3>
       <div className="flex gap-x-2">
         <Input
           value={myPageInfo?.phoneNumber ?? ''}
@@ -41,7 +42,7 @@ export default function PhoneNumberField() {
           }}
           inputBoxStyle={'default'}
           type={'text'}
-          placeholder={'‘-’ 제외하고 번호 입력'}
+          placeholder={t('mypage.userInfo.phoneNumber.placeholder')}
           customClassName={'w-full'}
         />
         <Button
@@ -70,16 +71,16 @@ export default function PhoneNumberField() {
           {isPhoneNumberVerificationLoading ? (
             <div className="flex items-center gap-x-2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-              <span>전송 중...</span>
+              <span>{t('mypage.userInfo.phoneNumber.sendingMessage')}</span>
             </div>
           ) : (
-            '연락처 인증'
+            t('mypage.userInfo.phoneNumber.verifiedPhoneNumber')
           )}
         </Button>
       </div>
 
       {isPhoneRegisteredError === undefined ? null : isPhoneRegisteredError ? (
-        <p className="badge-md text-error">이미 등록된 전화번호입니다.</p>
+        <p className="badge-md text-error">{t('mypage.userInfo.phoneNumber.phoneRegisteredError')}</p>
       ) : null}
 
       {isVerifyCodeFieldOpen ? (
@@ -92,7 +93,7 @@ export default function PhoneNumberField() {
               }}
               inputBoxStyle={'default'}
               type={'text'}
-              placeholder={'인증번호 입력'}
+              placeholder={t('mypage.userInfo.phoneNumber.verifyCodePlaceholder')}
               customClassName={'w-full'}
             />
             <Button
@@ -109,13 +110,13 @@ export default function PhoneNumberField() {
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >
-              인증하기
+              {t('mypage.userInfo.phoneNumber.verifiedButton')}
             </Button>
           </div>
           {isPhoneVerified === undefined ? null : isPhoneVerified ? (
-            <p className="badge-md text-main">인증되었습니다.</p>
+            <p className="badge-md text-main">{t('mypage.userInfo.phoneNumber.verifiedSuccess')}</p>
           ) : (
-            <p className="badge-md text-error">인증코드를 다시 확인해주세요</p>
+            <p className="badge-md text-error">{t('mypage.userInfo.phoneNumber.verifiedError')}</p>
           )}
         </div>
       ) : null}

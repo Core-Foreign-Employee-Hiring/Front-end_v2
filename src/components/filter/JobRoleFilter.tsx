@@ -4,6 +4,7 @@ import { JobCategoryType, JobRoleType } from '@/types/recruit'
 import { Dispatch, SetStateAction, useEffect, useState, useMemo } from 'react'
 import { CheckIcon, UnCheckIcon, XIcon } from '@/assets/svgComponents'
 import Input from '@/components/common/Input'
+import { useTranslation } from 'react-i18next'
 
 interface JobRoleFilterProps {
   onClose: () => void
@@ -28,6 +29,8 @@ export default function JobRoleFilter({
 }: JobRoleFilterProps) {
   const [jobRoleList, setJobRoleList] = useState<{ code: JobRoleType; label: string }[]>([])
   const [searchQuery, setSearchQuery] = useState('')
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     const list = getJobRoleList(selectedCategory)
@@ -75,14 +78,14 @@ export default function JobRoleFilter({
 
   return (
     <Filter onClose={onClose}>
-      <Filter.Title onClose={onClose} title={'직무선택'} />
+      <Filter.Title onClose={onClose} title={t('filter.jobRoleFilter.title')} />
       <Filter.Content>
         <div className="flex flex-col gap-y-4">
           <Input
             value={searchQuery}
             setValue={(e) => setSearchQuery(e.target.value)}
             inputBoxStyle={'default'}
-            placeholder="직군 또는 직무를 검색해보세요."
+            placeholder={t('filter.jobRoleFilter.jobRoleSearchPlaceHolder')}
           />
           <section className="border-gray2 flex h-[500px] gap-x-3 rounded-[12px] border p-3">
             {/* 왼쪽: 직군 리스트 (30%) */}
@@ -102,7 +105,7 @@ export default function JobRoleFilter({
                   } badge-sm text-gray5 flex h-[36px] w-full flex-shrink cursor-pointer items-center justify-center py-3 whitespace-nowrap transition transition-colors hover:opacity-[80%] hover:duration-75`}
                   key={jobCategory.code}
                 >
-                  {jobCategory.label}
+                  {t(jobCategory.label)}
                 </button>
               ))}
             </div>
@@ -124,7 +127,7 @@ export default function JobRoleFilter({
                     }`}
                     key={jobRole.code}
                   >
-                    <p className="truncate">{jobRole.label}</p>
+                    <p className="truncate">{t(jobRole.label)}</p>
                     {selectedJobRoles?.includes(jobRole.code) ? (
                       <CheckIcon width={16} height={16} className="ml-2 flex-shrink-0" />
                     ) : (
@@ -145,7 +148,7 @@ export default function JobRoleFilter({
                 key={selectedJobRole}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex cursor-pointer items-center rounded-full border px-3 py-2 whitespace-nowrap transition hover:opacity-[80%] hover:duration-75"
               >
-                {getJobRoleLabel(selectedJobRole)}
+                {t(getJobRoleLabel(selectedJobRole))}
                 <XIcon width={20} height={20} />
               </button>
             ))}

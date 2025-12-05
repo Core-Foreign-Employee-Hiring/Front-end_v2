@@ -3,7 +3,6 @@ import Pagination from '@/components/common/Pagination'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { getPurchasedArchives } from '@/lib/archive'
 import { PurchasedArchiveType } from '@/types/archive'
-import Header from '@/components/common/Header'
 
 interface PurchasedArchivePageProps {
   setIsPurchasedArchivePageOpen: Dispatch<SetStateAction<boolean>>
@@ -32,10 +31,9 @@ export default function PurchasedArchivePage({ setIsPurchasedArchivePageOpen }: 
 
   return (
     <div className="">
-      <Header title={'구매한 아카이브'} headerType={'dynamic'} onBack={() => setIsPurchasedArchivePageOpen(false)} />
       <div className="flex flex-col gap-y-5 px-5 pt-[60px]">
-        {purchasedArchiveList?.map((purchasedArchive) => {
-          return <PurchasedArchiveCard key={purchasedArchive.passArchiveId} {...purchasedArchive} />
+        {purchasedArchiveList?.map((purchasedArchive, index) => {
+          return <PurchasedArchiveCard key={index} {...purchasedArchive} />
         })}
 
         <Pagination

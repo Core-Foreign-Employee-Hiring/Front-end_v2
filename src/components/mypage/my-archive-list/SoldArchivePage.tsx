@@ -53,7 +53,7 @@ export default function SoldArchivePage({ setIsSoldArchivePageOpen }: SoldArchiv
   }
   return (
     <div>
-      <Header title={'판매한 아카이브'} headerType={'dynamic'} onBack={() => setIsSoldArchivePageOpen(false)} />
+      {/*<Header title={'판매한 아카이브'} headerType={'dynamic'} onBack={() => setIsSoldArchivePageOpen(false)} />*/}
       <div className="flex flex-col gap-y-5 px-5 pt-[60px]">
         {/*<section className="flex flex-col gap-y-[12px]">*/}
         {/*  <div className="flex items-center justify-between">*/}

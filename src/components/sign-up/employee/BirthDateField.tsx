@@ -1,14 +1,18 @@
 import { useAuthStore } from '@/store/authStore'
 import Input from '@/components/common/Input'
+import { useTranslation } from 'react-i18next'
 
 export default function BirthDateField() {
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const setAuthStoreState = useAuthStore((state) => state.setState)
 
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        생년월일<span className="text-main">*</span>
+        {t('signUp.birthDay.label')}
+        <span className="text-main">*</span>
       </p>
       <Input
         type={'date'}

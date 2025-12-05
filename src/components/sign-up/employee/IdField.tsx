@@ -5,16 +5,20 @@ import { useAuthStore } from '@/store/authStore'
 import { getMemberVerifyUserId } from '@/lib/auth'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
+import { useTranslation } from 'react-i18next'
 
 const IdField = () => {
   const setAuthStoreState = useAuthStore((state) => state.setState)
   const employeeSignUp = useAuthStore((state) => state.employeeSignUp)
   const isEmployeeIdVerified = useAuthStore((state) => state.isEmployeeIdVerified)
 
+  const { t } = useTranslation()
+
   return (
     <section className="flex flex-col gap-y-2">
       <p className="subtitle-lg">
-        아이디<span className="text-main">*</span>
+        {t('signUp.id.label')}
+        <span className="text-main">*</span>
       </p>
       <div className="flex items-center justify-center gap-x-2">
         <Input
@@ -25,7 +29,7 @@ const IdField = () => {
           }}
           inputBoxStyle={isEmployeeIdVerified === undefined || true ? 'default' : 'error'}
           type={'text'}
-          placeholder={'아이디를 입력해주세요.'}
+          placeholder={t('signUp.id.placeholder')}
           customClassName={'w-full'}
         />
         <Button
@@ -49,15 +53,15 @@ const IdField = () => {
           }}
           customClassName={`${employeeSignUp?.userId?.length === 0 ? 'cursor-no-drop' : 'cursor-pointer'} whitespace-nowrap`}
         >
-          중복확인
+          {t('signUp.id.duplication')}
         </Button>
       </div>
       {isEmployeeIdVerified !== undefined && (
         <div className="badge-md">
           {isEmployeeIdVerified ? (
-            <p className="text-main">사용 가능한 아이디입니다.</p>
+            <p className="text-main">{t('signUp.id.successMessage')}</p>
           ) : (
-            <p className="text-error">사용 불가능한 아이디입니다.</p>
+            <p className="text-error">{t('signUp.id.errorMessage')}</p>
           )}
         </div>
       )}

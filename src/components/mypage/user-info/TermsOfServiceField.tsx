@@ -1,6 +1,6 @@
-import { useAuthStore } from '@/store/authStore'
 import { CheckIcon, UnCheckIcon } from '@/assets/svgComponents'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function TermsOfServiceField() {
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
@@ -9,15 +9,17 @@ export default function TermsOfServiceField() {
   const adInfoAgreementSmsMms = useMyPageStore((state) => state.myPageInfo?.adInfoAgreementSmsMms)
   const adInfoAgreementEmail = useMyPageStore((state) => state.myPageInfo?.adInfoAgreementEmail)
 
+  const { t } = useTranslation()
+
   const termsOfUseContents = [
     {
-      content: '(선택) 광고성 정보 수신 동의 (SNS/MMS)',
+      content: t('mypage.userInfo.terms.adInfoAgreementSmsMms'),
       // component: MarketingInformation,
       state: adInfoAgreementSmsMms,
       key: 'adInfoAgreementSmsMms',
     },
     {
-      content: '(선택) 광고성 정보 수신 동의 (이메일)',
+      content: t('mypage.userInfo.terms.adInfoAgreementEmail'),
       // component: MarketingInformation,
       state: adInfoAgreementEmail,
       key: 'adInfoAgreementEmail',
@@ -37,7 +39,7 @@ export default function TermsOfServiceField() {
 
   return (
     <div className={'flex flex-col gap-y-3'}>
-      <h3 className="subtitle-md">약관동의</h3>
+      <h3 className="subtitle-md">{t('mypage.userInfo.terms.label')}</h3>
       <div className="w-full" />
       {termsOfUseContents.map((termsOfUseContent) => {
         return (

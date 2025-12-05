@@ -4,8 +4,9 @@ import Image from 'next/image'
 import { DownloadIcon, StarIcon } from '@/assets/svgComponents'
 import { useRouter } from 'next/navigation'
 import { useModalStore } from '@/store/modalStore'
-import { getPassArchivesPassArchiveIdDownLoad } from '@/lib/archive'
 
+import { getPassArchivesPassArchiveIdDownLoad } from '@/lib/archive'
+import { useTranslation } from 'react-i18next'
 interface PurchasedArchiveCardProps extends PurchasedArchiveType {}
 
 export default function PurchasedArchiveCard({
@@ -34,6 +35,10 @@ export default function PurchasedArchiveCard({
     archiveReviewId,
     star,
   }
+
+  const { t } = useTranslation()
+
+  const lang = localStorage.getItem('i18nextLng')
 
   /**
    * 아카이브의 모든 파일을 로컬에 다운로드
@@ -93,13 +98,13 @@ export default function PurchasedArchiveCard({
   return (
     <div
       onClick={() => {
-        router.push(`/archive/${passArchiveId}`)
+        router.push(`/${lang}/archive/${passArchiveId}`)
       }}
       className="flex flex-col gap-y-[12px]"
     >
       {isReviewed ? null : (
         <div className="badge-md text-main bg-main-light w-fit rounded-[8px] px-2 py-1">
-          아직 리뷰를 작성하지 않았어요.
+          {t('mypage.archive.purchased.noReviewMessage')}
         </div>
       )}
 
@@ -110,8 +115,13 @@ export default function PurchasedArchiveCard({
         <div className="flex flex-col gap-y-1">
           <h1 className="subtitle-md">{title}</h1>
           <p className="body-sm text-gray5">{oneLineReview}</p>
-          <p className="body-sm">{price.toLocaleString()}원</p>
-          <p className="small text-gray4">{approvedAt} 결제완료</p>
+          <p className="body-sm">
+            {price.toLocaleString()}
+            {t('mypage.archive.priceSymbol')}
+          </p>
+          <p className="small text-gray4">
+            {approvedAt} {t('mypage.archive.purchased.paymentCompleted')}
+          </p>
         </div>
       </section>
       <section onClick={(e) => e.stopPropagation()} className="flex gap-x-3">
@@ -124,7 +134,7 @@ export default function PurchasedArchiveCard({
           size={'lg'}
           customClassName={'w-[100px]  whitespace-nowrap'}
         >
-          다운로드
+          {t('mypage.archive.purchased.button.download')}
         </Button>
         {isReviewed ? (
           <Button
@@ -135,7 +145,7 @@ export default function PurchasedArchiveCard({
             size={'lg'}
             customClassName={'w-full'}
           >
-            내가 쓴 리뷰
+            {t('mypage.archive.purchased.button.myReview')}
           </Button>
         ) : (
           <Button
@@ -150,7 +160,7 @@ export default function PurchasedArchiveCard({
             size={'lg'}
             customClassName={'w-full'}
           >
-            리뷰 작성하기
+            {t('mypage.archive.purchased.button.addReview')}
           </Button>
         )}
       </section>

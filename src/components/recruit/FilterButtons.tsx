@@ -9,10 +9,14 @@ import JobRoleFilter from '@/components/filter/JobRoleFilter'
 import LanguageFilter from '@/components/filter/LanguageFilter'
 import RegionFilter from '@/components/filter/RegionFilter'
 import ContractFilter from '@/components/filter/ContractFilter'
-import { convertEnumToKorContractType } from '@/utils/recruit'
+import { convertEnumToKorContractType, convertEnumToKorContractTypeLabel } from '@/utils/recruit'
+import { useTranslation } from 'react-i18next'
 
 export default function FilterButtons() {
   const setState = useRecruitStore((state) => state.setState)
+
+  const { t } = useTranslation()
+
   /**
    * 비자 필터 관련 state
    */
@@ -268,7 +272,7 @@ export default function FilterButtons() {
         className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
-          비자
+          {t('recruitHome.filters.visa')}
           {selectedVisaFilterContentList.length === 0 ? null : (
             <div className="badge-sm bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
               {selectedVisaFilterContentList.length}
@@ -287,7 +291,7 @@ export default function FilterButtons() {
         className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
-          직무
+          {t('recruitHome.filters.jobRoles')}
           {selectedJobRoleFilterContentList.length === 0 ? null : (
             <div className="badge-sm bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
               {selectedJobRoleFilterContentList.length}
@@ -306,7 +310,7 @@ export default function FilterButtons() {
         className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
-          관련 언어
+          {t('recruitHome.filters.language')}
           {selectedLanguageFilterContentList.length === 0 ? null : (
             <div className="badge-sm bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
               {selectedLanguageFilterContentList.length}
@@ -325,7 +329,7 @@ export default function FilterButtons() {
         className="hover:border-gray3 border-gray2 flex h-[36px] cursor-pointer items-center gap-x-2 rounded-[12px] border px-4 whitespace-nowrap transition hover:duration-75"
       >
         <div className="button text-gray5 flex items-center gap-x-1">
-          근무 지역
+          {t('recruitHome.filters.region')}
           {selectedRegionFilterContentList.length === 0 ? null : (
             <div className="badge-sm bg-main flex h-[20px] w-[20px] items-center justify-center rounded-full text-white">
               {selectedRegionFilterContentList.length}
@@ -345,8 +349,8 @@ export default function FilterButtons() {
       >
         <p className="button">
           {selectedContractFilterContent === undefined
-            ? '계약형태'
-            : convertEnumToKorContractType(selectedContractFilterContent)}
+            ? t('recruitHome.filters.contractType')
+            : t(convertEnumToKorContractTypeLabel(selectedContractFilterContent))}
         </p>
         {isContractFilterOpen ? (
           <DropboxArrowUpIcon width={20} height={20} />

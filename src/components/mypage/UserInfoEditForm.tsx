@@ -12,6 +12,7 @@ import GenderField from '@/components/mypage/user-info/GenderField'
 import TermsOfServiceField from '@/components/mypage/user-info/TermsOfServiceField'
 import { getMyProfileInfo, patchModifyProfile } from '@/lib/mypage'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 interface UserInfoEditFormProps {
   setIsChangeAccountFormOpen: Dispatch<SetStateAction<boolean>>
@@ -25,6 +26,8 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
   const isEmailCodeVerified = useMyPageStore((state) => state.isEmailCodeVerified)
   const isPhoneRegisteredError = useMyPageStore((state) => state.isPhoneRegisteredError)
   const isPhoneVerified = useMyPageStore((state) => state.isPhoneVerified)
+
+  const { t } = useTranslation()
 
   // 수정완료 버튼 활성화 조건 검사
   const canComplete = () => {
@@ -57,7 +60,7 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
   return (
     <section className="px-5">
       <section className="flex items-center justify-between">
-        <p className="title-md">회원정보 수정</p>
+        <p className="title-md">{t('mypage.userInfo.modifyUserInfo')}</p>
         <Button
           size={'lg'}
           onClick={() => {
@@ -66,7 +69,7 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
           type={'outline'}
           customClassName={'h-[46px] px-6'}
         >
-          아이디 | 비밀번호 변경
+          {t('mypage.userInfo.modifyIDAndPW')}
         </Button>
       </section>
       {step === 1 ? (
@@ -96,7 +99,7 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
           type={'active'}
           customClassName={'w-full mt-[80px] mb-[40px]'}
         >
-          다음
+          {t('mypage.button.next')}
         </Button>
       ) : (
         <div className="flex gap-x-2">
@@ -108,7 +111,7 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
             type={'outline'}
             customClassName={'w-full mt-[80px] mb-[40px]'}
           >
-            이전
+            {t('mypage.button.back')}
           </Button>
           <Button
             size={'lg'}
@@ -124,7 +127,7 @@ export default function UserInfoEditForm({ setIsChangeAccountFormOpen }: UserInf
             disabled={!canComplete()}
             customClassName={'w-full mt-[80px] mb-[40px]'}
           >
-            수정완료
+            {t('mypage.button.done')}
           </Button>
         </div>
       )}

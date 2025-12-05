@@ -7,6 +7,7 @@ import { useAuthStore } from '@/store/authStore'
 import { Dispatch, SetStateAction } from 'react'
 import Button from '@/components/common/Button'
 import AddressField from '@/components/sign-up/employee/AddressField'
+import { useTranslation } from 'react-i18next'
 interface SignUpRequiredFormProps {
   setCurrentStep: Dispatch<SetStateAction<1 | 2>>
 }
@@ -18,6 +19,8 @@ export default function SignUpRequiredForm({ setCurrentStep }: SignUpRequiredFor
   const isEmployeePasswordValid = useAuthStore((state) => state.isEmployeePasswordValid) //비밀번호가 유효한지 (8글자 이상 ~)
   const isEmployeePhoneVerified = useAuthStore((state) => state.isEmployeePhoneVerified) // 전화번호 인증
   const isEmployeeEmailVerified = useAuthStore((state) => state.isEmployeeEmailVerified) // 전화번호 인증
+
+  const { t } = useTranslation()
 
   const isFormValid =
     isEmployeeIdVerified &&
@@ -51,7 +54,7 @@ export default function SignUpRequiredForm({ setCurrentStep }: SignUpRequiredFor
         type={isFormValid ? 'active' : 'disabled'}
         customClassName={'w-full'}
       >
-        다음
+        {t('signUp.nextButton')}
       </Button>
     </div>
   )

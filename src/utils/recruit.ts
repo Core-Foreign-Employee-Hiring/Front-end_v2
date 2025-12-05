@@ -125,6 +125,21 @@ export const convertEnumToKorContractType = (category: ContractEnumType): Contra
   }
 }
 
+export const convertEnumToKorContractTypeLabel = (category: ContractEnumType): string => {
+  switch (category) {
+    case 'INTERN':
+      return 'filter.contractTypeFilter.content.INTERN'
+    case 'EXPERIENCED':
+      return 'filter.contractTypeFilter.content.EXPERIENCED'
+    case 'CONTRACT':
+      return 'filter.contractTypeFilter.content.CONTRACT'
+    case 'NEWCOMER':
+      return 'filter.contractTypeFilter.content.NEWCOMER'
+    case 'REGULAR':
+      return 'filter.contractTypeFilter.content.REGULAR'
+  }
+}
+
 export const convertEnumToKorSalaryType = (category: SalaryEnumType): SalaryKorType => {
   switch (category) {
     case 'ANNUAL':
@@ -139,6 +154,23 @@ export const convertEnumToKorSalaryType = (category: SalaryEnumType): SalaryKorT
       return '월급'
     default:
       return '기타'
+  }
+}
+
+export const convertEnumToKorSalaryTypeLabel = (category: SalaryEnumType): string => {
+  switch (category) {
+    case 'ANNUAL':
+      return 'recruitDetail.recruitInfo.salaryType.ANNUAL'
+    case 'DAILY':
+      return 'recruitDetail.recruitInfo.salaryType.DAILY'
+    case 'WEEKLY':
+      return 'recruitDetail.recruitInfo.salaryType.WEEKLY'
+    case 'HOURLY':
+      return 'recruitDetail.recruitInfo.salaryType.HOURLY'
+    case 'MONTHLY':
+      return 'recruitDetail.recruitInfo.salaryType.MONTHLY'
+    default:
+      return 'recruitDetail.recruitInfo.salaryType.ETC'
   }
 }
 
@@ -169,6 +201,19 @@ export const changeEnumToKorWorkType = (workType: WorkType | undefined | null) =
       return '비대면'
     default:
       return '기타'
+  }
+}
+
+export const changeEnumToKorWorkTypeLabel = (workType: WorkType | undefined | null) => {
+  switch (workType) {
+    case 'ONSITE':
+      return 'recruitDetail.recruitInfo.workType.ONSITE'
+    case 'HYBRID':
+      return 'recruitDetail.recruitInfo.workType.HYBRID'
+    case 'REMOTE':
+      return 'recruitDetail.recruitInfo.workType.REMOTE'
+    default:
+      return 'recruitDetail.recruitInfo.workType.ETC'
   }
 }
 
@@ -238,5 +283,33 @@ export const changeEnumToKorWorkDaysType = (workDaysType: WorkDaysType | undefin
       return '일요일'
     default:
       return '기타'
+  }
+}
+export const changeEnumToKorWorkDaysTypeLabel = (workDaysType: WorkDaysType | undefined) => {
+  switch (workDaysType) {
+    case 'WEEKDAYS':
+      return 'recruitDetail.recruitInfo.workDaysType.WEEKDAYS'
+    case 'WEEKENDS':
+      return 'recruitDetail.recruitInfo.workDaysType.WEEKENDS'
+    case 'FULL_WEEK':
+      return 'recruitDetail.recruitInfo.workDaysType.FULL_WEEK'
+    case 'SIX_DAYS':
+      return 'recruitDetail.recruitInfo.workDaysType.SIX_DAYS'
+    case 'MONDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.MONDAY'
+    case 'TUESDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.TUESDAY'
+    case 'WEDNESDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.WEDNESDAY'
+    case 'THURSDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.THURSDAY'
+    case 'FRIDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.FRIDAY'
+    case 'SATURDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.SATURDAY'
+    case 'SUNDAY':
+      return 'recruitDetail.recruitInfo.workDaysType.SUNDAY'
+    default:
+      return 'recruitDetail.recruitInfo.workDaysType.ETC'
   }
 }

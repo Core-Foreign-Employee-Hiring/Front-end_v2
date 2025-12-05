@@ -4,6 +4,7 @@ import { getLanguageLabel, LANGUAGE_LIST } from '@/utils/filterList'
 import { XIcon } from '@/assets/svgComponents'
 import { LanguageType } from '@/types/recruit'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface LanguageFilterProps {
   selectedLanguages: LanguageType[] | undefined
@@ -24,6 +25,8 @@ export default function LanguageFilter({
 }: LanguageFilterProps) {
   const [searchQuery, setSearchQuery] = useState('')
 
+  const { t } = useTranslation()
+
   const filteredLanguages = useMemo(() => {
     if (!searchQuery.trim()) return LANGUAGE_LIST
 
@@ -32,14 +35,14 @@ export default function LanguageFilter({
 
   return (
     <Filter onClose={onClose}>
-      <Filter.Title onClose={onClose} title={'언어선택'} />
+      <Filter.Title onClose={onClose} title={t('filter.requiredLanguageFilter.title')} />
       <Filter.Content>
         <div className="flex flex-col gap-y-4">
           <Input
             value={searchQuery}
             setValue={(e) => setSearchQuery(e.target.value)}
             inputBoxStyle={'default'}
-            placeholder="관련 언어를 검색하세요."
+            placeholder={t('filter.requiredLanguageFilter.placeHolder')}
           />
           <section className="flex flex-wrap gap-2">
             {filteredLanguages.map((language) => (
@@ -49,7 +52,7 @@ export default function LanguageFilter({
                 onClick={() => addLanguages(language.code)}
                 className={`${selectedLanguages?.includes(language.code) ? 'border-main bg-main-light text-main cursor-pointer transition hover:opacity-[80%] hover:duration-75' : 'hover:border-gray3 border-gray2 text-gray5 cursor-pointer transition hover:duration-75'} button rounded-[12px] border px-4 py-3`}
               >
-                {language.label}
+                {t(language.label)}
               </button>
             ))}
           </section>
@@ -63,7 +66,7 @@ export default function LanguageFilter({
                 key={selectedLanguage}
                 className="border-gray3 bg-gray1 badge-sm text-gray5 flex cursor-pointer items-center rounded-full border px-3 py-2 whitespace-nowrap transition hover:opacity-[80%] hover:duration-75"
               >
-                {getLanguageLabel(selectedLanguage)}
+                {t(getLanguageLabel(selectedLanguage))}
                 <XIcon width={20} height={20} />
               </button>
             ))}

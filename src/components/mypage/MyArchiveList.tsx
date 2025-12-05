@@ -14,6 +14,7 @@ import WithdrawModal from '@/components/modal/WithdrawModal'
 import ServicePreparingModal from '@/components/modal/ServicePreparingModal'
 import AccountRegisterModal from '@/components/modal/AccountRegisterModal'
 import ErrorModal from '@/components/common/ErrorModal'
+import { useTranslation } from 'react-i18next'
 
 interface MyArchiveListProps {
   isPostArchivePageOpen: false
@@ -82,51 +83,53 @@ export default function MyArchiveList({
     })
   }, [])
 
+  const { t } = useTranslation()
+
   return (
     <>
-      {isNoAccountErrorModalOpen ? (
-        <ErrorModal
-          isModalOpen={isNoAccountErrorModalOpen}
-          setIsModalOpen={setIsNoAccountErrorModalOpen}
-          content={'등록된 계좌가 없습니다.'}
-        />
-      ) : null}
-      {isServicePreparingModalOpen ? (
-        <ServicePreparingModal
-          functionContent={'인출하기'}
-          isServicePreparingModalOpen={isServicePreparingModalOpen}
-          setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}
-        />
-      ) : null}
-      {isWithdrawModalOpen ? (
-        <WithdrawModal
-          isAccountRegisterModalOpen={isAccountRegisterModalOpen}
-          setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}
-          isServicePreparingModalOpen={isServicePreparingModalOpen}
-          setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}
-          isWithdrawModalOpen={isWithdrawModalOpen}
-          setIsWithdrawModalOpen={setIsWithdrawModalOpen}
-        />
-      ) : null}
-      {isAccountRegisterModalOpen ? (
-        <AccountRegisterModal
-          isAccountRegistered={isAccountRegistered}
-          isAccountRegisterModalOpen={isAccountRegisterModalOpen}
-          setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}
-        ></AccountRegisterModal>
-      ) : null}
+      {/*{isNoAccountErrorModalOpen ? (*/}
+      {/*  <ErrorModal*/}
+      {/*    isModalOpen={isNoAccountErrorModalOpen}*/}
+      {/*    setIsModalOpen={setIsNoAccountErrorModalOpen}*/}
+      {/*    content={'등록된 계좌가 없습니다.'}*/}
+      {/*  />*/}
+      {/*) : null}*/}
+      {/*{isServicePreparingModalOpen ? (*/}
+      {/*  <ServicePreparingModal*/}
+      {/*    functionContent={'인출하기'}*/}
+      {/*    isServicePreparingModalOpen={isServicePreparingModalOpen}*/}
+      {/*    setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}*/}
+      {/*  />*/}
+      {/*) : null}*/}
+      {/*{isWithdrawModalOpen ? (*/}
+      {/*  <WithdrawModal*/}
+      {/*    isAccountRegisterModalOpen={isAccountRegisterModalOpen}*/}
+      {/*    setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}*/}
+      {/*    isServicePreparingModalOpen={isServicePreparingModalOpen}*/}
+      {/*    setIsServicePreparingModalOpen={setIsServicePreparingModalOpen}*/}
+      {/*    isWithdrawModalOpen={isWithdrawModalOpen}*/}
+      {/*    setIsWithdrawModalOpen={setIsWithdrawModalOpen}*/}
+      {/*  />*/}
+      {/*) : null}*/}
+      {/*{isAccountRegisterModalOpen ? (*/}
+      {/*  <AccountRegisterModal*/}
+      {/*    isAccountRegistered={isAccountRegistered}*/}
+      {/*    isAccountRegisterModalOpen={isAccountRegisterModalOpen}*/}
+      {/*    setIsAccountRegisterModalOpen={setIsAccountRegisterModalOpen}*/}
+      {/*  ></AccountRegisterModal>*/}
+      {/*) : null}*/}
       <div className="flex flex-col gap-y-[32px] px-5">
         {/* 판매한 아카이브 */}
         <section className="flex w-full flex-col gap-y-[20px]">
           <section className="flex items-center justify-between">
-            <h1 className="title-md">판매한 아카이브</h1>
+            <h1 className="title-md">{t('mypage.archive.sold.title')}</h1>
             <button
               onClick={() => {
                 setIsSoldArchivePageOpen(!isSoldArchivePageOpen)
               }}
               className="button text-gray5 px-4"
             >
-              더보기
+              {t('mypage.archive.sold.moreButton')}
             </button>
           </section>
           {/*<section className="flex flex-col gap-y-[12px]">*/}
@@ -196,14 +199,14 @@ export default function MyArchiveList({
         {/* 작성한 아카이브 */}
         <section className="flex flex-col gap-y-[20px]">
           <section className="flex items-center justify-between">
-            <h1 className="title-md">작성한 아카이브</h1>
+            <h1 className="title-md">{t('mypage.archive.write.title')}</h1>
             <button
               onClick={() => {
                 setIsPostArchivePageOpen(!isPostArchivePageOpen)
               }}
               className="button text-gray5 px-4"
             >
-              더보기
+              {t('mypage.archive.write.moreButton')}
             </button>
           </section>
           <div className="flex gap-x-[20px] overflow-x-scroll">
@@ -216,18 +219,18 @@ export default function MyArchiveList({
         {/* 구매한 아카이브 */}
         <section className="flex flex-col gap-y-[20px] pb-[50px]">
           <section className="flex items-center justify-between">
-            <h1 className="title-md">구매한 아카이브</h1>
+            <h1 className="title-md">{t('mypage.archive.purchased.title')}</h1>
             <button
               onClick={() => {
                 setIsPurchasedArchivePageOpen(!isPurchasedArchivePageOpen)
               }}
               className="button text-gray5 px-4"
             >
-              더보기
+              {t('mypage.archive.purchased.button.more')}
             </button>
           </section>
-          {purchasedArchiveList?.map((purchasedArchive) => {
-            return <PurchasedArchiveCard key={purchasedArchive.passArchiveId} {...purchasedArchive} />
+          {purchasedArchiveList?.map((purchasedArchive, index) => {
+            return <PurchasedArchiveCard key={index} {...purchasedArchive} />
           })}
         </section>
       </div>
