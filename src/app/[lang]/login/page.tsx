@@ -94,7 +94,8 @@ const LoginPage = () => {
         }
 
         // 로그인 성공 후 페이지 이동
-        router.push('/')
+        console.log('lang', lang)
+        router.push(`/${lang}`)
       } else if (result.status === 400) {
         // result.data가 없거나 accessToken이 없는 경우 = 로그인 실패
         setLoginError(true)

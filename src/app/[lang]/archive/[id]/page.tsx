@@ -11,9 +11,9 @@ import { PassArchiveDetailDataType, PassArchiveReviewDataType } from '@/types/ar
 import Pagination from '@/components/common/Pagination'
 import ImageModal from '@/components/common/ImageModal'
 import BottomModal from '@/components/common/BottomModal'
-import { postPaymentTestConfirm } from '@/lib/payment'
 import Link from 'next/link'
 import PurchaseModal from '@/components/modal/PurchaseModal'
+import { useTranslation } from 'react-i18next'
 
 export default function ReviewDetailPage() {
   const params = useParams()
@@ -23,7 +23,7 @@ export default function ReviewDetailPage() {
 
   //이미지 클릭시
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string>()
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null | undefined>()
 
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(0)
@@ -36,6 +36,8 @@ export default function ReviewDetailPage() {
 
   //구매하기 모달창 제어
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false)
+
+  const { t } = useTranslation()
 
   // 구매하기 모달창 자동 닫기 효과
   useEffect(() => {
@@ -107,21 +109,18 @@ export default function ReviewDetailPage() {
       {isPurchaseModalOpen && (
         <PurchaseModal isModalOpen={isPurchaseModalOpen} setIsModalOpen={setIsPurchaseModalOpen} />
       )}
-      <Header headerType="dynamic" title={'합격 아카이브'} />
       <div className="relative mx-auto min-h-screen w-[375px] bg-white">
         {isInquireModalOpen ? (
-          <BottomModal onClose={() => setIsInquireModalOpen(false)} title={'문의하기'}>
+          <BottomModal onClose={() => setIsInquireModalOpen(false)} title={t('archiveDetail.inquireTitle')}>
             <div className="flex flex-col gap-y-4">
               <section className="border-gray2 flex h-[237px] flex-col items-center justify-center gap-y-2 rounded-[20px] border p-5">
-                <p className="title-md text-center">
-                  문의는 오픈채팅에서 <br /> 진행하실 수 있습니다.
-                </p>
+                <p className="title-md text-center">{t('archiveDetail.inquireMessage')}</p>
                 {inquiryUrl ? (
                   <Link href={inquiryUrl} className="text-main">
                     {inquiryUrl}
                   </Link>
                 ) : (
-                  <p>등록된 URL이 없습니다.</p>
+                  <p>{t('archiveDetail.noRegisteredUrlMessage')}</p>
                 )}
               </section>
             </div>
@@ -167,14 +166,17 @@ export default function ReviewDetailPage() {
                   <h1 className="subtitle-md">{archiveDetailData?.title}</h1>
                   <p className="body-sm text-gray5">{archiveDetailData?.oneLineReview}</p>
                 </div>
-                <p className="subtitle-lg">{archiveDetailData?.price}원</p>
+                <p className="subtitle-lg">
+                  {archiveDetailData?.price}
+                  {t('archiveDetail.priceSymbol')}
+                </p>
               </section>
             </section>
 
             {/* content */}
             <section className="flex flex-col gap-y-8">
               <section className="flex flex-col gap-y-3">
-                <p className="subtitle-md">설명</p>
+                <p className="subtitle-md">{t('archiveDetail.description')}</p>
                 <p className="body-md">{archiveDetailData?.description}</p>
               </section>
               <section className="flex overflow-x-scroll">
@@ -200,7 +202,7 @@ export default function ReviewDetailPage() {
             {/* review */}
             <section>
               <section>
-                <p className="subtitle-md">리뷰</p>
+                <p className="subtitle-md">{t('archiveDetail.review')}</p>
               </section>
               <section>
                 {reviewData && reviewData.length > 0 ? (
@@ -208,7 +210,7 @@ export default function ReviewDetailPage() {
                     return <Review key={review.archiveReviewId} {...review} />
                   })
                 ) : (
-                  <p className="badge-md text-gray5 mt-2">등록된 리뷰가 없습니다.</p>
+                  <p className="badge-md text-gray5 mt-2">{t('archiveDetail.noRegisteredReviewMessage')}</p>
                 )}
               </section>
 
@@ -235,20 +237,20 @@ export default function ReviewDetailPage() {
               size={'lg'}
               customClassName={'flex whitespace-nowrap ew-[72px] h-[52px]'}
             >
-              문의
+              {t('archiveDetail.inquireButton')}
             </Button>
             <Button
               onClick={async () => {
-                const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
-                if (result.success) {
-                  setIsPurchaseModalOpen(true)
-                }
+                // const result = await postPaymentTestConfirm(params.id) //TODO: 결제 변경해야함.
+                // if (result.success) {
+                //   setIsPurchaseModalOpen(true)
+                // }
               }}
               type={'active'}
               size={'lg'}
               customClassName={'w-full h-[52px]'}
             >
-              구매하기
+              {t('archiveDetail.purchaseButton')}
             </Button>
           </div>
         </>

@@ -1,12 +1,16 @@
 import Button from '@/components/common/Button'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function GenderField() {
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
   const setState = useMyPageStore((state) => state.setState)
+
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-3">
-      <h3 className="subtitle-md">성별</h3>
+      <h3 className="subtitle-md">{t('mypage.userInfo.gender.label')}</h3>
       <div className="flex gap-x-2">
         <Button
           onClick={() => {
@@ -24,7 +28,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={myPageInfo?.gender === 'MALE' ? 'active' : 'outline'}
         >
-          남자
+          {t('mypage.userInfo.gender.MALE')}
         </Button>
         <Button
           onClick={() => {
@@ -41,7 +45,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={myPageInfo?.gender === 'FEMALE' ? 'active' : 'outline'}
         >
-          여자
+          {t('mypage.userInfo.gender.FEMALE')}
         </Button>
         <Button
           onClick={() => {
@@ -58,7 +62,7 @@ export default function GenderField() {
           customClassName={'w-full'}
           type={myPageInfo?.gender === 'NULL' ? 'active' : 'outline'}
         >
-          선택 안함
+          {t('mypage.userInfo.gender.NOGENDER')}
         </Button>
       </div>
     </div>

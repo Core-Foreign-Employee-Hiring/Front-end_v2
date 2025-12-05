@@ -1,20 +1,30 @@
 import DropBox from '@/components/common/DropBox'
 import { useState } from 'react'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function EducationField() {
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false)
-  const educationContents = ['고졸', '대학 재학', '대졸 및 예정', '대학원 재학', '대학원졸 및 예정']
+  const educationContents = [
+    'signUp.education.content.highSchoolGraduate',
+    'signUp.education.content.universityEnrolled',
+    'signUp.education.content.universityGraduateOrExpected',
+    'signUp.education.content.graduateSchoolEnrolled',
+    'signUp.education.content.graduateSchoolGraduateOrExpected',
+  ]
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
   const setState = useMyPageStore((state) => state.setState)
+
+  const { t } = useTranslation()
+
   return (
     <div className="flex flex-col gap-y-3">
-      <h3 className="subtitle-md">학력</h3>
+      <h3 className="subtitle-md">{t('mypage.userInfo.education.label')}</h3>
       <DropBox
         isDropBoxOpen={isDropBoxOpen}
         setIsDropBoxOpen={() => setIsDropBoxOpen(!isDropBoxOpen)}
         selectedValue={myPageInfo?.education ?? ''}
-        initValue={'학력을 선택해주세요.'}
+        initValue={t('mypage.userInfo.education.placeholder')}
       >
         <>
           {educationContents.map((education) => {
@@ -23,13 +33,13 @@ export default function EducationField() {
                 key={education}
                 onClick={() => {
                   if (myPageInfo) {
-                    setState({ ...myPageInfo, myPageInfo: { ...myPageInfo, education: education } })
+                    setState({ ...myPageInfo, myPageInfo: { ...myPageInfo, education: t(education) } })
                   }
                   setIsDropBoxOpen(false)
                 }}
                 className="border-gray2 body-sm hover:bg-gray1 flex h-[60px] w-full cursor-pointer items-center bg-white px-4"
               >
-                {education}
+                {t(education)}
               </div>
             )
           })}

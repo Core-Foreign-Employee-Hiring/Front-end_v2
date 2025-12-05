@@ -3,10 +3,13 @@ import Button from '@/components/common/Button'
 import { useState } from 'react'
 import { postMemberVerificationEmail, postMemberVerifyEmail } from '@/lib/auth'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function EmailField() {
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
   const setState = useMyPageStore((state) => state.setState)
+
+  const { t } = useTranslation()
 
   // 이메일 정규식 검사 함수
   const isValidEmail = (email: string) => {
@@ -26,7 +29,7 @@ export default function EmailField() {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <h3 className="subtitle-md">이메일</h3>
+      <h3 className="subtitle-md">{t('mypage.userInfo.email.label')}</h3>
       <div className="flex gap-x-2">
         <Input
           inputBoxStyle={'default'}
@@ -72,15 +75,17 @@ export default function EmailField() {
           {isEmailVerificationLoading ? (
             <div className="flex items-center gap-x-2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-              <span>전송 중...</span>
+              <span>{t('mypage.userInfo.name.sendingMessage')}</span>
             </div>
           ) : (
-            '이메일 인증'
+            t('mypage.userInfo.email.verifiedEmail')
           )}
         </Button>
       </div>
 
-      {isEmailRegisteredError === undefined ? null : <p className="badge-md text-error">이미 등록된 이메일입니다.</p>}
+      {isEmailRegisteredError === undefined ? null : (
+        <p className="badge-md text-error">{t('mypage.userInfo.email.emailRegisteredError')}</p>
+      )}
 
       {isVerifyCodeFieldOpen ? (
         <div className="flex flex-col gap-y-2">
@@ -92,7 +97,7 @@ export default function EmailField() {
               }}
               inputBoxStyle={'default'}
               type={'text'}
-              placeholder={'인증번호 입력'}
+              placeholder={t('mypage.userInfo.email.verifyCodePlaceholder')}
               customClassName={'w-full'}
             />
             <Button
@@ -109,13 +114,13 @@ export default function EmailField() {
               }}
               customClassName={'w-[96px] h-[46px] whitespace-nowrap'}
             >
-              인증하기
+              {t('mypage.userInfo.email.verifiedButton')}
             </Button>
           </div>
           {isEmailCodeVerified === undefined ? null : isEmailCodeVerified ? (
-            <p className="badge-md text-main">인증되었습니다.</p>
+            <p className="badge-md text-main">{t('mypage.userInfo.email.verifiedSuccess')}</p>
           ) : (
-            <p className="badge-md text-error">인증코드를 다시 확인해주세요</p>
+            <p className="badge-md text-error">{t('mypage.userInfo.email.verifiedError')}</p>
           )}
         </div>
       ) : null}

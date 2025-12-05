@@ -10,6 +10,132 @@
     "nameSuffix": "님"
   },
 
+  "mypage": {
+    "h1": "마이페이지",
+    "button": {
+      "next": "다음",
+      "back": "이전",
+      "done": "수정완료"
+    },
+
+    "menu": {
+      "userInfo": "회원정보",
+      "myArchive": "내 아카이브"
+    },
+
+    "archive": {
+      "priceSymbol": "원",
+      "sold": {
+        "title": "판매한 아카이브",
+        "moreButton": "더보기",
+        "withdrawn": "인출완료"
+      },
+      "write": {
+        "title": "작성한 아카이브",
+        "moreButton": "더보기",
+        "content1": "총",
+        "content2": "개 판매됨"
+      },
+      "purchased": {
+        "title": "구매한 아카이브",
+        "paymentCompleted": "결제완료",
+        "noReviewMessage": "아직 리뷰를 작성하지 않았어요.",
+        "button": {
+          "more": "더보기",
+          "download": "다운로드",
+          "myReview": "내가 쓴 리뷰",
+          "addReview": "리뷰 작성하기"
+        }
+      }
+    },
+    "userInfo": {
+      "modifyUserInfo": "회원정보 수정",
+      "modifyIDAndPW": "아이디 | 비밀번호 변경",
+      "name": {
+        "label": "이름"
+      },
+      "education": {
+        "label": "학력",
+        "placeholder": "학력을 선택해주세요."
+      },
+      "terms": {
+        "label": "약관동의",
+        "adInfoAgreementSmsMms": "(선택) 광고성 정보 수신 동의 (SNS/MMS)",
+        "adInfoAgreementEmail": "(선택) 광고성 정보 수신 동의 (이메일)"
+      },
+      "gender": {
+        "label": "성별",
+        "MALE": "남자",
+        "FEMALE": "여자",
+        "NOGENDER": "선택 안함"
+      },
+      "visa": {
+        "label": "비자",
+        "placeholder": "비자를 선택해주세요."
+      },
+      "birthDay": {
+        "label": "생년월일"
+      },
+      "nationality": {
+        "label": "국적",
+        "placeholder": "국적을 선택해주세요."
+      },
+      "address": {
+        "label": "주소",
+        "searchAddressButton": "주소찾기",
+        "zipcodePlaceholder": "우편번호",
+        "address1Placeholder": "주소를 입력해주세요.",
+        "address2Placeholder": "상세주소를 입력해주세요."
+      },
+      "email": {
+        "label": "이메일",
+        "placeholder": "이메일을 입력해주세요.",
+        "verifyCode": "인증번호",
+        "sendingMessage": "전송 중...",
+        "verifiedEmail": "이메일 인증",
+        "emailRegisteredError": "이미 등록된 이메일입니다.",
+        "verifyCodePlaceholder": "인증번호 입력",
+        "verifiedButton": "인증하기",
+        "verifiedSuccess": "인증되었습니다.",
+        "verifiedError": "인증코드를 다시 확인해주세요."
+      },
+      "phoneNumber": {
+        "label": "전화번호",
+        "placeholder": "'-' 제외하고 번호 입력",
+        "verifyCode": "인증번호",
+        "sendingMessage": "전송 중...",
+        "verifiedPhoneNumber": "이메일 인증",
+        "phoneRegisteredError": "이미 등록된 전화번호입니다.",
+        "verifyCodePlaceholder": "인증번호 입력",
+        "verifiedButton": "인증하기",
+        "verifiedSuccess": "인증되었습니다.",
+        "verifiedError": "인증코드를 다시 확인해주세요."
+      }
+    }
+  },
+
+  "archiveHome": {
+    "h1": "합격 아카이브",
+    "counter": "건",
+    "searchPlaceholder": "궁금한 아카이브를 검색해보세요.",
+    "searchButton": "검색",
+    "addArchiveButton": "아카이브 등록",
+    "loadingMessage": "로딩중...",
+    "noSearchResultMessage": "검색 결과가 없습니다."
+  },
+
+  "archiveDetail": {
+    "inquireTitle": "문의하기",
+    "inquireMessage": "문의는 오픈채팅에서 진행하실 수 있습니다.",
+    "noRegisteredUrlMessage": "등록된 URL이 없습니다.",
+    "description": "설명",
+    "review": "리뷰",
+    "noRegisteredReviewMessage": "등록된 리뷰가 없습니다.",
+    "inquireButton": "문의",
+    "purchaseButton": "구매하기",
+    "priceSymbol": "원"
+  },
+
   "login": {
     "title": "로그인",
     "description": "Korfit 회원이 되어 더 많은 서비스를 즐겨보세요!",
@@ -123,7 +249,7 @@
       "noSearchResultMessage": "검색 결과가 없습니다."
     },
     "nationality": {
-      "label": "생년월일",
+      "label": "국적",
       "placeholder": "국적을 선택해주세요.",
       "content": {
         "GHANA": "Ghana (가나)",

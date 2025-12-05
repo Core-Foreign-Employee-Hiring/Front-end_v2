@@ -1,5 +1,8 @@
 import React, { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import { I18nParams } from '@/lib/i18n.types'
+import Header from '@/components/common/Header'
+import { useTranslationServer } from '@/lib/i18n'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.korfit.co.kr'
 
@@ -55,14 +58,17 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}`,
   },
 }
-
-export default async function RecruitLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: ReactNode
-}>) {
+  params: Promise<I18nParams>
+}
+
+export default async function ArchiveDetailLayout({ children, params }: RootLayoutProps) {
+  const { lang } = await params
+  const { t } = await useTranslationServer(lang, 'common')
   return (
     <div className="">
+      <Header params={params} headerType="dynamic" title={t('archiveHome.h1')} />
       <main className="">{children}</main>
     </div>
   )

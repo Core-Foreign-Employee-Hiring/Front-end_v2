@@ -27,6 +27,144 @@
     }
   },
 
+  "mypage": {
+    "h1": "MyPage",
+    "button": {
+      "next": "Next",
+      "back": "Back",
+      "done": "Save Changes"
+    },
+
+    "menu": {
+      "userInfo": "Profile Information",
+      "myArchive": "My Archive"
+    },
+    "archive": {
+      "priceSymbol": "KRW",
+      "sold": {
+        "title": "Sold Archives",
+        "moreButton": "View More",
+        "withdrawn": "Payout Completed"
+      },
+      "write": {
+        "title": "Created Archives",
+        "moreButton": "View More",
+        "content1": "Total",
+        "content2": "sold"
+      },
+      "purchased": {
+        "title": "Purchased Archives",
+        "paymentCompleted": "Payment Completed",
+        "noReviewMessage": "You haven't written a review yet.",
+        "button": {
+          "more": "View More",
+          "download": "Download",
+          "myReview": "My Review",
+          "addReview": "Write a Review"
+        }
+      }
+    },
+
+    "userInfo": {
+      "modifyUserInfo": "Edit Profile Information",
+      "modifyIDAndPW": "Change ID | Password",
+
+      "name": {
+        "label": "Name"
+      },
+
+      "education": {
+        "label": "Education",
+        "placeholder": "Select your education level."
+      },
+
+      "terms": {
+        "label": "Terms & Agreements",
+        "adInfoAgreementSmsMms": "(Optional) Receive promotional messages (SNS/MMS)",
+        "adInfoAgreementEmail": "(Optional) Receive promotional emails"
+      },
+
+      "gender": {
+        "label": "Gender",
+        "MALE": "Male",
+        "FEMALE": "Female",
+        "NOGENDER": "Prefer not to say"
+      },
+
+      "visa": {
+        "label": "Visa",
+        "placeholder": "Select your visa type."
+      },
+
+      "birthDay": {
+        "label": "Date of Birth"
+      },
+
+      "nationality": {
+        "label": "Nationality",
+        "placeholder": "Select your nationality."
+      },
+
+      "address": {
+        "label": "Address",
+        "searchAddressButton": "Search Address",
+        "zipcodePlaceholder": "Postal Code",
+        "address1Placeholder": "Enter your address.",
+        "address2Placeholder": "Enter details (optional)."
+      },
+
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email.",
+        "verifyCode": "Verification Code",
+        "sendingMessage": "Sending...",
+        "verifiedEmail": "Email Verification",
+        "emailRegisteredError": "This email is already registered.",
+        "verifyCodePlaceholder": "Enter verification code",
+        "verifiedButton": "Verify",
+        "verifiedSuccess": "Email verified.",
+        "verifiedError": "Invalid verification code."
+      },
+
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "Enter number without '-'",
+        "verifyCode": "Verification Code",
+        "sendingMessage": "Sending...",
+        "verifiedPhoneNumber": "Phone Verification",
+        "phoneRegisteredError": "This phone number is already registered.",
+        "verifyCodePlaceholder": "Enter verification code",
+        "verifiedButton": "Verify",
+        "verifiedSuccess": "Phone number verified.",
+        "verifiedError": "Invalid verification code."
+      }
+    }
+  },
+
+
+  "archiveHome": {
+    "h1": "Pass Archive",
+    "counter": "items",
+    "searchPlaceholder": "Search archives...",
+    "searchButton": "Search",
+    "addArchiveButton": "Add Archive",
+    "loadingMessage": "Loading...",
+    "noSearchResultMessage": "No results found."
+  },
+
+  "archiveDetail": {
+    "inquireTitle": "Inquiry",
+    "inquireMessage": "For inquiries, please contact us via Open Chat.",
+    "noRegisteredUrlMessage": "No URL registered.",
+    "description": "Description",
+    "review": "Review",
+    "noRegisteredReviewMessage": "No reviews available.",
+    "inquireButton": "Inquiry",
+    "purchaseButton": "Buy Now",
+    "priceSymbol": "KRW"
+  },
+
+
   "signUp": {
     "nextButton": "Next",
     "beforeButton": "Back",

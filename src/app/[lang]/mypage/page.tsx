@@ -18,6 +18,7 @@ import { InquiryDetailType, ReviewDetailDataType } from '@/types/archive'
 import { formatRelativeTime } from '@/utils/common'
 import SearchAddressModal from '@/components/common/SearchAddressModal'
 import { useMyPageStore } from '@/store/mypageStore'
+import { useTranslation } from 'react-i18next'
 
 export default function Mypage() {
   const [mypageType, setMypageType] = useState<'회원정보' | '내 아카이브' | '문의하기'>('회원정보')
@@ -44,6 +45,8 @@ export default function Mypage() {
   const setMyPageState = useMyPageStore((state) => state.setState)
   const myPageInfo = useMyPageStore((state) => state.myPageInfo)
   const isSearchAddressModalOpen = useModalStore((state) => state.isSearchAddressModalOpen)
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (selectedReviewId !== undefined && isViewReviewModalOpen) {
@@ -168,7 +171,7 @@ export default function Mypage() {
         <>
           <div className="mt-[20px]">
             <div className="flex flex-col px-5">
-              <h1 className="title-md">마이페이지</h1>
+              <h1 className="title-md">{t('mypage.h1')}</h1>
             </div>
 
             <div className="mt-5 flex flex-col gap-y-[40px]">
@@ -191,7 +194,6 @@ export default function Mypage() {
                       setIsSoldArchivePageOpen={setIsSoldArchivePageOpen}
                     />
                   ) : null}
-                  {/*{mypageType === '문의하기' ? <AskForm /> : null}*/}
                 </>
               )}
             </div>

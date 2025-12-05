@@ -9,6 +9,7 @@ import Pagination from '@/components/common/Pagination'
 import { getArchiveData } from '@/lib/archive'
 import { PassArchiveCardDataType } from '@/types/archive'
 import ArchiveRegisterForm from '@/components/archive/ArchiveRegisterForm'
+import { useTranslation } from 'react-i18next'
 
 export default function ArchiveClientPage() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -23,7 +24,6 @@ export default function ArchiveClientPage() {
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
     setCurrentPage(page - 1) // Pagination은 1부터 시작하지만 API는 0부터 시작
-    console.log(`페이지 ${page}로 이동`)
   }
 
   // 검색 핸들러
@@ -73,6 +73,8 @@ export default function ArchiveClientPage() {
     loadArchiveData()
   }, [searchKeyword, currentPage]) // searchKeyword와 currentPage 변경 시 실행
 
+  const { t } = useTranslation()
+
   return isArchiveRegisterFormOpen ? (
     <ArchiveRegisterForm setIsArchiveRegisterFormOpen={setIsArchiveRegisterFormOpen} />
   ) : (
@@ -80,23 +82,23 @@ export default function ArchiveClientPage() {
       <div className="h-[20px]" />
       <div className="px-5">
         <section className="flex flex-col gap-y-3 whitespace-nowrap">
-          <h1 className="title-lg">합격 아카이브</h1>
+          <h1 className="title-lg">{t('archiveHome.h1')}</h1>
           <div className="subtitle-lg flex gap-x-[5px]">
             <p className="text-main">{totalElements.toLocaleString()}</p>
-            <p>건</p>
+            <p>{t('archiveHome.counter')}</p>
           </div>
           <div className="flex gap-x-3">
             <Input
               leftIcon={<GraySearchIcon width={24} height={24} />}
               inputBoxStyle={'default'}
-              placeholder={'궁금한 아카이브를 검색해보세요.'}
+              placeholder={t('archiveHome.searchPlaceholder')}
               value={searchKeyword}
               setValue={(e) => setSearchKeyword(e.target.value)}
               onKeyPress={handleKeyPress}
               customClassName={'w-full'}
             />
             <Button onClick={handleSearch} type={'active'} size={'lg'} customClassName={'whitespace-nowrap w-[80px]'}>
-              검색
+              {t('archiveHome.searchButton')}
             </Button>
           </div>
         </section>
@@ -104,7 +106,7 @@ export default function ArchiveClientPage() {
         {/* 로딩 상태 */}
         {isLoading ? (
           <div className="mt-5 flex h-40 items-center justify-center">
-            <p>로딩 중...</p>
+            <p>{t('archiveHome.loadingMessage')}</p>
           </div>
         ) : (
           <section className="mt-5 grid grid-cols-2 gap-4">
@@ -112,7 +114,7 @@ export default function ArchiveClientPage() {
               archiveList.map((archive) => <ArchiveCard key={archive.passArchiveId} {...archive} />)
             ) : (
               <div className="col-span-2 flex h-40 items-center justify-center">
-                <p className="text-gray4">검색 결과가 없습니다.</p>
+                <p className="text-gray4">{t('archiveHome.noSearchResultMessage')}</p>
               </div>
             )}
           </section>
@@ -141,7 +143,7 @@ export default function ArchiveClientPage() {
         }}
       >
         <PlusIcon width={24} height={24} />
-        아카이브 등록
+        {t('archiveHome.addArchiveButton')}
       </button>
     </div>
   )
