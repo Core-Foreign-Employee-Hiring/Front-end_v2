@@ -34,7 +34,6 @@ export default function GlobalModals({ currentLng }: GlobalModalsProps) {
       {isTokenExpiredModalOpen && <TokenExpiredModal isModalOpen={isTokenExpiredModalOpen} />}
       {isLanguageSelectModalOpen && <LanguageSelectModal onLanguageChange={handleLanguageChange} />}
       {isAlarmModalOpen && <AlarmModal />}
-      {}
     </>
   )
 }

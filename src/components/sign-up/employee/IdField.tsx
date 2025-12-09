@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'
-import { getMemberVerifyUserId } from '@/lib/auth'
+import { getMemberVerifyUserId } from '@/lib/login'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { useTranslation } from 'react-i18next'

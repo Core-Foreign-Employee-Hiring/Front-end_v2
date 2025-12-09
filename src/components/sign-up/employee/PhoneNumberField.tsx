@@ -2,7 +2,7 @@ import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
 import { ChangeEvent, useState } from 'react'
-import { postMemberVerificationPhoneCode, postMemberVerifyPhone } from '@/lib/auth'
+import { postMemberVerificationPhoneCode, postMemberVerifyPhone } from '@/lib/login'
 import { useTranslation } from 'react-i18next'
 
 const PhoneNumberField = () => {

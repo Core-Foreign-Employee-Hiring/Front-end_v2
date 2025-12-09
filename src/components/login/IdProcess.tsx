@@ -1,17 +1,26 @@
+'use client'
+
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
-import { postMemberFindIdSendCode, postMemberFindIdVerifyCode, postMemberVerifyPhone } from '@/lib/auth'
+import { ChangeEvent, useState } from 'react'
 import { useAuthStore } from '@/store/authStore'
+import { usePathname, useRouter } from 'next/navigation'
+import { postClientMemberFindIdSendCode, postClientMemberFindIdVerifyCode } from '@/lib/client/login'
+type StepType = '1' | '2'
+type SearchType = 'id' | 'pw'
 
-interface IdProcessProps {
-  setStep: Dispatch<SetStateAction<number>>
-}
-export default function IdProcess({ setStep }: IdProcessProps) {
+export default function IdProcess() {
   const [findIdRequestData, setFindIdRequestData] = useState<{
     name: string
     phoneNumber: string
   }>()
+
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleStepClick = (step: StepType, type: SearchType) => {
+    router.push(`${pathname}?type=${encodeURIComponent(type)}&step=${encodeURIComponent(step)}`)
+  }
 
   const [isVerifyCodeFieldOpen, setIsVerifyCodeFieldOpen] = useState<boolean | undefined>()
   const [verifyCode, setVerifyCode] = useState<string>('')
@@ -22,7 +31,6 @@ export default function IdProcess({ setStep }: IdProcessProps) {
 
   // 로딩 상태 추가
   const [isPhoneNumberVerificationLoading, setIsPhoneNumberVerificationLoading] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<undefined | string>(undefined)
 
   //아이디 찾기 결과값 저장
   const setState = useAuthStore((state) => state.setState)
@@ -78,11 +86,10 @@ export default function IdProcess({ setStep }: IdProcessProps) {
                   if (findIdRequestData?.phoneNumber && !isPhoneNumberVerificationLoading) {
                     setIsPhoneNumberVerificationLoading(true) // 로딩 시작
                     try {
-                      const result = await postMemberFindIdSendCode(findIdRequestData)
-                      console.log('result', result)
+                      const result = await postClientMemberFindIdSendCode(findIdRequestData)
                       if (result.success) {
                         setIsVerifyCodeFieldOpen(result.success)
-                      } else if (result.status === 404 && result.message === '해당 사용자를 찾을 수 없습니다.') {
+                      } else if (!result.success && result.error === '해당 사용자를 찾을 수 없습니다.') {
                         setIsPhoneRegisteredError(true)
                       }
                     } catch (error) {
@@ -137,11 +144,11 @@ export default function IdProcess({ setStep }: IdProcessProps) {
         <Button
           onClick={async () => {
             if (verifyCode) {
-              const result = await postMemberFindIdVerifyCode(verifyCode)
+              const result = await postClientMemberFindIdVerifyCode(verifyCode)
               if (result.success) {
-                setState({ idResultData: result.data })
-                setStep(2)
-              } else if (result.status === 400) {
+                setState({ idResultData: result.data?.data })
+                handleStepClick('2', 'id')
+              } else if (result.error && result.error === 'SMS 인증코드가 올바르지 않습니다.') {
                 setIsPhoneVerified(false)
               }
             }

@@ -7,10 +7,11 @@ interface HeaderProps {
   title?: string
   headerType?: 'default' | 'navbar' | 'dynamic'
   onBack?: () => void
+  path?: string
   params: Promise<I18nParams>
 }
 
-const Header = async ({ title, headerType = 'default', onBack, params }: HeaderProps) => {
+const Header = async ({ title, headerType = 'default', onBack, params, path }: HeaderProps) => {
   const { lang } = await params
 
   const renderHeaderType = (headerType: 'default' | 'navbar' | 'dynamic') => {

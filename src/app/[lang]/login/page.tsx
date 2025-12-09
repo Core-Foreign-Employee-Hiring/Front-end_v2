@@ -2,15 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { CheckIcon, EyeIcon, NonEyeIcon, UnCheckIcon } from '@/assets/svgComponents'
 import { useAuthStore } from '@/store/authStore'
-import { postMemberLogin } from '@/lib/auth'
 import { UserDataType } from '@/types/common'
-import FindAccountProcess from '@/components/login/FindAccountProcess'
 import { useTranslation } from 'react-i18next'
+import { postAuth } from '@/lib/auth'
 
 const LoginPage = () => {
   const router = useRouter()
@@ -22,8 +20,6 @@ const LoginPage = () => {
   const [loginError, setLoginError] = useState(false)
   //비밀번호 공개, 비공개
   const [showPassword, setShowPassword] = useState(false)
-  //아이디/비밀번호 찾기 페이지
-  const [findAccountProcess, setFindAccountProcess] = useState(false)
 
   const [lang, setLang] = useState<string | null>()
 
@@ -68,40 +64,40 @@ const LoginPage = () => {
     if (!loginData) return
 
     try {
-      const result = await postMemberLogin(loginData)
+      const result = await postAuth(loginData)
 
-      // 로그인 성공 확인
-      if (result.data && result.data.accessToken) {
-        // 로그인 성공 시 에러 상태 초기화
+      if (result.accessToken && result.refreshToken) {
         setLoginError(false)
 
-        // 아이디 저장 설정에 따라 아이디만 저장/삭제
         saveUserId(rememberMe)
 
-        // 토큰 저장
-        Cookies.set('accessToken', result.data.accessToken)
-        Cookies.set('refreshToken', result.data.refreshToken)
+        // 쿠키 설정 - Route Handler 호출
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/api/auth/cookies`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            accessToken: result.accessToken,
+            refreshToken: result.refreshToken,
+          }),
+        })
 
-        // 사용자 데이터 저장
         const userData: UserDataType = {
-          name: result.data.name,
-          userId: result.data.userId,
-          role: result.data.role,
+          name: result.name,
+          userId: result.userId,
+          role: result.role,
         }
 
         if (typeof window !== 'undefined') {
           localStorage.setItem('userData', JSON.stringify(userData))
         }
 
-        // 로그인 성공 후 페이지 이동
-        console.log('lang', lang)
         router.push(`/${lang}`)
-      } else if (result.status === 400) {
-        // result.data가 없거나 accessToken이 없는 경우 = 로그인 실패
+      } else if (!result.success) {
         setLoginError(true)
       }
     } catch (error: any) {
-      // 네트워크 에러나 예외 발생 시
       setLoginError(true)
     }
   }
@@ -117,9 +113,7 @@ const LoginPage = () => {
     })
   }
 
-  return findAccountProcess ? (
-    <FindAccountProcess setFindAccountProcess={setFindAccountProcess} />
-  ) : (
+  return (
     <div>
       <div className="flex h-[calc(100vh-112px)] flex-col items-center justify-center">
         <div className="flex w-full flex-col items-center justify-center">
@@ -174,7 +168,7 @@ const LoginPage = () => {
                 </div>
                 <div
                   onClick={() => {
-                    setFindAccountProcess(!findAccountProcess)
+                    router.push(`/${lang}/login/find?type=id&step=1`)
                   }}
                   className="flex items-center gap-x-2"
                 >

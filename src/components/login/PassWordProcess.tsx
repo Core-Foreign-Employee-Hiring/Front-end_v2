@@ -1,15 +1,24 @@
+'use client'
+
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { FindPWRequestDataType } from '@/types/auth'
-import { postMemberPasswordResetSendCode, postMemberPasswordResetVerifyCode, postMemberVerifyEmail } from '@/lib/auth'
 import { useAuthStore } from '@/store/authStore'
+import { usePathname, useRouter } from 'next/navigation'
+import { postClientMemberPasswordResetSendCode, postClientMemberPasswordResetVerifyCode } from '@/lib/client/login'
 
-interface PassWordProcessProps {
-  setStep: Dispatch<SetStateAction<number>>
-}
+type StepType = '1' | '2'
+type SearchType = 'id' | 'pw'
 
-export default function PassWordProcess({ setStep }: PassWordProcessProps) {
+export default function PassWordProcess() {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleStepClick = (step: StepType, type: SearchType) => {
+    router.push(`${pathname}?type=${encodeURIComponent(type)}&step=${encodeURIComponent(step)}`)
+  }
+
   const [findPWRequestData, setFindPWRequestData] = useState<FindPWRequestDataType>()
   // 이메일 정규식 검사 함수
   const isValidEmail = (email: string) => {
@@ -84,13 +93,13 @@ export default function PassWordProcess({ setStep }: PassWordProcessProps) {
                 if (findPWRequestData?.email && !isEmailVerificationLoading) {
                   setIsEmailVerificationLoading(true) // 로딩 시작
                   try {
-                    const result = await postMemberPasswordResetSendCode(findPWRequestData)
+                    const result = await postClientMemberPasswordResetSendCode(findPWRequestData)
                     console.log('result', result)
 
                     if (result.success) {
                       setIsVerified(result.success)
                     }
-                    if (result.status === 404 && result.message === '해당 사용자를 찾을 수 없습니다.') {
+                    if (!result.success && result.error === '해당 사용자를 찾을 수 없습니다.') {
                       setIsError(true)
                     }
                   } catch (error) {
@@ -131,10 +140,10 @@ export default function PassWordProcess({ setStep }: PassWordProcessProps) {
       <div className="fixed bottom-0 w-[375px] bg-white px-5 pb-5">
         <Button
           onClick={async () => {
-            const result = await postMemberPasswordResetVerifyCode(verifyCode)
+            const result = await postClientMemberPasswordResetVerifyCode(verifyCode)
             if (result.success) {
               setState({ ...modifyPWRequestData, modifyPWRequestData: { ...modifyPWRequestData, code: verifyCode } })
-              setStep(2)
+              handleStepClick('2', 'pw')
             }
           }}
           buttonType={'submit'}

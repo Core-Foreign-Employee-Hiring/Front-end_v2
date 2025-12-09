@@ -1,15 +1,18 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
+'use client'
+
+import { ChangeEvent, useEffect, useState } from 'react'
 import Button from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { EyeIcon, NonEyeIcon } from '@/assets/svgComponents'
 import { useAuthStore } from '@/store/authStore'
-import { postMemberPasswordResetModify } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
+import { postClientMemberPasswordResetModify } from '@/lib/client/login'
 
-interface PassWordResultProps {
-  setStep: Dispatch<SetStateAction<number>>
-  setFindAccountProcess: Dispatch<SetStateAction<boolean>>
-}
-export default function PassWordResult({ setStep, setFindAccountProcess }: PassWordResultProps) {
+export default function PassWordResult() {
+  const router = useRouter()
+
+  const lang = localStorage.getItem('i18nextLng')
+
   const [newPassword, setNewPassword] = useState<string | undefined>(undefined)
   const [isPasswordMatch, setIsPasswordMatch] = useState<undefined | boolean>(undefined)
   const [isPasswordValid, setIsPasswordValid] = useState<undefined | boolean>(undefined)
@@ -23,10 +26,9 @@ export default function PassWordResult({ setStep, setFindAccountProcess }: PassW
 
   useEffect(() => {
     if (modifyPWRequestData?.code && modifyPWRequestData.newPassword) {
-      postMemberPasswordResetModify(modifyPWRequestData).then((result) => {
+      postClientMemberPasswordResetModify(modifyPWRequestData).then((result) => {
         if (result.success) {
-          setStep(1)
-          setFindAccountProcess(false)
+          router.push(`/${lang}/login`)
         }
       })
     }

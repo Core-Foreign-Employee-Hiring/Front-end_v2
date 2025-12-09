@@ -1,7 +1,7 @@
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
-import { postMemberVerificationEmail, postMemberVerifyEmail } from '@/lib/auth'
+import { postMemberVerificationEmail, postMemberVerifyEmail } from '@/lib/login'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -1,15 +1,25 @@
-import { Dispatch, SetStateAction } from 'react'
+'use client'
+
 import { useAuthStore } from '@/store/authStore'
 import Button from '@/components/common/Button'
 import { formatDate } from '@/utils/common'
+import { usePathname, useRouter } from 'next/navigation'
 
-interface IdResultProps {
-  setStep: Dispatch<SetStateAction<number>>
-  setType: Dispatch<SetStateAction<'id' | 'pw'>>
-  setFindAccountProcess: Dispatch<SetStateAction<boolean>>
-}
-export default function IdResult({ setStep, setType, setFindAccountProcess }: IdResultProps) {
+type StepType = '1' | '2'
+type SearchType = 'id' | 'pw'
+
+export default function IdResult() {
   const idResultData = useAuthStore((state) => state.idResultData)
+
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const lang = localStorage.getItem('i18nextLng')
+
+  const handleStepClick = (step: StepType, type: SearchType) => {
+    router.push(`${pathname}?type=${encodeURIComponent(type)}&step=${encodeURIComponent(step)}`)
+  }
+
   return (
     <div>
       {idResultData ? (
@@ -25,8 +35,7 @@ export default function IdResult({ setStep, setType, setFindAccountProcess }: Id
       <div className="fixed bottom-0 flex w-[375px] gap-x-3 bg-white px-5 pb-5">
         <Button
           onClick={async () => {
-            setType('pw')
-            setStep(1)
+            handleStepClick('1', 'pw')
           }}
           buttonType={'submit'}
           type={'outline'}
@@ -37,7 +46,7 @@ export default function IdResult({ setStep, setType, setFindAccountProcess }: Id
         </Button>
         <Button
           onClick={async () => {
-            setFindAccountProcess(false)
+            router.push(`/${lang}/login`)
           }}
           buttonType={'submit'}
           type={'active'}

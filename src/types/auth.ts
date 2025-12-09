@@ -29,6 +29,7 @@ export interface EmployeeLoginType {
 
 export interface ResponseLoginType {
   name: string
+  email: string
   userId: string
   accessToken: string
   refreshToken: string

@@ -2,7 +2,7 @@ import Button from '@/components/common/Button'
 import { useEffect, useState } from 'react'
 import Input from '@/components/common/Input'
 import { getVerifyMyUserId, patchModifyPassword, patchModifyUserId, postVerifyMyPassword } from '@/lib/mypage'
-import { getMemberVerifyUserId } from '@/lib/auth'
+import { getMemberVerifyUserId } from '@/lib/login'
 import { useRouter } from 'next/navigation'
 import { EyeIcon, NonEyeIcon } from '@/assets/svgComponents'
 

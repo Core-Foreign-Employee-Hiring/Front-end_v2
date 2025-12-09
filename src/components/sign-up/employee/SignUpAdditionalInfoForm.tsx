@@ -7,7 +7,7 @@ import TermsOfServiceField from '@/components/sign-up/employee/TermsOfServiceFie
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import Button from '@/components/common/Button'
 import { useAuthStore } from '@/store/authStore'
-import { postMemberEmployeeRegister } from '@/lib/auth'
+import { postMemberEmployeeRegister } from '@/lib/login'
 import { useRouter } from 'next/navigation'
 import JobRoleField from '@/components/sign-up/employee/JobRoleField'
 import { useTranslation } from 'react-i18next'

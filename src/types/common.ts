@@ -1,8 +1,17 @@
 export interface UserDataType {
-  name: string
-  userId: string
-  role: 'EMPLOYER' | 'EMPLOYEE'
+  name: string | undefined
+  userId: string | undefined
+  role: 'EMPLOYER' | 'EMPLOYEE' | undefined
 }
+
+//api.ts의 parseJsonResponse 타입 (프론트 BFF 구조시 불러오는 responseType)
+export interface ApiCallResult<T = never> {
+  success: boolean
+  data?: T
+  error?: string
+  status?: number
+}
+
 export interface ApiResponse<T> {
   message: string
   status: number
