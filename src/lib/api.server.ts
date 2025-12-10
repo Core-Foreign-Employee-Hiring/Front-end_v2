@@ -14,10 +14,6 @@ import { getAccessTokenServer, refreshAccessTokenServer } from './auth.server'
 import { parseJsonResponse } from './api'
 import { ApiCallResult } from '@/types/common'
 
-interface FetchOptions extends RequestInit {
-  skipAuth?: boolean
-}
-
 /**
  * 서버 사이드 API 요청 함수
  * accessToken을 자동으로 헤더에 추가하고
@@ -30,7 +26,7 @@ interface FetchOptions extends RequestInit {
  * @param url - API 엔드포인트 (상대 경로)
  * @param options - fetch 옵션
  */
-export const apiFetchServer = async (url: string, options: FetchOptions = {}): Promise<Response> => {
+export const apiFetchServer = async (url: string, options: RequestInit = {}): Promise<Response> => {
   const { ...fetchOptions } = options
 
   // 기본 설정
@@ -54,7 +50,7 @@ export const apiFetchServer = async (url: string, options: FetchOptions = {}): P
     credentials: 'include' as const,
   })
 
-  console.log(response)
+  console.log('fetchResponse', response)
 
   // 401 또는 403 에러인 경우 토큰 갱신 시도
   if (response.status === 401 || response.status === 403) {
@@ -94,17 +90,10 @@ export const apiFetchServer = async (url: string, options: FetchOptions = {}): P
 
 /**
  * 더 간편한 서버 사이드 API 호출 래퍼
+ * client 에서 fetch 함수 => next 서버 apiCallServer()함수 호출 => 이 함수에서 apiFetchServer()함수 호출
  * 자동 JSON 파싱 + 토큰 갱신 처리
- *
- * 사용 예:
- * const { data, error } = await apiCallServer<UserProfile>('/v1/user/profile')
- * if (error) {
- *   console.error(error) // 백엔드에서 보낸 message
- *   return
- * }
- * console.log(data.name) // result 필드의 데이터
  */
-export const apiCallServer = async <T = never>(url: string, options: FetchOptions = {}): Promise<ApiCallResult<T>> => {
+export const apiCallServer = async <T = never>(url: string, options: RequestInit = {}): Promise<ApiCallResult<T>> => {
   try {
     const response = await apiFetchServer(url, options)
     return await parseJsonResponse<T>(response)

@@ -1,9 +1,9 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { RecruitResponseContentType } from '@/types/recruit'
-import { convertEnumToKorContractType, jobCategoryList } from '@/utils/recruit'
+import { convertEnumToKorContractType } from '@/utils/recruit'
 import { LocationIcon } from '@/assets/svgComponents'
 import { useState } from 'react'
 import { getJobCategoryLabel } from '@/utils/filterList'
@@ -11,15 +11,13 @@ import { useTranslation } from 'react-i18next'
 
 interface RecruitCardProps {
   recruit: RecruitResponseContentType
+  lang: string
 }
 
-const RecruitCard = ({ recruit }: RecruitCardProps) => {
+const RecruitCard = ({ lang, recruit }: RecruitCardProps) => {
   const [imageError, setImageError] = useState(false)
   const router = useRouter()
-
   const { t } = useTranslation()
-
-  const lang = localStorage.getItem('i18nextLng')
 
   const formatDate = (dateString: string) => {
     // "2025-07-16" -> "07/16(수)"

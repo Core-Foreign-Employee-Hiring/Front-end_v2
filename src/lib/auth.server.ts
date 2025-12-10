@@ -1,4 +1,3 @@
-// lib/auth.server.ts
 import { cookies } from 'next/headers'
 import { useModalStore } from '@/store/modalStore'
 
