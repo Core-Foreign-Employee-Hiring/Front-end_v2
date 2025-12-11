@@ -234,7 +234,7 @@ export const SalaryTypeClassName = (salaryEnumType: SalaryEnumType) => {
   }
 }
 
-export const changeCompanyTypeEnumToKor = (companyEnumType: CompanyType) => {
+export const changeCompanyTypeEnumToKor = (companyEnumType: CompanyType | null | undefined) => {
   switch (companyEnumType) {
     case 'LARGE_CORPORATION':
       return '대기업'
@@ -285,7 +285,7 @@ export const changeEnumToKorWorkDaysType = (workDaysType: WorkDaysType | undefin
       return '기타'
   }
 }
-export const changeEnumToKorWorkDaysTypeLabel = (workDaysType: WorkDaysType | undefined) => {
+export const changeEnumToKorWorkDaysTypeLabel = (workDaysType: WorkDaysType | undefined | null) => {
   switch (workDaysType) {
     case 'WEEKDAYS':
       return 'recruitDetail.recruitInfo.workDaysType.WEEKDAYS'

@@ -67,6 +67,7 @@ export default async function RecruitLayout({ children, params }: RootLayoutProp
   const { lang } = await params
 
   const { t } = await useTranslationServer(lang, 'common')
+
   return (
     <div className="">
       <Header params={params} headerType="dynamic" title={t('recruitDetail.headerTitle')} />

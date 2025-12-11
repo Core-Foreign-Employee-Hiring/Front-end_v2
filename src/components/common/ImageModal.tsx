@@ -1,17 +1,15 @@
 import Image from 'next/image'
-import { CancelIcon, WhiteCancelIcon } from '@/assets/svgComponents'
-import { Dispatch, SetStateAction } from 'react'
+
+import { WhiteCancelIcon } from '@/assets/svgComponents'
 
 interface ImageModalProps {
   ImageUrl: string | undefined | null
-  setSelectedImageUrl: Dispatch<SetStateAction<string | undefined | null>>
-  setIsImageModalOpen: Dispatch<SetStateAction<boolean>>
+  close: () => void
 }
 
-export default function ImageModal({ ImageUrl, setSelectedImageUrl, setIsImageModalOpen }: ImageModalProps) {
+export default function ImageModal({ ImageUrl, close }: ImageModalProps) {
   const handleCloseModal = () => {
-    setSelectedImageUrl(undefined)
-    setIsImageModalOpen(false)
+    close()
   }
 
   // 이미지 클릭 시 모달이 닫히지 않도록 이벤트 전파 중단

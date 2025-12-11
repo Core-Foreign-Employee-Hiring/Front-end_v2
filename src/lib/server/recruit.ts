@@ -2,6 +2,7 @@ import {
   ContractEnumType,
   JobRoleType,
   LanguageType,
+  RecruitInputDataType,
   RecruitResponseContentType,
   RegionType,
   VisaType,
@@ -65,7 +66,19 @@ export const serverFetchAllPosts = async (params: {
     headers: {
       'Content-Type': 'application/json',
     },
-    next: { revalidate: 1800 },
+    next: { revalidate: 1800 }, // 30분
+  })
+
+  return await response.json()
+}
+
+export const serverFetchPostDetailData = async (recruitId: string): Promise<ApiResponse<RecruitInputDataType>> => {
+  const response = await apiFetchServer(`/api/v2/recruit/${recruitId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    cache: 'force-cache', // 현재 공고에 수정 기능이 없어 영구 캐싱
   })
 
   return await response.json()

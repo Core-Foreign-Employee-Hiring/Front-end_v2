@@ -18,6 +18,7 @@ export interface ApiResponse<T> {
   success: boolean
   data?: T
 }
+
 export interface ListResponse<T> {
   content: T[]
   page: number

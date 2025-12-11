@@ -1,23 +1,25 @@
-import MiddleModal from '@/components/common/MiddleModal'
-import { Dispatch, SetStateAction, useCallback } from 'react'
-import { ApplicationMethodType } from '@/types/recruit'
-import Button from '@/components/common/Button'
 import Link from 'next/link'
-import useClipboard from '@/hooks/useClipboard'
+
 import { useTranslation } from 'react-i18next'
+import useClipboard from '@/hooks/useClipboard'
+
+import { ApplicationMethodType } from '@/types/recruit'
+
+import MiddleModal from '@/components/common/MiddleModal'
+import Button from '@/components/common/Button'
 
 interface ApplicationModalProps {
-  isApplicationMethodModalOpen: true
-  setIsApplicationMethodModalOpen: Dispatch<SetStateAction<boolean>>
   applicationMethod: ApplicationMethodType | undefined | null
   directInputApplicationMethod: string | undefined | null
+  onClose: () => void
+  isOpen: boolean
 }
 
 export default function ApplicationModal({
   applicationMethod,
-  isApplicationMethodModalOpen,
-  setIsApplicationMethodModalOpen,
   directInputApplicationMethod,
+  onClose,
+  isOpen,
 }: ApplicationModalProps) {
   const { copyToClipboard, isLoading } = useClipboard()
 
@@ -82,12 +84,8 @@ export default function ApplicationModal({
     }
   }
 
-  const onClose = () => {
-    setIsApplicationMethodModalOpen(!isApplicationMethodModalOpen)
-  }
-
   return (
-    <MiddleModal modalType={'GENERAL'} isModalOpen={isApplicationMethodModalOpen} onClose={onClose}>
+    <MiddleModal modalType={'GENERAL'} isModalOpen={isOpen} onClose={onClose}>
       <div className="flex flex-col gap-y-[40px]">
         <section className="flex flex-col items-center justify-center gap-y-4">
           {lang === 'ko' ? (
@@ -106,14 +104,7 @@ export default function ApplicationModal({
           </div>
         </section>
         <section className="flex gap-x-3">
-          <Button
-            onClick={() => {
-              setIsApplicationMethodModalOpen(false)
-            }}
-            size={'lg'}
-            type={'outline'}
-            customClassName={'w-full bg-white'}
-          >
+          <Button onClick={onClose} size={'lg'} type={'outline'} customClassName={'w-full bg-white'}>
             {t('recruitDetail.apply.close')}
           </Button>
           {renderDirectInputApplicationMethodButton(applicationMethod)}

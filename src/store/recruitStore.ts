@@ -1,18 +1,11 @@
 import { create } from 'zustand'
 import {
-  ApplicationMethodType,
-  CompanyType,
   ContractEnumType,
-  JobCategoryType,
   JobRoleType,
   LanguageType,
-  NationalityType,
   RecruitInputDataType,
   RegionType,
-  SalaryEnumType,
   VisaType,
-  WorkDaysType,
-  WorkType,
 } from '@/types/recruit'
 
 interface SetRecruitStoreType {
