@@ -28,7 +28,7 @@ export default function Banner() {
         </Button>
       </div>
 
-      <Image src={'/home-image.png'} alt={'홈'} fill className="object-cover" priority></Image>
+      <Image src={'/home-image.png'} alt={'홈'} fill className="rounded-[16px] object-cover" priority></Image>
     </div>
   )
 }
